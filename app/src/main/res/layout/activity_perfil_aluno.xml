@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/roxoPrincipal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnIniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/simbolo_inicio"
+        android:background="#00000000"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/txtIniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/questrial"
+        android:text="Iniciar"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/btnIniciar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgFotoPerfil"
+        android:layout_width="179dp"
+        android:layout_height="156dp"
+        android:layout_marginTop="85dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_margin="116dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_margin="116dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iconeperfilvazioredonda" />
+
+    <ImageButton
+        android:id="@+id/btnEditarPerfil"
+        android:layout_width="96dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="68dp"
+        android:background="#00000000"
+        android:scaleType="fitCenter"
+        app:layout_constraintHorizontal_bias="0.676"
+        app:layout_constraintLeft_margin="214dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_margin="146dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btneditarfoto" />
+
+    <TextView
+        android:id="@+id/txtNomeCompletoAluno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="85dp"
+        android:fontFamily="@font/open_sans_light"
+        android:text="Nome Completo do Aluno"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeDeUsuario"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFotoPerfil" />
+
+    <TextView
+        android:id="@+id/txtNomeDeUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="147dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/open_sans_light"
+        android:text="nomeuser123"
+        android:textColor="#000000"
+        android:textSize="19sp"
+        app:layout_constraintTop_toBottonOf="@+id/txtNomeCompletoAluno"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeCompletoAluno" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/open_sans_light"
+        android:text="emailDoAluno@gmail.com"
+        android:textColor="#000000"
+        android:textSize="19sp"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeDeUsuario"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_margin="94dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintRight_margin="94dp" />
+
+    <View
+        android:id="@+id/linhaHorizontal"
+        android:layout_width="407dp"
+        android:layout_height="35dp"
+        android:background="@drawable/linha_cinza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:layout_constraintTop_margin="4dp" />
+
+    <TextView
+        android:id="@+id/txtEstatisticas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estatísticas"
+        android:textColor="#000000"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_margin="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="357dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <TextView
+        android:id="@+id/txtQuestoesHoje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="Questões hoje:"
+        android:textColor="#000000"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_QuestoesHoje"
+        app:layout_constraintEnd_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_margin="11dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtQuestoesNaSemana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="Questões na semana:"
+        android:textColor="#000000"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_QuestoesSemana"
+        app:layout_constraintEnd_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_margin="11dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view_Acertos"
+        android:layout_width="150dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/fundo_arredondado_estatisticas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintStart_margin="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas" />
+
+    <View
+        android:id="@+id/view_Erros"
+        android:layout_width="150dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/fundo_arredondado_estatisticas"
+        app:layout_constraintEnd_margin="225dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.865"
+        app:layout_constraintStart_margin="225dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas" />
+
+    <View
+        android:id="@+id/view_QuestoesHoje"
+        android:layout_width="326dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="540dp"
+        android:background="@drawable/fundo_arredondado_estatisticas"
+        app:layout_constraintEnd_margin="225dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_margin="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="543dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view_QuestoesSemana"
+        android:layout_width="326dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="648dp"
+        android:background="@drawable/fundo_arredondado_estatisticas"
+        app:layout_constraintEnd_margin="225dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_margin="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="648dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgAcertos"
+        android:layout_width="58dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="421dp"
+        android:layout_marginEnd="124dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="@+id/view_Acertos"
+        app:layout_constraintTop_margin="421dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iconeacertos" />
+
+    <ImageView
+        android:id="@+id/imgErros"
+        android:layout_width="51dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="426dp"
+        android:layout_marginEnd="124dp"
+        app:layout_constraintEnd_toEndOf="@+id/view_Erros"
+        app:layout_constraintTop_margin="426dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/iconeerros" />
+
+    <TextView
+        android:id="@+id/txtNumeroAcertos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="438dp"
+        android:text="100"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imgAcertos"
+        app:layout_constraintTop_margin="421dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNumeroErros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="438dp"
+        android:text="100"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imgErros"
+        app:layout_constraintTop_margin="421dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtNumeroQuestoesHoje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_margin="550dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_margin="550dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_margin="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_margin="94dp" />
+
+    <TextView
+        android:id="@+id/txtNumeroQuestoesSemana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_margin="550dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_margin="94dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_margin="94dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="550dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.938" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="roxoPrincipal">#8C52FF</color>
+    <color name="corBotoes">#C6A3FF</color>
+    <color name="roxoMaisEscuro">#5E17EB</color>
+    <color name="corIcones">#835AD2</color>
+    <color name="btnOlimpiadaRosa">#CB6CE6</color>
+    <color name="btnOlimpiadaAzul">#5271FF</color>
+    <color name="btnOlimpiadaLaranja">#FF914D</color>
+    <color name="btnOlimpiadaCiano">#18B9CD</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
