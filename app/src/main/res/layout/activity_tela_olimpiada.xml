@@ -25,9 +25,9 @@
         android:background="@color/roxoPrincipal"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -140,14 +140,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLivros" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnConteudo"
-        android:layout_width="162dp"
-        android:layout_height="97dp"
-        android:background="@drawable/fundo_btn_olimp_rosa"
-        android:text="Button"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="134dp" />
+    <HorizontalScrollView
+        android:layout_width="409dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConteudo1"
+                android:layout_width="300dp"
+                android:layout_height="99dp"
+                android:layout_marginEnd="13dp"
+                android:layout_marginRight="36dp"
+                android:background="@drawable/fundo_btn_olimp_rosa"
+                android:fontFamily="@font/open_sans"
+                android:paddingStart="8dp"
+                android:text="@string/conteudo1_olimpiada"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@id/btnConteudo2" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConteudo2"
+                android:layout_width="300dp"
+                android:layout_height="99dp"
+                android:background="@drawable/fundo_btn_olimp_azul"
+                android:fontFamily="@font/open_sans"
+                android:paddingStart="8dp"
+                android:text="@string/conteudo2_olimpiada"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="261dp"
+                tools:layout_editor_absoluteY="354dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
