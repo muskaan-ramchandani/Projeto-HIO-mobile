@@ -142,6 +142,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtLivros" />
 
     <HorizontalScrollView
+        android:id="@+id/horizontalScrollView3"
         android:layout_width="409dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -178,6 +179,7 @@
                 android:id="@+id/btnConteudo2"
                 android:layout_width="300dp"
                 android:layout_height="99dp"
+                android:layout_marginEnd="13dp"
                 android:layout_weight="1"
                 android:background="@drawable/fundo_btn_olimp_azul"
                 android:fontFamily="@font/open_sans"
@@ -188,15 +190,15 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@id/btnConteudo3"
                 tools:layout_editor_absoluteX="261dp"
-                tools:layout_editor_absoluteY="354dp"
-                android:layout_marginEnd="13dp"
-                app:layout_constraintEnd_toStartOf="@id/btnConteudo3"/>
+                tools:layout_editor_absoluteY="354dp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnConteudo3"
                 android:layout_width="300dp"
                 android:layout_height="99dp"
+                android:layout_marginEnd="13dp"
                 android:background="@drawable/fundo_btn_olimp_laranja"
                 android:fontFamily="@font/open_sans"
                 android:paddingStart="8dp"
@@ -206,10 +208,9 @@
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@id/btnConteudo4"
                 tools:layout_editor_absoluteX="134dp"
-                tools:layout_editor_absoluteY="309dp"
-                android:layout_marginEnd="13dp"
-                app:layout_constraintEnd_toStartOf="@id/btnConteudo4"/>
+                tools:layout_editor_absoluteY="309dp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnConteudo4"
@@ -229,7 +230,8 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <ScrollView
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="392dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
@@ -241,9 +243,9 @@
         app:layout_constraintTop_toBottomOf="@+id/txtRecomendacoes">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardLivro1"
@@ -271,10 +273,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="7dp"
-                        android:layout_marginEnd="16dp">
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/txtTituloLivro1"
@@ -356,10 +358,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="7dp"
-                        android:layout_marginEnd="16dp">
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/txtTituloLivro2"
@@ -399,7 +401,90 @@
                             android:textColor="#000000" />
 
                         <androidx.appcompat.widget.AppCompatButton
-                            android:id="@+id/btnOndeComprar1"
+                            android:id="@+id/btnOndeComprar2"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/fundo_botoes_comuns_lilas"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:text="Onde comprar?"
+                            android:textAllCaps="false"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLivro3"
+                android:layout_width="375dp"
+                android:layout_height="150dp"
+                android:background="@drawable/fundo_arredondado_livros_provas">
+
+                <LinearLayout
+                    android:layout_width="376dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fundo_arredondado_livros_provas"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageViewLivro3"
+                        android:layout_width="100dp"
+                        android:layout_height="122dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="10dp"
+                        app:srcCompat="@drawable/imglivrofisica" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtTituloLivro3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:text="O Livro da Física 3"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtAutor3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Autor: Maria Almeida"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/txtEdicao3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Edição: 2"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/txtDataPub3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Data de publicação: 19/03/2010"
+                            android:textColor="#000000" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnOndeComprar3"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_marginTop="5dp"
@@ -415,6 +500,249 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </ScrollView>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:layout_width="409dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="508dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProvasAnterior1"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/fundo_arredondado_livros_provas">
+
+                <LinearLayout
+                    android:layout_width="375dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/fundo_arredondado_livros_provas">
+
+                    <TextView
+                        android:id="@+id/txtAnoProvaAnterior1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="2022"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtEstadoProvaAnterior1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Estado: Respondida"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtFaseProvaAnterior1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Fase: 1"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageViewCirculoUser1"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="7dp"
+                            app:srcCompat="@drawable/forma_redonda" />
+
+                        <TextView
+                            android:id="@+id/txtUserProf1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/open_sans"
+                            android:text="demiLov"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProvasAnterior2"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/fundo_arredondado_livros_provas">
+
+                <LinearLayout
+                    android:layout_width="375dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/fundo_arredondado_livros_provas">
+
+                    <TextView
+                        android:id="@+id/txtAnoProvaAnterior2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="2023"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtEstadoProvaAnterior2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Estado: Respondida"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtFaseProvaAnterior2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Fase: 4"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageViewCirculoUser2"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="7dp"
+                            app:srcCompat="@drawable/forma_redonda" />
+
+                        <TextView
+                            android:id="@+id/txtUserProf2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/open_sans"
+                            android:text="luanaLavareda"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardProvasAnterior3"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/fundo_arredondado_livros_provas">
+
+                <LinearLayout
+                    android:layout_width="375dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/fundo_arredondado_livros_provas">
+
+                    <TextView
+                        android:id="@+id/txtAnoProvaAnterior3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="2018"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtEstadoProvaAnterior3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Estado: Respondida"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtFaseProvaAnterior3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="Fase: 2"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageViewCirculoUser3"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="7dp"
+                            app:srcCompat="@drawable/forma_redonda" />
+
+                        <TextView
+                            android:id="@+id/txtUserProf3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/open_sans"
+                            android:text="luanaLavareda"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
