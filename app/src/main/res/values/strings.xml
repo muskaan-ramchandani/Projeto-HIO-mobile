@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Helper in Olympics</string>
     <string name="btn_inicio_descricao">Botão para retornar à tela inicial</string>
+    <string name="nome_formatacao_Logo"><i>Helper in <b>Olympics</b></i></string>
 
     <!--conteúdos obf exemplo-->
     <string name="conteudo1_olimpiada"><b>Mecânica Clássica:</b> Fundamentos da cinemática do ponto material</string>
