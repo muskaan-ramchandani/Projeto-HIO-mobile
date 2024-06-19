@@ -8,4 +8,15 @@
     <string name="conteudo2_olimpiada"><b>Dilatação Superficial:</b> conceito e fórmulas</string>
     <string name="conteudo3_olimpiada"><b>Estática e Hidrostática:</b>Princípios Básicos</string>
     <string name="conteudo4_olimpiada"><b>Termologia:</b>Termometria, Calorimetria, Termodinâmica</string>
+
+    <!--Nomes e siglas olimpíadas-->
+    <string name="nome_sigla_OBA">Olimpíada Brasileira de Astronomia - OBA</string>
+    <string name="nome_sigla_OBF">Olimpíada Brasileira de Física - OBF</string>
+    <string name="nome_sigla_OBI">Olimpíada Brasileira de Informática - OBI</string>
+    <string name="nome_sigla_OBMEP">Olimpíada Brasileira de Matemática das Escolas Públicas - OBMEP</string>
+    <string name="nome_sigla_ONHB">Olimpíada Nacional da História Brasileira - ONHB</string>
+    <string name="nome_sigla_OBQ">Olimpíada Brasileira de Química - OBQ</string>
+    <string name="nome_sigla_OBB">Olimpíada Brasileira de Biologia - OBB</string>
+    <string name="nome_sigla_ONC">Olimpíada Nacional de Ciências - ONC</string>
+
 </resources>
