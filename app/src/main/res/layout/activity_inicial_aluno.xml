@@ -26,9 +26,7 @@
         android:contentDescription="Botão para abrir barra de menu"
         android:scaleType="fitCenter"
         android:src="@drawable/linha_menu"
-        app:layout_constraintStart_Margin="193dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_Margin="20dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -41,9 +39,7 @@
         android:text="@string/nome_formatacao_Logo"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
-        app:layout_constraintEnd_Margin="100dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_Margin="25dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -57,9 +53,7 @@
         android:textColor="@color/roxoPrincipal"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_Margin="193dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_Margin="50dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
