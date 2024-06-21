@@ -15,7 +15,7 @@
     </style>
 
     <!--Estilo barras de menu-->
-    <style name="NavigationViewTextStyle" parent="TextAppearance.AppCompat.Body1">
+    <style name="NavigationViewTextStyle">
         <item name="android:fontFamily">@font/open_sans</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
@@ -26,7 +26,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.HelperInOlympics.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.HelperInOlympics.AppBarOverlay"  />
 
     <style name="Theme.HelperInOlympics.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

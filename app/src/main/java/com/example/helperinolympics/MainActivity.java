@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, TelaInicialAlunoActivity.class);
+                Intent intent = new Intent(MainActivity.this, MenuDeslizanteAlunoActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -2,39 +2,44 @@ package com.example.helperinolympics;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
 
-import com.example.helperinolympics.ChatsAlunoActivity;
-import com.example.helperinolympics.ConfiguracoesActivity;
-import com.example.helperinolympics.FavoritosAlunoActivity;
-import com.example.helperinolympics.ManualActivity;
-import com.example.helperinolympics.PerfilAlunoActivity;
-import com.example.helperinolympics.SairActivity;
 import com.example.helperinolympics.databinding.ActivityMenuDeslizanteAlunoBinding;
 import com.google.android.material.navigation.NavigationView;
-import androidx.navigation.ui.AppBarConfiguration;
 
 public class MenuDeslizanteAlunoActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
+    private DrawerLayout drawerLayout;
+    private ImageButton btnAbreFechaMenu;
+    private NavigationView navView;
     private ActivityMenuDeslizanteAlunoBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMenuDeslizanteAlunoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.appBarMenuDeslizanteAluno.toolbarHIOMenu);
+        drawerLayout = binding.drawerLayout;
+        navView = binding.navView;
 
-        DrawerLayout drawerLayout = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        // Configuração do ImageButton para abrir e fechar o DrawerLayout
+        btnAbreFechaMenu = binding.btnBarraMenuAluno;
+        btnAbreFechaMenu.setOnClickListener(v -> {
+            if (drawerLayout.isDrawerOpen(navView)) {
+                drawerLayout.closeDrawer(navView);
+            } else {
+                drawerLayout.openDrawer(navView);
+            }
+        });
 
-     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+     navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
          @Override
          public boolean onNavigationItemSelected(MenuItem item) {
              // Fecha o drawer quando um item é selecionado
