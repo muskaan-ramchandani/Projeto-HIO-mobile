@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfil_aluno"
+            android:icon="@drawable/iconeseuperfil"
+            android:title="@string/menu_perfil" />
+        <item
+            android:id="@+id/nav_favoritos_aluno"
+            android:icon="@drawable/iconefavoritos"
+            android:title="@string/menu_favoritos" />
+        <item
+            android:id="@+id/nav_chats"
+            android:icon="@drawable/iconechats"
+            android:title="@string/menu_chats" />
+        <item
+            android:id="@+id/nav_manual"
+            android:icon="@drawable/iconemanual"
+            android:title="@string/menu_manual" />
+        <item
+            android:id="@+id/nav_configuracoes"
+            android:icon="@drawable/iconeconfiguracoes"
+            android:title="@string/menu_configuracoes" />
+        <item
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/iconesair"
+            android:title="@string/menu_sair" />
+    </group>
+</menu>
