@@ -99,6 +99,7 @@
                 android:background="@color/roxoPrincipal"
                 android:gravity="center">
 
+
                 <ImageButton
                     android:id="@+id/btnAcessarHanking"
                     android:layout_width="wrap_content"
@@ -182,12 +183,11 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/txtMinhasOlimp"
             android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txtMinhasOlimp"
+            app:layout_constraintEnd_toEndOf="@+id/toolbarHIOMenu"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="90dp"
+            app:layout_constraintBottom_toTopOf="@+id/toolbarBotoesInferiores"
+            android:layout_marginBottom="15dp"
             android:background="#00000000">
 
             <LinearLayout
@@ -207,7 +207,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_rosa">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
@@ -253,7 +254,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_azul">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
@@ -300,7 +302,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_laranja">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
@@ -347,7 +350,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="80dp"
-                        android:background="@drawable/fundo_btn_olimp_ciano">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
@@ -393,7 +397,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_rosa">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
@@ -439,7 +444,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_azul">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -486,7 +492,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_laranja">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
@@ -532,7 +539,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="380dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/fundo_btn_olimp_ciano">
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="380dp"
