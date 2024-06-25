@@ -5,6 +5,7 @@
     android:layout_height="@dimen/nav_header_height"
     android:background="@drawable/side_nav_bar"
     android:orientation="horizontal"
+    android:paddingTop="40dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageButton

@@ -20,13 +20,14 @@
 
     <ImageButton
         android:id="@+id/btnIniciar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="34dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/simbolo_inicio"
         android:background="#00000000"
+        android:scaleType="centerCrop"
+        android:src="@drawable/simbolo_inicio"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar" />
@@ -35,12 +36,13 @@
         android:id="@+id/txtIniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="19dp"
         android:fontFamily="@font/questrial"
         android:text="Iniciar"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/btnIniciar"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,28 +50,27 @@
         android:id="@+id/imgFotoPerfil"
         android:layout_width="179dp"
         android:layout_height="156dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="116dp"
         android:layout_marginEnd="116dp"
         android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:srcCompat="@drawable/iconeperfilvazioredonda" />
 
     <ImageButton
         android:id="@+id/btnEditarPerfil"
         android:layout_width="96dp"
         android:layout_height="95dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
         android:background="#00000000"
         android:scaleType="fitCenter"
-        app:layout_constraintHorizontal_bias="0.676"
-        android:layout_marginStart="280dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="146dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.677"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:srcCompat="@drawable/btneditarfoto" />
 
     <TextView
@@ -134,31 +135,31 @@
         android:id="@+id/txtEstatisticas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:text="Estatísticas"
         android:textColor="#000000"
         android:textSize="19sp"
         android:textStyle="bold"
-        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        android:layout_marginStart="11dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="3dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534" />
+        app:layout_constraintTop_toTopOf="@+id/linhaHorizontal"
+        app:layout_constraintVertical_bias="0.071" />
 
     <TextView
         android:id="@+id/txtQuestoesHoje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
         android:text="Questões hoje:"
         android:textColor="#000000"
         android:textSize="19sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/view_QuestoesHoje"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -169,12 +170,12 @@
         android:id="@+id/txtQuestoesNaSemana"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
+        android:layout_marginTop="85dp"
         android:text="Questões na semana:"
         android:textColor="#000000"
         android:textSize="19sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/view_QuestoesSemana"
+        app:layout_constraintTop_toBottomOf="@+id/txtQuestoesHoje"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
@@ -208,47 +209,47 @@
         android:id="@+id/view_QuestoesHoje"
         android:layout_width="326dp"
         android:layout_height="51dp"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/fundo_arredondado_estatisticas"
         android:layout_marginEnd="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         android:layout_marginStart="11dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQuestoesHoje" />
 
     <View
         android:id="@+id/view_QuestoesSemana"
         android:layout_width="326dp"
         android:layout_height="51dp"
-        android:layout_marginTop="648dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/fundo_arredondado_estatisticas"
         android:layout_marginEnd="11dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.588"
         android:layout_marginStart="11dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQuestoesNaSemana" />
 
     <ImageView
         android:id="@+id/imgAcertos"
         android:layout_width="58dp"
         android:layout_height="61dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="17dp"
         android:layout_marginEnd="124dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="@+id/view_Acertos"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas"
         app:srcCompat="@drawable/iconeacertos" />
 
     <ImageView
         android:id="@+id/imgErros"
         android:layout_width="51dp"
         android:layout_height="54dp"
-        android:layout_marginTop="410dp"
         android:layout_marginEnd="124dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtEstatisticas"
         app:layout_constraintEnd_toEndOf="@+id/view_Erros"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/iconeerros" />
 
     <TextView
@@ -256,26 +257,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="427dp"
+        android:layout_marginTop="16dp"
         android:text="100"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgAcertos"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/view_Acertos" />
 
     <TextView
         android:id="@+id/txtNumeroErros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="427dp"
+        android:layout_marginTop="16dp"
         android:text="100"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgErros"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/view_Erros"/>
 
     <TextView
         android:id="@+id/txtNumeroQuestoesHoje"
@@ -285,14 +286,12 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="150dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="550dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="@+id/view_QuestoesHoje"
         app:layout_constraintVertical_bias="0.784"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view_QuestoesHoje"
         android:layout_marginStart="94dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/view_QuestoesHoje"
         android:layout_marginEnd="94dp" />
 
     <TextView
@@ -303,15 +302,12 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="94dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="@+id/view_QuestoesSemana"
+        app:layout_constraintStart_toStartOf="@+id/view_QuestoesSemana"
         android:layout_marginStart="94dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="550dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.938" />
+        app:layout_constraintEnd_toEndOf="@+id/view_QuestoesSemana"
+        android:layout_marginEnd="94dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
