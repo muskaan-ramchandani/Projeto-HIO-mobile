@@ -38,7 +38,7 @@
         <activity android:name=".ConfiguracoesActivity" />
         <activity android:name=".ManualActivity" />
         <activity android:name=".SairActivity" />
-        <activity android:name=".FlashcardActivity" />
+        <activity android:name=".FlashcardActivity" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
         <activity android:name=".FlashcardModelo" />
 
 

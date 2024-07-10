@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/white">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -18,17 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-
-
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgSimboloOlimpiada"
         android:layout_width="59dp"
         android:layout_height="64dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="674dp"
+        android:layout_marginBottom="0dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/txtNomeOlimp"
         app:srcCompat="@drawable/imgmacacaindo" />
 
@@ -38,14 +35,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginBottom="680dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="OBF"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 
     <LinearLayout
@@ -109,16 +106,16 @@
         android:id="@+id/txtTema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/open_sans_bold"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:text="Fundamentos da cinemática do ponto material" />
 
 
@@ -160,7 +157,8 @@
                 android:id="@+id/acessoFlashcard1"
                 android:layout_width="380dp"
                 android:layout_height="100dp"
-                android:background="@drawable/fundo_arredondado_livros_provas"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="10dp">
 
 
@@ -222,7 +220,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="380dp"
                 android:layout_height="100dp"
-                android:background="@drawable/fundo_arredondado_livros_provas"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="10dp">
 
 
@@ -285,7 +284,8 @@
                 android:id="@+id/acessoFlashcard3"
                 android:layout_width="380dp"
                 android:layout_height="100dp"
-                android:background="@drawable/fundo_arredondado_livros_provas"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="10dp">
 
 
@@ -345,7 +345,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="380dp"
                 android:layout_height="100dp"
-                android:background="@drawable/fundo_arredondado_livros_provas"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="10dp">
 
 
@@ -407,7 +408,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="380dp"
                 android:layout_height="100dp"
-                android:background="@drawable/fundo_arredondado_livros_provas"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="10dp">
 
 
@@ -467,7 +469,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="380dp"
                 android:layout_height="100dp"
-                android:background="@drawable/fundo_arredondado_livros_provas"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="10dp">
 
 

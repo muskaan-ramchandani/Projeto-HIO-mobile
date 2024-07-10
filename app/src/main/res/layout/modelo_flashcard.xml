@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#00000000"
     android:orientation="vertical">
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardFundoFlashcard"
@@ -14,65 +12,61 @@
         android:layout_height="535dp"
         android:layout_gravity="center"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="10dp">
-
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/txtResumoTopico"
-                android:layout_width="250dp"
-                android:layout_height="260dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="90dp"
-                android:layout_marginEnd="10dp"
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/txtTopico"
-                app:layout_constraintStart_toStartOf="@+id/txtTopico"
-                app:layout_constraintTop_toTopOf="@+id/txtTopico"
-                tools:text="@string/textoFlashTopico1" />
-
-
-            <ImageView
-                android:id="@+id/imgDoAssuntoFlashcard"
-                android:layout_width="250dp"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/imgpontomaterial"
-                app:layout_constraintTop_toBottomOf="@id/txtResumoTopico"
-                app:layout_constraintStart_toStartOf="@id/txtTopico"
-                app:layout_constraintEnd_toEndOf="@id/txtTopico"/>
-
-
             <TextView
                 android:id="@+id/txtTopico"
-                android:layout_width="350dp"
+                android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:background="@drawable/fundo_titulo_flashcard"
                 android:textSize="25sp"
-                tools:text="Ponto Material"
+                android:text="Ponto Material"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent" />
 
+            <TextView
+                android:id="@+id/txtResumoTopico"
+                android:layout_width="300dp"
+                android:layout_height="260dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="@string/textoFlashTopico1"
+                app:layout_constraintEnd_toEndOf="@id/txtTopico"
+                app:layout_constraintStart_toStartOf="@id/txtTopico"
+                app:layout_constraintTop_toBottomOf="@id/txtTopico" />
+
+            <ImageView
+                android:id="@+id/imgDoAssuntoFlashcard"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/imgpontomaterial"
+                app:layout_constraintTop_toBottomOf="@id/txtResumoTopico"
+                app:layout_constraintStart_toStartOf="@id/txtTopico"
+                app:layout_constraintEnd_toEndOf="@id/txtTopico" />
 
             <ImageButton
                 android:id="@+id/btnFechar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:background="#00000000"
+                android:background="@android:color/transparent"
                 app:srcCompat="@drawable/baseline_close_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/txtTopico"/>
+                app:layout_constraintTop_toTopOf="@id/txtTopico" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

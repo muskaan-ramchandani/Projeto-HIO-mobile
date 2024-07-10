@@ -27,61 +27,62 @@
         android:background="@color/roxoPrincipal"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgSimboloOlimpiada"
         android:layout_width="59dp"
         android:layout_height="64dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="674dp"
+        android:layout_marginBottom="0dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/txtNomeOlimp"
         app:srcCompat="@drawable/imgmacacaindo" />
+
 
     <TextView
         android:id="@+id/txtNomeOlimp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginBottom="680dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="OBF"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/txtConteudos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="618dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="Conteúdos:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollViewConteudos"
+        app:layout_constraintStart_toStartOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/txtLivros"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="452dp"
+        android:layout_marginTop="7dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="Livros:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewConteudos"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -89,13 +90,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="236dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="Provas anteriores:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewLivros"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
@@ -140,7 +141,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtLivros" />
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView3"
+        android:id="@+id/horizontalScrollViewConteudos"
         android:layout_width="409dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -225,7 +226,7 @@
     </HorizontalScrollView>
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
+        android:id="@+id/horizontalScrollViewLivros"
         android:layout_width="392dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
@@ -246,7 +247,8 @@
                 android:layout_width="375dp"
                 android:layout_height="150dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/fundo_arredondado_livros_provas">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="376dp"
@@ -330,7 +332,8 @@
                 android:layout_width="375dp"
                 android:layout_height="150dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/fundo_arredondado_livros_provas">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="376dp"
@@ -413,7 +416,8 @@
                 android:id="@+id/cardLivro3"
                 android:layout_width="375dp"
                 android:layout_height="150dp"
-                android:background="@drawable/fundo_arredondado_livros_provas">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="376dp"
@@ -495,12 +499,13 @@
     </HorizontalScrollView>
 
     <HorizontalScrollView
+        android:id="@+id/horizontalScroolViewProvasAnteriores"
         android:layout_width="409dp"
         android:layout_height="130dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="508dp"
+        android:layout_marginTop="7dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtProvas">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -512,7 +517,8 @@
                 android:layout_width="375dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/fundo_arredondado_livros_provas">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="375dp"
@@ -554,29 +560,32 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:orientation="horizontal">
+
 
                         <ImageView
                             android:id="@+id/imageViewCirculoUser1"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_weight="1"
+                            app:srcCompat="@drawable/forma_redonda"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="7dp"
-                            app:srcCompat="@drawable/forma_redonda" />
-
+                            />
                         <TextView
                             android:id="@+id/txtUserProf1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginStart="3dp"
+                            android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/open_sans"
                             android:text="demiLov"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="15sp"
+                            />
+
 
                     </LinearLayout>
 
@@ -588,7 +597,8 @@
                 android:layout_width="375dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/fundo_arredondado_livros_provas">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="375dp"
@@ -630,7 +640,7 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -647,7 +657,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginStart="3dp"
+                            android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/open_sans"
                             android:text="luanaLavareda"
@@ -664,7 +674,8 @@
                 android:layout_width="375dp"
                 android:layout_height="120dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/fundo_arredondado_livros_provas">
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="375dp"
@@ -706,7 +717,7 @@
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -723,7 +734,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginStart="3dp"
+                            android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/open_sans"
                             android:text="luanaLavareda"
