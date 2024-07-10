@@ -38,6 +38,8 @@
         <activity android:name=".ConfiguracoesActivity" />
         <activity android:name=".ManualActivity" />
         <activity android:name=".SairActivity" />
+        <activity android:name=".FlashcardActivity" />
+        <activity android:name=".FlashcardModelo" />
 
 
         <activity

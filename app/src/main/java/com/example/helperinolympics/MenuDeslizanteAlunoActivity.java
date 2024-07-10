@@ -3,6 +3,7 @@ package com.example.helperinolympics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -70,5 +71,15 @@ public class MenuDeslizanteAlunoActivity extends AppCompatActivity {
              }
          }
      });
+
+
+     //Acesso a olimpiada
+        findViewById(R.id.cardOlimpiada2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuDeslizanteAlunoActivity.this, InicioOlimpiadaActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

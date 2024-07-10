@@ -205,6 +205,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardOlimpiada1"
                         android:layout_width="380dp"
                         android:layout_height="70dp"
                         app:cardBackgroundColor="@android:color/transparent"
@@ -252,6 +253,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardOlimpiada2"
                         android:layout_width="380dp"
                         android:layout_height="70dp"
                         app:cardBackgroundColor="@android:color/transparent"

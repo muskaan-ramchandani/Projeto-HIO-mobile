@@ -162,6 +162,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/acessoFlashcard1"
                 android:layout_width="380dp"
                 android:layout_height="100dp"
                 android:background="@drawable/fundo_arredondado_livros_provas"
@@ -286,6 +287,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/acessoFlashcard3"
                 android:layout_width="380dp"
                 android:layout_height="100dp"
                 android:background="@drawable/fundo_arredondado_livros_provas"
