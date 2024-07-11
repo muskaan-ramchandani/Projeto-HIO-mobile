@@ -1,6 +1,7 @@
 package com.example.helperinolympics;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,8 @@ public class PerfilAlunoActivity extends Activity {
         btnVoltarInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(PerfilAlunoActivity.this, MenuDeslizanteAlunoActivity.class);
+                startActivity(intent);
             }
         });
     }
