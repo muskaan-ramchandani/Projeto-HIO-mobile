@@ -10,7 +10,8 @@ lifecycleLivedataKtx = "2.6.1"
 lifecycleViewmodelKtx = "2.6.1"
 navigationFragment = "2.6.0"
 navigationUi = "2.6.0"
-mpandroidchart = "v3.1.0"
+eazegraph = "1.2.5l"
+nineoldandroids = "2.4.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -23,7 +24,8 @@ lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-lived
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
-mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version.ref = "mpandroidchart" }
+eazegraph = { group = "com.github.blackfizz", name = "eazegraph", version = "1.2.5l" }
+nineoldandroids = { group = "com.nineoldandroids", name = "library", version = "2.4.0" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

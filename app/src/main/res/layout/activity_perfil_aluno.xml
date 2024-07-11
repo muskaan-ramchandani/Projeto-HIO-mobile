@@ -144,11 +144,79 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toBottomOf="@id/txtEstatisticas"
         app:layout_constraintStart_toStartOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="@id/toolbar">
 
 
+        <org.eazegraph.lib.charts.PieChart
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/graficoPizzaErrosAcertos"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            android:padding="6dp"
+            android:layout_weight="1"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLegendaGrafico"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/viewLegendaAcertos"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/legenda_acertos"/>
+
+                <TextView
+                    android:id="@+id/txtLegendaAcertos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="Acertos (25)" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/viewLegendaErros"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/legenda_erros" />
+
+                <TextView
+                    android:id="@+id/txtLegendaErros"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="Erros (30)" />
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
