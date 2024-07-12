@@ -1,13 +1,18 @@
 <resources>
+    <!--Strings essenciais para a aplicação-->
     <string name="app_name">Helper in Olympics</string>
-    <string name="btn_inicio_descricao">Botão para retornar à tela inicial</string>
     <string name="nome_formatacao_Logo"><i>Helper in <b>Olympics</b></i></string>
 
-    <!--conteúdos obf exemplo-->
+    <!--exemplos-->
     <string name="conteudo1_olimpiada"><b>Mecânica Clássica:</b> Fundamentos da cinemática do ponto material</string>
     <string name="conteudo2_olimpiada"><b>Dilatação Superficial:</b> conceito e fórmulas</string>
     <string name="conteudo3_olimpiada"><b>Estática e Hidrostática:</b>Princípios Básicos</string>
     <string name="conteudo4_olimpiada"><b>Termologia:</b>Termometria, Calorimetria, Termodinâmica</string>
+
+    <string name="pergunta_matrizes">Qual das seguintes afirmações sobre determinantes está correta?</string>
+    <string name="resposta_certa_matrizes">O determinante de uma matriz quadrada é sempre um número real.</string>
+    <string name="resposta_errada_matrizes">O determinante de uma matriz pode ser calculado apenas se todos os elementos forem números inteiros.</string>
+
 
     <!--Nomes e siglas olimpíadas-->
     <string name="nome_sigla_OBA">Olimpíada Brasileira de Astronomia - OBA</string>
@@ -19,12 +24,21 @@
     <string name="nome_sigla_OBB">Olimpíada Brasileira de Biologia - OBB</string>
     <string name="nome_sigla_ONC">Olimpíada Nacional de Ciências - ONC</string>
 
+    <!--Itens do menu deslizante-->
     <string name="menu_perfil">Seu perfil</string>
     <string name="menu_favoritos">Favoritos</string>
     <string name="menu_chats">Chats</string>
     <string name="menu_manual">Manual</string>
     <string name="menu_configuracoes">Configurações</string>
     <string name="menu_sair">Sair</string>
+
+    <!--Strings base-->
+    <string name="pergunta_Negrito"><b>Pergunta:</b></string>
+    <string name="alternativa_marcada_Negrito"><b>Alternativa marcada:</b></string>
+    <string name="alternativa_correta_Negrito"><b>Alternativa correta:</b></string>
+
+
+    <!--OUTROS-->
 
     <string name="title_activity_menu_deslizante">MenuDeslizanteActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -35,7 +49,7 @@
     <string name="action_settings">Settings</string>
 
 
-
+    <string name="btn_inicio_descricao">Botão para retornar à tela inicial</string>
     <string name="textoFlashTopico1">Corpo cujas <b>dimensões não interferem</b> no estudo do movimento;\nApenas a <b>trajetória</b> importa;</string>
 
 </resources>
