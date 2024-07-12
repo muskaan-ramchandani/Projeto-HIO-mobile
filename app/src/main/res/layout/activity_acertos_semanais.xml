@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/roxoPrincipal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
+        app:layout_constraintStart_toStartOf="@+id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar2">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/btnvoltarbranco"/>
+
+        <TextView
+            android:id="@+id/txtAcertosSemanais"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Acertos semanais"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtSemanasAnteriores"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:text="Comparação com 2 semanas anteriores:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/toolbar2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/txtSemanasAnteriores"
+        app:layout_constraintStart_toStartOf="@id/toolbar2"
+        app:layout_constraintEnd_toEndOf="@id/toolbar2">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/viewLegendaSemanaUm"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/legenda_semana_um"/>
+
+                <TextView
+                    android:id="@+id/txtLegendaSemanaUm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="23/06 - 29/06" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/viewLegendaSemanaDois"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/legenda_acertos" />
+
+                <TextView
+                    android:id="@+id/txtLegendaSemanaDois"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="30/06 - 06/07" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:id="@+id/viewLegendaSemanaTres"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/legenda_erros" />
+
+                <TextView
+                    android:id="@+id/txtLegendaSemanaTres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    tools:text="07/07 - 13/07" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
