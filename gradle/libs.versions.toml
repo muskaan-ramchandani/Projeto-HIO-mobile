@@ -26,6 +26,7 @@ navigation-fragment = { group = "androidx.navigation", name = "navigation-fragme
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 eazegraph = { group = "com.github.blackfizz", name = "eazegraph", version = "1.2.5l" }
 nineoldandroids = { group = "com.nineoldandroids", name = "library", version = "2.4.0" }
+mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version = "v3.1.0" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

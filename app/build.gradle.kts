@@ -45,4 +45,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.eazegraph)
     implementation(libs.nineoldandroids)
+    implementation(libs.mpandroidchart)
 }
