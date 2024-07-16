@@ -12,12 +12,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HelperInOlympics"
         tools:targetApi="31">
+        <activity
+            android:name=".CadastroAlunoProfessor"
+            android:exported="false" />
+        <activity
+            android:name=".TelaTextoIlimpiadaAcesso"
+            android:exported="false" />
+        <activity
+            android:name=".TelaEscolhaOlimpiada"
+            android:exported="false" />
+        <activity
+            android:name=".TelaCadastro"
+            android:exported="false" />
+        <activity
+            android:name=".TelaBemVindo"
+            android:exported="false" />
+        <activity
+            android:name=".TelaLogin"
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-        <!--main/splash screen-->
+            android:resource="@array/preloaded_fonts" /> <!-- main/splash screen -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -27,7 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".TelaInicialAlunoActivity" />
         <activity android:name=".PerfilAlunoActivity" />
         <activity android:name=".InicioOlimpiadaActivity" />
@@ -36,8 +51,6 @@
         <activity android:name=".ConfiguracoesActivity" />
         <activity android:name=".ManualActivity" />
         <activity android:name=".SairActivity" />
-
-
         <activity
             android:name=".MenuDeslizanteAlunoActivity"
             android:exported="false"
