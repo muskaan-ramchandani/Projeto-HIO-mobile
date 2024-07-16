@@ -80,9 +80,8 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graficoBarraAcertosSemanais"
-            android:layout_width="210dp"
-            android:layout_height="200dp"
-            android:layout_margin="16dp"/>
+            android:layout_width="226dp"
+            android:layout_height="200dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

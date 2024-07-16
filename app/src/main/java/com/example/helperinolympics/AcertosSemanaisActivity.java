@@ -26,9 +26,9 @@ public class AcertosSemanaisActivity extends Activity {
 
         //Entradas de dados
         ArrayList<BarEntry> entradaDados = new ArrayList<>();
-        entradaDados.add(new BarEntry(1f, 4f));
-        entradaDados.add(new BarEntry(2f, 6f));
-        entradaDados.add(new BarEntry(3f, 8f));
+        entradaDados.add(new BarEntry(1f, 3f));
+        entradaDados.add(new BarEntry(2f, 4f));
+        entradaDados.add(new BarEntry(3f, 2f));
 
         // Cores
         int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
@@ -37,10 +37,11 @@ public class AcertosSemanaisActivity extends Activity {
         int[] cores = new int[] {corAzul, corRosa, corRoxa};
 
         // Creating a bar data set
-        BarDataSet barDataSet = new BarDataSet(entradaDados, "oq é isso");
+        BarDataSet barDataSet = new BarDataSet(entradaDados, "Data Set 1");
         barDataSet.setColors(cores);
         barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(16f);
+        barDataSet.setValueTextSize(10f);
+        
 
         // Creating bar data
         BarData barData = new BarData(barDataSet);
