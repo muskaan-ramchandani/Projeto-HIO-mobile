@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CadastroAlunoProfessor">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="245dp"
+        android:layout_height="244dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.936"
+        app:srcCompat="@drawable/hipocadastroalunoprofessor" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fontenoemi"
+        android:text="Você é"
+        android:textColor="#49688D"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="159dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="304dp"
+        android:layout_marginBottom="612dp"
+        android:textAlignment="gravity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/mancharoxa" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bntaluno"
+        android:layout_width="248dp"
+        android:layout_height="114dp"
+        android:background="@drawable/fundo_botoes_comuns_lilas"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:gravity="center|center_horizontal"
+        android:text="Aluno                                                                                                                                                                        Recebe as atividades e acessa as olímpiadas"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnprofessor"
+        android:layout_width="248dp"
+        android:layout_height="114dp"
+        android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
+        android:fontFamily="@font/open_sans_extrabold"
+        android:text="Professor                                                                                                       Cadastra livros, vídeos e flashcards, datas de inscrição e"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="333dp"
+        android:layout_height="187dp"
+        android:layout_marginTop="608dp"
+        android:layout_marginEnd="220dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/manchaLilas" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
