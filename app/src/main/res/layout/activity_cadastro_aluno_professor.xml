@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroAlunoProfessor">
+    tools:context=".CadastroAlunoProfessorActivity">
 
     <ImageView
         android:id="@+id/imageView6"
@@ -45,7 +45,7 @@
         app:srcCompat="@drawable/mancharoxa" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/bntaluno"
+        android:id="@+id/btnSouAluno"
         android:layout_width="248dp"
         android:layout_height="114dp"
         android:background="@drawable/fundo_botoes_comuns_lilas"
@@ -54,6 +54,7 @@
         android:text="Aluno                                                                                                                                                                        Recebe as atividades e acessa as olímpiadas"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -62,12 +63,13 @@
         app:layout_constraintVertical_bias="0.22" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnprofessor"
+        android:id="@+id/btnSouProfessor"
         android:layout_width="248dp"
         android:layout_height="114dp"
         android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
         android:fontFamily="@font/open_sans_extrabold"
-        android:text="Professor                                                                                                       Cadastra livros, vídeos e flashcards, datas de inscrição e"
+        android:text="Professor                                                                                                       Cadastra livros, vídeos e flashcards, datas de inscrição"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
