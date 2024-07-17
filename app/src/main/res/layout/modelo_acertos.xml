@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@android:color/transparent"
+    android:layout_margin="10dp"
+    android:layout_gravity="center_horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--@android:color/transparent-->
 
 
     <androidx.cardview.widget.CardView
@@ -41,7 +42,7 @@
 
                     <!--Variar cor de acordo com a "cor da olimpíada"-->
                     <TextView
-                        android:id="@+id/txtNomeOlimpiada"
+                        android:id="@+id/txtNomeOlimpiadaAcertos"
                         android:layout_width="330dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_bold"
