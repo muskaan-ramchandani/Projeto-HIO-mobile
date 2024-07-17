@@ -3,39 +3,98 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
+    android:orientation="vertical"
     android:background="@android:color/transparent">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardFundoRecadoProf"
-        android:layout_width="339dp"
-        android:layout_height="529dp"
+        android:layout_height="wrap_content"
+        android:layout_width="330dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="4dp"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="2dp">
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/open_sans_bold"
-            android:gravity="center"
-            android:text="Olá professor"
-            android:textColor="#000000"
-            android:textSize="24dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintAvisoProf"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="117dp"
-            android:layout_height="153dp"
-            android:text="TextView" />
+            <TextView
+                android:id="@+id/txtOlaProfAviso"
+                android:layout_width="330dp"
+                android:layout_height="68dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:gravity="center"
+                android:text="Olá professor!"
+                android:textColor="#000000"
+                android:textSize="25dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/constraintAvisoProf"
+                app:layout_constraintEnd_toEndOf="@+id/constraintAvisoProf"/>
+
+            <LinearLayout
+                android:layout_width="314dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/txtOlaProfAviso"
+                app:layout_constraintStart_toStartOf="@+id/constraintAvisoProf"
+                app:layout_constraintEnd_toEndOf="@+id/constraintAvisoProf">
+
+                <TextView
+                    android:id="@+id/txtAvisoProf"
+                    android:layout_width="314dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/texto_aviso_prof"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txtAcesseLinkWebProf"
+                    android:layout_width="314dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/texto_acesse_link_web_prof"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="3dp"/>
+
+                <TextView
+                    android:id="@+id/txtLinkWebProf"
+                    android:layout_width="314dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/texto_link_web_prof"
+                    android:gravity="center"
+                    android:textColor="@color/roxoPrincipal"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="15dp"/>
+
+                <Button
+                    android:id="@+id/btnEntendido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entendido! Acessarei o site"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_marginBottom="5dp"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 
 
 </LinearLayout>

@@ -4,6 +4,10 @@
     <string name="nome_formatacao_Logo"><i>Helper in <b>Olympics</b></i></string>
     <string name="texto_sou_aluno"><b>Aluno</b>\nRecebe as atividades e acessa as olímpiadas</string>
     <string name="texto_sou_professor"><b>Professor</b>\nCadastra livros, vídeos e flashcards, datas de inscrição</string>
+    <string name="texto_aviso_prof">Para proporcionar uma melhor experiência, optamos por criar diferentes ambientes que se adequem para cada tipo de usuário. Para professores, criamos um <b>site</b>, levando em consideração as ações que vocês podem realizar.</string>
+    <string name="texto_acesse_link_web_prof">Acesse o site através do seu <b>computador</b> pelo link:</string>
+    <string name="texto_link_web_prof">https://hio_site.com.br</string>
+
 
     <!--exemplos-->
     <string name="conteudo1_olimpiada"><b>Mecânica Clássica:</b> Fundamentos da cinemática do ponto material</string>

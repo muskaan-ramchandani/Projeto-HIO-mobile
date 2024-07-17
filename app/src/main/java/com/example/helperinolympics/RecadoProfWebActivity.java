@@ -15,7 +15,7 @@ public class RecadoProfWebActivity extends DialogFragment {
 
 
         // Configurar o botão de fechar
-        view.findViewById(R.id.btnFecharRecadoProf).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btnEntendido).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

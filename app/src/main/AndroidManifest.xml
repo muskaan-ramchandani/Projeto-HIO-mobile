@@ -22,13 +22,13 @@
             android:name=".TelaEscolhaOlimpiada"
             android:exported="false" />
         <activity
-            android:name=".TelaCadastro"
+            android:name=".TelaCadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".TelaBemVindo"
+            android:name=".TelaBemVindoActivity"
             android:exported="false" />
         <activity
-            android:name=".TelaLogin"
+            android:name=".TelaLoginActivity"
             android:exported="false" />
 
         <meta-data

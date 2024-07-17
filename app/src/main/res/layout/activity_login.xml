@@ -45,7 +45,7 @@
         app:srcCompat="@drawable/hipologin" />
 
     <EditText
-        android:id="@+id/editTextNumberPasswordSenha"
+        android:id="@+id/editTextSenha"
         android:layout_width="272dp"
         android:layout_height="53dp"
         android:ems="10"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.297" />
 
     <EditText
-        android:id="@+id/ediTextNomeCompleto"
+        android:id="@+id/editTextNomeUser"
         android:layout_width="272dp"
         android:layout_height="51dp"
         android:ems="10"
@@ -99,6 +99,7 @@
         android:layout_width="192dp"
         android:layout_height="62dp"
         android:layout_marginStart="108dp"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Login"
         android:textColorHighlight="#C6A3FF"
         android:textColorLink="#000000"
@@ -124,6 +125,7 @@
         android:id="@+id/button3"
         android:layout_width="195dp"
         android:layout_height="63dp"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Cadastre-se"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -28,7 +28,6 @@
         android:layout_marginBottom="672dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_Margin="50dp"
         app:layout_constraintEnd_toEndOf="@+id/txtNomeOlimp"
         app:srcCompat="@drawable/imgmacacaindo" />
 
@@ -43,7 +42,6 @@
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_Margin="674"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
