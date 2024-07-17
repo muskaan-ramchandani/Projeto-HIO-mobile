@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/TelaEscolha"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".telaEscolhaOlimpiada">
+    android:layout_height="match_parent">
 
     <!-- TextView -->
 
@@ -66,12 +65,13 @@
             <!-- CardView 2 -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="375dp"
+                android:layout_height="56dp"
                 android:layout_margin="16dp"
                 app:cardCornerRadius="8dp"
-                app:layout_constraintTop_toBottomOf="@id/cardView1"
-                tools:layout_editor_absoluteX="16dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardView1" />
 
                 <CheckBox
                     android:id="@+id/checkBox2"
@@ -87,15 +87,7 @@
 
                 <!-- Centraliza verticalmente -->
 
-            </androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintTop_toBottomOf="@id/cardView2"
 
-                >
 
 
             <androidx.cardview.widget.CardView

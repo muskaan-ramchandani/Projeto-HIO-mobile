@@ -42,10 +42,12 @@ public class AcertosSemanaisActivity extends Activity {
         entradaDados.add(new BarEntry(3f, 2f));
 
         // Cores
-        int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
-        int corRosa = ContextCompat.getColor(this, R.color.btnOlimpiadaRosa);
-        int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
-        int[] cores = new int[] {corAzul, corRosa, corRoxa};
+        //int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
+        //int corRosa = ContextCompat.getColor(this, R.color.btnOlimpiadaRosa);
+        //int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
+        //int[] cores = new int[] {corAzul, corRosa, corRoxa};
+
+        int[] cores = new int[] {Color.BLUE, Color.GREEN, Color.YELLOW};
 
         // Creating a bar data set
         BarDataSet barDataSet = new BarDataSet(entradaDados, "Data Set 1");

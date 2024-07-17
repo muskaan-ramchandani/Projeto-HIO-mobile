@@ -2,6 +2,8 @@
     <!--Strings essenciais para a aplicação-->
     <string name="app_name">Helper in Olympics</string>
     <string name="nome_formatacao_Logo"><i>Helper in <b>Olympics</b></i></string>
+    <string name="texto_sou_aluno"><b>Aluno</b>\nRecebe as atividades e acessa as olímpiadas</string>
+    <string name="texto_sou_professor"><b>Professor</b>\nCadastra livros, vídeos e flashcards, datas de inscrição</string>
 
     <!--exemplos-->
     <string name="conteudo1_olimpiada"><b>Mecânica Clássica:</b> Fundamentos da cinemática do ponto material</string>
