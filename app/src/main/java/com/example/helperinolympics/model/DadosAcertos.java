@@ -12,8 +12,6 @@ public class DadosAcertos {
     private String perguntaQuestaoCerta;
     private String questaoMarcadaCerta;
 
-    private String perguntaFixa;
-    private String alternativaMarcadaFixa;
 
     public DadosAcertos(String olimpiadaQuestaoCerta, String assuntoQuestaoCerta, String topicoDaQuestaoCerta, String profQuestaoCerta, String perguntaQuestaoCerta, String questaoMarcadaCerta) {
         setOlimpiadaQuestaoCerta(olimpiadaQuestaoCerta);
@@ -61,7 +59,6 @@ public class DadosAcertos {
     }
 
     public void setPerguntaQuestaoCerta(String perguntaQuestaoCerta) {
-        perguntaFixa= findViewById(s);
         this.perguntaQuestaoCerta = perguntaQuestaoCerta;
     }
 

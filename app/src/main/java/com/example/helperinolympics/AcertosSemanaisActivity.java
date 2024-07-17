@@ -75,12 +75,12 @@ public class AcertosSemanaisActivity extends Activity {
 
         //DADOS PARA TESTE
         DadosAcertos dados1 = new DadosAcertos("OBMEP", "Matrizes", "Determinante", "Por: Profº Maria João",
-                "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um número real.");
+                "Pergunta: Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
 
         listaAcertos.add(dados1);
 
         DadosAcertos dados2 = new DadosAcertos("OBI", "Estruturas condicionais", "If e else", "Por: Profº Maria João",
-                "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
+                "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
         listaAcertos.add(dados2);
     }
