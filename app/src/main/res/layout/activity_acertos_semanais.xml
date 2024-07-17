@@ -81,89 +81,10 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graficoBarraAcertosSemanais"
-            android:layout_width="230dp"
-            android:layout_height="200dp"/>
+            android:layout_width="380dp"
+            android:layout_height="200dp"
+            android:layout_marginEnd="5dp"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="20dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
-
-                <View
-                    android:id="@+id/viewLegendaSemanaUm"
-                    android:layout_width="20dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/legenda_semana_um"/>
-
-                <TextView
-                    android:id="@+id/txtLegendaSemanaUm"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    tools:text="23/06 - 29/06" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="20dp"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
-
-                <View
-                    android:id="@+id/viewLegendaSemanaDois"
-                    android:layout_width="20dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/legenda_acertos" />
-
-                <TextView
-                    android:id="@+id/txtLegendaSemanaDois"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    tools:text="30/06 - 06/07" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="20dp"
-                android:orientation="horizontal">
-
-                <View
-                    android:id="@+id/viewLegendaSemanaTres"
-                    android:layout_width="20dp"
-                    android:layout_height="15dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/legenda_erros" />
-
-                <TextView
-                    android:id="@+id/txtLegendaSemanaTres"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    tools:text="07/07 - 13/07" />
-            </LinearLayout>
-
-
-
-        </LinearLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
