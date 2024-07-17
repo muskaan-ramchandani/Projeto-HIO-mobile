@@ -7,6 +7,8 @@
     <string name="texto_aviso_prof">Para proporcionar uma melhor experiência, optamos por criar diferentes ambientes que se adequem para cada tipo de usuário. Para professores, criamos um <b>site</b>, levando em consideração as ações que vocês podem realizar.</string>
     <string name="texto_acesse_link_web_prof">Acesse o site através do seu <b>computador</b> pelo link:</string>
     <string name="texto_link_web_prof">https://hio_site.com.br</string>
+    <string name="pergunta_negrito"><b>Pergunta:</b></string>
+    <string name="alternativa_marcada_negrito"><b>Alternativa marcada:</b></string>
 
 
     <!--exemplos-->
@@ -14,10 +16,6 @@
     <string name="conteudo2_olimpiada"><b>Dilatação Superficial:</b> conceito e fórmulas</string>
     <string name="conteudo3_olimpiada"><b>Estática e Hidrostática:</b>Princípios Básicos</string>
     <string name="conteudo4_olimpiada"><b>Termologia:</b>Termometria, Calorimetria, Termodinâmica</string>
-
-    <string name="pergunta_matrizes">Qual das seguintes afirmações sobre determinantes está correta?</string>
-    <string name="resposta_certa_matrizes">O determinante de uma matriz quadrada é sempre um número real.</string>
-    <string name="resposta_errada_matrizes">O determinante de uma matriz pode ser calculado apenas se todos os elementos forem números inteiros.</string>
 
 
     <!--Nomes e siglas olimpíadas-->

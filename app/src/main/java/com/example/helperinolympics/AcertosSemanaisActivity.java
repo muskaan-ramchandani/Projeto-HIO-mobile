@@ -39,18 +39,16 @@ public class AcertosSemanaisActivity extends Activity {
         ArrayList<BarEntry> entradaDados = new ArrayList<>();
         entradaDados.add(new BarEntry(1f, 3f));
         entradaDados.add(new BarEntry(2f, 4f));
-        entradaDados.add(new BarEntry(3f, 2f));
+        entradaDados.add(new BarEntry(3f, 5f));
 
         // Cores
-        //int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
-        //int corRosa = ContextCompat.getColor(this, R.color.btnOlimpiadaRosa);
-        //int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
-        //int[] cores = new int[] {corAzul, corRosa, corRoxa};
-
-        int[] cores = new int[] {Color.BLUE, Color.GREEN, Color.YELLOW};
+        int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
+        int corRosa = ContextCompat.getColor(this, R.color.btnOlimpiadaRosa);
+        int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
+        int[] cores = new int[] {corAzul, corRosa, corRoxa};
 
         // Creating a bar data set
-        BarDataSet barDataSet = new BarDataSet(entradaDados, "Data Set 1");
+        BarDataSet barDataSet = new BarDataSet(entradaDados, "Gráfico de comparação");
         barDataSet.setColors(cores);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
@@ -77,12 +75,12 @@ public class AcertosSemanaisActivity extends Activity {
 
         //DADOS PARA TESTE
         DadosAcertos dados1 = new DadosAcertos("OBMEP", "Matrizes", "Determinante", "Por: Profº Maria João",
-                "Pergunta: Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
+                "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um número real.");
 
         listaAcertos.add(dados1);
 
         DadosAcertos dados2 = new DadosAcertos("OBI", "Estruturas condicionais", "If e else", "Por: Profº Maria João",
-                "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
+                "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
         listaAcertos.add(dados2);
     }

@@ -40,7 +40,6 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity android:name=".AcertosSemanaisActivity"/>
         <activity android:name=".RecadoProfWebActivity"/>
-        <activity android:name=".AcertosModelo"/>
 
         <activity
             android:name=".CadastroAlunoProfessorActivity"

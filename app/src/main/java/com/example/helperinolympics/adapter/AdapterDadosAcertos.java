@@ -30,6 +30,21 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
     public void onBindViewHolder(@NonNull AdapterDadosAcertos.AcertosViewHolder holder, int position) {
         String valorOlimpiada = listaDadosAcertos.get(position).getOlimpiadaQuestaoCerta();
         holder.olimpiada.setText(valorOlimpiada);
+
+        String valorAssunto = listaDadosAcertos.get(position).getAssuntoQuestaoCerta();
+        holder.assunto.setText(valorAssunto);
+
+        String valorTopico = listaDadosAcertos.get(position).getTopicoDaQuestaoCerta();
+        holder.topico.setText(valorTopico);
+
+        String valorProf = listaDadosAcertos.get(position).getProfQuestaoCerta();
+        holder.prof.setText(valorProf);
+
+        String valorPergunta = listaDadosAcertos.get(position).getPerguntaQuestaoCerta();
+        holder.pergunta.setText(valorPergunta);
+
+        String valorQuestao = listaDadosAcertos.get(position).getQuestaoMarcadaCerta();
+        holder.questao.setText(valorQuestao);
     }
 
     @Override
@@ -45,6 +60,7 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
         TextView prof;
         TextView pergunta;
         TextView questao;
+
         public AcertosViewHolder(@NonNull View itemView) {
             super(itemView);
             olimpiada=itemView.findViewById(R.id.txtNomeOlimpiadaAcertos);
