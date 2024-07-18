@@ -52,12 +52,12 @@
                 <CheckBox
                     android:id="@+id/checkBox1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:background="#9773DF"
                     android:fontFamily="@font/archivo_black"
                     android:gravity="center_vertical"
                     android:text="OBF - Olimpíada Brasileira de Física"
-                    android:textColor="#FFFDFD"
+                    android:textColor="#FFFFFF"
                     android:textSize="16sp" /> <!-- Centraliza verticalmente -->
 
             </androidx.cardview.widget.CardView>
@@ -71,7 +71,7 @@
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardView1" />
+                app:layout_constraintTop_toBottomOf="@id/cardView1" >
 
                 <CheckBox
                     android:id="@+id/checkBox2"
@@ -81,11 +81,12 @@
                     android:fontFamily="@font/archivo_black"
                     android:gravity="center_vertical"
                     android:text="OBMEP - Olimpíada Brasileira de Matemática das Escolas Públicas"
-                    android:textColor="#FAF6F6"
+                    android:textColor="#FFFFFF"
                     android:textColorLink="#FFFFFF"
                     android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
 
-                <!-- Centraliza verticalmente -->
+            <!-- Centraliza verticalmente -->
 
 
 
@@ -202,7 +203,7 @@
                     android:id="@+id/checkBox7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FF914D"
+                    android:background="#F07223"
                     android:fontFamily="@font/archivo_black"
                     android:gravity="center_vertical"
                     android:text="OBB - Olimpíada Brasileira de Biologia"
@@ -226,7 +227,7 @@
                     android:id="@+id/checkBox8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#18B9CD"
+                    android:background="#025059"
                     android:fontFamily="@font/archivo_black"
                     android:gravity="center_vertical"
                     android:text="ONC - Olimpíada Nacional de Ciências"
