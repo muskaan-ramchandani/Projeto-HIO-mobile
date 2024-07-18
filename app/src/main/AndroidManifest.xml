@@ -39,6 +39,7 @@
             android:label="@string/title_activity_menu_deslizante"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity android:name=".AcertosSemanaisActivity"/>
+        <activity android:name=".ErrosSemanaisActivity"/>
         <activity android:name=".RecadoProfWebActivity"/>
 
         <activity

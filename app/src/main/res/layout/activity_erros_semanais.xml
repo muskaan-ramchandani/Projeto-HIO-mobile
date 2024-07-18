@@ -8,7 +8,7 @@
 
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarAcertos"
+        android:id="@+id/toolbarErrosSemanais"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="@color/roxoPrincipal"
@@ -23,12 +23,12 @@
         android:layout_height="75dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="@+id/toolbarAcertos"
-        app:layout_constraintStart_toStartOf="@+id/toolbarAcertos"
-        app:layout_constraintEnd_toEndOf="@+id/toolbarAcertos">
+        app:layout_constraintTop_toTopOf="@+id/toolbarErrosSemanais"
+        app:layout_constraintStart_toStartOf="@+id/toolbarErrosSemanais"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarErrosSemanais">
 
         <ImageButton
-            android:id="@+id/btnAcertosVoltarAoPerfil"
+            android:id="@+id/btnVoltarAoPerfil"
             android:layout_width="35dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -39,21 +39,21 @@
             app:srcCompat="@drawable/btnvoltarbranco"/>
 
         <TextView
-            android:id="@+id/txtAcertosSemanais"
+            android:id="@+id/txtErrosSemanais"
             android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Acertos semanais"
+            android:text="Erros semanais"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtAcertosSemanasAnteriores"
+        android:id="@+id/txtErrosSemanasAnteriores"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -62,12 +62,12 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/toolbarAcertos"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarAcertos" />
+        app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarErrosSemanais" />
 
     <!--Linear principal-->
     <LinearLayout
-        android:id="@+id/linearLayoutGraficoELegendaAcertos"
+        android:id="@+id/linearLayoutGraficoELegendaErros"
         android:layout_width="380dp"
         android:layout_height="200dp"
         android:orientation="horizontal"
@@ -75,12 +75,12 @@
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
         android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/txtAcertosSemanasAnteriores"
-        app:layout_constraintStart_toStartOf="@id/toolbarAcertos"
-        app:layout_constraintEnd_toEndOf="@id/toolbarAcertos">
+        app:layout_constraintTop_toBottomOf="@id/txtErrosSemanasAnteriores"
+        app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
+        app:layout_constraintEnd_toEndOf="@id/toolbarErrosSemanais">
 
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/graficoBarraAcertosSemanais"
+            android:id="@+id/graficoBarraErrosSemanais"
             android:layout_width="370dp"
             android:layout_height="200dp"
             android:layout_marginEnd="5dp"/>
@@ -88,15 +88,15 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewListaAcertos"
+        android:id="@+id/recyclerViewListaErros"
         android:layout_width="380dp"
         android:layout_height="360dp"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutGraficoELegendaAcertos"
-        app:layout_constraintStart_toStartOf="@id/toolbarAcertos"
-        app:layout_constraintEnd_toEndOf="@id/toolbarAcertos"/>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutGraficoELegendaErros"
+        app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
+        app:layout_constraintEnd_toEndOf="@id/toolbarErrosSemanais"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

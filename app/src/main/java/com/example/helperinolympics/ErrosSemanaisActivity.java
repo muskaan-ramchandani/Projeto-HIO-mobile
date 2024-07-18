@@ -3,73 +3,67 @@ package com.example.helperinolympics;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Adapter;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.helperinolympics.adapter.AdapterDadosAcertos;
-import com.example.helperinolympics.model.DadosAcertos;
+import com.example.helperinolympics.adapter.AdapterDadosErros;
+import com.example.helperinolympics.model.DadosErros;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.data.BarEntry;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class AcertosSemanaisActivity extends Activity {
+public class ErrosSemanaisActivity extends Activity {
 
-    BarChart barChart;
-    RecyclerView rVListaAcertos;
+    BarChart barChart2;
+    RecyclerView rVListaErros;
 
-    AdapterDadosAcertos acertosAdapter;
+    AdapterDadosErros errosAdapter;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acertos_semanais);
+        setContentView(R.layout.activity_erros_semanais);
 
         configurarBarra();
 
-
-        //Lista de acertos
-        rVListaAcertos = findViewById(R.id.recyclerViewListaAcertos);
+        //Lista de erros
+        rVListaErros = findViewById(R.id.recyclerViewListaErros);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rVListaAcertos.setLayoutManager(layoutManager);
-        rVListaAcertos.setHasFixedSize(true);
+        rVListaErros.setLayoutManager(layoutManager);
+        rVListaErros.setHasFixedSize(true);
 
-        List<DadosAcertos> listaAcertos = new ArrayList<>();
-        acertosAdapter = new AdapterDadosAcertos(listaAcertos);
-        rVListaAcertos.setAdapter(acertosAdapter);
+        List<DadosErros> listaErros = new ArrayList<>();
+        errosAdapter = new AdapterDadosErros(listaErros);
+        rVListaErros.setAdapter(errosAdapter);
 
         //DADOS PARA TESTE
-        DadosAcertos dados1 = new DadosAcertos("OBMEP", "Matrizes", "Determinante", "Por: Profº Maria João",
-                "Pergunta: Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
+        DadosErros dados1 = new DadosErros("OBMEP", "Matrizes", "Determinante", "Por: Profº Maria João",
+                "Pergunta: Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um booleab.", "Alternativa correta: O determinante de uma matriz quadrada é sempre um número real.");
 
-        listaAcertos.add(dados1);
+        listaErros.add(dados1);
 
-        DadosAcertos dados2 = new DadosAcertos("OBI", "Estruturas condicionais", "If e else", "Por: Profº Maria João",
-                "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
+        DadosErros dados2 = new DadosErros("OBI", "Estruturas condicionais", "If e else", "Por: Profº Maria João",
+                "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Alternativa correta: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
-        listaAcertos.add(dados2);
+        listaErros.add(dados2);
     }
 
     private void configurarBarra(){
-        barChart = findViewById(R.id.graficoBarraAcertosSemanais);
+        barChart2 = findViewById(R.id.graficoBarraErrosSemanais);
 
         //Entradas de dados
-        ArrayList<BarEntry> entradaDados = new ArrayList<>();
-        entradaDados.add(new BarEntry(1f, 3f));
-        entradaDados.add(new BarEntry(2f, 4f));
-        entradaDados.add(new BarEntry(3f, 5f));
+        ArrayList<BarEntry> entradaDados2 = new ArrayList<>();
+        entradaDados2.add(new BarEntry(1f, 6f));
+        entradaDados2.add(new BarEntry(2f, 1f));
+        entradaDados2.add(new BarEntry(3f, 3f));
 
         // Cores
         int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
@@ -78,13 +72,13 @@ public class AcertosSemanaisActivity extends Activity {
         int[] cores = new int[] {corAzul, corRosa, corRoxa};
 
         // Creating a bar data set
-        BarDataSet barDataSet = new BarDataSet(entradaDados, "Gráfico de comparação");
+        BarDataSet barDataSet = new BarDataSet(entradaDados2, "Gráfico de comparação");
         barDataSet.setColors(cores);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
 
         //Inserindo legenda
-        Legend legend = barChart.getLegend();
+        Legend legend = barChart2.getLegend();
         legend.setEnabled(true);
         legend.setTextSize(12f);
         legend.setTextColor(Color.BLACK);
@@ -109,8 +103,8 @@ public class AcertosSemanaisActivity extends Activity {
 
         //Adicionando configurações
         BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
-        barChart.animateY(2000);
+        barChart2.setData(barData);
+        barChart2.animateY(2000);
     }
 
 

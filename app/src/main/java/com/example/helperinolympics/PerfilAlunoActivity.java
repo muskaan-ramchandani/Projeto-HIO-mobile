@@ -17,7 +17,7 @@ import org.eazegraph.lib.models.PieModel;
 public class PerfilAlunoActivity extends Activity {
 
     private ActivityPerfilAlunoBinding binding;
-    Button btnVoltarInicio, btnAcertos;
+    Button btnVoltarInicio, btnAcertos, btnErros;
     TextView txtAcertos, txtErros;
     PieChart graficoPizzaEstatisticas;
     protected void onCreate(Bundle savedInstanceState){
@@ -41,6 +41,15 @@ public class PerfilAlunoActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilAlunoActivity.this, AcertosSemanaisActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnErros= binding.btnHistoricoErros;
+        btnErros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PerfilAlunoActivity.this, ErrosSemanaisActivity.class);
                 startActivity(intent);
             }
         });
