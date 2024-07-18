@@ -1,37 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <!-- Background Image -->
-    <ImageView
-        android:id="@+id/imageView19"
-        android:layout_width="437dp"
-        android:layout_height="258dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/fundo_titulo_flashcard"
-        tools:ignore="MissingConstraints" />
 
 
-    <!-- CardView -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
+        android:id="@+id/cardFundoTelaVoceAcertou"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:background="@color/roxoPrincipal">
+
+
+        <!--Linear total do cabeçalho-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:orientation="vertical"
+            android:background="@color/roxoPrincipal">
+
+
+            <TextView
+                android:id="@+id/txtVoceAcertou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/questrial"
+                android:text="Você acertou..."
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="10dp" />
+
+
+            <!--Linear questoes e hipo-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+
+                <!--Linear questoes-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/txtNumeroQuestaoCertas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:textSize="91sp"
+                        android:textStyle="bold"
+                        tools:text="10" />
+
+
+                    <TextView
+                        android:id="@+id/txtQuestoesTotais"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        tools:text="Questões de 20"
+                        android:layout_marginTop="13dp"
+                        />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:id="@+id/imgHipoTristeOuFeliz"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:layout_marginStart="30dp"
+                    app:srcCompat="@drawable/hipoalegredeolhosabertos" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+    <TextView
+        android:id="@+id/txtCorrecaoErros"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Correção de erros:"
+        android:textSize="24sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardScroolCorrecao"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintTop_toBottomOf="@id/imageView19"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:cardElevation="5dp">
 
 
         <ScrollView
@@ -47,59 +134,46 @@
 
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/txtPergunta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="Correção de erros:"
-                    android:textSize="23sp" />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="@string/pergunta_exemplo"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/txtAlternativaCorreta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:fontFamily="@font/open_sans"
-                    android:text="@string/textoPergunta"
-                    android:textSize="17sp" />
+                    android:text="@string/alternativaCorreta_exemplo"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/txtExplicacao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:fontFamily="@font/open_sans"
-                    android:text="@string/alternativaCorreta"
-                    android:textSize="17sp" />
-
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans"
-                    android:text="@string/Explicacao"
-                    android:textSize="17sp" />
-
+                    android:text="@string/explicacao_exemplo"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </ScrollView>
 
 
     </androidx.cardview.widget.CardView>
-
-
-    <!-- Image below CardView -->
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="205dp"
-        android:layout_height="210dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView"
-        app:srcCompat="@drawable/hipoalegredeolhosabertos" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -8,16 +8,17 @@
     tools:context=".CadastroAlunoProfessorActivity">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgHipoVoceE"
         android:layout_width="245dp"
         android:layout_height="244dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.936"
-        app:srcCompat="@drawable/hipocadastroalunoprofessor" />
+        app:srcCompat="@drawable/hipoalegredeolhosfechados" />
 
     <TextView
         android:id="@+id/txtVoceE"

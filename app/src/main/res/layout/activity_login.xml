@@ -34,15 +34,16 @@
         app:layout_constraintVertical_bias="0.071" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="285dp"
+        android:id="@+id/imgHipoLogin"
+        android:layout_width="350dp"
         android:layout_height="264dp"
         android:layout_marginTop="500dp"
+        android:layout_marginEnd="122dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/hipologin" />
+        app:srcCompat="@drawable/hipoprincipalcommedalha" />
 
     <EditText
         android:id="@+id/editTextSenha"
