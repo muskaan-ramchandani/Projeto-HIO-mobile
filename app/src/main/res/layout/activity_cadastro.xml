@@ -7,23 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".TelaCadastroActivity">
 
-    <ImageButton
-        android:id="@+id/btnVoltarAoBemVindo"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="6dp"
-        android:scaleType="fitCenter"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/btnvoltar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
     <TextView
-        android:id="@+id/txtCadastreSe"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#49688D"
+        android:backgroundTint="#49688D"
         android:fontFamily="@font/open_sans_bold"
         android:gravity="center_horizontal"
         android:text="Cadastre-se"
@@ -36,7 +24,7 @@
         app:layout_constraintVertical_bias="0.069" />
 
     <ImageView
-        android:id="@+id/imgIconeUser"
+        android:id="@+id/imageView3"
         android:layout_width="65dp"
         android:layout_height="57dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,10 +36,10 @@
         app:srcCompat="@drawable/iconeuser" />
 
     <ImageView
-        android:id="@+id/imgIconeNome"
+        android:id="@+id/imageView4"
         android:layout_width="65dp"
         android:layout_height="57dp"
-        app:layout_constraintBottom_toTopOf="@+id/imgIconeUser"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +48,7 @@
         app:srcCompat="@drawable/iconenome" />
 
     <ImageView
-        android:id="@+id/imgIconeEmail"
+        android:id="@+id/imageView5"
         android:layout_width="65dp"
         android:layout_height="57dp"
         android:layout_marginTop="66dp"
@@ -68,22 +56,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgIconeUser"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.018"
         app:srcCompat="@drawable/iconeemail" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="130dp"
+        android:layout_width="186dp"
         android:layout_height="175dp"
-        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/hipocommedalhas" />
+        app:srcCompat="@drawable/img" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -95,15 +82,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/mancharoxa" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnFinalizarCadastro"
+    <Button
+        android:id="@+id/button"
         android:layout_width="151dp"
         android:layout_height="58dp"
-        android:background="@drawable/fundo_botoes_comuns_lilas"
         android:fontFamily="@font/open_sans_bold"
         android:text="Finalizar"
-        android:textColor="@color/white"
-        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -112,14 +96,12 @@
         app:layout_constraintVertical_bias="0.737" />
 
     <EditText
-        android:id="@+id/editTxtNomeCompleto"
+        android:id="@+id/editTextText3"
         android:layout_width="223dp"
         android:layout_height="52dp"
         android:ems="10"
-        android:fontFamily="@font/open_sans"
-        android:hint="Nome completo"
         android:inputType="text"
-        android:textColor="@color/black"
+        android:text="Nome completo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.569"
@@ -128,14 +110,12 @@
         app:layout_constraintVertical_bias="0.181" />
 
     <EditText
-        android:id="@+id/editTxtNomeUser"
+        android:id="@+id/editTextText4"
         android:layout_width="223dp"
         android:layout_height="52dp"
         android:ems="10"
-        android:fontFamily="@font/open_sans"
-        android:hint="Nome de usuário"
         android:inputType="text"
-        android:textColor="@color/black"
+        android:text="Nome de usuário"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.569"
@@ -149,9 +129,7 @@
         android:layout_height="58dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Email"
-        android:fontFamily="@font/open_sans"
-        android:textColor="@color/black"
+        android:text="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.554"
@@ -160,7 +138,7 @@
         app:layout_constraintVertical_bias="0.396" />
 
     <ImageView
-        android:id="@+id/imgIconeSenha"
+        android:id="@+id/imageView11"
         android:layout_width="65dp"
         android:layout_height="57dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -172,7 +150,7 @@
         app:srcCompat="@drawable/iconesenha" />
 
     <ImageView
-        android:id="@+id/imgIconeConfirmaSenha"
+        android:id="@+id/imageView12"
         android:layout_width="65dp"
         android:layout_height="57dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -184,14 +162,12 @@
         app:srcCompat="@drawable/iconeconfirmasenha" />
 
     <EditText
-        android:id="@+id/editTxtSenha"
+        android:id="@+id/editTextText7"
         android:layout_width="223dp"
         android:layout_height="58dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Senha"
-        android:textColor="@color/black"
-        android:fontFamily="@font/open_sans"
+        android:text="Senha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.558"
@@ -205,9 +181,7 @@
         android:layout_height="58dp"
         android:ems="10"
         android:inputType="text"
-        android:hint="Confirmar Senha"
-        android:textColor="@color/black"
-        android:fontFamily="@font/open_sans"
+        android:text="Confirmar Senha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.559"
