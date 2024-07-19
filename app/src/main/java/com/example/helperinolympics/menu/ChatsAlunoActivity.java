@@ -1,4 +1,4 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.menu;
 
 public class ChatsAlunoActivity {
 }

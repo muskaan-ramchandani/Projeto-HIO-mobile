@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
                     android:layout_marginStart="30dp"
-                    app:srcCompat="@drawable/hipoalegredeolhosabertos" />
+                    tools:srcCompat="@drawable/hipoalegredeolhosabertos" />
             </LinearLayout>
         </LinearLayout>
 

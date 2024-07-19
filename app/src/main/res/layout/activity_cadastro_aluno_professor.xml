@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".CadastroAlunoProfessorActivity">
 
+    <ImageButton
+        android:id="@+id/btnVoltarAoBemVindo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="6dp"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/btnvoltar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/imgHipoVoceE"
         android:layout_width="245dp"

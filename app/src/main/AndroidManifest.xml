@@ -26,13 +26,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".TelaInicialAlunoActivity" />
-        <activity android:name=".PerfilAlunoActivity" />
+        <activity android:name=".menu.PerfilAlunoActivity" />
         <activity android:name=".InicioOlimpiadaActivity" />
-        <activity android:name=".ChatsAlunoActivity" />
-        <activity android:name=".FavoritosAlunoActivity" />
-        <activity android:name=".ConfiguracoesActivity" />
-        <activity android:name=".ManualActivity" />
-        <activity android:name=".SairActivity" />
+        <activity android:name=".menu.ChatsAlunoActivity" />
+        <activity android:name=".menu.FavoritosAlunoActivity" />
+        <activity android:name=".menu.ConfiguracoesActivity" />
+        <activity android:name=".menu.ManualActivity" />
+        <activity android:name=".menu.SairActivity" />
         <activity
             android:name=".MenuDeslizanteAlunoActivity"
             android:exported="false"

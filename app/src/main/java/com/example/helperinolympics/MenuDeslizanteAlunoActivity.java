@@ -6,12 +6,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.helperinolympics.databinding.ActivityMenuDeslizanteAlunoBinding;
+import com.example.helperinolympics.menu.ChatsAlunoActivity;
+import com.example.helperinolympics.menu.ConfiguracoesActivity;
+import com.example.helperinolympics.menu.FavoritosAlunoActivity;
+import com.example.helperinolympics.menu.ManualActivity;
+import com.example.helperinolympics.menu.PerfilAlunoActivity;
+import com.example.helperinolympics.menu.SairActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuDeslizanteAlunoActivity extends AppCompatActivity {

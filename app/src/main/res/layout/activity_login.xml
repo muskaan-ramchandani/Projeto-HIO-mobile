@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imgSenha"
         android:layout_width="48dp"
         android:layout_height="49dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,12 +19,13 @@
         app:srcCompat="@drawable/iconesenha" />
 
     <TextView
-        android:id="@+id/TextViewlogin"
+        android:id="@+id/txtLogin"
         android:layout_width="114dp"
         android:layout_height="57dp"
         android:fontFamily="@font/open_sans_bold"
         android:rotationX="-4"
         android:text="Login"
+        android:gravity="center"
         android:textColor="#49688D"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +47,7 @@
         app:srcCompat="@drawable/hipoprincipalcommedalha" />
 
     <EditText
-        android:id="@+id/editTextSenha"
+        android:id="@+id/editTxtSenha"
         android:layout_width="272dp"
         android:layout_height="53dp"
         android:ems="10"
@@ -60,7 +61,7 @@
         app:layout_constraintVertical_bias="0.297" />
 
     <EditText
-        android:id="@+id/editTextNomeUser"
+        android:id="@+id/editTxtUser"
         android:layout_width="272dp"
         android:layout_height="51dp"
         android:ems="10"
@@ -84,7 +85,7 @@
         app:srcCompat="@drawable/mancharoxa" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/imgUser"
         android:layout_width="50dp"
         android:layout_height="52dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,38 +96,45 @@
         app:layout_constraintVertical_bias="0.2"
         app:srcCompat="@drawable/iconenome" />
 
-    <Button
-        android:id="@+id/button1"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFinalizarLogin"
         android:layout_width="192dp"
         android:layout_height="62dp"
         android:layout_marginStart="108dp"
+        android:background="@drawable/fundo_botoes_comuns_lilas"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Login"
-        android:textColorHighlight="#C6A3FF"
-        android:textColorLink="#000000"
+        android:text="Finalizar"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.426" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtOu"
         android:layout_width="21dp"
         android:layout_height="22dp"
         android:layout_marginStart="188dp"
         android:layout_marginEnd="188dp"
         android:text="ou"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.516" />
 
-    <Button
-        android:id="@+id/button3"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnCadastreSe"
         android:layout_width="195dp"
         android:layout_height="63dp"
+        android:background="@drawable/fundo_botoes_comuns_lilas"
         android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         android:text="Cadastre-se"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
