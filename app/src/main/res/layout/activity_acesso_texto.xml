@@ -37,7 +37,7 @@
         android:layout_height="57dp"
         android:layout_marginStart="44dp"
         android:layout_marginBottom="668dp"
-        android:fontFamily="@font/open_sans_extrabold"
+        android:fontFamily="@font/open_sans_bold"
         android:text="OBF"
         android:textColor="@color/white"
         android:textSize="34sp"
