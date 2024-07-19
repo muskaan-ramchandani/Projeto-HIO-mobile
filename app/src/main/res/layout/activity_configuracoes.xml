@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarConfiguracoes"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/roxoPrincipal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="@+id/toolbarConfiguracoes"
+        app:layout_constraintStart_toStartOf="@+id/toolbarConfiguracoes"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarConfiguracoes">
+
+        <ImageButton
+            android:id="@+id/btnVoltarAoInicio"
+            android:layout_width="35dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/btnvoltarbranco"/>
+
+        <TextView
+            android:id="@+id/txtConfiguracoes"
+            android:layout_width="315dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Configurações"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtMeusdados"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:text="Meus dados:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/toolbarConfiguracoes"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarConfiguracoes" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewDadosConfiguracoes"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:layout_constraintStart_toStartOf="@+id/toolbarConfiguracoes"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarConfiguracoes"
+        app:layout_constraintTop_toBottomOf="@+id/txtMeusdados">
+
+        <!--Borda-->
+        <FrameLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_rosa_acertos_erros">
+
+            <!--Linear geral-->
+            <LinearLayout
+                android:id="@+id/linearImagemDadosConfiguracoes"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgFotoPerfilConfiguracoes"
+                    android:layout_width="114dp"
+                    android:layout_height="123dp"
+                    android:layout_marginEnd="13dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Foto de perfil do usuário"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/iconeperfilvazioredonda" />
+
+                <LinearLayout
+                    android:id="@+id/linearDadosConfiguracoes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtNomeCompletoConfiguracoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_light"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="Bolofofos da Silva " />
+
+                    <TextView
+                        android:id="@+id/txtUserConfiguracoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_light"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="bolofofos" />
+
+                    <TextView
+                        android:id="@+id/txtEmailConfiguracoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_light"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="bolofofos@gmail.com" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnAlterarDados"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Alterar dados"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:background="@drawable/fundo_botoes_roxos"
+        android:fontFamily="@font/open_sans_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.738" />
+
+    <Button
+        android:id="@+id/btnExcluirConta"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Excluir conta"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:background="@drawable/fundo_botoes_roxos"
+        android:fontFamily="@font/open_sans_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.877" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

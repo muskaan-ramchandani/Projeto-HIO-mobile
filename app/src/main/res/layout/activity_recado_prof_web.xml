@@ -79,14 +79,15 @@
                     android:textSize="20sp"
                     android:layout_marginBottom="15dp"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnEntendido"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:text="Entendido! Acessarei o site"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:textSize="18sp"
+                    android:background="@drawable/fundo_botoes_roxos"
                     android:fontFamily="@font/open_sans_bold"
                     android:layout_marginBottom="5dp"/>
             </LinearLayout>
