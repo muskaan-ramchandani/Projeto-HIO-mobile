@@ -49,6 +49,9 @@
         <activity android:name=".modelos_sobrepostos.RecadoProfWebActivity" />
 
         <activity
+            android:name=".QuestionarioFinalizarActivity"
+            android:exported="false" />
+        <activity
             android:name=".cadastros.CadastroAlunoProfessorActivity"
             android:exported="false" />
         <activity
