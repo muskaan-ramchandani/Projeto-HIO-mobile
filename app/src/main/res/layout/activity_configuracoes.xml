@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -59,7 +59,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="22dp"
         android:text="Meus dados:"
-        android:textColor="#000000"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/toolbarConfiguracoes"
@@ -73,7 +73,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="15dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="2dp"
+        app:cardElevation="4dp"
         app:layout_constraintStart_toStartOf="@+id/toolbarConfiguracoes"
         app:layout_constraintEnd_toEndOf="@+id/toolbarConfiguracoes"
         app:layout_constraintTop_toBottomOf="@+id/txtMeusdados">
@@ -115,7 +115,7 @@
                         android:id="@+id/txtNomeCompletoConfiguracoes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans_light"
+                        android:fontFamily="@font/open_sans"
                         android:textColor="#000000"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -125,20 +125,18 @@
                         android:id="@+id/txtUserConfiguracoes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans_light"
+                        android:fontFamily="@font/open_sans"
                         android:textColor="#000000"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         tools:text="bolofofos" />
 
                     <TextView
                         android:id="@+id/txtEmailConfiguracoes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans_light"
+                        android:fontFamily="@font/open_sans"
                         android:textColor="#000000"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         tools:text="bolofofos@gmail.com" />
 
                 </LinearLayout>
@@ -148,38 +146,181 @@
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/btnAlterarDados"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Alterar dados"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:background="@drawable/fundo_botoes_roxos"
-        android:fontFamily="@font/open_sans_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.738" />
 
-    <Button
-        android:id="@+id/btnExcluirConta"
-        android:layout_width="250dp"
+    <TextView
+        android:id="@+id/txtConfiguracoesDaConta"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:text="Excluir conta"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:background="@drawable/fundo_botoes_roxos"
-        android:fontFamily="@font/open_sans_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.877" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:text="Configurações da conta:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/toolbarConfiguracoes"
+        app:layout_constraintTop_toBottomOf="@+id/cardviewDadosConfiguracoes" />
+
+    <LinearLayout
+        android:id="@+id/linearBotoesConfigurar"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/toolbarConfiguracoes"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarConfiguracoes"
+        app:layout_constraintTop_toBottomOf="@+id/txtConfiguracoesDaConta">
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAlterarDados"
+                android:layout_width="170dp"
+                android:layout_height="155dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#EDEDED"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgAlterarDados"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/baseline_edit_24" />
+
+                    <TextView
+                        android:id="@+id/txtAlterarDados"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Alterar dados"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAlterarSenha"
+                android:layout_width="170dp"
+                android:layout_height="155dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#EDEDED"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgAlterarSenha"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/baseline_password_24" />
+
+                    <TextView
+                        android:id="@+id/txtAlterarSenha"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Alterar senha"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardHistoricosAcesso"
+                android:layout_width="170dp"
+                android:layout_height="155dp"
+                android:layout_marginEnd="20dp"
+                android:backgroundTint="#EDEDED"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgHistorico"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/baseline_access_time_24" />
+
+                    <TextView
+                        android:id="@+id/txtHistoricoAcesso"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Históricos de acesso"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardDeletarConta"
+                android:layout_width="170dp"
+                android:layout_height="155dp"
+                android:backgroundTint="#EDEDED"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgDeletarConta"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/baseline_delete_forever_24" />
+
+                    <TextView
+                        android:id="@+id/txtDeletarConta"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Deletar conta"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

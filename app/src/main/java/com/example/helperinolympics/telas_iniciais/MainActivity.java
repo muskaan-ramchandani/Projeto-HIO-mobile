@@ -1,10 +1,13 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.telas_iniciais;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
+import com.example.helperinolympics.MenuDeslizanteAlunoActivity;
+import com.example.helperinolympics.R;
 
 public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {

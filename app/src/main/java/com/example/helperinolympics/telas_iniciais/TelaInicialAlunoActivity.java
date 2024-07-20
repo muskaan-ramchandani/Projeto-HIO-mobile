@@ -1,7 +1,9 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.telas_iniciais;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.helperinolympics.R;
 
 
 public class TelaInicialAlunoActivity extends Activity {

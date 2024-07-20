@@ -1,15 +1,13 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.telas_iniciais;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Patterns;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.regex.Pattern;
+import com.example.helperinolympics.R;
 
 public class TelaLoginActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.cadastros;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.helperinolympics.R;
+import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 
 public class CadastroAlunoProfessorActivity extends AppCompatActivity {
 

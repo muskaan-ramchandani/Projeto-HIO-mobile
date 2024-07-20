@@ -1,9 +1,12 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.materiais;
 import android.os.Bundle;
 import android.view.View;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.helperinolympics.R;
+import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 
 
 public class FlashcardActivity extends AppCompatActivity{

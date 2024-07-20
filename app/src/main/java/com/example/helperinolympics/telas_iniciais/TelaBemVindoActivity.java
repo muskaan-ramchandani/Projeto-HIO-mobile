@@ -1,10 +1,10 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.telas_iniciais;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.helperinolympics.R;
 
 public class TelaBemVindoActivity extends AppCompatActivity {
 

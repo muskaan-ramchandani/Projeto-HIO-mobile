@@ -19,7 +19,7 @@
 
         <!--Main activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".telas_iniciais.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,9 +29,9 @@
         </activity>
 
         <!-- Outras activities -->
-        <activity android:name=".TelaInicialAlunoActivity" />
+        <activity android:name=".telas_iniciais.TelaInicialAlunoActivity" />
         <activity android:name=".menu.PerfilAlunoActivity" />
-        <activity android:name=".InicioOlimpiadaActivity" />
+        <activity android:name=".telas_iniciais.InicioOlimpiadaActivity" />
         <activity android:name=".menu.ChatsAlunoActivity" />
         <activity android:name=".menu.FavoritosAlunoActivity" />
         <activity android:name=".menu.ConfiguracoesActivity" />
@@ -46,25 +46,25 @@
 
         <activity android:name=".AcertosSemanaisActivity" />
         <activity android:name=".ErrosSemanaisActivity" />
-        <activity android:name=".RecadoProfWebActivity" />
+        <activity android:name=".modelos_sobrepostos.RecadoProfWebActivity" />
 
         <activity
-            android:name=".CadastroAlunoProfessorActivity"
+            android:name=".cadastros.CadastroAlunoProfessorActivity"
             android:exported="false" />
         <activity
-            android:name=".AcessoTextoActivity"
+            android:name=".telas_de_acesso.AcessoTextoActivity"
             android:exported="false" />
         <activity
-            android:name=".TelaEscolhaOlimpiadaActivity"
+            android:name=".telas_iniciais.TelaEscolhaOlimpiadaActivity"
             android:exported="false" />
         <activity
-            android:name=".CadastroActivity"
+            android:name=".cadastros.CadastroActivity"
             android:exported="false" />
         <activity
-            android:name=".TelaBemVindoActivity"
+            android:name=".telas_iniciais.TelaBemVindoActivity"
             android:exported="false" />
         <activity
-            android:name=".TelaLoginActivity"
+            android:name=".telas_iniciais.TelaLoginActivity"
             android:exported="false" />
     </application>
 

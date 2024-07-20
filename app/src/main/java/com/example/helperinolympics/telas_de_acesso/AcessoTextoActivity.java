@@ -1,4 +1,4 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.telas_de_acesso;
 
 import android.os.Bundle;
 
@@ -8,13 +8,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
+import com.example.helperinolympics.R;
+
+public class AcessoTextoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_tela_escolha_olimpiada);
+        setContentView(R.layout.activity_acesso_texto);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

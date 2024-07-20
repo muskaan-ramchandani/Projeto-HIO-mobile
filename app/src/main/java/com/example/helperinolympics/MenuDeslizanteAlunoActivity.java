@@ -16,6 +16,7 @@ import com.example.helperinolympics.menu.FavoritosAlunoActivity;
 import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.menu.SairActivity;
+import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuDeslizanteAlunoActivity extends AppCompatActivity {
