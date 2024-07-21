@@ -18,8 +18,8 @@ public class TelaLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        editTextUser=findViewById(R.id.editTextNomeUser);
-        editTextInserirSenha=findViewById(R.id.editTextSenha);
+        editTextUser=findViewById(R.id.editTxtUser);
+        editTextInserirSenha=findViewById(R.id.editTxtSenha);
         String usuario = editTextUser.getText().toString().trim();
         String senha = editTextInserirSenha.getText().toString().trim();
 
