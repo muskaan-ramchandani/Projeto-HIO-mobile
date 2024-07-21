@@ -29,7 +29,7 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingV
 
     public void onBindViewHolder(@NonNull AdapterRanking.RankingViewHolder holder, int position){
         int valorPosicao = listaRanking.get(position).getPosicao();
-        holder.posicao.setText(valorPosicao);
+        holder.posicao.setText(String.valueOf(valorPosicao));
 
         int valorFoto = listaRanking.get(position).getFotoPerfil();
         holder.foto.setImageResource(valorFoto);
@@ -38,7 +38,7 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingV
         holder.user.setText(valorUser);
 
         int valorAcertos = listaRanking.get(position).getQntdAcertos();
-        holder.qntdAcertos.setText(valorAcertos);
+        holder.qntdAcertos.setText(String.valueOf(valorAcertos));
 
     }
 

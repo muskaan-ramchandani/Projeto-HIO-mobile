@@ -73,5 +73,6 @@ public class QuestionarioCorrecaoActivity extends Activity {
                         "A diferença principal entre switch e if-else é que o switch é mais adequado para situações em que você precisa comparar uma única variável contra várias constantes, tornando o código mais legível e organizado. A instrução if-else é mais flexível, pois pode avaliar expressões booleanas complexas, mas pode se tornar menos legível quando há muitas condições a serem verificadas. A resposta B está incorreta porque if-else não está limitado a duas opções; você pode encadear vários else if. A resposta C está incorreta porque switch pode ser usado com tipos de dados int, char, byte, short, String, e enumeradores. A resposta D está incorreta porque a eficiência depende do caso de uso específico e da implementação subjacente da JVM.");
 
         listaCorrecao.add(dados2);
+        correcaoAdapter.notifyDataSetChanged();
     }
 }

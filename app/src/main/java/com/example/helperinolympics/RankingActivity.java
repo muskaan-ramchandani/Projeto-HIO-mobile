@@ -26,8 +26,8 @@ public class RankingActivity extends Activity {
     AdapterRanking adapter;
     ImageButton retornaInicio, acessacalendario;
 
-    public void onCreate(Bundle savedInstaceState){
-        super.onCreate(savedInstaceState);
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
         retornaInicio=findViewById(R.id.btnRetornarInicio);

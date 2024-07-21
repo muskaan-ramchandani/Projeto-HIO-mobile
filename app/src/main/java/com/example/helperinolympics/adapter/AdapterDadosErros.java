@@ -17,7 +17,7 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
 
     private List<DadosErros> listaDadosErros;
 
-    public AdapterDadosErros(List<DadosErros> listaDadosAcertos) {
+    public AdapterDadosErros(List<DadosErros> listaDadosErros) {
         this.listaDadosErros = listaDadosErros;
     }
     public AdapterDadosErros.ErrosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -29,7 +29,6 @@
         </activity>
 
         <!-- Outras activities -->
-        <activity android:name=".telas_iniciais.TelaInicialAlunoActivity" />
         <activity android:name=".menu.PerfilAlunoActivity" />
         <activity android:name=".telas_iniciais.InicioOlimpiadaActivity" />
         <activity android:name=".menu.ChatsAlunoActivity" />

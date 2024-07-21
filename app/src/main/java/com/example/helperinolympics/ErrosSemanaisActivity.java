@@ -54,6 +54,7 @@ public class ErrosSemanaisActivity extends Activity {
                 "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Alternativa correta: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
         listaErros.add(dados2);
+        errosAdapter.notifyDataSetChanged();
     }
 
     private void configurarBarra(){
