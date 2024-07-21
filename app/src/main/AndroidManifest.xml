@@ -39,17 +39,18 @@
         <activity android:name=".menu.SairActivity" />
 
         <activity
-            android:name=".MenuDeslizanteAlunoActivity"
+            android:name=".telas_iniciais.InicialAlunoMenuDeslizanteActivity"
             android:exported="false"
             android:label="@string/title_activity_menu_deslizante"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
 
         <activity android:name=".AcertosSemanaisActivity" />
         <activity android:name=".ErrosSemanaisActivity" />
+        <activity android:name=".RankingActivity" />
         <activity android:name=".modelos_sobrepostos.RecadoProfWebActivity" />
 
         <activity
-            android:name=".QuestionarioFinalizarActivity"
+            android:name=".QuestionarioCorrecaoActivity"
             android:exported="false" />
         <activity
             android:name=".cadastros.CadastroAlunoProfessorActivity"

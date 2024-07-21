@@ -29,7 +29,6 @@ public class AcertosSemanaisActivity extends Activity {
 
     BarChart barChart;
     RecyclerView rVListaAcertos;
-
     AdapterDadosAcertos acertosAdapter;
 
     protected void onCreate(Bundle savedInstanceState){

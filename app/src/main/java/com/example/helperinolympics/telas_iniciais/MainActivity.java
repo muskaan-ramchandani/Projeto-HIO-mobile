@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.helperinolympics.MenuDeslizanteAlunoActivity;
 import com.example.helperinolympics.R;
 
 public class MainActivity extends Activity {
@@ -17,7 +16,7 @@ public class MainActivity extends Activity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, MenuDeslizanteAlunoActivity.class);
+                Intent intent = new Intent(MainActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 startActivity(intent);
                 finish();
             }

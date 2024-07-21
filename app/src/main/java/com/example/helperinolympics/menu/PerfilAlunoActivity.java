@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.helperinolympics.AcertosSemanaisActivity;
 import com.example.helperinolympics.ErrosSemanaisActivity;
-import com.example.helperinolympics.MenuDeslizanteAlunoActivity;
+import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityPerfilAlunoBinding;
 
@@ -34,7 +34,7 @@ public class PerfilAlunoActivity extends Activity {
         btnVoltarInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PerfilAlunoActivity.this, MenuDeslizanteAlunoActivity.class);
+                Intent intent = new Intent(PerfilAlunoActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 startActivity(intent);
             }
         });

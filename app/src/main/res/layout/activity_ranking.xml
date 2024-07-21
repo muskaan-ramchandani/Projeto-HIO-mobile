@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
@@ -27,7 +28,7 @@
                 android:id="@+id/txtHIO"
                 android:layout_width="196dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/nome_formatacao_Logo"
@@ -36,35 +37,195 @@
 
             <!--Linear posições pódio-->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="390dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:orientation="horizontal">
 
                 <!--Linear posição 2-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="130dp"
+                    android:layout_height="198dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
+                    <ImageView
+                        android:id="@+id/fotoPerfilPosicao2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        tools:srcCompat="@drawable/iconeperfilvazioredonda" />
+
+                    <TextView
+                        android:id="@+id/txtUserPosicao2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="User321" />
+
+                    <TextView
+                        android:id="@+id/txtQntdAcertosPosicao2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:layout_marginTop="3dp"
+                        tools:text="12340 acertos"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFundoLaranjaPodio2"
+                        android:layout_width="75dp"
+                        android:layout_height="58dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/btnOlimpiadaLaranja">
+
+                        <LinearLayout
+                            android:layout_width="75dp"
+                            android:layout_height="58dp"
+                            android:background="@color/btnOlimpiadaLaranja"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/txtPosicaoPodio2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="2"
+                                android:textColor="@color/white"
+                                android:textSize="34sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
                 <!--Linear posição 1-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="130dp"
+                    android:layout_height="216dp"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
+                    <ImageView
+                        android:id="@+id/fotoPerfilPosicao1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        tools:srcCompat="@drawable/iconeperfilvazioredonda" />
 
+                    <TextView
+                        android:id="@+id/txtUserPosicao1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="User123" />
+
+                    <TextView
+                        android:id="@+id/txtQntdAcertosPosicao1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:layout_marginTop="3dp"
+                        tools:text="12400 acertos"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFundoLaranjaPodio1"
+                        android:layout_width="75dp"
+                        android:layout_height="70dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/btnOlimpiadaLaranja">
+
+                        <LinearLayout
+                            android:layout_width="75dp"
+                            android:layout_height="70dp"
+                            android:background="@color/btnOlimpiadaLaranja"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/txtPosicaoPodio1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="1"
+                                android:textColor="@color/white"
+                                android:textSize="34sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <!--Linear posição 3-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="130dp"
+                    android:layout_height="186dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical">
 
+                    <ImageView
+                        android:id="@+id/fotoPerfilPosicao3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        tools:srcCompat="@drawable/iconeperfilvazioredonda" />
 
+                    <TextView
+                        android:id="@+id/txtUserPosicao3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:text="User213" />
+
+                    <TextView
+                        android:id="@+id/txtQntdAcertosPosicao3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="@font/questrial"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:layout_marginTop="3dp"
+                        tools:text="12335 acertos"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFundoLaranjaPodio3"
+                        android:layout_width="75dp"
+                        android:layout_height="39dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/btnOlimpiadaLaranja">
+
+                        <LinearLayout
+                            android:layout_width="75dp"
+                            android:layout_height="39dp"
+                            android:background="@color/btnOlimpiadaLaranja"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical|center_horizontal">
+
+                            <TextView
+                                android:id="@+id/txtPosicaoPodio3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="3"
+                                android:textColor="@color/white"
+                                android:textSize="34sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -73,6 +234,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewRanking"
         android:layout_width="match_parent"
         android:layout_height="382dp" />
 
@@ -124,7 +286,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/questrial"
-                android:text="Hanking"
+                android:text="Ranking"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
