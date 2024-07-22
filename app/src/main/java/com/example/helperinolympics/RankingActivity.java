@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -41,6 +43,7 @@ public class RankingActivity extends Activity {
 
         acessacalendario= findViewById(R.id.btnCalendario);
 
+        dadosPodio();
         configurarRecyclerRanking();
     }
 
@@ -66,32 +69,69 @@ public class RankingActivity extends Activity {
         adapter = new AdapterRanking(listaRanking);
         rvRanking.setAdapter(adapter);
 
+
         //DADOS FICTICIOS
-        DadosRanking dado1 = new DadosRanking(4, R.drawable.iconeseuperfil, 12330, "estevaoferreira");
-        listaRanking.add(dado1);
-
-        DadosRanking dado2 = new DadosRanking(5, R.drawable.iconeseuperfil, 12325, "pantera");
-        listaRanking.add(dado2);
-
-        DadosRanking dado3= new DadosRanking(6, R.drawable.iconeseuperfil, 12320, "noemiGadelha");
-        listaRanking.add(dado3);
-
-        DadosRanking dado4 = new DadosRanking(7, R.drawable.iconeseuperfil, 12315, "hannaMontana");
+        DadosRanking dado4 = new DadosRanking(4, R.drawable.iconeseuperfil, 12330, "estevaoferreira");
         listaRanking.add(dado4);
 
-        DadosRanking dado5 = new DadosRanking(8, R.drawable.iconeseuperfil, 12310, "thiagooo");
+        DadosRanking dado5 = new DadosRanking(5, R.drawable.iconeseuperfil, 12325, "pantera");
         listaRanking.add(dado5);
 
-        DadosRanking dado6 = new DadosRanking(9, R.drawable.iconeseuperfil, 12305, "paulista");
+        DadosRanking dado6= new DadosRanking(6, R.drawable.iconeseuperfil, 12320, "noemiGadelha");
         listaRanking.add(dado6);
 
-        DadosRanking dado7 = new DadosRanking(10, R.drawable.iconeseuperfil, 12300, "mahDiva");
+        DadosRanking dado7 = new DadosRanking(7, R.drawable.iconeseuperfil, 12315, "hannaMontana");
         listaRanking.add(dado7);
 
-        DadosRanking dado8 = new DadosRanking(11, R.drawable.iconeseuperfil, 12299, "lunaa");
+        DadosRanking dado8 = new DadosRanking(8, R.drawable.iconeseuperfil, 12310, "thiagooo");
         listaRanking.add(dado8);
 
-        DadosRanking dado9 = new DadosRanking(12, R.drawable.iconeseuperfil, 1, "besties");
+        DadosRanking dado9 = new DadosRanking(9, R.drawable.iconeseuperfil, 12305, "paulista");
         listaRanking.add(dado9);
+
+        DadosRanking dado10 = new DadosRanking(10, R.drawable.iconeseuperfil, 12300, "mahDiva");
+        listaRanking.add(dado10);
+
+        DadosRanking dado11 = new DadosRanking(11, R.drawable.iconeseuperfil, 12299, "lunaa");
+        listaRanking.add(dado11);
+
+        DadosRanking dado12 = new DadosRanking(12, R.drawable.iconeseuperfil, 1, "besties");
+        listaRanking.add(dado12);
+
+        DadosRanking dado13 = new DadosRanking(13, R.drawable.iconeseuperfil, 0, "muska");
+        listaRanking.add(dado13);
+    }
+
+    public void dadosPodio(){
+
+        //DADOS FICTICIOS PODIO
+        List<DadosRanking> listaRankingPodio = new ArrayList<>();
+        DadosRanking dado1 = new DadosRanking(1, R.drawable.iconeseuperfil, 12400, "User123");
+        listaRankingPodio.add(dado1);
+
+        DadosRanking dado2 = new DadosRanking(2, R.drawable.iconeseuperfil, 12340, "User321");
+        listaRankingPodio.add(dado2);
+
+        DadosRanking dado3 = new DadosRanking(3, R.drawable.iconeseuperfil, 12335, "User213");
+        listaRankingPodio.add(dado3);
+
+        //Atribuindo aos itens da activity
+        ImageView fotoPosicao1, fotoPosicao2, fotoPosicao3;
+        TextView userPosicao1, userPosicao2, userPosicao3, acertosPosicao1, acertosPosicao2, acertosPosicao3;
+
+        fotoPosicao1 = findViewById(R.id.fotoPerfilPosicao1);
+        fotoPosicao2= findViewById(R.id.fotoPerfilPosicao2);
+        fotoPosicao3=findViewById(R.id.fotoPerfilPosicao3);
+        userPosicao1=findViewById(R.id.txtUserPosicao1);
+        userPosicao2=findViewById(R.id.txtUserPosicao2);
+        userPosicao3=findViewById(R.id.txtUserPosicao3);
+        acertosPosicao1=findViewById(R.id.txtQntdAcertosPosicao1);
+        acertosPosicao2=findViewById(R.id.txtQntdAcertosPosicao2);
+        acertosPosicao1=findViewById(R.id.txtQntdAcertosPosicao1);
+
+        fotoPosicao1.setImageResource(listaRankingPodio.get(1).getFotoPerfil());
+        userPosicao1.setText(listaRankingPodio.get(1).getPosicao());
+        acertosPosicao1.setText(listaRankingPodio.get(1).getQntdAcertos());
+
     }
 }
