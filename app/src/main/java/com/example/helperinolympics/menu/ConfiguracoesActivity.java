@@ -11,6 +11,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
+import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
 
 public class ConfiguracoesActivity extends Activity {
 
@@ -36,7 +38,7 @@ public class ConfiguracoesActivity extends Activity {
         alteraSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                configurarDialogsSenha();
             }
         });
 

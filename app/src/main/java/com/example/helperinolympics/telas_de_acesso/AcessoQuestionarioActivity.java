@@ -1,4 +1,4 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.telas_de_acesso;
 
 import android.os.Bundle;
 
@@ -8,7 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class activity_questionario_acesso extends AppCompatActivity {
+import com.example.helperinolympics.R;
+
+public class AcessoQuestionarioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
