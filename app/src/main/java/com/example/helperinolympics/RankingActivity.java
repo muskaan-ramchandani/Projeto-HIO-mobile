@@ -129,17 +129,17 @@ public class RankingActivity extends Activity {
         acertosPosicao2=findViewById(R.id.txtQntdAcertosPosicao2);
         acertosPosicao3=findViewById(R.id.txtQntdAcertosPosicao3);
 
-        fotoPosicao1.setImageResource(listaRankingPodio.get(1).getFotoPerfil());
-        userPosicao1.setText(listaRankingPodio.get(1).getPosicao());
-        acertosPosicao1.setText(listaRankingPodio.get(1).getQntdAcertos());
+        fotoPosicao1.setImageResource(listaRankingPodio.get(0).getFotoPerfil());
+        userPosicao1.setText(listaRankingPodio.get(0).getPosicao());
+        acertosPosicao1.setText(listaRankingPodio.get(0).getQntdAcertos());
 
-        fotoPosicao2.setImageResource(listaRankingPodio.get(2).getFotoPerfil());
-        userPosicao2.setText(listaRankingPodio.get(2).getPosicao());
-        acertosPosicao2.setText(listaRankingPodio.get(2).getQntdAcertos());
+        fotoPosicao2.setImageResource(listaRankingPodio.get(1).getFotoPerfil());
+        userPosicao2.setText(listaRankingPodio.get(1).getPosicao());
+        acertosPosicao2.setText(listaRankingPodio.get(1).getQntdAcertos());
 
-        fotoPosicao3.setImageResource(listaRankingPodio.get(3).getFotoPerfil());
-        userPosicao3.setText(listaRankingPodio.get(3).getPosicao());
-        acertosPosicao3.setText(listaRankingPodio.get(3).getQntdAcertos());
+        fotoPosicao3.setImageResource(listaRankingPodio.get(2).getFotoPerfil());
+        userPosicao3.setText(listaRankingPodio.get(2).getPosicao());
+        acertosPosicao3.setText(listaRankingPodio.get(2).getQntdAcertos());
 
     }
 }
