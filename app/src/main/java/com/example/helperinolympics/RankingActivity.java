@@ -142,7 +142,7 @@ public class RankingActivity extends Activity {
         fotoPosicao3.setImageResource(listaRankingPodio.get(2).getFotoPerfil());
         userPosicao3.setText(String.valueOf(listaRankingPodio.get(2).getUser()));
         String acertos3 = String.valueOf(listaRankingPodio.get(2).getQntdAcertos()) + " acertos";
-        acertosPosicao1.setText(acertos3);
+        acertosPosicao3.setText(acertos3);
 
     }
 }
