@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="75dp"
-    tools:context=".TelaAlterarDados">
+    tools:context=".AlterarDadosActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"

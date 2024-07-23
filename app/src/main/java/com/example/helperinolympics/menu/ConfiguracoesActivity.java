@@ -3,6 +3,7 @@ package com.example.helperinolympics.menu;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,14 +14,18 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
+import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 
     CardView alteraDados, alteraSenha, historicosAcesso, deletarConta;
+    TextView nomeCompleto, user, email;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes);
+
+        inserirDadosUsuario();
 
         alteraDados=findViewById(R.id.cardAlterarDados);
         alteraSenha=findViewById(R.id.cardAlterarSenha);
@@ -57,8 +62,18 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         });
     }
 
+    private void inserirDadosUsuario() {
+        nomeCompleto = findViewById(R.id.txtNomeCompletoConfiguracoes);
+        user = findViewById(R.id.txtUserConfiguracoes);
+        email= findViewById(R.id.txtEmailConfiguracoes);
+
+        nomeCompleto.setText("Bolofofos da Silva");
+        user.setText("bolofofos");
+        email.setText("bolofofos@gmail.com");
+    }
+
     private void showNotificationAlteraSenha() {
-        SenhaAlterarActivity notificationDialogFragment = new SenhaAlterarActivity();
+        SenhaVerificarAlteracaoActivity notificationDialogFragment = new SenhaVerificarAlteracaoActivity();
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 
