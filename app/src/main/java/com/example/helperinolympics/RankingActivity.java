@@ -127,11 +127,22 @@ public class RankingActivity extends Activity {
         userPosicao3=findViewById(R.id.txtUserPosicao3);
         acertosPosicao1=findViewById(R.id.txtQntdAcertosPosicao1);
         acertosPosicao2=findViewById(R.id.txtQntdAcertosPosicao2);
-        acertosPosicao1=findViewById(R.id.txtQntdAcertosPosicao1);
+        acertosPosicao3=findViewById(R.id.txtQntdAcertosPosicao3);
 
-        fotoPosicao1.setImageResource(listaRankingPodio.get(1).getFotoPerfil());
-        userPosicao1.setText(listaRankingPodio.get(1).getPosicao());
-        acertosPosicao1.setText(listaRankingPodio.get(1).getQntdAcertos());
+        fotoPosicao1.setImageResource(listaRankingPodio.get(0).getFotoPerfil());
+        userPosicao1.setText(String.valueOf(listaRankingPodio.get(0).getUser()));
+        String acertos = String.valueOf(listaRankingPodio.get(0).getQntdAcertos()) + " acertos";
+        acertosPosicao1.setText(acertos);
+
+        fotoPosicao2.setImageResource(listaRankingPodio.get(1).getFotoPerfil());
+        userPosicao2.setText(String.valueOf(listaRankingPodio.get(1).getUser()));
+        String acertos2 = String.valueOf(listaRankingPodio.get(1).getQntdAcertos()) + " acertos";
+        acertosPosicao2.setText(acertos2);
+
+        fotoPosicao3.setImageResource(listaRankingPodio.get(2).getFotoPerfil());
+        userPosicao3.setText(String.valueOf(listaRankingPodio.get(2).getUser()));
+        String acertos3 = String.valueOf(listaRankingPodio.get(2).getQntdAcertos()) + " acertos";
+        acertosPosicao3.setText(acertos3);
 
     }
 }
