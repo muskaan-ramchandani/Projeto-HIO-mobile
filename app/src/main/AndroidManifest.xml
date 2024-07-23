@@ -13,6 +13,12 @@
         android:theme="@style/Theme.HelperInOlympics"
         tools:targetApi="31">
         <activity
+            android:name=".TelaAlterarDados"
+            android:exported="false" />
+        <activity
+            android:name=".HistoricoDeAcessos"
+            android:exported="false" />
+        <activity
             android:name=".telas_de_acesso.AcessoQuestionarioActivity"
             android:exported="false" />
 
