@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HistoricoDeAcessos">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarHistorico"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/roxoPrincipal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="@+id/toolbarHistorico"
+        app:layout_constraintStart_toStartOf="@+id/toolbarHistorico"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarHistorico">
+
+        <ImageButton
+            android:id="@+id/btnVoltarAoInicioAlterarDados"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:contentDescription="bntVoltarAoInicio"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/btnvoltarbranco" />
+
+        <TextView
+            android:id="@+id/txtAlterarDados"
+            android:layout_width="284dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Alterar dados"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="409dp"
+        android:layout_height="741dp"
+        android:layout_marginTop="72dp"
+        android:contentDescription="ScrollViewGeral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:contentDescription="Textos:"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Textos:"
+                android:textSize="21sp" />
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="413dp"
+                android:layout_height="142dp"
+                android:contentDescription="Scroll de texto">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Flash Cards:"
+                android:textSize="21sp" />
+
+            <ScrollView
+                android:layout_width="413dp"
+                android:layout_height="142dp"
+                android:contentDescription="Flash Cards">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Questionários:"
+                android:textSize="21sp" />
+
+            <ScrollView
+                android:layout_width="413dp"
+                android:layout_height="142dp"
+                android:contentDescription="ScrollViweQuestionarios">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Vídeos"
+                android:textSize="21sp" />
+
+            <ScrollView
+                android:id="@+id/ScrollViewVideos"
+                android:layout_width="413dp"
+                android:layout_height="142dp"
+                android:contentDescription="ScrollViewVideos">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </ScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
