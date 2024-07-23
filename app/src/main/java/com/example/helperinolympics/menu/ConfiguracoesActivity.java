@@ -5,16 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
 
-public class ConfiguracoesActivity extends Activity {
+public class ConfiguracoesActivity extends AppCompatActivity {
 
     CardView alteraDados, alteraSenha, historicosAcesso, deletarConta;
 
@@ -38,7 +38,7 @@ public class ConfiguracoesActivity extends Activity {
         alteraSenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                configurarDialogsSenha();
+                showNotificationAlteraSenha();
             }
         });
 
@@ -55,6 +55,11 @@ public class ConfiguracoesActivity extends Activity {
 
             }
         });
+    }
+
+    private void showNotificationAlteraSenha() {
+        SenhaAlterarActivity notificationDialogFragment = new SenhaAlterarActivity();
+        notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 
 }
