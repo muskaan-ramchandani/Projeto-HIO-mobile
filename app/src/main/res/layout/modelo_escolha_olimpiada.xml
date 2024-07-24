@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="410dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal|center_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFundoOlimpiada"
+        android:layout_width="390dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        tools:background="@drawable/fundo_btn_olimp_rosa">
+
+        <LinearLayout
+            android:id="@+id/linearFundoCardOlimpiada"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:background="@drawable/fundo_btn_olimp_rosa">
+
+            <ImageView
+                android:id="@+id/iconeOlimpiada"
+                android:layout_width="1dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="5dp"
+                tools:srcCompat="@drawable/imgtelescopio" />
+
+            <TextView
+                android:id="@+id/txtOlimpiada"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_bold"
+                tools:text="@string/nome_sigla_OBA"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="5dp" />
+
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="android:color/transparent" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
