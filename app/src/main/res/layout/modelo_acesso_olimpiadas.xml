@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="380dp"
+    android:layout_width="400dp"
     android:layout_height="80dp"
     android:background="@android:color/transparent"
     android:gravity="center_horizontal|center_vertical"
@@ -8,18 +8,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardFundoOlimpiada"
         android:layout_width="380dp"
         android:layout_height="70dp"
-        android:background="@drawable/fundo_btn_olimp_rosa">
+        tools:background="@drawable/fundo_btn_olimp_rosa">
 
         <LinearLayout
+            android:id="@+id/linearFundoCardOlimpiada"
             android:layout_width="380dp"
             android:layout_height="70dp"
             android:orientation="horizontal"
-            android:background="@drawable/fundo_btn_olimp_rosa">
+            tools:background="@drawable/fundo_btn_olimp_rosa">
 
             <ImageView
-                android:id="@+id/imgTelescopioOBA"
+                android:id="@+id/iconeOlimpiada"
                 android:layout_width="1dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="8dp"
