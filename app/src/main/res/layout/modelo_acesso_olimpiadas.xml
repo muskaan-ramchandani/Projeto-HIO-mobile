@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="400dp"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:gravity="center_horizontal|center_vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,12 +11,15 @@
         android:id="@+id/cardFundoOlimpiada"
         android:layout_width="380dp"
         android:layout_height="70dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
         tools:background="@drawable/fundo_btn_olimp_rosa">
 
         <LinearLayout
             android:id="@+id/linearFundoCardOlimpiada"
             android:layout_width="380dp"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:background="@drawable/fundo_btn_olimp_rosa">
 

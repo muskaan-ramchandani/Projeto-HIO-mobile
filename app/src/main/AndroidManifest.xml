@@ -39,7 +39,7 @@
             </intent-filter>
         </activity> <!-- Outras activities -->
         <activity android:name=".menu.PerfilAlunoActivity" />
-        <activity android:name=".telas_iniciais.InicioOlimpiadaActivity" />
+        <activity android:name=".telas_iniciais.InicioOlimpiadaActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
         <activity android:name=".menu.ChatsAlunoActivity" />
         <activity android:name=".menu.FavoritosAlunoActivity" />
         <activity
@@ -54,9 +54,7 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity
             android:name=".telas_iniciais.InicialAlunoMenuDeslizanteActivity"
-            android:exported="false"
-            android:label="@string/title_activity_menu_deslizante"
-            android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
+            android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity android:name=".AcertosSemanaisActivity" />
         <activity android:name=".ErrosSemanaisActivity" />
         <activity android:name=".RankingActivity" />
