@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    >
+
+
+
+
+    <?xml version="1.0" encoding="utf-8"?>
 
 
     <androidx.appcompat.widget.Toolbar
@@ -18,14 +23,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
+
+
     <ImageView
-        android:id="@+id/imgSimboloOlimpiada"
+        android:id="@+id/imgMacaCaindo"
         android:layout_width="59dp"
         android:layout_height="64dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="674dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/txtNomeOlimp"
         app:srcCompat="@drawable/imgmacacaindo" />
 
@@ -35,14 +43,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="680dp"
         android:fontFamily="@font/open_sans_bold"
         android:text="OBF"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <LinearLayout
@@ -63,7 +71,7 @@
             android:layout_weight="1"
             android:src="@drawable/iconetexto"
             android:scaleType="centerCrop"
-            android:background="#00000000"
+            android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
             android:layout_marginEnd="5dp"/>
 
 
@@ -85,9 +93,8 @@
             android:layout_weight="1"
             android:src="@drawable/iconeflashcard"
             android:scaleType="centerCrop"
-            android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
-            android:layout_marginEnd="5dp"
-            />
+            android:background="#00000000"
+            android:layout_marginEnd="5dp"/>
 
 
         <ImageButton
@@ -106,26 +113,26 @@
         android:id="@+id/txtTema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="55dp"
         android:fontFamily="@font/open_sans_bold"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
         tools:text="Fundamentos da cinemática do ponto material" />
 
 
     <ImageButton
-        android:id="@+id/btnVoltarDeFlashcardParaInicio"
+        android:id="@+id/imgButtonVoltar"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/btnvoltar"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerviewFlashcard"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerviewTexto"
         android:background="#00000000"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         android:layout_marginStart="3dp"
@@ -135,7 +142,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewFlashcard"
+        android:id="@+id/recyclerviewTexto"
         android:layout_width="380dp"
         android:layout_height="500dp"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
@@ -144,4 +151,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="20dp"/>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
