@@ -31,23 +31,22 @@ public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.Flas
         return new FlashcardViewHolder(viewItemListaFlashcard);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    @Override
+
     public void onBindViewHolder(@NonNull FlashcardViewHolder holder, int position) {
         DadosFlashcard flashcard = listaFlashcard.get(position);
 
-        // Set the data to the views
+
         holder.conteudo.setText(flashcard.getTemaPertencente());
         holder.userProf.setText(flashcard.getProfessorCadastrou());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+
     @Override
     public int getItemCount() {
         return listaFlashcard.size();
     }
 
-    // ViewHolder class
+
     public class FlashcardViewHolder extends RecyclerView.ViewHolder {
         TextView conteudo, userProf;
 
