@@ -78,7 +78,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, InicioOlimpiadaActivity.class);
-                    ((AppCompatActivity)context).startActivityForResult(intent, 0);
+                    ((AppCompatActivity)context).startActivity(intent);
                 }
             });
         }
@@ -86,8 +86,4 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
 
 
     public int getItemCount(){return listaOlimpiadas.size();}
-
-    public interface ContactsAdapterListener {
-        void onContactSelected(DadosOlimpiada olimp);
-    }
 }

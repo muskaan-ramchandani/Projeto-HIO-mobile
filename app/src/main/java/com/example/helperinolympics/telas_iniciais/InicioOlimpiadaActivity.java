@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,8 +16,7 @@ import com.example.helperinolympics.model.DadosOlimpiada;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InicioOlimpiadaActivity extends Activity {
-
+public class InicioOlimpiadaActivity extends AppCompatActivity {
 
 
     protected void onCreate(Bundle savedInstanceState){
