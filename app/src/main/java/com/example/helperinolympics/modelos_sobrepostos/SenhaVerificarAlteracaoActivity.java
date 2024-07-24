@@ -24,6 +24,15 @@ public class SenhaVerificarAlteracaoActivity extends DialogFragment {
             }
         });
 
+        view.findViewById(R.id.btnVerificarCodigo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SenhaAlterarActivity alterarSenha = new SenhaAlterarActivity();
+                alterarSenha.show(getParentFragmentManager(), "alterar senha");
+                dismiss(); //fechar dialog 1
+            }
+        });
+
         return view;
     }
 

@@ -42,72 +42,71 @@
                 app:layout_constraintTop_toTopOf="@id/txtALterarSenhaTela"
                 app:srcCompat="@drawable/baseline_close_24" />
 
-            <TextView
-                android:id="@+id/txtAvisoEnviadoCodigo"
-                android:layout_width="210dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:fontFamily="@font/open_sans"
-                android:text="Foi enviado um código de verificação para seu email"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:gravity="center"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtALterarSenhaTela" />
+                app:layout_constraintTop_toBottomOf="@+id/txtALterarSenhaTela">
 
-            <EditText
-                android:id="@+id/editTextCodigoVerificacao"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:hint="Digite aqui o código"
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/black"
-                android:ems="6"
-                android:gravity="center"
-                android:inputType="number"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtAvisoEnviadoCodigo"/>
+                <TextView
+                    android:id="@+id/txtAvisoEnviadoCodigo"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Foi enviado um código de verificação para seu email"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:gravity="center" />
 
-            <Button
-                android:id="@+id/btnVerificarCodigo"
-                android:layout_width="210dp"
-                android:layout_height="40dp"
-                android:text="Verificar"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/fundo_botoes_roxos"
-                android:fontFamily="@font/open_sans_bold"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextCodigoVerificacao"/>
+                <EditText
+                    android:id="@+id/editTextCodigoVerificacao"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Digite aqui o código"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:ems="6"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:layout_marginTop="30dp" />
 
-            <Button
-                android:id="@+id/btnEnviarNovamenteCodigo"
-                android:layout_width="210dp"
-                android:layout_height="40dp"
-                android:text="Enviar novamente"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/fundo_botoes_roxos"
-                android:fontFamily="@font/open_sans_bold"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnVerificarCodigo"/>
+                <Button
+                    android:id="@+id/btnVerificarCodigo"
+                    android:layout_width="210dp"
+                    android:layout_height="40dp"
+                    android:text="Verificar"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:background="@drawable/fundo_botoes_roxos"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="30dp" />
+
+                <Button
+                    android:id="@+id/btnEnviarNovamenteCodigo"
+                    android:layout_width="210dp"
+                    android:layout_height="40dp"
+                    android:text="Enviar novamente"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:background="@drawable/fundo_botoes_roxos"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp" />
+            </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

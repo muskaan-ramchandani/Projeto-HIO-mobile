@@ -1,6 +1,9 @@
 package com.example.helperinolympics.materiais;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterVideo;
 import com.example.helperinolympics.model.DadosVideo;
+import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +20,21 @@ import java.util.List;
 public class VideoActivity extends AppCompatActivity {
     RecyclerView rvVideo;
     AdapterVideo adapter;
+    ImageButton botaoVoltarAOlimp;
 
     public void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
         configurarRecyclerVideo();
 
+        botaoVoltarAOlimp=findViewById(R.id.imgButtonVoltar2);
+        botaoVoltarAOlimp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, InicioOlimpiadaActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

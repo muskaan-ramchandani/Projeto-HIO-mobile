@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.materiais.FlashcardActivity;
+import com.example.helperinolympics.materiais.VideoActivity;
 
 public class InicioOlimpiadaActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState){
@@ -15,7 +15,7 @@ public class InicioOlimpiadaActivity extends Activity {
         findViewById(R.id.btnConteudo1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InicioOlimpiadaActivity.this, FlashcardActivity.class);
+                Intent intent = new Intent(InicioOlimpiadaActivity.this, VideoActivity.class);
                 startActivity(intent);
             }
         });
