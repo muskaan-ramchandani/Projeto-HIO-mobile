@@ -39,8 +39,8 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     }
 
     public void configurarRecyclerConteudos(){
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterConteudos= new AdapterConteudos(conteudos);
         rvConteudos=findViewById(R.id.recyclerViewConteudosOlimpiada);
         rvConteudos.setLayoutManager(layoutManager);

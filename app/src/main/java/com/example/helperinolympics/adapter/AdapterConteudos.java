@@ -18,7 +18,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.materiais.FlashcardActivity;
 import com.example.helperinolympics.materiais.TextoActivity;
 import com.example.helperinolympics.model.DadosConteudo;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
@@ -71,10 +70,6 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
                 public void onClick(View v) {
                     Intent intent = new Intent(context, TextoActivity.class);
                     ((AppCompatActivity)context).startActivity(intent);
-
-                    if (context instanceof AppCompatActivity) {
-                        ((AppCompatActivity) context).finish();
-                    }
                 }
             });
         }
