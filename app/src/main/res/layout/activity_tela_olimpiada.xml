@@ -68,7 +68,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollViewConteudos"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewConteudosOlimpiada"
         app:layout_constraintStart_toStartOf="@+id/toolbar" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewConteudos"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewConteudosOlimpiada"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -140,8 +140,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLivros" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollViewConteudos"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewConteudosOlimpiada"
         android:layout_width="409dp"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
@@ -150,80 +150,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConteudo1"
-                android:layout_width="300dp"
-                android:layout_height="99dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/fundo_btn_olimp_rosa"
-                android:fontFamily="@font/open_sans"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/conteudo1_olimpiada"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConteudo2"
-                android:layout_width="300dp"
-                android:layout_height="99dp"
-                android:layout_marginEnd="13dp"
-                android:layout_weight="1"
-                android:background="@drawable/fundo_btn_olimp_azul"
-                android:fontFamily="@font/open_sans"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/conteudo2_olimpiada"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="261dp"
-                tools:layout_editor_absoluteY="354dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConteudo3"
-                android:layout_width="300dp"
-                android:layout_height="99dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/fundo_btn_olimp_laranja"
-                android:fontFamily="@font/open_sans"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/conteudo3_olimpiada"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="134dp"
-                tools:layout_editor_absoluteY="309dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConteudo4"
-                android:layout_width="300dp"
-                android:layout_height="99dp"
-                android:background="@drawable/fundo_btn_olimp_laranja"
-                android:fontFamily="@font/open_sans"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/conteudo4_olimpiada"
-                android:textAlignment="viewStart"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="134dp"
-                tools:layout_editor_absoluteY="309dp" />
-        </LinearLayout>
-    </HorizontalScrollView>
+        app:layout_constraintTop_toTopOf="@+id/toolbar"/>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollViewLivros"

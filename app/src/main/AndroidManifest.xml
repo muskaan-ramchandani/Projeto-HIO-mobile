@@ -45,6 +45,7 @@
         <activity android:name=".menu.ManualActivity" />
         <activity android:name=".menu.SairActivity" />
         <activity android:name=".materiais.VideoActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+        <activity android:name=".materiais.TextoActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
             android:name=".telas_iniciais.InicialAlunoMenuDeslizanteActivity"
