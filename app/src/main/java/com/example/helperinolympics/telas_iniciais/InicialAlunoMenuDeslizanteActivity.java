@@ -3,6 +3,7 @@ package com.example.helperinolympics.telas_iniciais;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -119,40 +120,15 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         rvOlimpiadas.setHasFixedSize(true);
         rvOlimpiadas.setAdapter(adapter);
 
-        //DADOS PARA O BANCO
-        DadosOlimpiada dado1 = new DadosOlimpiada(R.drawable.imgtelescopio, "Olimpíada Brasileira de Astronomia",
-                "OBA", "Rosa");
-        olimpiadas.add(dado1);
-
-        DadosOlimpiada dado2 = new DadosOlimpiada(R.drawable.imgmacacaindo, "Olimpíada Brasileira de Física",
-                "OBF", "Azul");
-        olimpiadas.add(dado2);
-
-        DadosOlimpiada dado3 = new DadosOlimpiada(R.drawable.imgcomputador, "Olimpíada Brasileira de Informática",
-                "OBI", "Laranja");
-        olimpiadas.add(dado3);
-
-        //CONFIGURAR PARA AUMENTAR SE FOR OBMEP
-        DadosOlimpiada dado4 = new DadosOlimpiada(R.drawable.imgoperacoesbasicas, "Olimpíada Brasileira de Matemática das Escolas Públicas",
-                "OBMEP", "Ciano");
-        olimpiadas.add(dado4);
-
-        DadosOlimpiada dado5 = new DadosOlimpiada(R.drawable.imgpapiro, "Olimpíada Nacional da História Brasileira",
-                "ONHB", "Rosa");
-        olimpiadas.add(dado5);
-
-        DadosOlimpiada dado6 = new DadosOlimpiada(R.drawable.imgtubodeensaio, "Olimpíada Brasileira de Química",
-                "OBQ", "Azul");
-        olimpiadas.add(dado6);
-
-        DadosOlimpiada dado7 = new DadosOlimpiada(R.drawable.imgdna, "Olimpíada Brasileira de Biologia",
-                "OBB", "Laranja");
-        olimpiadas.add(dado7);
-
-        DadosOlimpiada dado8 = new DadosOlimpiada(R.drawable.imgatomo, "Olimpíada Nacional de Ciências",
-                "ONC", "Ciano");
-        olimpiadas.add(dado8);
+        Intent intent = getIntent();
+        ArrayList<DadosOlimpiada> listaRecebida = intent.getParcelableArrayListExtra("listaEscolhidas");
+        if (listaRecebida != null) {
+            olimpiadas.clear();
+            olimpiadas.addAll(listaRecebida);
+            adapter.notifyDataSetChanged();
+        } else {
+            Log.e("InicialAlunoMenuDeslizanteActivity", "Nenhuma lista de olimpiadas foi recebida.");
+        }
     }
-
 
 }

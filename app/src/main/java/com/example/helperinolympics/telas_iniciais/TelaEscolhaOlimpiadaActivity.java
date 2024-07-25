@@ -20,9 +20,9 @@ import java.util.List;
 
 public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
-    RecyclerView rvOlimpiadasEscolhidas;
-    AdapterEscolhaOlimpiadas adapter;
-    List<DadosOlimpiada> listaOlimpiadasEscolhidas = new ArrayList<>();
+    RecyclerView rvOlimpiadasEscolher;
+    List<DadosOlimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
+    AdapterEscolhaOlimpiadas adapter = new AdapterEscolhaOlimpiadas(listaOlimpiadasOpcoes);
     AppCompatButton btnFinalizar;
     ImageView btnVoltarAoCadastro;
 
@@ -31,11 +31,14 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_escolha_olimpiada);
 
+        configurarRecycler();
+
         btnFinalizar = findViewById(R.id.btnFinalizarEscolha);
         btnFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TelaEscolhaOlimpiadaActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                intent.putParcelableArrayListExtra("listaEscolhidas", new ArrayList<>(adapter.getListaEscolhidas()));
                 startActivity(intent);
                 finish(); //fechar activity
             }
@@ -51,43 +54,45 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             }
         });
 
-        configurarRecycler();
+
+
     }
 
     private void configurarRecycler() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new AdapterEscolhaOlimpiadas(listaOlimpiadasEscolhidas);
-        rvOlimpiadasEscolhidas = findViewById(R.id.recyclerViewEscolhaOlimpiadas);
-        rvOlimpiadasEscolhidas.setLayoutManager(layoutManager);
-        rvOlimpiadasEscolhidas.setHasFixedSize(true);
-        rvOlimpiadasEscolhidas.setAdapter(adapter);
+        rvOlimpiadasEscolher = findViewById(R.id.recyclerViewEscolhaOlimpiadas);
+        rvOlimpiadasEscolher.setLayoutManager(layoutManager);
+        rvOlimpiadasEscolher.setHasFixedSize(true);
+        rvOlimpiadasEscolher.setAdapter(adapter);
 
         // Adiciona dados à lista
         DadosOlimpiada dado1 = new DadosOlimpiada(R.drawable.imgtelescopio, "Olimpíada Brasileira de Astronomia", "OBA", "Rosa");
-        listaOlimpiadasEscolhidas.add(dado1);
+        listaOlimpiadasOpcoes.add(dado1);
 
         DadosOlimpiada dado2 = new DadosOlimpiada(R.drawable.imgmacacaindo, "Olimpíada Brasileira de Física", "OBF", "Azul");
-        listaOlimpiadasEscolhidas.add(dado2);
+        listaOlimpiadasOpcoes.add(dado2);
 
         DadosOlimpiada dado3 = new DadosOlimpiada(R.drawable.imgcomputador, "Olimpíada Brasileira de Informática", "OBI", "Laranja");
-        listaOlimpiadasEscolhidas.add(dado3);
+        listaOlimpiadasOpcoes.add(dado3);
 
         DadosOlimpiada dado4 = new DadosOlimpiada(R.drawable.imgoperacoesbasicas, "Olimpíada Brasileira de Matemática das Escolas Públicas", "OBMEP", "Ciano");
-        listaOlimpiadasEscolhidas.add(dado4);
+        listaOlimpiadasOpcoes.add(dado4);
 
         DadosOlimpiada dado5 = new DadosOlimpiada(R.drawable.imgpapiro, "Olimpíada Nacional da História Brasileira", "ONHB", "Rosa");
-        listaOlimpiadasEscolhidas.add(dado5);
+        listaOlimpiadasOpcoes.add(dado5);
 
         DadosOlimpiada dado6 = new DadosOlimpiada(R.drawable.imgtubodeensaio, "Olimpíada Brasileira de Química", "OBQ", "Azul");
-        listaOlimpiadasEscolhidas.add(dado6);
+        listaOlimpiadasOpcoes.add(dado6);
 
         DadosOlimpiada dado7 = new DadosOlimpiada(R.drawable.imgdna, "Olimpíada Brasileira de Biologia", "OBB", "Laranja");
-        listaOlimpiadasEscolhidas.add(dado7);
+        listaOlimpiadasOpcoes.add(dado7);
 
         DadosOlimpiada dado8 = new DadosOlimpiada(R.drawable.imgatomo, "Olimpíada Nacional de Ciências", "ONC", "Ciano");
-        listaOlimpiadasEscolhidas.add(dado8);
+        listaOlimpiadasOpcoes.add(dado8);
 
-        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged(); //atualizar o recycler
     }
+
+
 }

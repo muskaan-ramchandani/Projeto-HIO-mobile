@@ -17,14 +17,14 @@
         tools:background="@drawable/fundo_btn_olimp_rosa">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearFundoCardOlimpiada"
+            android:id="@+id/constraintFundoCardOlimpiada"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:background="@drawable/fundo_btn_olimp_rosa">
 
             <ImageView
-                android:id="@+id/iconeOlimpiada"
+                android:id="@+id/iconeOlimpiadaEscolha"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="8dp"
@@ -35,7 +35,7 @@
                 tools:srcCompat="@drawable/imgtelescopio" />
 
             <TextView
-                android:id="@+id/txtOlimpiada"
+                android:id="@+id/txtOlimpiadaEscolha"
                 android:layout_width="250dp"
                 android:layout_height="60dp"
                 android:fontFamily="@font/open_sans_bold"
@@ -44,7 +44,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:gravity="center_vertical"
-                app:layout_constraintStart_toEndOf="@+id/iconeOlimpiada"
+                app:layout_constraintStart_toEndOf="@+id/iconeOlimpiadaEscolha"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <CheckBox
@@ -52,7 +52,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintStart_toEndOf="@+id/txtOlimpiada"
+                app:layout_constraintStart_toEndOf="@+id/txtOlimpiadaEscolha"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/CustomCheckBox" />
 
