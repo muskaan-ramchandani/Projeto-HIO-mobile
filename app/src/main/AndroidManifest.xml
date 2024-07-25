@@ -38,18 +38,19 @@
 
         <!-- Outras activities -->
         <activity android:name=".menu.PerfilAlunoActivity" />
-        <activity android:name=".telas_iniciais.InicioOlimpiadaActivity" />
+        <activity android:name=".telas_iniciais.InicioOlimpiadaActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
         <activity android:name=".menu.ChatsAlunoActivity" />
         <activity android:name=".menu.FavoritosAlunoActivity" />
         <activity android:name=".menu.ConfiguracoesActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
         <activity android:name=".menu.ManualActivity" />
         <activity android:name=".menu.SairActivity" />
         <activity android:name=".materiais.VideoActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+        <activity android:name=".materiais.TextoActivity" android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+
         <activity
             android:name=".telas_iniciais.InicialAlunoMenuDeslizanteActivity"
-            android:exported="false"
-            android:label="@string/title_activity_menu_deslizante"
-            android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
+            android:exported="false" android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
+
         <activity android:name=".AcertosSemanaisActivity" />
         <activity android:name=".ErrosSemanaisActivity" />
         <activity android:name=".RankingActivity" />
@@ -59,16 +60,19 @@
             android:exported="false" />
         <activity
             android:name=".cadastros.CadastroAlunoProfessorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity
             android:name=".telas_de_acesso.AcessoTextoActivity"
             android:exported="false" />
         <activity
             android:name=".telas_iniciais.TelaEscolhaOlimpiadaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
         <activity
             android:name=".cadastros.CadastroActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity
             android:name=".telas_iniciais.TelaBemVindoActivity"
             android:exported="false" />

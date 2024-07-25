@@ -1,17 +1,23 @@
 package com.example.helperinolympics.telas_iniciais;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.RankingActivity;
+import com.example.helperinolympics.adapter.AdapterOlimpiadas;
 import com.example.helperinolympics.databinding.ActivityMenuDeslizanteAlunoBinding;
 import com.example.helperinolympics.menu.ChatsAlunoActivity;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
@@ -19,14 +25,22 @@ import com.example.helperinolympics.menu.FavoritosAlunoActivity;
 import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.menu.SairActivity;
+import com.example.helperinolympics.model.DadosOlimpiada;
 import com.google.android.material.navigation.NavigationView;
 
-public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
     private ImageButton btnAbreFechaMenu, acessarRanking, acessarCalendario;
     private NavigationView navView;
     private ActivityMenuDeslizanteAlunoBinding binding;
+
+    RecyclerView rvOlimpiadas;
+    List<DadosOlimpiada> olimpiadas = new ArrayList<>();
+    AdapterOlimpiadas adapter;
 
 
     @Override
@@ -94,13 +108,27 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity {
          }
      });
 
-     //Acesso a olimpiada
-        findViewById(R.id.cardOlimpiada2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, InicioOlimpiadaActivity.class);
-                startActivity(intent);
-            }
-        });
+        configurarRecyclerOlimpiadas();
     }
+
+    public void configurarRecyclerOlimpiadas(){
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        adapter= new AdapterOlimpiadas(olimpiadas);
+        rvOlimpiadas=findViewById(R.id.recyclerViewTelaInicialOlimpiadas);
+        rvOlimpiadas.setLayoutManager(layoutManager);
+        rvOlimpiadas.setHasFixedSize(true);
+        rvOlimpiadas.setAdapter(adapter);
+
+        Intent intent = getIntent();
+        ArrayList<DadosOlimpiada> listaRecebida = intent.getParcelableArrayListExtra("listaEscolhidas");
+        if (listaRecebida != null) {
+            olimpiadas.clear();
+            olimpiadas.addAll(listaRecebida);
+            adapter.notifyDataSetChanged();
+        } else {
+            Log.e("InicialAlunoMenuDeslizanteActivity", "Nenhuma lista de olimpiadas foi recebida.");
+        }
+    }
+
 }

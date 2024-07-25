@@ -35,6 +35,7 @@ public class FlashcardActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FlashcardActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
+                finish(); //fechar activity
             }
         });
 

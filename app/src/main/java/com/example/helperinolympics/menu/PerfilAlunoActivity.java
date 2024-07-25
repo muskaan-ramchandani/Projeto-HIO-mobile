@@ -36,6 +36,7 @@ public class PerfilAlunoActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilAlunoActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 startActivity(intent);
+                finish(); //fechar activity
             }
         });
 
@@ -45,6 +46,7 @@ public class PerfilAlunoActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilAlunoActivity.this, AcertosSemanaisActivity.class);
                 startActivity(intent);
+                finish(); //fechar activity
             }
         });
 
@@ -54,6 +56,7 @@ public class PerfilAlunoActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilAlunoActivity.this, ErrosSemanaisActivity.class);
                 startActivity(intent);
+                finish(); //fechar activity
             }
         });
 

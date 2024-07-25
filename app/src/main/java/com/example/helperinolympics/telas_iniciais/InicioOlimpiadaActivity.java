@@ -2,84 +2,86 @@ package com.example.helperinolympics.telas_iniciais;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.adapter.AdapterOlimpiadas;
-import com.example.helperinolympics.materiais.VideoActivity;
-import com.example.helperinolympics.model.DadosOlimpiada;
+import com.example.helperinolympics.adapter.AdapterConteudos;
+import com.example.helperinolympics.model.DadosConteudo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InicioOlimpiadaActivity extends Activity {
+public class InicioOlimpiadaActivity extends AppCompatActivity {
 
-    RecyclerView rvOlimpiadas;
-    AdapterOlimpiadas adapter;
+    List<DadosConteudo> conteudos = new ArrayList<>();
+    RecyclerView rvConteudos, rvLivros, rvProvasAnteriores;
+    AdapterConteudos adapterConteudos, adapterLivros, adapterProvasAnteriores;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_olimpiada);
 
-        findViewById(R.id.btnConteudo1).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InicioOlimpiadaActivity.this, VideoActivity.class);
+                Intent intent = new Intent(InicioOlimpiadaActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
-        configurarRecyclerOlimpiadas();
+        configurarRecyclerConteudos();
     }
 
-    public void configurarRecyclerOlimpiadas(){
-        rvOlimpiadas=findViewById(R.id.recyclerViewTelaInicialOlimpiadas);
+    public void configurarRecyclerConteudos(){
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvOlimpiadas.setLayoutManager(layoutManager);
-        rvOlimpiadas.setHasFixedSize(true);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        adapterConteudos= new AdapterConteudos(conteudos);
+        rvConteudos=findViewById(R.id.recyclerViewConteudosOlimpiada);
+        rvConteudos.setLayoutManager(layoutManager);
+        rvConteudos.setHasFixedSize(true);
+        rvConteudos.setAdapter(adapterConteudos);
 
-        List<DadosOlimpiada> olimpiadas = new ArrayList<>();
-        adapter= new AdapterOlimpiadas(olimpiadas);
-        rvOlimpiadas.setAdapter(adapter);
 
-        //DADOS PARA O BANCO
-        DadosOlimpiada dado1 = new DadosOlimpiada(R.drawable.imgtelescopio, "Olimpíada Brasileira de Astronomia",
-        "OBA", "Rosa");
-        olimpiadas.add(dado1);
+        //DADOS FICTICIOS ENQUANTO NÃO HÁ BANCO
+        DadosConteudo dado1 = new DadosConteudo(1, "Mecânica Clássica", "Fundamentos da cinemática do ponto material",
+                "OBF", "Rosa");
+        conteudos.add(dado1);
 
-        DadosOlimpiada dado2 = new DadosOlimpiada(R.drawable.imgmacacaindo, "Olimpíada Brasileira de Física",
+        DadosConteudo dado2 = new DadosConteudo(2, "Dilatação Superficial", "Conceito e fórmulas",
                 "OBF", "Azul");
-        olimpiadas.add(dado2);
+        conteudos.add(dado2);
 
-        DadosOlimpiada dado3 = new DadosOlimpiada(R.drawable.imgcomputador, "Olimpíada Brasileira de Informática",
-                "OBI", "Laranja");
-        olimpiadas.add(dado3);
+        DadosConteudo dado3 = new DadosConteudo(3, "Estática e Hidrostática", "Princípios Básicos",
+                "OBF", "Laranja");
+        conteudos.add(dado3);
 
-        //CONFIGURAR PARA AUMENTAR SE FOR OBMEP
-        DadosOlimpiada dado4 = new DadosOlimpiada(R.drawable.imgoperacoesbasicas, "Olimpíada Brasileira de Matemática das Escolas Públicas",
-                "OBMEP", "Ciano");
-        olimpiadas.add(dado4);
+        DadosConteudo dado4 = new DadosConteudo(1, "Termologia", "Termometria, Calorimetria, Termodinâmica",
+                "OBF", "Ciano");
+        conteudos.add(dado4);
 
-        DadosOlimpiada dado5 = new DadosOlimpiada(R.drawable.imgpapiro, "Olimpíada Nacional da História Brasileira",
-                "ONHB", "Rosa");
-        olimpiadas.add(dado5);
+        DadosConteudo dado5 = new DadosConteudo(1, "Campo Elétrico", "Energia e trabalho",
+                "OBF", "Rosa");
+        conteudos.add(dado5);
 
-        DadosOlimpiada dado6 = new DadosOlimpiada(R.drawable.imgtubodeensaio, "Olimpíada Brasileira de Química",
-                "OBQ", "Azul");
-        olimpiadas.add(dado6);
+        adapterConteudos.notifyDataSetChanged();
 
-        DadosOlimpiada dado7 = new DadosOlimpiada(R.drawable.imgdna, "Olimpíada Brasileira de Biologia",
-                "OBB", "Laranja");
-        olimpiadas.add(dado7);
+        /*QUANDO TIVER OS ASSUNTOS PARA CADA OLIMPIADA NO BANCO
 
-        DadosOlimpiada dado8 = new DadosOlimpiada(R.drawable.imgatomo, "Olimpíada Nacional de Ciências",
-                "ONC", "Ciano");
-        olimpiadas.add(dado8);
-
-
+        Intent intent = getIntent();
+        ArrayList<DadosConteudo> listaRecebida = intent.getParcelableArrayListExtra("listaEscolhidas");
+        if (listaRecebida != null) {
+            olimpiadas.clear();
+            olimpiadas.addAll(listaRecebida);
+            adapter.notifyDataSetChanged();
+        } else {
+            Log.e("InicialAlunoMenuDeslizanteActivity", "Nenhuma lista de olimpiadas foi recebida.");
+        }*/
     }
+
 }
