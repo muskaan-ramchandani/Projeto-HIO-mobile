@@ -1,6 +1,7 @@
 package com.example.helperinolympics.menu;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.helperinolympics.AlterarDadosActivity;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
@@ -36,6 +38,9 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         alteraDados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent (ConfiguracoesActivity.this, AlterarDadosActivity.class);
+                startActivity(intent);
+                finish();
 
             }
         });
