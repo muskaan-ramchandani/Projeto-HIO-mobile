@@ -3,12 +3,14 @@ package com.example.helperinolympics.model;
 public class DadosOlimpiada {
     int iconeOlimp;
     String nome, sigla, cor;
+    private boolean isSelected;
 
     public DadosOlimpiada(int iconeOlimp, String nome, String sigla, String cor) {
         setIconeOlimp(iconeOlimp);
         setNome(nome);
         setSigla(sigla);
         setCor(cor);
+        this.isSelected = false; //inicializando
     }
 
     public int getIconeOlimp() {
@@ -44,5 +46,13 @@ public class DadosOlimpiada {
         if(!(cor!="Azul"&&cor!="Ciano"&&cor!="Laranja"&&cor!="Rosa")){
             this.cor = cor;
         }
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }
