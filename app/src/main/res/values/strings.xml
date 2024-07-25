@@ -13,10 +13,6 @@
 
 
     <!--exemplos-->
-    <string name="conteudo1_olimpiada"><b>Mecânica Clássica:</b> Fundamentos da cinemática do ponto material</string>
-    <string name="conteudo2_olimpiada"><b>Dilatação Superficial:</b> conceito e fórmulas</string>
-    <string name="conteudo3_olimpiada"><b>Estática e Hidrostática:</b>Princípios Básicos</string>
-    <string name="conteudo4_olimpiada"><b>Termologia:</b>Termometria, Calorimetria, Termodinâmica</string>
     <string name="pergunta_exemplo"> <b>Pergunta:</b> Para quê serve o uso da estrutura if/else? </string>
     <string name="alternativaCorreta_exemplo"> <b>Alternativa Correta:</b> Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.</string>
     <string name="explicacao_exemplo"><b>Explicação:</b> A estrutura if/else é uma construção de controle de fluxo fundamental em muitas linguagens de programação. Quando um programa chega a um bloco if/else, ele avalia a condição dentro do parêntese após o if. Se a condição for verdadeira, o programa executa o bloco de código imediatamente seguinte ao if. Se a condição for falsa, e houver uma cláusula else, o programa executa o bloco de código imediatamente seguinte ao else.

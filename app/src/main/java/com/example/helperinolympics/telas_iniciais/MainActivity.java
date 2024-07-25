@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.cadastros.CadastroActivity;
 
 public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +17,7 @@ public class MainActivity extends Activity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
                 startActivity(intent);
                 finish();
             }

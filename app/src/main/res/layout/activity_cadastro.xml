@@ -2,13 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".cadastros.CadastroActivity">
 
+    <ImageButton
+        android:id="@+id/btnVoltarAEscolhaAlunoProf"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="6dp"
+        android:scaleType="fitCenter"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/btnvoltar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtCadastreSe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#49688D"
@@ -16,6 +27,8 @@
         android:gravity="center_horizontal"
         android:text="Cadastre-se"
         android:textSize="38sp"
+        android:textColor="#49688D"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.455"
@@ -83,18 +96,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/mancharoxa" />
 
-    <Button
-        android:id="@+id/button"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFinalizarCadastro"
         android:layout_width="151dp"
         android:layout_height="58dp"
+        android:background="@drawable/fundo_titulo_flashcard"
         android:fontFamily="@font/open_sans_bold"
         android:text="Finalizar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="160dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextText3"

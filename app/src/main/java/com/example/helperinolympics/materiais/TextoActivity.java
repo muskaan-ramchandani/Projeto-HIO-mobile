@@ -34,6 +34,7 @@ public class TextoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TextoActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
+                finish(); //fechar activity
             }
         });
 

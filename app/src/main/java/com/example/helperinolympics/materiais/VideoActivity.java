@@ -33,6 +33,7 @@ public class VideoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(VideoActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
+                finish(); //fechar activity
             }
         });
 
