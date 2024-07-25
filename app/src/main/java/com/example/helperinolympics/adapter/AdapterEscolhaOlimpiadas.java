@@ -30,7 +30,7 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
 
     public AdapterEscolhaOlimpiadas.OlimpiadasEscolhaViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
         View viewItemListaOlimpiadasEscolha= LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_escolha_olimpiada, parent, false);
-        return new AdapterEscolhaOlimpiadas.OlimpiadasEscolhaViewHolder(viewItemListaOlimpiadasEscolha, parent.getContext());
+        return new AdapterEscolhaOlimpiadas.OlimpiadasEscolhaViewHolder(viewItemListaOlimpiadasEscolha);
     }
 
     public void onBindViewHolder(@NonNull AdapterEscolhaOlimpiadas.OlimpiadasEscolhaViewHolder holder, int position) {
@@ -54,15 +54,6 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
             holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
         }
 
-        holder.checkBox.setOnCheckedChangeListener(null); // Desconectar o listener
-        holder.checkBox.setChecked(olimp.isSelected()); // Atualizar o estado do CheckBox
-        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> olimp.setSelected(isChecked));
-
-        holder.itemView.setOnClickListener(v -> {
-            boolean newState = !holder.checkBox.isChecked();
-            holder.checkBox.setChecked(newState);
-        });
-
     }
 
 
@@ -74,7 +65,7 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
         CheckBox checkBox;
 
 
-        public OlimpiadasEscolhaViewHolder(@NonNull View itemView, final Context context){
+        public OlimpiadasEscolhaViewHolder(@NonNull View itemView){
             super(itemView);
             icone=itemView.findViewById(R.id.iconeOlimpiada);
             nomeESigla=itemView.findViewById(R.id.txtOlimpiada);
