@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_horizontal|center_vertical"
+    android:layout_width="392dp"
+    android:layout_height="130dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardProvasAnterior1"
+        android:layout_width="375dp"
+        android:layout_height="120dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="375dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/fundo_arredondado_livros_provas">
+
+            <TextView
+                android:id="@+id/txtAnoProvaAnterior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/open_sans_bold"
+                tools:text="2022"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtEstadoProvaAnterior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/open_sans"
+                tools:text="Estado: Respondida"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtFaseProvaAnterior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/open_sans"
+                tools:text="Fase: 1"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/imageViewCirculoUser1"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/forma_redonda"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    />
+                <TextView
+                    android:id="@+id/txtUserProf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/open_sans"
+                    tools:text="demiLov"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
