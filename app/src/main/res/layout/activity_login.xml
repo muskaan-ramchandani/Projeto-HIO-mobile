@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".telas_iniciais.MainActivity">
 
 
@@ -54,6 +55,7 @@
                 android:layout_width="268dp"
                 android:layout_height="51dp"
                 android:hint="Usuário"
+                android:textColorHint="@color/black"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -82,6 +84,7 @@
                 android:layout_width="268dp"
                 android:layout_height="51dp"
                 android:hint="Senha"
+                android:textColorHint="@color/black"
                 android:inputType="numberPassword"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/black"
