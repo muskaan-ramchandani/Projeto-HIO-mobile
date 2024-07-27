@@ -7,30 +7,29 @@
     tools:context=".telas_iniciais.TelaBemVindoActivity">
 
     <ImageButton
-        android:id="@+id/btnAcertosVoltarAoLogin"
-        android:layout_width="84dp"
-        android:layout_height="75dp"
-        android:layout_weight="1"
+        android:id="@+id/btnBemVindoVoltarAoLogin"
+        android:layout_width="66dp"
+        android:layout_height="68dp"
         android:background="@android:color/transparent"
-        android:contentDescription="botão de voltar"
         android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="botão de voltar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/btnvoltar" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txtBemVindo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#673AB7"
         android:fontFamily="@font/open_sans_bold"
         android:text="Bem vindo(a)"
-        android:textColor="#7347BF"
-        android:textSize="32sp"
+        android:textColor="@color/roxoPrincipal"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.206"
@@ -44,6 +43,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_bold"
         android:text="ao HIO!"
+        android:textColor="@color/black"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,13 +53,14 @@
         app:layout_constraintVertical_bias="0.198" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/txtBoasVindas"
         android:layout_width="348dp"
         android:layout_height="285dp"
+        android:fontFamily="@font/open_sans"
         android:text="Olá mestres e medalhistas! Meu nome é Hipo e sou o mascote do HIO (Helper in Olympics). Caso você não saiba, o app tem como objetivo ajudar alunos a estudarem para olimpíadas científicas, contando com a participação de professores voluntários, reunindo materiais para facilitar o estudo."
         android:textAlignment="gravity"
-        android:textColor="#161616"
-        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -67,11 +68,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.459" />
 
-    <Button
-        android:id="@+id/button2"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinuarCadastro"
         android:layout_width="154dp"
         android:layout_height="55dp"
         android:text="Continuar"
+        android:background="@drawable/fundo_botoes_comuns_lilas"
+        android:fontFamily="@font/open_sans_bold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

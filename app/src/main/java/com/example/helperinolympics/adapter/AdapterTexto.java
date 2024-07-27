@@ -1,5 +1,7 @@
 package com.example.helperinolympics.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
 
 import java.util.List;
 
@@ -50,6 +53,15 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
             super(itemView);
             titulo = itemView.findViewById(R.id.txtConteudo);
             userProf = itemView.findViewById(R.id.txtUserProf);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, AcessoTextoActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

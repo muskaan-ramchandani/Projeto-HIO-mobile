@@ -1,5 +1,7 @@
 package com.example.helperinolympics.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +51,12 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.VideoViewHol
             userProf=itemView.findViewById(R.id.txtUserProf);
             capa=itemView.findViewById(R.id.imgVideo);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //abrir video pelo link no youtube
+                }
+            });
         }
     }
 }

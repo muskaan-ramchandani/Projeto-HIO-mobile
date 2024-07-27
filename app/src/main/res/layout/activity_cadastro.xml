@@ -36,49 +36,159 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.069" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="65dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+    <LinearLayout
+        android:id="@+id/linearDados"
+        android:layout_width="300dp"
+        android:layout_height="340dp"
+        android:orientation="vertical"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.291"
-        app:srcCompat="@drawable/iconeuser" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCadastreSe">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="6dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewNome"
+                android:layout_width="65dp"
+                android:layout_height="57dp"
+                app:srcCompat="@drawable/iconenome" />
+
+            <EditText
+                android:id="@+id/editTextNomeCompleto"
+                android:layout_width="223dp"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:hint="Nome completo"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/edittext_personalizado_1"
+                android:paddingStart="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:id="@+id/imageViewUser"
+                android:layout_width="65dp"
+                android:layout_height="57dp"
+                app:srcCompat="@drawable/iconeuser" />
+
+            <EditText
+                android:id="@+id/editTextNomeUsuario"
+                android:hint="Nome de usuário"
+                android:layout_width="223dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:layout_marginStart="10dp"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/edittext_personalizado_1"
+                android:paddingStart="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:id="@+id/imageViewEmail"
+                android:layout_width="65dp"
+                android:layout_height="57dp"
+                app:srcCompat="@drawable/iconeemail" />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="223dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:hint="Email"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/edittext_personalizado_1"
+                android:paddingStart="15dp" /></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:id="@+id/imageViewSenha"
+                android:layout_width="65dp"
+                android:layout_height="57dp"
+                app:srcCompat="@drawable/iconesenha" />
+
+            <EditText
+                android:id="@+id/editTextSenha"
+                android:layout_width="223dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Senha"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:background="@drawable/edittext_personalizado_1"
+                android:paddingStart="15dp" /></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="62dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
+
+            <ImageView
+                android:id="@+id/imageViewConfirma"
+                android:layout_width="65dp"
+                android:layout_height="57dp"
+                app:srcCompat="@drawable/iconeconfirmasenha" />
+
+            <EditText
+                android:id="@+id/editTextConfirmarSenha"
+                android:layout_width="223dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="text"
+                android:hint="Confirmar senha"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/edittext_personalizado_1"
+                android:paddingStart="15dp" /></LinearLayout>
+    </LinearLayout>
+
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="65dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.884"
-        app:srcCompat="@drawable/iconenome" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="65dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="66dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.018"
-        app:srcCompat="@drawable/iconeemail" />
-
-    <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imgHipoCadastreSe"
         android:layout_width="186dp"
         android:layout_height="175dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="555dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,112 +209,18 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFinalizarCadastro"
         android:layout_width="151dp"
-        android:layout_height="58dp"
-        android:background="@drawable/fundo_titulo_flashcard"
+        android:layout_height="55dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/fundo_botoes_roxos"
         android:fontFamily="@font/open_sans_bold"
         android:text="Finalizar"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="160dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextText3"
-        android:layout_width="223dp"
-        android:layout_height="52dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Nome completo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
-
-    <EditText
-        android:id="@+id/editTextText4"
-        android:layout_width="223dp"
-        android:layout_height="52dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Nome de usuário"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296" />
-
-    <EditText
-        android:id="@+id/editTextText5"
-        android:layout_width="223dp"
-        android:layout_height="58dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="Email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="65dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.122"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516"
-        app:srcCompat="@drawable/iconesenha" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="65dp"
-        android:layout_height="57dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633"
-        app:srcCompat="@drawable/iconeconfirmasenha" />
-
-    <EditText
-        android:id="@+id/editTextText7"
-        android:layout_width="223dp"
-        android:layout_height="58dp"
-        android:ems="10"
-        android:inputType="textVisiblePassword"
-        android:text="Senha"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.517" />
-
-    <EditText
-        android:id="@+id/editTextText8"
-        android:layout_width="223dp"
-        android:layout_height="58dp"
-        android:ems="10"
-        android:inputType="textVisiblePassword"
-        android:text="Confirmar Senha"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.559"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.631" />
+        app:layout_constraintTop_toBottomOf="@+id/linearDados" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

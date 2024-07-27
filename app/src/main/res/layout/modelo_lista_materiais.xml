@@ -8,7 +8,7 @@
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/acessoFlashcard1"
+        android:id="@+id/acessoMateriais"
         android:layout_width="380dp"
         android:layout_height="100dp"
         app:cardBackgroundColor="@android:color/transparent"
