@@ -37,6 +37,14 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_olimpiada);
 
+        findViewById(R.id.btnBemVindoVoltarAoLogin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InicioOlimpiadaActivity.this, TelaLoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
