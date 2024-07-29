@@ -75,10 +75,22 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar" />
         <activity
             android:name=".telas_iniciais.TelaBemVindoActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
         <activity
             android:name=".telas_iniciais.TelaLoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+
+        <activity
+            android:name=".materiais.FlashcardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+
+        <activity
+            android:name=".materiais.QuestionarioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
     </application>
 
 </manifest>

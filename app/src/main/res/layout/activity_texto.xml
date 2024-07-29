@@ -61,16 +61,16 @@
         <ImageButton
             android:id="@+id/btnTexto"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:src="@drawable/iconetexto"
             android:scaleType="centerCrop"
-            android:background="#00000000"
+            android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
             android:layout_marginEnd="5dp"/>
 
 
         <ImageButton
-            android:id="@+id/btnVideo"
+            android:id="@+id/btnVideoPeloTxt"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -81,7 +81,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnFlashcard"
+            android:id="@+id/btnFlashcardPeloTxt"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -92,14 +92,14 @@
 
 
         <ImageButton
-            android:id="@+id/btnQuestionario"
+            android:id="@+id/btnQuestionarioPeloTxt"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:layout_weight="1"
             android:src="@drawable/iconequestionarios"
             android:scaleType="centerCrop"
             android:layout_marginEnd="5dp"
-            android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"/>
+            android:background="@color/roxoPrincipal"/>
     </LinearLayout>
 
 
@@ -121,7 +121,7 @@
 
 
     <ImageButton
-        android:id="@+id/imgButtonVoltar"
+        android:id="@+id/imgButtonVoltarAOlimpDoTxt"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"

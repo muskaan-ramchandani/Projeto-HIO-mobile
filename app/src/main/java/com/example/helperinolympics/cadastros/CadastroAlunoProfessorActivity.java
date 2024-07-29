@@ -1,5 +1,6 @@
 package com.example.helperinolympics.cadastros;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -11,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
+import com.example.helperinolympics.modelos_sobrepostos.RecadoProfWebActivity;
+import com.example.helperinolympics.telas_iniciais.TelaBemVindoActivity;
 
 public class CadastroAlunoProfessorActivity extends AppCompatActivity {
 
@@ -22,10 +25,22 @@ public class CadastroAlunoProfessorActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cadastro_aluno_professor);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        findViewById(R.id.btnVoltarAoBemVindo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CadastroAlunoProfessorActivity.this, TelaBemVindoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnSouAluno).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CadastroAlunoProfessorActivity.this, CadastroActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
         findViewById(R.id.btnSouProfessor).setOnClickListener(new View.OnClickListener() {
@@ -37,7 +52,7 @@ public class CadastroAlunoProfessorActivity extends AppCompatActivity {
     }
 
     private void showNotification() {
-        FlashcardModelo notificationDialogFragment = new FlashcardModelo();
+        RecadoProfWebActivity notificationDialogFragment = new RecadoProfWebActivity();
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 }

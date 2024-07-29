@@ -27,13 +27,40 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video);
         configurarRecyclerVideo();
 
-        botaoVoltarAOlimp=findViewById(R.id.imgButtonVoltar2);
+        botaoVoltarAOlimp=findViewById(R.id.imgButtonVoltarAOlimpPeloVideo);
         botaoVoltarAOlimp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VideoActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
                 finish(); //fechar activity
+            }
+        });
+
+        findViewById(R.id.btnQuestionarioPeloVideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, QuestionarioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnTextoPeloVideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, TextoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnFlashcardPeloVideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, FlashcardActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 

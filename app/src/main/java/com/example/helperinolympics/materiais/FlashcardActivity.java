@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,9 @@ public class FlashcardActivity extends AppCompatActivity {
         rvFlashcard.setHasFixedSize(true);
 
         List<DadosFlashcard> listaFlashcard= new ArrayList<>();
-        adapter=new AdapterFlashcard(listaFlashcard);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        adapter=new AdapterFlashcard(listaFlashcard, fragmentManager);
         rvFlashcard.setAdapter(adapter);
 
         DadosFlashcard dado1=new DadosFlashcard("Ponto material e corpo extenso","material", "OBF", "Fundamentos da cinemática do ponto material");

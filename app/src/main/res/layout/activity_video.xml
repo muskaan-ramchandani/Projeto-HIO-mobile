@@ -58,7 +58,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnTexto"
+            android:id="@+id/btnTextoPeloVideo"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -80,7 +80,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnFlashcard"
+            android:id="@+id/btnFlashcardPeloVideo"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -91,7 +91,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnQuestionario"
+            android:id="@+id/btnQuestionarioPeloVideo"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:layout_weight="1"
@@ -120,7 +120,7 @@
 
 
     <ImageButton
-        android:id="@+id/imgButtonVoltar2"
+        android:id="@+id/imgButtonVoltarAOlimpPeloVideo"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"

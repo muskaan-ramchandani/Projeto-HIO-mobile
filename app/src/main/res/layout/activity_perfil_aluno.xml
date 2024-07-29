@@ -45,24 +45,13 @@
         android:layout_marginStart="116dp"
         android:layout_marginEnd="116dp"
         android:scaleType="fitCenter"
-        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/iconeperfilvazioredonda"
         app:layout_constraintStart_toStartOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="@id/toolbar"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:srcCompat="@drawable/iconeperfilvazioredonda" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-    <ImageButton
-        android:id="@+id/btnEditarPerfil"
-        android:layout_width="96dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginBottom="70dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toStartOf="@id/imgFotoPerfil"
-        app:layout_constraintBottom_toBottomOf="@id/imgFotoPerfil"
-        app:srcCompat="@drawable/btneditarfoto" />
+    </ImageView>
+
 
     <TextView
         android:id="@+id/txtNomeCompletoAluno"

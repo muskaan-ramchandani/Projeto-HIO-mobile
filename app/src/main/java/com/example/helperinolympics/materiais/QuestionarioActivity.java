@@ -29,17 +29,43 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         configurarRecyclerQuestionario();
 
-        botaoVoltarAOlimp = findViewById(R.id.imgButtonVoltar);
+        botaoVoltarAOlimp = findViewById(R.id.imgButtonVoltarConteudo);
         botaoVoltarAOlimp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent intent = new Intent(QuestionarioActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+        findViewById(R.id.btnTextoPeloQuest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioActivity.this, TextoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnVideoPeloQuest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioActivity.this, VideoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnFlashcardPeloQuest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioActivity.this, FlashcardActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void configurarRecyclerQuestionario() {

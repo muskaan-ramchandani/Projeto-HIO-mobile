@@ -28,13 +28,40 @@ public class TextoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_texto);
         configurarRecyclerTexto();
 
-        botaoVoltarAOlimp = findViewById(R.id.imgButtonVoltar);
+        botaoVoltarAOlimp = findViewById(R.id.imgButtonVoltarAOlimpDoTxt);
         botaoVoltarAOlimp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TextoActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
                 finish(); //fechar activity
+            }
+        });
+
+        findViewById(R.id.btnQuestionarioPeloTxt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TextoActivity.this, QuestionarioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnVideoPeloTxt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TextoActivity.this, VideoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnFlashcardPeloTxt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TextoActivity.this, FlashcardActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
