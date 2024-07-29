@@ -8,93 +8,6 @@
     tools:context=".TelaAlterarDados"
     android:background="@color/white">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="192dp"
-        android:layout_height="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@drawable/iconeperfilvazioredonda" />
-
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="92dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginBottom="70dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="bntEditarFoto"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209"
-        app:srcCompat="@drawable/btneditarfoto" />
-
-
-    <EditText
-        android:id="@+id/editTextText6"
-        android:layout_width="262dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:hint="Nome completo"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.671"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.528" />
-
-
-    <EditText
-        android:id="@+id/editTextText9"
-        android:layout_width="262dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:hint="Nome de usuário"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.671"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.64" />
-
-
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="262dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="48dp"
-        android:ems="10"
-        android:hint="Digite seu email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
-
-
-    <ImageView
-        android:id="@+id/imageView15"
-        android:layout_width="57dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="324dp"
-        android:layout_marginBottom="320dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/iconenome" />
-
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar3"
         android:layout_width="418dp"
@@ -106,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -115,7 +27,6 @@
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <ImageButton
             android:id="@+id/btnVoltarAoInicio"
@@ -128,7 +39,6 @@
             android:contentDescription="bntVoltarAoInicio"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/btnvoltarbranco" />
-
 
         <TextView
             android:id="@+id/txtConfiguracoes"
@@ -143,43 +53,139 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="57dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="244dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/iconeuser" />
-
-
-    <ImageView
-        android:id="@+id/imageView19"
-        android:layout_width="57dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/iconeemail" />
-
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="166dp"
-        android:layout_height="61dp"
-        android:layout_marginBottom="68dp"
-        android:text="Alterar"
-        android:textAllCaps="false"
+    <LinearLayout
+        android:id="@+id/linearLayoutForm"
+        android:layout_width="344dp"
+        android:layout_height="188dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="57dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="12dp"
+                app:srcCompat="@drawable/iconenome" />
+
+            <EditText
+                android:id="@+id/editTextText6"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="Nome completo"
+                android:inputType="text"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="57dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="12dp"
+                app:srcCompat="@drawable/iconeuser" />
+
+            <EditText
+                android:id="@+id/editTextText9"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="Nome de usuário"
+                android:inputType="text"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView19"
+                android:layout_width="57dp"
+                android:layout_height="54dp"
+                android:layout_marginEnd="12dp"
+                app:srcCompat="@drawable/iconeemail" />
+
+            <EditText
+                android:id="@+id/editTextTextEmailAddress"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:hint="Digite seu email"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="192dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutForm"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.675"
+        app:srcCompat="@drawable/iconeperfilvazioredonda" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="92dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginBottom="70dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="bntEditarFoto"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131"
+        app:srcCompat="@drawable/btneditarfoto" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonAlterarDados"
+        android:layout_width="179dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/fundo_titulo_flashcard"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Alterar dados"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
