@@ -30,7 +30,7 @@
 
         <!-- Classes de cadastro -->
         <activity
-            android:name=".cadastros.CadastroActivity"
+            android:name=".cadastros.CadasctroActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 

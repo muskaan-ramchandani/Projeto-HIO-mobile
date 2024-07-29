@@ -42,7 +42,7 @@
             app:srcCompat="@drawable/btnvoltarbranco" />
 
         <TextView
-            android:id="@+id/txtAlterarDados"
+            android:id="@+id/txtHistoricodeAcessos"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"

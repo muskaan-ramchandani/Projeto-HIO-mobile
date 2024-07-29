@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.AlterarDadosActivity;
+import com.example.helperinolympics.HistoricoDeAcessos;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
@@ -65,8 +66,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         historicosAcesso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent (ConfiguracoesActivity.this, HistoricoDeAcessos.class);
+                startActivity(intent);
+                finish();
+                }
 
-            }
+
         });
 
         deletarConta.setOnClickListener(new View.OnClickListener() {
