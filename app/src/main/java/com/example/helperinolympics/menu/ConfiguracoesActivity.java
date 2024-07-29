@@ -17,6 +17,7 @@ import com.example.helperinolympics.AlterarDadosActivity;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
+import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
 
@@ -26,6 +27,15 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracoes);
+
+        findViewById(R.id.btnVoltarAoInicioDasConfig).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ConfiguracoesActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         inserirDadosUsuario();
 

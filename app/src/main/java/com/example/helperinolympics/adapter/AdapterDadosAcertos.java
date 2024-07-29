@@ -1,6 +1,7 @@
 package com.example.helperinolympics.adapter;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
 
     @Override
     public void onBindViewHolder(@NonNull AdapterDadosAcertos.AcertosViewHolder holder, int position) {
+
         String valorOlimpiada = listaDadosAcertos.get(position).getOlimpiadaQuestaoCerta();
         holder.olimpiada.setText(valorOlimpiada);
 
@@ -37,14 +39,14 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
         String valorTopico = listaDadosAcertos.get(position).getTopicoDaQuestaoCerta();
         holder.topico.setText(valorTopico);
 
-        String valorProf = listaDadosAcertos.get(position).getProfQuestaoCerta();
+        String valorProf = "Por: "+ listaDadosAcertos.get(position).getProfQuestaoCerta();
         holder.prof.setText(valorProf);
 
-        String valorPergunta = listaDadosAcertos.get(position).getPerguntaQuestaoCerta();
-        holder.pergunta.setText(valorPergunta);
+        String valorPergunta = "<b>Pergunta: </b>" + listaDadosAcertos.get(position).getPerguntaQuestaoCerta();
+        holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
 
-        String valorQuestao = listaDadosAcertos.get(position).getQuestaoMarcadaCerta();
-        holder.questao.setText(valorQuestao);
+        String valorQuestao = "<b>Alternativa marcada: </b>" + listaDadosAcertos.get(position).getQuestaoMarcadaCerta();
+        holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
     }
 
     @Override

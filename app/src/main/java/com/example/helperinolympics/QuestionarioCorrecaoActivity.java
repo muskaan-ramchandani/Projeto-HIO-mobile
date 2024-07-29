@@ -1,6 +1,8 @@
 package com.example.helperinolympics;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.ImageView;
 
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterCorrecao;
+import com.example.helperinolympics.materiais.QuestionarioActivity;
 import com.example.helperinolympics.model.DadosCorrecao;
 
 import java.util.ArrayList;
@@ -44,6 +47,15 @@ public class QuestionarioCorrecaoActivity extends Activity {
         }
 
         listaCorrecao();
+
+        findViewById(R.id.btnEntendiCorrecao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioCorrecaoActivity.this, QuestionarioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     public void listaCorrecao(){
@@ -59,9 +71,9 @@ public class QuestionarioCorrecaoActivity extends Activity {
 
 
         //DADOS PARA TESTE
-        DadosCorrecao dados1 = new DadosCorrecao("Pergunta: Para quê serve o uso da estrutura if/else?",
-                "Alternativa correta: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.",
-                "Explicação: A estrutura if/else é uma construção de controle de fluxo fundamental em muitas linguagens de programação. Quando um programa chega a um bloco if/else, ele avalia a condição dentro do parêntese após o if. Se a condição for verdadeira, o programa executa o bloco de código imediatamente seguinte ao if. Se a condição for falsa, e houver uma cláusula else, o programa executa o bloco de código imediatamente seguinte ao else.\n" +
+        DadosCorrecao dados1 = new DadosCorrecao("Para quê serve o uso da estrutura if/else?",
+                "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.",
+                "A estrutura if/else é uma construção de controle de fluxo fundamental em muitas linguagens de programação. Quando um programa chega a um bloco if/else, ele avalia a condição dentro do parêntese após o if. Se a condição for verdadeira, o programa executa o bloco de código imediatamente seguinte ao if. Se a condição for falsa, e houver uma cláusula else, o programa executa o bloco de código imediatamente seguinte ao else.\n" +
                         "Isso permite que o programa tome decisões dinâmicas e execute diferentes caminhos de código com base nas condições em tempo de execução.");
 
         listaCorrecao.add(dados1);

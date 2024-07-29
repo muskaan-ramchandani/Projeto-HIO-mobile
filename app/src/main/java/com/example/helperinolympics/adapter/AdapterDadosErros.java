@@ -1,5 +1,7 @@
 package com.example.helperinolympics.adapter;
 
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,10 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
 
     @Override
     public void onBindViewHolder(@NonNull AdapterDadosErros.ErrosViewHolder holder, int position) {
+
+
         String valorOlimpiada = listaDadosErros.get(position).getOlimpiadaQuestaoErrada();
+        Log.d("AdapterDadosErros", "Olimpiada: " + valorOlimpiada);
         holder.olimpiada.setText(valorOlimpiada);
 
         String valorAssunto = listaDadosErros.get(position).getAssuntoQuestaoErrada();
@@ -36,14 +41,17 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
         String valorTopico = listaDadosErros.get(position).getTopicoDaQuestaoErrada();
         holder.topico.setText(valorTopico);
 
-        String valorProf = listaDadosErros.get(position).getProfQuestaoErrada();
+        String valorProf = "Por: "+listaDadosErros.get(position).getProfQuestaoErrada();
         holder.prof.setText(valorProf);
 
-        String valorPergunta = listaDadosErros.get(position).getPerguntaQuestaoErrada();
-        holder.pergunta.setText(valorPergunta);
+        String valorPergunta = "<b>Pergunta: </b>"+listaDadosErros.get(position).getPerguntaQuestaoErrada();
+        holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
 
-        String valorQuestao = listaDadosErros.get(position).getQuestaoMarcadaErrada();
-        holder.questao.setText(valorQuestao);
+        String valorQuestao = "<b>Alternativa marcada: </b>"+listaDadosErros.get(position).getQuestaoMarcadaErrada();
+        holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
+
+        String valorCorrecao = "<b>Alternativa correta: </b>"+listaDadosErros.get(position).getQuestaoCorrecaoDaErrada();
+        holder.correcao.setText(Html.fromHtml(valorCorrecao, Html.FROM_HTML_MODE_COMPACT));
     }
 
     @Override

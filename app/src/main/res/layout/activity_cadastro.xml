@@ -5,6 +5,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".cadastros.CadastroActivity">
 
     <ImageButton
@@ -68,7 +69,7 @@
                 android:layout_height="50dp"
                 android:inputType="text"
                 android:hint="Nome completo"
-                android:textColorHint="@color/black"
+                android:textColorHint="#858585"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -92,7 +93,7 @@
             <EditText
                 android:id="@+id/editTextNomeUsuario"
                 android:hint="Nome de usuário"
-                android:textColorHint="@color/black"
+                android:textColorHint="#858585"
                 android:layout_width="223dp"
                 android:layout_height="50dp"
                 android:ems="10"
@@ -125,7 +126,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:hint="Email"
-                android:textColorHint="@color/black"
+                android:textColorHint="#858585"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -152,7 +153,7 @@
                 android:ems="10"
                 android:inputType="text"
                 android:hint="Senha"
-                android:textColorHint="@color/black"
+                android:textColorHint="#858585"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -179,7 +180,7 @@
                 android:ems="10"
                 android:inputType="text"
                 android:hint="Confirmar senha"
-                android:textColorHint="@color/black"
+                android:textColorHint="#858585"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginStart="10dp"

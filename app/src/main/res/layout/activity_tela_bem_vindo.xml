@@ -56,7 +56,7 @@
     <TextView
         android:id="@+id/txtBoasVindas"
         android:layout_width="348dp"
-        android:layout_height="285dp"
+        android:layout_height="290dp"
         android:fontFamily="@font/open_sans"
         android:text="Olá mestres e medalhistas! Meu nome é Hipo e sou o mascote do HIO (Helper in Olympics). Caso você não saiba, o app tem como objetivo ajudar alunos a estudarem para olimpíadas científicas, contando com a participação de professores voluntários, reunindo materiais para facilitar o estudo."
         android:textAlignment="gravity"

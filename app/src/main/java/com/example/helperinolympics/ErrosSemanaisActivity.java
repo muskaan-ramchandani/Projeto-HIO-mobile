@@ -1,14 +1,17 @@
 package com.example.helperinolympics;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterDadosErros;
+import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.DadosErros;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -31,6 +34,15 @@ public class ErrosSemanaisActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_erros_semanais);
 
+        findViewById(R.id.btnVoltarAoInicioErrosSemanais).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ErrosSemanaisActivity.this, PerfilAlunoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         configurarBarra();
 
         //Lista de erros
@@ -45,13 +57,13 @@ public class ErrosSemanaisActivity extends Activity {
         rVListaErros.setAdapter(errosAdapter);
 
         //DADOS PARA TESTE
-        DadosErros dados1 = new DadosErros("OBMEP", "Matrizes", "Determinante", "Por: Profº Maria João",
-                "Pergunta: Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um booleab.", "Alternativa correta: O determinante de uma matriz quadrada é sempre um número real.");
+        DadosErros dados1 = new DadosErros("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
+                "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um booleab.", "O determinante de uma matriz quadrada é sempre um número real.");
 
         listaErros.add(dados1);
 
-        DadosErros dados2 = new DadosErros("OBI", "Estruturas condicionais", "If e else", "Por: Profº Maria João",
-                "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Alternativa correta: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
+        DadosErros dados2 = new DadosErros("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
+                "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
         listaErros.add(dados2);
         errosAdapter.notifyDataSetChanged();

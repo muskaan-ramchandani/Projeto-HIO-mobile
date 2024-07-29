@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
@@ -65,6 +66,10 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
                 Context context = v.getContext();
                 Intent intent = new Intent(context, TextoActivity.class);
                 context.startActivity(intent);
+
+                if (context instanceof Activity) {
+                    ((Activity) context).finish();
+                }
             }
         });
 

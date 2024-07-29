@@ -60,6 +60,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent= new Intent(InicialAlunoMenuDeslizanteActivity.this, RankingActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -86,21 +87,27 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
 
              if(itemID == R.id.nav_perfil_aluno){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class));
+                 finish();
                  return true;
              }else if(itemID == R.id.nav_favoritos_aluno){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, FavoritosAlunoActivity.class));
+                 finish();
                  return true;
              }else if(itemID == R.id.nav_chats){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ChatsAlunoActivity.class));
+                 finish();
                  return true;
              }else if(itemID == R.id.nav_manual){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
+                 finish();
                  return true;
              }else if(itemID == R.id.nav_configuracoes){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class));
+                 finish();
                  return true;
              }else if(itemID == R.id.nav_sair){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, SairActivity.class));
+                 finish();
                  return true;
              }else{
                  return false;

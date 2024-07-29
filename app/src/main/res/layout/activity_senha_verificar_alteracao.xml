@@ -68,8 +68,10 @@
                 <EditText
                     android:id="@+id/editTextCodigoVerificacao"
                     android:layout_width="230dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
+                    android:background="@drawable/edittext_personalizado_2"
                     android:hint="Digite aqui o código"
+                    android:textColorHint="#858585"
                     android:fontFamily="@font/open_sans"
                     android:textColor="@color/black"
                     android:ems="6"

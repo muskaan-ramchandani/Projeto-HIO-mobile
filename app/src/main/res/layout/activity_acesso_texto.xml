@@ -59,7 +59,7 @@
         <ImageButton
             android:id="@+id/btnTexto"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:src="@drawable/iconetexto"
             android:scaleType="centerCrop"
@@ -68,7 +68,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnVideo"
+            android:id="@+id/btnVideoPeloAcessoTxt"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -79,7 +79,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnFlashcard"
+            android:id="@+id/btnFlashcardPeloAcessoTxt"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -91,7 +91,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnQuestionario"
+            android:id="@+id/btnQuestionarioPeloAcessoTxt"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:layout_weight="1"
@@ -102,7 +102,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txtTitulotexto"
+        android:id="@+id/txtTituloTexto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_bold"
@@ -121,40 +121,54 @@
         android:id="@+id/txtProfAutorDoTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Por: Profa Ana Castela"
+        android:text="Por: Profa Ana Castela"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:fontFamily="@font/open_sans"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloTexto"
         app:layout_constraintVertical_bias="0.242" />
 
     <ScrollView
-        android:layout_width="368dp"
-        android:layout_height="339dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/scroolTextoAcesso"
+        android:layout_width="380dp"
+        android:layout_height="450dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtProfAutorDoTexto">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="380dp"
+            android:layout_height="450dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtTextoCriado"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="380dp"
+                android:layout_height="450dp"
                 android:fontFamily="@font/open_sans"
-                android:gravity="clip_vertical|left"
                 android:text="Cinemática Escalar é um dos principais ramos da Mecânica. Trata-se da área que estuda o movimento dos corpos sem atribuir-lhes uma causa. A palavra escalar refere-se ao fato de lidarmos com movimentos unicamente unidimensionais, ou seja, que se desenvolvem unicamente ao longo de uma direção do espaço, dispensando, dessa forma, o tratamento vetorial das grandezas físicas envolvidas. Para o estudo da Cinemática Escalar, alguns conceitos são de grande importância, portanto, trataremos aqui daqueles que são fundamentais para o seu entendimento.  Conceitos fundamentais da Cinemática Escalar  → Corpo: É uma porção limitada de matéria e é constituído por partículas, mas pode ser tratado macroscopicamente como um único corpo no âmbito da Cinemática Escalar.  → Ponto material: É todo corpo cujas dimensões podem ser desprezadas em relação às distâncias envolvidas. "
                 android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/imgButtonVoltarAOlimpDoTxtAcesso"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/btnvoltar"
+        app:layout_constraintTop_toBottomOf="@+id/scroolTextoAcesso"
+        android:background="#00000000"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        android:layout_marginStart="3dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

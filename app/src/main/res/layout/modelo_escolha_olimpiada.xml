@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardFundoOlimpiada"
         android:layout_width="390dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="10dp"
         android:gravity="center_vertical"
@@ -20,6 +20,8 @@
             android:id="@+id/constraintFundoCardOlimpiada"
             android:layout_width="400dp"
             android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
             android:orientation="horizontal"
             tools:background="@drawable/fundo_btn_olimp_rosa">
 
@@ -37,7 +39,7 @@
             <TextView
                 android:id="@+id/txtOlimpiadaEscolha"
                 android:layout_width="250dp"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_bold"
                 tools:text="@string/nome_sigla_OBA"
                 android:textColor="@color/white"
