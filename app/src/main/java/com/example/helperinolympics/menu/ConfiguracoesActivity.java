@@ -18,6 +18,7 @@ import com.example.helperinolympics.HistoricoDeAcessos;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaAlterarActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
+import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarDeletarActivity;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 public class ConfiguracoesActivity extends AppCompatActivity {
@@ -75,7 +76,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         deletarConta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showNotificationDeletarConta();
             }
         });
     }
@@ -92,6 +93,11 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
     private void showNotificationAlteraSenha() {
         SenhaVerificarAlteracaoActivity notificationDialogFragment = new SenhaVerificarAlteracaoActivity();
+        notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
+    }
+
+    private void showNotificationDeletarConta() {
+        SenhaVerificarDeletarActivity notificationDialogFragment = new SenhaVerificarDeletarActivity();
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 

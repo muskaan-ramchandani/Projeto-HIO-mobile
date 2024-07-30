@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/btnFecharConfirmarSenha"
+                android:id="@+id/btnFecharConfirmarDeletar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -31,40 +31,50 @@
                 app:srcCompat="@drawable/baseline_close_24_black" />
 
             <TextView
-                android:id="@+id/txtConfirmaAcaoComSenha"
+                android:id="@+id/txtConfirmaDeletar"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="Digite sua senha para confirmar a ação"
+                android:text="Você deseja mesmo apagar sua conta?"
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:gravity="center"
                 android:layout_marginTop="15dp"/>
 
-            <EditText
-                android:id="@+id/editTextSenhaNova"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edittext_personalizado_1"
-                android:hint="Digite sua senha"
-                android:textColorHint="#858585"
+            <TextView
+                android:id="@+id/txtAcaoIrreversivel"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans"
+                android:text="Esta ação é irreversível!"
                 android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginTop="30dp"
-                android:gravity="center" />
+                android:textSize="17sp"
+                android:gravity="center"
+                android:layout_marginTop="5dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConfirmarSenhaAlteracaoDados"
+                android:id="@+id/btnConfirmarDeletar"
                 android:layout_width="210dp"
                 android:layout_height="40dp"
-                android:text="Confirmar"
+                android:text="Sim"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:background="@drawable/fundo_botoes_comuns_lilas"
                 android:fontFamily="@font/open_sans_bold"
                 android:layout_marginTop="30dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNegarDeletar"
+                android:layout_width="210dp"
+                android:layout_height="40dp"
+                android:text="Não"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:background="@drawable/fundo_botoes_comuns_lilas"
+                android:fontFamily="@font/open_sans_bold"
+                android:layout_marginTop="15dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
