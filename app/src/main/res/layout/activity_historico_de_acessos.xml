@@ -70,24 +70,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtTextosHistorico"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Textos:"
-                android:textColor="@color/black"
-                android:textSize="21sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistoricoTexto"
-                android:layout_width="390dp"
-                android:layout_height="142dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"/>
-
-            <TextView
                 android:id="@+id/txtFlashcardsHistorico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,6 +87,24 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
                 />
+
+            <TextView
+                android:id="@+id/txtProvasHistorico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Provas anteriores:"
+                android:textColor="@color/black"
+                android:textSize="21sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistoricoProvas"
+                android:layout_width="390dp"
+                android:layout_height="142dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp" />
 
             <TextView
                 android:id="@+id/txtQuestionarioHistorico"
@@ -125,6 +125,25 @@
                 android:layout_marginStart="15dp" />
 
             <TextView
+                android:id="@+id/txtTextosHistorico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Textos:"
+                android:textColor="@color/black"
+                android:textSize="21sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewHistoricoTexto"
+                android:layout_width="390dp"
+                android:layout_height="142dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"/>
+
+
+            <TextView
                 android:id="@+id/txtVideoHistorico"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,8 +160,6 @@
                 android:layout_height="142dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp" />
-
-
 
         </LinearLayout>
     </ScrollView>
