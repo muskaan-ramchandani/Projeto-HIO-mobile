@@ -34,7 +34,7 @@ public class ErrosSemanaisActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_erros_semanais);
 
-        findViewById(R.id.btnVoltarAoInicioErrosSemanais).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnVoltarAoPerfilDosErros).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ErrosSemanaisActivity.this, PerfilAlunoActivity.class);

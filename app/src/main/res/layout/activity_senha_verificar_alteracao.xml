@@ -69,7 +69,7 @@
                     android:id="@+id/editTextCodigoVerificacao"
                     android:layout_width="230dp"
                     android:layout_height="45dp"
-                    android:background="@drawable/edittext_personalizado_2"
+                    android:background="@drawable/edittext_personalizado_1"
                     android:hint="Digite aqui o código"
                     android:textColorHint="#858585"
                     android:fontFamily="@font/open_sans"
@@ -79,7 +79,7 @@
                     android:inputType="number"
                     android:layout_marginTop="30dp" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnVerificarCodigo"
                     android:layout_width="210dp"
                     android:layout_height="40dp"
@@ -87,13 +87,13 @@
                     android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:textSize="16sp"
-                    android:background="@drawable/fundo_botoes_roxos"
+                    android:background="@drawable/fundo_botoes_comuns_lilas"
                     android:fontFamily="@font/open_sans_bold"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnEnviarNovamenteCodigo"
                     android:layout_width="210dp"
                     android:layout_height="40dp"
@@ -101,7 +101,7 @@
                     android:textColor="@color/white"
                     android:textAllCaps="false"
                     android:textSize="16sp"
-                    android:background="@drawable/fundo_botoes_roxos"
+                    android:background="@drawable/fundo_botoes_comuns_lilas"
                     android:fontFamily="@font/open_sans_bold"
                     android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"

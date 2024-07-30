@@ -38,7 +38,7 @@ public class AcertosSemanaisActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acertos_semanais);
 
-        findViewById(R.id.btnVoltarAoInicioAcertos).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnVoltarAoPerfilDosAcertos).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AcertosSemanaisActivity.this, PerfilAlunoActivity.class);

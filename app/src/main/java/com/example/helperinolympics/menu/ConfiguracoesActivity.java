@@ -69,9 +69,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 Intent intent = new Intent (ConfiguracoesActivity.this, HistoricoDeAcessos.class);
                 startActivity(intent);
                 finish();
-                }
-
-
+            }
         });
 
         deletarConta.setOnClickListener(new View.OnClickListener() {

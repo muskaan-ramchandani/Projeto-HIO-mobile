@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAcertos"
         android:layout_width="match_parent"
@@ -28,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbarAcertos">
 
         <ImageButton
-            android:id="@+id/btnVoltarAoInicioAcertos"
+            android:id="@+id/btnVoltarAoPerfilDosAcertos"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -40,13 +39,13 @@
             app:srcCompat="@drawable/btnvoltarbranco" />
 
         <TextView
-            android:id="@+id/txtAcertosSemanais"
+            android:id="@+id/txtAcertos"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"
             android:layout_weight="1"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Acertos Semanais"
+            android:text="Acertos semanais"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="24sp"

@@ -11,13 +11,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
+import com.example.helperinolympics.modelos_sobrepostos.ConfirmaSenhaAlterarDadosActivity;
+import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
 
 public class AlterarDadosActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alterar_dados);
 
         findViewById(R.id.btnVoltarAsConfiguracoes).setOnClickListener(new View.OnClickListener() {
@@ -28,5 +29,17 @@ public class AlterarDadosActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.btnFinalizarAlterarDados).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showNotificationConfirmarAlterarDados();
+            }
+        });
+    }
+
+    public void showNotificationConfirmarAlterarDados(){
+        ConfirmaSenhaAlterarDadosActivity notificationDialogFragment = new ConfirmaSenhaAlterarDadosActivity();
+        notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 }

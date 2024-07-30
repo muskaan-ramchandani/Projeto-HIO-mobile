@@ -22,7 +22,6 @@ public class CadastroAlunoProfessorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_cadastro_aluno_professor);
 
         findViewById(R.id.btnVoltarAoBemVindo).setOnClickListener(new View.OnClickListener() {
