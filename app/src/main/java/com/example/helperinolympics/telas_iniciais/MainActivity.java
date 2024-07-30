@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
+                Intent intent = new Intent(MainActivity.this, TelaLoginActivity.class);
                 startActivity(intent);
                 finish();
             }

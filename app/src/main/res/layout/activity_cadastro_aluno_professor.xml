@@ -2,21 +2,22 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".cadastros.CadastroAlunoProfessorActivity">
+    tools:context=".cadastros.CadastroAlunoProfessorActivity"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    >
 
     <ImageButton
         android:id="@+id/btnVoltarAoBemVindo"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginEnd="6dp"
-        android:scaleType="fitCenter"
+        android:layout_width="66dp"
+        android:layout_height="68dp"
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/btnvoltar"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btnvoltar" />
 
     <ImageView
         android:id="@+id/imgHipoVoceE"
@@ -78,7 +79,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSouProfessor"
         android:layout_width="248dp"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp"
         android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
         android:fontFamily="@font/open_sans"
         android:text="@string/texto_sou_professor"

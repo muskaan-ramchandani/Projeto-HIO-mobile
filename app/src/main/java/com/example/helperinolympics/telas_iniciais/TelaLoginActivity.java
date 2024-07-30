@@ -1,13 +1,16 @@
 package com.example.helperinolympics.telas_iniciais;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.materiais.TextoActivity;
 
 public class TelaLoginActivity extends AppCompatActivity {
 
@@ -17,30 +20,22 @@ public class TelaLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-        editTextUser=findViewById(R.id.editTxtUser);
-        editTextInserirSenha=findViewById(R.id.editTxtSenha);
-        String usuario = editTextUser.getText().toString().trim();
-        String senha = editTextInserirSenha.getText().toString().trim();
-
-        editTextUser.addTextChangedListener(new TextWatcher() {
+        findViewById(R.id.btnFinalizarLogin).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(TelaLoginActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                startActivity(intent);
+                finish();
             }
+        });
 
+        findViewById(R.id.btnCadastreSe).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            public void onClick(View v) {
+                Intent intent = new Intent(TelaLoginActivity.this, TelaBemVindoActivity.class);
+                startActivity(intent);
+                finish();
             }
-
-            @Override
-
-            public void afterTextChanged(Editable s) {
-                String usuario = toString();
-                //if senha e user não coincidirem no banco = erro; else if coincidirem = prosseguir
-            }
-
         });
 
     }

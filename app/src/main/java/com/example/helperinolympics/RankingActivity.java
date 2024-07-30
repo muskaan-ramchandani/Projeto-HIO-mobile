@@ -38,6 +38,7 @@ public class RankingActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(RankingActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

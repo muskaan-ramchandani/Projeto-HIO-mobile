@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="390dp"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardLivro1"
+        android:layout_width="375dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="5dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="376dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/fundo_arredondado_livros_provas"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/capaLivro"
+                android:layout_width="100dp"
+                android:layout_height="122dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                tools:srcCompat="@drawable/imglivrofisica" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtTituloLivro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    tools:text="O Livro da Física"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAutor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/open_sans"
+                    tools:text="Autor: Maria Souza"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/txtEdicao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/open_sans"
+                    tools:text="Edição: 1"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/txtDataPub"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/open_sans"
+                    tools:text="Data de publicação: 19/03/2009"
+                    android:textColor="#000000" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnOndeComprar"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/fundo_botoes_comuns_lilas"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Onde comprar?"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

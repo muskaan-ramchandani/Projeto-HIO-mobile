@@ -27,13 +27,40 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video);
         configurarRecyclerVideo();
 
-        botaoVoltarAOlimp=findViewById(R.id.imgButtonVoltar2);
+        botaoVoltarAOlimp=findViewById(R.id.imgButtonVoltarAOlimpPeloVideo);
         botaoVoltarAOlimp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VideoActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
                 finish(); //fechar activity
+            }
+        });
+
+        findViewById(R.id.btnQuestionarioPeloVideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, QuestionarioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnTextoPeloVideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, TextoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnFlashcardPeloVideo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VideoActivity.this, FlashcardActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -50,11 +77,11 @@ public class VideoActivity extends AppCompatActivity {
         adapter=new AdapterVideo(listaVideo);
         rvVideo.setAdapter(adapter);
 
-        DadosVideo dado1=new DadosVideo("Ponto material e corpo extenso","link", "profAnaCastela", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
+        DadosVideo dado1=new DadosVideo(1, "Ponto material e corpo extenso","link", "profAnaCastela", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
         listaVideo.add(dado1);
-        DadosVideo dado2=new DadosVideo("Referencial e trajetória","link", "zezeDiCamargo", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo2);
+        DadosVideo dado2=new DadosVideo(2, "Referencial e trajetória","link", "zezeDiCamargo", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo2);
         listaVideo.add(dado2);
-        DadosVideo dado3=new DadosVideo("Distância percorrida e deslocamento","link", "demiLovProf", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
+        DadosVideo dado3=new DadosVideo(3, "Distância percorrida e deslocamento","link", "demiLovProf", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
         listaVideo.add(dado3);
     }
 }

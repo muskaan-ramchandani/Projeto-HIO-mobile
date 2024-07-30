@@ -29,17 +29,43 @@ public class QuestionarioActivity extends AppCompatActivity {
 
         configurarRecyclerQuestionario();
 
-        botaoVoltarAOlimp = findViewById(R.id.imgButtonVoltar);
+        botaoVoltarAOlimp = findViewById(R.id.imgButtonVoltarConteudo);
         botaoVoltarAOlimp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent intent = new Intent(QuestionarioActivity.this, InicioOlimpiadaActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+        findViewById(R.id.btnTextoPeloQuest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioActivity.this, TextoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnVideoPeloQuest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioActivity.this, VideoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.btnFlashcardPeloQuest).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionarioActivity.this, FlashcardActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     private void configurarRecyclerQuestionario() {
@@ -49,9 +75,9 @@ public class QuestionarioActivity extends AppCompatActivity {
         rvQuestionario.setLayoutManager(layoutManager);
 
         List<DadosQuestionario> listaQuestionario = new ArrayList<>();
-        listaQuestionario.add(new DadosQuestionario("Ponto material e corpo extenso", "material", "OBF", "Fundamentos da cinemática do ponto material"));
-        listaQuestionario.add(new DadosQuestionario("Referencial e trajetória", "material", "OBF", "Fundamentos da cinemática do ponto material"));
-        listaQuestionario.add(new DadosQuestionario("Distância percorrida e deslocamento", "material", "OBF", "Fundamentos da cinemática do ponto material"));
+        listaQuestionario.add(new DadosQuestionario(1, "Ponto material e corpo extenso", "material", "OBF", "Fundamentos da cinemática do ponto material"));
+        listaQuestionario.add(new DadosQuestionario(2, "Referencial e trajetória", "material", "OBF", "Fundamentos da cinemática do ponto material"));
+        listaQuestionario.add(new DadosQuestionario(3, "Distância percorrida e deslocamento", "material", "OBF", "Fundamentos da cinemática do ponto material"));
 
         adapter = new AdapterQuestionario(listaQuestionario);
         rvQuestionario.setAdapter(adapter);

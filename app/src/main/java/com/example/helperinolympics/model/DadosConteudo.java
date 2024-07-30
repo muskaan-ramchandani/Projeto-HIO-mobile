@@ -4,6 +4,8 @@ public class DadosConteudo {
 
     int id;
     String tituloConteudo, subtituloConteudo, olimpiadaPertencente, corFundo;
+    private boolean isPressed;
+
 
     //id automatico no banco
     public DadosConteudo(int id, String tituloConteudo, String subtituloConteudo, String olimpiadaPertencente, String corFundo) {
@@ -12,6 +14,7 @@ public class DadosConteudo {
         setSubtituloConteudo(subtituloConteudo);
         setOlimpiadaPertencente(olimpiadaPertencente);
         setCorFundo(corFundo);
+        this.isPressed = false; //inicializando
     }
 
     public int getId() {
@@ -52,5 +55,13 @@ public class DadosConteudo {
 
     public void setCorFundo(String corFundo) {
         this.corFundo = corFundo;
+    }
+
+    public boolean isPressed() {
+        return isPressed;
+    }
+
+    public void setPressed(boolean pressed) {
+        isPressed = pressed;
     }
 }

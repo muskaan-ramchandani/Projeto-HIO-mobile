@@ -1,8 +1,10 @@
 package com.example.helperinolympics;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Adapter;
 
 import androidx.core.content.ContextCompat;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.helperinolympics.adapter.AdapterDadosAcertos;
+import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.DadosAcertos;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -35,6 +38,15 @@ public class AcertosSemanaisActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acertos_semanais);
 
+        findViewById(R.id.btnVoltarAoPerfilDosAcertos).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AcertosSemanaisActivity.this, PerfilAlunoActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         configurarBarra();
 
 
@@ -50,13 +62,13 @@ public class AcertosSemanaisActivity extends Activity {
         rVListaAcertos.setAdapter(acertosAdapter);
 
         //DADOS PARA TESTE
-        DadosAcertos dados1 = new DadosAcertos("OBMEP", "Matrizes", "Determinante", "Por: Profº Maria João",
-                "Pergunta: Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
+        DadosAcertos dados1 = new DadosAcertos("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
+                "Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
 
         listaAcertos.add(dados1);
 
-        DadosAcertos dados2 = new DadosAcertos("OBI", "Estruturas condicionais", "If e else", "Por: Profº Maria João",
-                "Pergunta: Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
+        DadosAcertos dados2 = new DadosAcertos("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
+                "Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
         listaAcertos.add(dados2);
         acertosAdapter.notifyDataSetChanged();

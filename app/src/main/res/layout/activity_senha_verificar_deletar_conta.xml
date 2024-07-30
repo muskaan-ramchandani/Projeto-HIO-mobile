@@ -19,10 +19,10 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/txtALterarSenhaTela"
+                android:id="@+id/txtDeletarContaTela"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Alterar senha"
+                android:text="Deletar conta"
                 android:background="@color/roxoPrincipal"
                 android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
@@ -33,13 +33,13 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageButton
-                android:id="@+id/btnFecharAlterarSenha"
+                android:id="@+id/btnFecharDeletarConta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/txtALterarSenhaTela"
+                app:layout_constraintTop_toTopOf="@id/txtDeletarContaTela"
                 app:srcCompat="@drawable/baseline_close_24" />
 
             <LinearLayout
@@ -52,7 +52,7 @@
                 android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtALterarSenhaTela">
+                app:layout_constraintTop_toBottomOf="@+id/txtDeletarContaTela">
 
                 <TextView
                     android:id="@+id/txtAvisoEnviadoCodigo"

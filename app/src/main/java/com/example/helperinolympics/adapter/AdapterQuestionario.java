@@ -1,5 +1,7 @@
 package com.example.helperinolympics.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosQuestionario;
+import com.example.helperinolympics.telas_de_acesso.AcessoQuestionarioActivity;
 
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class AdapterQuestionario extends RecyclerView.Adapter<AdapterQuestionari
     @Override
     public void onBindViewHolder(@NonNull QuestionarioViewHolder holder, int position) {
         DadosQuestionario questionario = listaQuestionario.get(position);
-        holder.conteudo.setText(questionario.getTemaPertencente());
+        holder.conteudo.setText(questionario.getTitulo());
         holder.userProf.setText(questionario.getProfessorCadastrou());
     }
 
@@ -46,6 +49,15 @@ public class AdapterQuestionario extends RecyclerView.Adapter<AdapterQuestionari
             super(itemView);
             conteudo = itemView.findViewById(R.id.txtConteudo);
             userProf = itemView.findViewById(R.id.txtUserProf);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, AcessoQuestionarioActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

@@ -1,5 +1,8 @@
 package com.example.helperinolympics.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
@@ -37,15 +40,16 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
     }
 
     public void onBindViewHolder(@NonNull AdapterConteudos.ConteudosViewHolder holder, int position) {
-        DadosConteudo olimp = listaConteudos.get(position);
+        DadosConteudo conteudo = listaConteudos.get(position);
 
-        String valorTitulo = olimp.getTituloConteudo();
-        String valorSubtitulo = olimp.getSubtituloConteudo();
+        String valorTitulo = conteudo.getTituloConteudo();
+        String valorSubtitulo = conteudo.getSubtituloConteudo();
         String valorTituloSubTitulo = "<b>" + valorTitulo + ": </b> " + valorSubtitulo;
 
-        holder.btnConteudo.setText(Html.fromHtml(valorTituloSubTitulo)); //manter parte do texto em negrito
+        holder.btnConteudo.setText(Html.fromHtml(valorTituloSubTitulo, Html.FROM_HTML_MODE_COMPACT)); //manter parte do texto em negrito
 
-        String valorCor = olimp.getCorFundo();
+
+        String valorCor = conteudo.getCorFundo();
         if (valorCor.equals("Azul")) {
             holder.btnConteudo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
         } else if (valorCor.equals("Ciano")) {
@@ -56,6 +60,20 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
             holder.btnConteudo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
         }
 
+        holder.btnConteudo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = v.getContext();
+                Intent intent = new Intent(context, TextoActivity.class);
+                context.startActivity(intent);
+
+                if (context instanceof Activity) {
+                    ((Activity) context).finish();
+                }
+            }
+        });
+
+
     }
 
     public class ConteudosViewHolder extends RecyclerView.ViewHolder{
@@ -65,13 +83,7 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
             super(itemView);
             btnConteudo = itemView.findViewById(R.id.btnConteudoOlimpiada);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(context, TextoActivity.class);
-                    ((AppCompatActivity)context).startActivity(intent);
-                }
-            });
+
         }
     }
 

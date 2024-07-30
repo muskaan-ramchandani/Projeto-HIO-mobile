@@ -29,25 +29,24 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbarErrosSemanais">
 
         <ImageButton
-            android:id="@+id/btnVoltarAoInicioErrosSemanais"
+            android:id="@+id/btnVoltarAoPerfilDosErros"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:contentDescription="bntVoltarAoInicio"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/btnvoltarbranco" />
 
         <TextView
-            android:id="@+id/txtErrosSemanais"
+            android:id="@+id/txtErros"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"
             android:layout_weight="1"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Erros Semanais"
+            android:text="Erros semanais"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="24sp"

@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbarConfiguracoes">
 
         <ImageButton
-            android:id="@+id/btnVoltarAoInicio"
+            android:id="@+id/btnVoltarAoInicioDasConfig"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
@@ -202,7 +202,7 @@
                         app:srcCompat="@drawable/baseline_edit_24" />
 
                     <TextView
-                        android:id="@+id/txtAlterarDados"
+                        android:id="@+id/txtHistoricodeAcessos"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"

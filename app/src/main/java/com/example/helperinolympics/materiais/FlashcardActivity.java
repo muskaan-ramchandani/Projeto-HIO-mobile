@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,14 +50,16 @@ public class FlashcardActivity extends AppCompatActivity {
         rvFlashcard.setHasFixedSize(true);
 
         List<DadosFlashcard> listaFlashcard= new ArrayList<>();
-        adapter=new AdapterFlashcard(listaFlashcard);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        adapter=new AdapterFlashcard(listaFlashcard, fragmentManager);
         rvFlashcard.setAdapter(adapter);
 
-        DadosFlashcard dado1=new DadosFlashcard("Ponto material e corpo extenso","material", "OBF", "Fundamentos da cinemática do ponto material");
+        DadosFlashcard dado1=new DadosFlashcard(1,"Ponto material e corpo extenso","material", "OBF", "Fundamentos da cinemática do ponto material");
         listaFlashcard.add(dado1);
-        DadosFlashcard dado2=new DadosFlashcard("Referencial e trajetória","material", "OBF", "Fundamentos da cinemática do ponto material");
+        DadosFlashcard dado2=new DadosFlashcard(2, "Referencial e trajetória","material", "OBF", "Fundamentos da cinemática do ponto material");
         listaFlashcard.add(dado2);
-        DadosFlashcard dado3=new DadosFlashcard("Distância percorrida e deslocamento","material", "OBF", "Fundamentos da cinemática do ponto material");
+        DadosFlashcard dado3=new DadosFlashcard(3,"Distância percorrida e deslocamento","material", "OBF", "Fundamentos da cinemática do ponto material");
         listaFlashcard.add(dado3);
     }
 }

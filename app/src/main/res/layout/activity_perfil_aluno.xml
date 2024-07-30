@@ -37,32 +37,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/toolbar" />
 
-    <ImageView
-        android:id="@+id/imgFotoPerfil"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFotoPerfil"
         android:layout_width="179dp"
         android:layout_height="156dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="116dp"
         android:layout_marginEnd="116dp"
-        android:scaleType="fitCenter"
-        android:background="@android:color/transparent"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintStart_toStartOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="@id/toolbar"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:srcCompat="@drawable/iconeperfilvazioredonda" />
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeCompletoAluno">
 
-    <ImageButton
-        android:id="@+id/btnEditarPerfil"
-        android:layout_width="96dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginBottom="70dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintHorizontal_bias="0.677"
-        app:layout_constraintStart_toStartOf="@id/imgFotoPerfil"
-        app:layout_constraintBottom_toBottomOf="@id/imgFotoPerfil"
-        app:srcCompat="@drawable/btneditarfoto" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="179dp"
+            android:layout_height="156dp"
+            app:layout_constraintVertical_bias="0.678"
+            app:srcCompat="@drawable/iconeperfilvazioredonda" />
+    </androidx.cardview.widget.CardView>
+
 
     <TextView
         android:id="@+id/txtNomeCompletoAluno"
@@ -79,7 +76,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txtNomeDeUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgFotoPerfil" />
+        app:layout_constraintTop_toBottomOf="@+id/cardFotoPerfil" />
 
     <TextView
         android:id="@+id/txtNomeDeUsuario"
