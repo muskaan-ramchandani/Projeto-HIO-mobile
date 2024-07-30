@@ -2,15 +2,24 @@ package com.example.helperinolympics.model;
 
 public class DadosVideo {
     private String titulo, linkVideo, professorRecomendou, olimpiadaPertencente, temaPertencente;
-    private int capaVideo;
+    private int capaVideo, id;
 
-    public DadosVideo(String titulo, String linkVideo, String professorRecomendou, String olimpiadaPertencente, String temaPertencente, int capaVideo) {
+    public DadosVideo(int id, String titulo, String linkVideo, String professorRecomendou, String olimpiadaPertencente, String temaPertencente, int capaVideo) {
+        setId(id);
         setTitulo(titulo);
         setLinkVideo(linkVideo);
         setProfessorRecomendou(professorRecomendou);
         setOlimpiadaPertencente(olimpiadaPertencente);
         setTemaPertencente(temaPertencente);
         setCapaVideo(capaVideo);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitulo() {

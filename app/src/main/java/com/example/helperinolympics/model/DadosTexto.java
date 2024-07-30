@@ -2,12 +2,22 @@ package com.example.helperinolympics.model;
 
 public class DadosTexto {
     private String titulo, professorCadastrou, olimpiadaPertencente, temaPertencente;
+    private int id;
 
-    public DadosTexto(String titulo, String professorCadastrou, String olimpiadaPertencente, String temaPertencente) {
+    public DadosTexto(int id, String titulo, String professorCadastrou, String olimpiadaPertencente, String temaPertencente) {
+        setId(id);
         setTitulo(titulo);
         setProfessorCadastrou(professorCadastrou);
         setOlimpiadaPertencente(olimpiadaPertencente);
         setTemaPertencente(temaPertencente);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitulo() {

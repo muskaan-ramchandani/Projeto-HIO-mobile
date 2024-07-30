@@ -77,11 +77,11 @@ public class VideoActivity extends AppCompatActivity {
         adapter=new AdapterVideo(listaVideo);
         rvVideo.setAdapter(adapter);
 
-        DadosVideo dado1=new DadosVideo("Ponto material e corpo extenso","link", "profAnaCastela", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
+        DadosVideo dado1=new DadosVideo(1, "Ponto material e corpo extenso","link", "profAnaCastela", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
         listaVideo.add(dado1);
-        DadosVideo dado2=new DadosVideo("Referencial e trajetória","link", "zezeDiCamargo", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo2);
+        DadosVideo dado2=new DadosVideo(2, "Referencial e trajetória","link", "zezeDiCamargo", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo2);
         listaVideo.add(dado2);
-        DadosVideo dado3=new DadosVideo("Distância percorrida e deslocamento","link", "demiLovProf", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
+        DadosVideo dado3=new DadosVideo(3, "Distância percorrida e deslocamento","link", "demiLovProf", "OBF","Fundamentos da cinemática do ponto material", R.drawable.fotovideo1);
         listaVideo.add(dado3);
     }
 }
