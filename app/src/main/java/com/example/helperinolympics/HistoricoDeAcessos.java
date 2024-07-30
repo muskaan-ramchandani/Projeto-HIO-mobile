@@ -104,6 +104,8 @@ public class HistoricoDeAcessos extends AppCompatActivity {
         listaHistorico.add(new DadosHistorico(3, "Video"));
 
 
+        ///ARRUMAR TAMANHOOOOO
+
 
         for(DadosHistorico dado : listaHistorico){
             if(dado.getTipoItem().equals("Flashcard")){

@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoricoDeAcessos"
@@ -56,8 +55,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:layout_marginTop="@+id/toolbarHistorico"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/toolbarHistorico"
@@ -66,7 +65,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="650dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -157,7 +156,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewHistoricoVideo"
                 android:layout_width="390dp"
-                android:layout_height="142dp"
+                android:layout_height="240dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp" />
 
