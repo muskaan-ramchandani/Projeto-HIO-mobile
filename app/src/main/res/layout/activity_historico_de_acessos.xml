@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="@+id/toolbarHistorico">
 
         <ImageButton
-            android:id="@+id/btnVoltarAoInicioAlterarDados"
+            android:id="@+id/btnVoltarAConfiguracoesHistoricoAcesso"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"

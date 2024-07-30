@@ -1,6 +1,8 @@
 package com.example.helperinolympics;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.example.helperinolympics.adapter.historicos.AdapterHistoricoProvas;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoQuestionario;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoTexto;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoVideo;
+import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.model.DadosFlashcard;
 import com.example.helperinolympics.model.DadosHistorico;
 import com.example.helperinolympics.model.DadosProvasAnteriores;
@@ -55,6 +58,15 @@ public class HistoricoDeAcessos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico_de_acessos);
+
+        findViewById(R.id.btnVoltarAConfiguracoesHistoricoAcesso).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HistoricoDeAcessos.this, ConfiguracoesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         // DADOS QUE VAO SER PUXADOS DO BANCO QUANDO ELE EXISTIR
         listaFlashcardsBanco.add(new DadosFlashcard(1,"Ponto material e corpo extenso","material", "OBF", "Fundamentos da cinemática do ponto material"));
