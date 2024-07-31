@@ -55,7 +55,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="100dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/open_sans_bold"
                 android:text="Flashcards:"
                 android:textColor="@color/black"
@@ -82,7 +82,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewHistoricoFlashcards"
                 android:layout_width="390dp"
-                android:layout_height="142dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
                 />
@@ -101,7 +101,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewHistoricoProvas"
                 android:layout_width="390dp"
-                android:layout_height="142dp"
+                android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp" />
 
@@ -119,7 +119,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewHistoricoQuestionario"
                 android:layout_width="390dp"
-                android:layout_height="142dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp" />
 
@@ -137,7 +137,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewHistoricoTexto"
                 android:layout_width="390dp"
-                android:layout_height="142dp"
+                android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"/>
 
@@ -157,8 +157,8 @@
                 android:id="@+id/recyclerViewHistoricoVideo"
                 android:layout_width="390dp"
                 android:layout_height="240dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
     </ScrollView>

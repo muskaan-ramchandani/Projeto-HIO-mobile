@@ -13,16 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosQuestionario;
+import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.modelos_sobrepostos.QuestionarioHistoricoExibir;
+import com.example.helperinolympics.modelos_sobrepostos.TextoHistoricoExibir;
 import com.example.helperinolympics.telas_de_acesso.AcessoQuestionarioActivity;
 
 import java.util.List;
 
 public class AdapterHistoricoQuestionario extends RecyclerView.Adapter<AdapterHistoricoQuestionario.QuestionarioHistoricoViewHolder> {
     private List<DadosQuestionario> listaQuestionario;
+    private DadosQuestionario quest;
+    private FragmentManager fragmentManager;
+
 
     // Constructor to initialize the list
-    public AdapterHistoricoQuestionario(List<DadosQuestionario> listaQuestionario) {
+    public AdapterHistoricoQuestionario(List<DadosQuestionario> listaQuestionario, FragmentManager fragmentManager) {
         this.listaQuestionario = listaQuestionario;
+        this.fragmentManager = fragmentManager;
     }
 
     // Create new views (invoked by the layout manager)
@@ -36,7 +43,7 @@ public class AdapterHistoricoQuestionario extends RecyclerView.Adapter<AdapterHi
 
     public void onBindViewHolder(@NonNull AdapterHistoricoQuestionario.QuestionarioHistoricoViewHolder holder, int position) {
         DadosQuestionario quest = listaQuestionario.get(position);
-
+        this.quest = listaQuestionario.get(position);
 
         holder.conteudo.setText(quest.getTitulo());
         holder.userProf.setText(quest.getProfessorCadastrou());
@@ -60,9 +67,8 @@ public class AdapterHistoricoQuestionario extends RecyclerView.Adapter<AdapterHi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, AcessoQuestionarioActivity.class);
-                    context.startActivity(intent);
+                    QuestionarioHistoricoExibir notificationDialogFragment = new QuestionarioHistoricoExibir(quest);
+                    notificationDialogFragment.show(fragmentManager, "notificationDialog");
                 }
             });
 

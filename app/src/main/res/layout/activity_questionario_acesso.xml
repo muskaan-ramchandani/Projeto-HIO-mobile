@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -57,7 +58,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnTexto"
+            android:id="@+id/btnTextoPeloAcessoQuest"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -68,7 +69,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnVideo"
+            android:id="@+id/btnVideoPeloAcessoQuest"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -79,7 +80,7 @@
 
 
         <ImageButton
-            android:id="@+id/btnFlashcard"
+            android:id="@+id/btnFlashcardPeloAcessoQuest"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_weight="1"
@@ -281,6 +282,7 @@
         android:layout_width="333dp"
         android:layout_height="65dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.615"
@@ -292,7 +294,6 @@
             android:id="@+id/imgButtonVoltarEsquerda"
             android:layout_width="74dp"
             android:layout_height="64dp"
-            android:layout_marginBottom="16dp"
             android:background="#00000000"
             android:scaleType="centerCrop"
             android:src="@drawable/btnvoltareavancarexercicioesquerda" />
@@ -300,9 +301,9 @@
         <Button
             android:id="@+id/btnResponder"
             android:layout_width="170dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="@color/roxoPrincipal"
+            android:layout_height="50dp"
+            android:textAllCaps="false"
+            android:background="@drawable/fundo_botoes_roxos"
             android:fontFamily="@font/open_sans_bold"
             android:text="Responder"
             android:textSize="19sp" />

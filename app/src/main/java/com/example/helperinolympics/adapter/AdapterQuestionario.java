@@ -1,5 +1,6 @@
 package com.example.helperinolympics.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -56,6 +57,9 @@ public class AdapterQuestionario extends RecyclerView.Adapter<AdapterQuestionari
                     Context context = v.getContext();
                     Intent intent = new Intent(context, AcessoQuestionarioActivity.class);
                     context.startActivity(intent);
+                    if (context instanceof Activity) {
+                        ((Activity) context).finish();
+                    }
                 }
             });
         }
