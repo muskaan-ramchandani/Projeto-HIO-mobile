@@ -4,16 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.helperinolympics.adapter.AdapterFlashcard;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoFlashcard;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoProvas;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoQuestionario;
@@ -21,20 +16,19 @@ import com.example.helperinolympics.adapter.historicos.AdapterHistoricoTexto;
 import com.example.helperinolympics.adapter.historicos.AdapterHistoricoVideo;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.model.DadosFlashcard;
-import com.example.helperinolympics.model.DadosHistorico;
+import com.example.helperinolympics.model.historicos_acesso.DadosHistoricoFlashcards;
 import com.example.helperinolympics.model.DadosProvasAnteriores;
 import com.example.helperinolympics.model.DadosQuestionario;
 import com.example.helperinolympics.model.DadosTexto;
 import com.example.helperinolympics.model.DadosVideo;
+import com.example.helperinolympics.model.historicos_acesso.DadosHistoricoProvasAnteriores;
+import com.example.helperinolympics.model.historicos_acesso.DadosHistoricoQuestionario;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class HistoricoDeAcessos extends AppCompatActivity {
 
-    List<DadosHistorico> listaHistorico = new ArrayList<>();
     RecyclerView rvHistoricoFlashcard, rvHistoricoProvas, rvHistoricoQuestionarios, rvHistoricoTexto, rvHistoricoVideo;
     AdapterHistoricoFlashcard adapterFlash;
     AdapterHistoricoQuestionario adapterQuest;
@@ -42,14 +36,24 @@ public class HistoricoDeAcessos extends AppCompatActivity {
     AdapterHistoricoProvas adapterProvas;
     AdapterHistoricoVideo adapterVideo;
 
+    //Ids guardados nos históricos
+    List<DadosHistoricoFlashcards> idsHistoricoFlash = new ArrayList<>();
+    List<DadosHistoricoQuestionario> idsHistoricoQuest = new ArrayList<>();
+    List<DadosHistoricoProvasAnteriores> idsHistoricoProvas = new ArrayList<>();
+
+    //Listas banco e as que vao para a tela
     List<DadosFlashcard> listaFlashcardHistorico= new ArrayList<>();
     List<DadosFlashcard> listaFlashcardsBanco= new ArrayList<>();
+
     List<DadosQuestionario> listaQuestHistorico = new ArrayList<>();
     List<DadosQuestionario> listaQuestBanco = new ArrayList<>();
+
     List<DadosTexto> listaTxtHistorico = new ArrayList<>();
     List<DadosTexto> listaTxtBanco = new ArrayList<>();
+
     List<DadosProvasAnteriores> listaProvasHistorico = new ArrayList<>();
     List<DadosProvasAnteriores> listaProvasBanco = new ArrayList<>();
+
     List<DadosVideo> listaVideoHistorico = new ArrayList<>();
     List<DadosVideo> listaVideoBanco = new ArrayList<>();
 
@@ -87,49 +91,50 @@ public class HistoricoDeAcessos extends AppCompatActivity {
 
 
         //adicionando dados aleatorios de historico
-        listaHistorico.add(new DadosHistorico(1, "Flashcard"));
-        listaHistorico.add(new DadosHistorico(2, "Flashcard"));
-        listaHistorico.add(new DadosHistorico(3, "Flashcard"));
-        listaHistorico.add(new DadosHistorico(1, "Prova"));
-        listaHistorico.add(new DadosHistorico(2, "Prova"));
-        listaHistorico.add(new DadosHistorico(3, "Prova"));
-        listaHistorico.add(new DadosHistorico(1, "Questionario"));
-        listaHistorico.add(new DadosHistorico(2, "Questionario"));
-        listaHistorico.add(new DadosHistorico(3, "Questionario"));
-        listaHistorico.add(new DadosHistorico(1, "Texto"));
-        listaHistorico.add(new DadosHistorico(2, "Texto"));
-        listaHistorico.add(new DadosHistorico(3, "Texto"));
-        listaHistorico.add(new DadosHistorico(1, "Video"));
-        listaHistorico.add(new DadosHistorico(2, "Video"));
-        listaHistorico.add(new DadosHistorico(3, "Video"));
+        idsHistoricoFlash.add(new DadosHistoricoFlashcards(1));
+        idsHistoricoFlash.add(new DadosHistoricoFlashcards(2));
+        idsHistoricoFlash.add(new DadosHistoricoFlashcards(3));
+        idsHistoricoQuest.add(new DadosHistoricoQuestionario(1));
+        idsHistoricoQuest.add(new DadosHistoricoQuestionario(2));
+        idsHistoricoQuest.add(new DadosHistoricoQuestionario(3));
+
+        idsHistoricoProvas.add(new DadosHistoricoProvasAnteriores(1));
+        idsHistoricoProvas.add(new DadosHistoricoProvasAnteriores(2));
+        idsHistoricoProvas.add(new DadosHistoricoProvasAnteriores(3));
+        listaHistorico.add(new DadosHistoricoFlashcards(1, "Texto"));
+        listaHistorico.add(new DadosHistoricoFlashcards(2, "Texto"));
+        listaHistorico.add(new DadosHistoricoFlashcards(3, "Texto"));
+        listaHistorico.add(new DadosHistoricoFlashcards(1, "Video"));
+        listaHistorico.add(new DadosHistoricoFlashcards(2, "Video"));
+        listaHistorico.add(new DadosHistoricoFlashcards(3, "Video"));
 
 
-        ///ARRUMAR TAMANHOOOOO
-
-
-        for(DadosHistorico dado : listaHistorico){
-            if(dado.getTipoItem().equals("Flashcard")){
-                DadosFlashcard flash= listaFlashcardsBanco.get(dado.getIdItem());
-                listaFlashcardHistorico.add(flash);
-
-            }else if(dado.getTipoItem().equals("Questionario")){
-                DadosQuestionario quest = listaQuestBanco.get(dado.getIdItem());
-                listaQuestHistorico.add(quest);
-            }
-            else if(dado.getTipoItem().equals("Texto")){
-                DadosTexto txt = listaTxtBanco.get(dado.getIdItem());
-                listaTxtHistorico.add(txt);
-
-            }else if(dado.getTipoItem().equals("Prova")){
-                DadosProvasAnteriores prova = listaProvasBanco.get(dado.getIdItem());
-                listaProvasHistorico.add(prova);
-
-            }else if(dado.getTipoItem().equals("Video")){
-                DadosVideo video = listaVideoBanco.get(dado.getIdItem());
-                listaVideoHistorico.add(video);
+        for(DadosHistoricoProvasAnteriores dado : idsHistoricoProvas){
+            int idNoHistorico = dado.getIdItem();
+            for(DadosProvasAnteriores prova : listaProvasBanco){
+                if(prova.getId()==idNoHistorico){
+                    listaProvasHistorico.add(prova);
+                }
             }
         }
 
+        for(DadosHistoricoFlashcards dado : idsHistoricoFlash){
+            int idNoHistorico = dado.getIdItem();
+            for(DadosFlashcard flash : listaFlashcardsBanco){
+                if(flash.getId()==idNoHistorico){
+                    listaFlashcardHistorico.add(flash);
+                }
+            }
+        }
+
+        for(DadosHistoricoQuestionario dado : idsHistoricoQuest){
+            int idNoHistorico = dado.getIdItem();
+            for(DadosQuestionario quest : listaQuestBanco){
+                if(quest.getId()==idNoHistorico){
+                    listaFlashcardHistorico.add(quest);
+                }
+            }
+        }
 
         //recyclers
         configurarRecyclerHistoricoFlashcards();
