@@ -36,6 +36,14 @@ public class AdapterHistoricoVideo extends RecyclerView.Adapter<AdapterHistorico
     public void onBindViewHolder(@NonNull AdapterHistoricoVideo.VideoHistoricoViewHolder holder, int position) {
         DadosVideo video = listaVideo.get(position);
 
+        String valorTema=video.getTemaPertencente();
+        holder.conteudo.setText(valorTema);
+
+        String valorUser=video.getProfessorRecomendou();
+        holder.userProf.setText(valorUser);
+
+        int valorCapa=video.getCapaVideo();
+        holder.capa.setImageResource(valorCapa);
 
 
     }

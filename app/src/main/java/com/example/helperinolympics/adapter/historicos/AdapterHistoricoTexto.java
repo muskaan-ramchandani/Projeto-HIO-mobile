@@ -13,16 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.modelos_sobrepostos.RecadoProfWebActivity;
+import com.example.helperinolympics.modelos_sobrepostos.TextoHistoricoExibir;
 import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
 
 import java.util.List;
 
 public class AdapterHistoricoTexto extends RecyclerView.Adapter<AdapterHistoricoTexto.TextoHistoricoViewHolder> {
 private List<DadosTexto> listaTxt;
+private FragmentManager fragmentManager;
+private DadosTexto texto;
 
 // Constructor to initialize the list
-public AdapterHistoricoTexto(List<DadosTexto> listaTxt) {
+public AdapterHistoricoTexto(List<DadosTexto> listaTxt, FragmentManager fragmentManager) {
     this.listaTxt = listaTxt;
+    this.fragmentManager = fragmentManager;
 }
 
 // Create new views (invoked by the layout manager)
@@ -36,7 +41,7 @@ public AdapterHistoricoTexto.TextoHistoricoViewHolder onCreateViewHolder(@NonNul
 
 public void onBindViewHolder(@NonNull AdapterHistoricoTexto.TextoHistoricoViewHolder holder, int position) {
     DadosTexto txt = listaTxt.get(position);
-
+    this.texto = listaTxt.get(position);
 
     holder.conteudo.setText(txt.getTitulo());
     holder.userProf.setText(txt.getProfessorCadastrou());
@@ -60,9 +65,8 @@ public class TextoHistoricoViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = v.getContext();
-                Intent intent = new Intent(context, AcessoTextoActivity.class);
-                context.startActivity(intent);
+                TextoHistoricoExibir notificationDialogFragment = new TextoHistoricoExibir(texto);
+                notificationDialogFragment.show(fragmentManager, "notificationDialog");
             }
         });
 
