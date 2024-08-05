@@ -24,7 +24,7 @@ public class DadosErros {
         return olimpiadaQuestaoErrada;
     }
 
-    public void setOlimpiadaQuestaoErrada(String olimpiadaQuestaoErradaa) {
+    public void setOlimpiadaQuestaoErrada(String olimpiadaQuestaoErrada) {
         this.olimpiadaQuestaoErrada = olimpiadaQuestaoErrada;
     }
 

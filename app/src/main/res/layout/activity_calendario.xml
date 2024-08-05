@@ -130,11 +130,14 @@
                         app:srcCompat="@drawable/voltar_direita_redimensionado" />
 
                 </LinearLayout>
-
-
             </LinearLayout>
-
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEventosCalendario"
+            android:layout_width="360dp"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar

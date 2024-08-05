@@ -48,9 +48,10 @@ public class AcertosSemanaisActivity extends Activity {
         });
 
         configurarBarra();
+        configurarRecyclerAcertos();
+    }
 
-
-        //Lista de acertos
+    private void configurarRecyclerAcertos() {
         rVListaAcertos = findViewById(R.id.recyclerViewListaAcertos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
