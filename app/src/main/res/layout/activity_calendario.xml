@@ -91,8 +91,9 @@
 
             <!--Linear eventos + botoes-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -105,19 +106,30 @@
                     android:textStyle="bold"
                     android:text="Eventos:" />
 
-                <ImageButton
-                    android:id="@+id/imageButton2"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/btnvoltareavancarexercicioesquerda" />
+                    android:layout_height="50dp"
+                    android:layout_marginStart="190dp">
 
-                <ImageButton
-                    android:id="@+id/imageButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/btnvoltareavancarexerciciodireita" />
+                    <ImageButton
+                        android:id="@+id/btnVoltarMes"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/voltar_esquerda_redimensionado" />
+
+                    <ImageButton
+                        android:id="@+id/btnAvancarMes"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        app:srcCompat="@drawable/voltar_direita_redimensionado" />
+
+                </LinearLayout>
 
 
             </LinearLayout>

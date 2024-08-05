@@ -31,6 +31,15 @@
     <string name="nome_sigla_OBB">Olimpíada Brasileira de Biologia - OBB</string>
     <string name="nome_sigla_ONC">Olimpíada Nacional de Ciências - ONC</string>
 
+    <string name="sigla_OBA">OBA</string>
+    <string name="sigla_OBF">OBF</string>
+    <string name="sigla_OBI">OBI</string>
+    <string name="sigla_OBMEP">OBMEP</string>
+    <string name="sigla_ONHB">ONHB</string>
+    <string name="sigla_OBQ">OBQ</string>
+    <string name="sigla_OBB">OBB</string>
+    <string name="sigla_ONC">ONC</string>
+
     <!--Itens do menu deslizante-->
     <string name="menu_perfil">Seu perfil</string>
     <string name="menu_favoritos">Favoritos</string>
