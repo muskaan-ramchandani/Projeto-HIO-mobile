@@ -3,6 +3,7 @@ package com.example.helperinolympics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,6 +46,11 @@ public class CalendarioActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        TextView txtDiaSemana = findViewById(R.id.txtDiadaSemanaCalendario);
+        txtDiaSemana.setText("Sexta");
+        TextView txtData = findViewById(R.id.txtDiaMesAno);
+        txtData.setText("06 de fevereiro, 2024");
 
         configurarRecyclerEventos();
     }

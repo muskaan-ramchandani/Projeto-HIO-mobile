@@ -26,6 +26,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorControlActivated">@color/roxoPrincipal</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
     <style name="Theme.HelperInOlympics.AppBarOverlay"  />
 
     <style name="Theme.HelperInOlympics.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

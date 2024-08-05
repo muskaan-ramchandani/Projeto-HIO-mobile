@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.CalendarioActivity;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.RankingActivity;
 import com.example.helperinolympics.adapter.AdapterOlimpiadas;
@@ -65,6 +66,14 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         });
 
         acessarCalendario =findViewById(R.id.btnCalendario);
+        acessarCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, CalendarioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
         // Configuração do ImageButton para abrir e fechar o DrawerLayout

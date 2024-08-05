@@ -46,20 +46,36 @@ public class AdapterEventos extends RecyclerView.Adapter<AdapterEventos.EventosV
 
         if (valorOlimpiada.equals("OBA")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+
         } else if (valorOlimpiada.equals("OBF")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+
         } else if (valorOlimpiada.equals("OBI")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+
         } else if (valorOlimpiada.equals("OBMEP")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+
         }else if (valorOlimpiada.equals("ONHB")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+
         } else if (valorOlimpiada.equals("OBQ")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+
         } else if (valorOlimpiada.equals("OBB")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+
         } else if (valorOlimpiada.equals("ONC")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+
         }
     }
 
