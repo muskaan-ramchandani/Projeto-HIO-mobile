@@ -1,4 +1,4 @@
-package com.example.helperinolympics.adapter;
+package com.example.helperinolympics.adapter.calendario;
 
 import android.text.Html;
 import android.view.LayoutInflater;

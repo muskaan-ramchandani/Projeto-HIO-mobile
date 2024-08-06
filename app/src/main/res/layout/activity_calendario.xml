@@ -34,113 +34,189 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <!--Linear dados em geral-->
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="385dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="90dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="@id/toolbarTopoCalendario"
         app:layout_constraintEnd_toEndOf="@+id/toolbarTopoCalendario"
         app:layout_constraintTop_toBottomOf="@+id/toolbarTopoCalendario">
 
-        <!--Linear dados calendario-->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCalendario"
+            android:layout_width="360dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="6dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp">
+
+           <LinearLayout
+               android:id="@+id/linearCalendario"
+               android:background="@color/white"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_marginTop="12dp"
+               android:layout_marginBottom="12dp"
+               android:layout_marginStart="15dp"
+               android:layout_marginEnd="15dp"
+               android:orientation="vertical">
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="50dp"
+                   android:gravity="center_horizontal|center_vertical"
+                   android:orientation="horizontal">
+
+                   <ImageButton
+                       android:id="@+id/btnVoltarMes"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_weight="1"
+                       android:scaleType="fitCenter"
+                       android:background="@android:color/transparent"
+                       app:srcCompat="@drawable/voltar_esquerda_redimensionado" />
+
+                   <TextView
+                       android:id="@+id/txtMesAno"
+                       android:layout_width="230dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/open_sans_bold"
+                       tools:text="Agosto 2024"
+                       android:gravity="center_horizontal"
+                       android:textColor="@color/roxoExtraBtnSelecionado"
+                       android:textSize="22sp"
+                       android:textStyle="bold" />
+
+                   <ImageButton
+                       android:id="@+id/btnAvancarMes"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_weight="1"
+                       android:scaleType="fitCenter"
+                       android:background="@android:color/transparent"
+                       app:srcCompat="@drawable/voltar_direita_redimensionado" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/diasSemanaCalendario"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background=""
+                   android:layout_marginTop="10dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="10dp">
+
+                   <TextView
+                       android:id="@+id/txtDomingo"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="D"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtSegunda"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="S"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtTerca"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="T"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtQuarta"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="Q"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtQuinta"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="Q"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtSexta"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="S"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtSabado"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="S"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp" />
+               </LinearLayout>
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"/>
+
+           </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/txtEventos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:fontFamily="@font/open_sans_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Eventos:"
+            android:layout_marginTop="10dp"
+            android:paddingStart="15dp"/>
 
-            <TextView
-                android:id="@+id/txtDiadaSemanaCalendario"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/questrial"
-                android:textColor="#898989"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="Sexta" />
-
-            <TextView
-                android:id="@+id/txtDiaMesAno"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewEventosCalendario"
                 android:layout_width="360dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_bold"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="6dp"
-                tools:text="06 de fevereiro, 2024" />
-
-            <CalendarView
-                android:id="@+id/calendarViewEventos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/CalenderViewCustom"
-                />
-
-
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
-
-        <!--Linear dados eventos-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!--Linear eventos + botoes-->
-            <LinearLayout
-                android:layout_width="360dp"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/txtEventos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:text="Eventos:" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="190dp">
-
-                    <ImageButton
-                        android:id="@+id/btnVoltarMes"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:scaleType="fitCenter"
-                        android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/voltar_esquerda_redimensionado" />
-
-                    <ImageButton
-                        android:id="@+id/btnAvancarMes"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:scaleType="fitCenter"
-                        android:background="@android:color/transparent"
-                        app:srcCompat="@drawable/voltar_direita_redimensionado" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewEventosCalendario"
-            android:layout_width="360dp"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarBotoesInferiores"
