@@ -3,29 +3,42 @@ package com.example.helperinolympics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.adapter.calendario.AdapterDatasCalendario;
 import com.example.helperinolympics.adapter.calendario.AdapterEventos;
 import com.example.helperinolympics.model.DadosEventos;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CalendarioActivity extends AppCompatActivity {
-    RecyclerView rvListaEventos;
-    AdapterEventos adapter;
+    private RecyclerView rvListaEventos, rvCalendario;
+    private AdapterDatasCalendario adapterCalendario;
+    private AdapterEventos adapter;
+    private TextView txtMesEAno;
+    private Calendar dataAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
+
 
         findViewById(R.id.btnAcessarHanking).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +58,98 @@ public class CalendarioActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btnVoltarMes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                voltarMes();
+            }
+        });
+
+        findViewById(R.id.btnAvancarMes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                avancarMes();
+            }
+        });
 
 
+        configurarCalendario();
         configurarRecyclerEventos();
+    }
+
+    private void configurarCalendario(){
+
+        rvCalendario = findViewById(R.id.recyclerViewCalendario);
+        txtMesEAno = findViewById(R.id.txtMesAno);
+
+        dataAtual = Calendar.getInstance();
+        txtMesEAno.setText(mesAnoAtravesData(dataAtual));
+
+        ArrayList<String> diasDoMes = vetorDiasNoMes(dataAtual);
+
+        rvCalendario = findViewById(R.id.recyclerViewCalendario);
+        LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
+        rvCalendario.setLayoutManager(layoutManager);
+        rvCalendario.setHasFixedSize(true);
+
+        adapterCalendario = new AdapterDatasCalendario(diasDoMes, dataAtual);
+        rvCalendario.setAdapter(adapterCalendario);
+        adapterCalendario.notifyDataSetChanged();
+    }
+
+    private String mesAnoAtravesData(Calendar calendar){
+        SimpleDateFormat formatacao = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+        return formatacao.format(calendar.getTime());
+    }
+
+    private ArrayList<String> vetorDiasNoMes(Calendar calendar){
+        ArrayList<String> diasDoMes = new ArrayList<>();
+        int ano = calendar.get(Calendar.YEAR);
+        int mes = calendar.get(Calendar.MONTH); // Janeiro é 0
+
+        Calendar primeiroDiaDoMes = Calendar.getInstance();
+        primeiroDiaDoMes.set(ano, mes, 1);
+        int diasNoMes = primeiroDiaDoMes.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        int diaSemana = primeiroDiaDoMes.get(Calendar.DAY_OF_WEEK);
+
+        int primeiroDiaDaGrade = Calendar.SUNDAY; // Definido como domingo
+        for (int i = primeiroDiaDaGrade; i < diaSemana; i++) {
+            diasDoMes.add(""); // Adiciona dias vazios antes do início do mês
+        }
+
+        for (int i = 1; i <= diasNoMes; i++) {
+            diasDoMes.add(String.valueOf(i));
+        }
+
+        int diasRestantesNaGrade = 42 - diasDoMes.size();
+        for (int i = 0; i < diasRestantesNaGrade; i++) {
+            diasDoMes.add("");
+        }
+
+        return diasDoMes;
+    }
+
+    public void voltarMes() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        dataAtual.setTime(calendar.getTime());
+        atualizarCalendario(); // Atualiza o calendário
+    }
+
+    public void avancarMes() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, 1);
+        dataAtual.setTime(calendar.getTime());
+        atualizarCalendario(); // Atualiza o calendário
+    }
+
+    private void atualizarCalendario() {
+        txtMesEAno.setText(mesAnoAtravesData(dataAtual));
+        ArrayList<String> diasDoMes = vetorDiasNoMes(dataAtual);
+        if (adapterCalendario != null) {
+            adapterCalendario.atualizarDatas(diasDoMes);
+        }
     }
 
     private void configurarRecyclerEventos() {
@@ -62,6 +164,11 @@ public class CalendarioActivity extends AppCompatActivity {
         List<DadosEventos> listaEventos = new ArrayList<>();
         adapter = new AdapterEventos(listaEventos);
         rvListaEventos.setAdapter(adapter);
+
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Converte o Calendar para uma String formatada
+        String formattedDate = sdf.format(calendar.getTime());*/
 
         //DADOS PARA TESTE
         Date data1 = null;

@@ -1,5 +1,6 @@
 package com.example.helperinolympics.adapter.calendario;
 
+import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosEventos;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class AdapterDatasCalendario extends RecyclerView.Adapter<AdapterDatasCalendario.DatasViewHolder>{
 
-    private final List<String> diasDoMes;
+    private List<String> diasDoMes;
+    private Calendar dataAtual;
 
-    public AdapterDatasCalendario(List<String> diasDoMes) {
+    public AdapterDatasCalendario(List<String> diasDoMes, Calendar dataAtual) {
         this.diasDoMes = diasDoMes;
+        this.dataAtual = dataAtual;
     }
     public AdapterDatasCalendario.DatasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewData = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_datas_calendario, parent, false);
@@ -29,9 +33,26 @@ public class AdapterDatasCalendario extends RecyclerView.Adapter<AdapterDatasCal
 
     @Override
     public void onBindViewHolder(@NonNull AdapterDatasCalendario.DatasViewHolder holder, int position) {
+        int diaAtual = dataAtual.get(Calendar.DAY_OF_MONTH);
+
         holder.data.setText(diasDoMes.get(position));
+
+        if (diasDoMes.get(position).equals(String.valueOf(diaAtual))) {
+            holder.data.setBackgroundResource(R.drawable.fundo_arredondado_roxo_btn_selecionado);
+            holder.data.setTextColor(Color.parseColor("#FFFFFFFF"));
+
+        } else {
+            holder.data.setBackgroundResource(0);
+            holder.data.setTextColor(Color.parseColor("#FF000000"));
+
+        }
+
     }
 
+    public void atualizarDatas(List<String> novosDiasDoMes) {
+        this.diasDoMes = novosDiasDoMes;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return diasDoMes.size();

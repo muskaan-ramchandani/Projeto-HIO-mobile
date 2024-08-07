@@ -6,12 +6,13 @@
 
     <TextView
         android:id="@+id/celulaDia"
-        android:layout_width="30dp"
+        android:layout_width="47dp"
         android:layout_height="wrap_content"
         tools:text="1"
-        android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:textColor="@color/black"
         android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
         />
 
 </LinearLayout>
