@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,26 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
 
         String valorCorrecao = "<b>Alternativa correta: </b>"+listaDadosErros.get(position).getQuestaoCorrecaoDaErrada();
         holder.correcao.setText(Html.fromHtml(valorCorrecao, Html.FROM_HTML_MODE_COMPACT));
+
+
+        if (valorOlimpiada.equals("OBA")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+        } else if (valorOlimpiada.equals("OBF")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+        } else if (valorOlimpiada.equals("OBI")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+        } else if (valorOlimpiada.equals("OBMEP")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+        }else if (valorOlimpiada.equals("ONHB")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+        } else if (valorOlimpiada.equals("OBQ")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+        } else if (valorOlimpiada.equals("OBB")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+        } else if (valorOlimpiada.equals("ONC")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+        }
+
     }
 
     @Override
@@ -68,6 +89,7 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
         TextView pergunta;
         TextView questao;
         TextView correcao;
+        FrameLayout frameBorda;
 
         public ErrosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +100,7 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
             pergunta=itemView.findViewById(R.id.txtPerguntaErros);
             questao=itemView.findViewById(R.id.txtRespostaErros);
             correcao=itemView.findViewById(R.id.txtCorrecaoErros);
+            frameBorda=itemView.findViewById(R.id.fundoBordaCardErros);
         }
     }
 }

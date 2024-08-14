@@ -140,6 +140,11 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
+            android:name=".CalendarioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+
+        <activity
             android:name=".ErrosSemanaisActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
