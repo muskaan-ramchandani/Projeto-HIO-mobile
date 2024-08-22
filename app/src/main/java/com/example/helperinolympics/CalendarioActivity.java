@@ -32,7 +32,7 @@ public class CalendarioActivity extends AppCompatActivity {
     private AdapterDatasCalendario adapterCalendario;
     private AdapterEventos adapter;
     private TextView txtMesEAno;
-    private Calendar dataAtual;
+    private Calendar dataAtual, dataNova;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -131,16 +131,12 @@ public class CalendarioActivity extends AppCompatActivity {
     }
 
     public void voltarMes() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
-        dataAtual.setTime(calendar.getTime());
+        dataAtual.add(Calendar.MONTH, -1);
         atualizarCalendario(); // Atualiza o calendário
     }
 
     public void avancarMes() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, 1);
-        dataAtual.setTime(calendar.getTime());
+        dataAtual.add(Calendar.MONTH, 1);
         atualizarCalendario(); // Atualiza o calendário
     }
 
