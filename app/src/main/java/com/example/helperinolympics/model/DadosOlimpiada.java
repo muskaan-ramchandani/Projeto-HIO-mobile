@@ -8,6 +8,8 @@ public class DadosOlimpiada implements Parcelable {
     String nome, sigla, cor;
     private boolean isSelected;
 
+    public DadosOlimpiada(){}
+
     public DadosOlimpiada(int iconeOlimp, String nome, String sigla, String cor) {
         setIconeOlimp(iconeOlimp);
         setNome(nome);

@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,8 +98,39 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
         }
     }
 
-
     public int getItemCount(){return listaOlimpiadasOpcoes.size();}
 
+    public void atualizarOpcoes(List<DadosOlimpiada> olimpiadas){
+        this.listaOlimpiadasOpcoes.clear();
+        this.listaOlimpiadasOpcoes.addAll(olimpiadas);
+        this.notifyDataSetChanged();
+    }
 
+
+    public void atualizaFoto(int sigla, Bitmap icone){
+        for (DadosOlimpiada olimp : listaOlimpiadasOpcoes){
+            if(olimp.getSigla().equals(sigla)){
+                int ic = bitmapToInt(icone);
+                olimp.setIconeOlimp(ic);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
+    public void atualizaFoto(String[] siglaOlimp, Bitmap[] foto){
+        for(int i = 0; i < siglaOlimp.length; i++){
+            for (DadosOlimpiada olimp : listaOlimpiadasOpcoes){
+                if(olimp.getSigla().equals(siglaOlimp[i])){
+                    int ic = bitmapToInt(foto[i]);
+                    olimp.setIconeOlimp(ic);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public int bitmapToInt(Bitmap bitmap) {
+        return bitmap.hashCode();
+    }
 }
