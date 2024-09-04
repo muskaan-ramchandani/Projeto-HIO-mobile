@@ -101,14 +101,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
         protected void onPostExecute(List<DadosOlimpiada> olimpiadas) {
             super.onPostExecute(olimpiadas);
             adapter.atualizarOpcoes(olimpiadas);
-            adapter.notifyDataSetChanged(); // Atualiza o RecyclerView
-//            String[] siglas = new String[olimpiadas.size()];
-//            for (int i = 0; i < olimpiadas.size(); i++){
-//                DadosOlimpiada olimp = olimpiadas.get(i);
-//                siglas[i] = olimp.getSigla();
-//            }
-//            FotoDownload fotoDownload = new FotoDownload();
-//            fotoDownload.execute(siglas);
+            adapter.notifyDataSetChanged();
         }
 
 
@@ -117,7 +110,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             List<DadosOlimpiada> olimpiadas = new ArrayList<>();
             Log.d("CONEXAO", "tentando fazer dowload");
             try {
-                URL url = new URL("http://192.168.204.214:8086/phpHio/carregaOlimpiadas.php");
+                URL url = new URL("http://192.168.1.11:8086/phpHio/carregaOlimpiadas.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -131,6 +124,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
                     InputStream in = conexao.getInputStream();
                     String jsonString = converterParaJSONString(in);
                     Log.d("DADOS", jsonString);
+                    listaOlimpiadasOpcoes.addAll(converterParaList(jsonString));
                     olimpiadas.addAll(converterParaList(jsonString));
                 }
             } catch (Exception e) {
@@ -140,6 +134,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
         }
 
 
+        //Setando valores na lista
         private List<DadosOlimpiada> converterParaList(String jsonString) {
             List<DadosOlimpiada> olimpiadas = new ArrayList<>();
 
@@ -152,8 +147,15 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
                     olimp.setNome(olimpJSON.getString("nome"));
                     olimp.setSigla(olimpJSON.getString("sigla"));
 
-//                    int icone = olimpJSON.getString("icone").hashCode();
-//                    olimp.setIconeOlimp(icone);
+                    String nomeDrawable = olimpJSON.getString("icone");
+
+                    int drawableId = getResources().getIdentifier(nomeDrawable, "drawable", getPackageName());
+
+                    if(drawableId!=0){
+                        olimp.setIconeOlimp(drawableId);
+                    }else{
+                        olimp.setIconeOlimp(R.drawable.baseline_disabled_by_default_24);
+                    }
 
                     olimp.setCor(olimpJSON.getString("cor"));
 
@@ -163,7 +165,6 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             }catch (Exception e){
                 Log.d("ERRO", e.toString());
             }
-
 
             return olimpiadas;
         }
@@ -185,53 +186,5 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             return dados.toString();
         }
     }
-
-
-    class FotoDownload extends AsyncTask<String, Void, Bitmap[]> {
-
-        private String[] siglas;
-
-        @Override
-        protected void onPostExecute(Bitmap[] foto) {
-            super.onPostExecute(foto);
-            adapter.atualizaFoto(siglas, foto);
-        }
-
-
-        @Override
-        protected Bitmap[] doInBackground(String[] sigla) {
-            this.siglas = sigla;
-            Bitmap[] fotos = new Bitmap[sigla.length];
-            for (int i = 0; i < siglas.length; i++) {
-                String siglaOlimp = siglas[i];
-                Log.d("Sigla Olimpiada", "" + siglaOlimp);
-                try {
-                    URL url = new URL("http://192.168.204.214:8086/phpHio/carregaImagem.php?sigla=" + siglaOlimp);
-                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-                    conexao.setReadTimeout(5000);
-                    conexao.setConnectTimeout(5000);
-                    conexao.setRequestMethod("GET");
-                    conexao.setDoInput(true);
-                    conexao.setDoOutput(false);
-
-
-                    conexao.connect();
-                    if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        InputStream in = conexao.getInputStream();
-                        Bitmap foto = BitmapFactory.decodeStream(in);
-                        fotos[i] = foto;
-                    } else {
-                        fotos[i] = null;
-                        Log.d("EntradaDeDados", "Problema para receber os dados!");
-                    }
-                } catch (Exception e) {
-                    fotos[i] = null;
-                    Log.d("EntradaDeDados", "Problema para receber os dados!");
-                }
-            }
-            return fotos;
-        }
-    }
-
 
 }

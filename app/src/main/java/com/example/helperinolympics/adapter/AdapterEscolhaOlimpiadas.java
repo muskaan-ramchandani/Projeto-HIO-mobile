@@ -47,16 +47,21 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
         holder.nomeESigla.setText(olimp.getNome() + " - " + olimp.getSigla());
 
         String valorCor = olimp.getCor();
-        if (valorCor.equals("Azul")) {
-            holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-            holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-        } else if (valorCor.equals("Ciano")) {
-            holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-            holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-        } else if (valorCor.equals("Laranja")) {
-            holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-            holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-        } else if (valorCor.equals("Rosa")) {
+        if (valorCor != null) {
+            if (valorCor.equals("Azul")) {
+                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+            } else if (valorCor.equals("Ciano")) {
+                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+            } else if (valorCor.equals("Laranja")) {
+                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+            } else if (valorCor.equals("Rosa")) {
+                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+            }
+        } else {
             holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
             holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
         }
@@ -106,31 +111,4 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
         this.notifyDataSetChanged();
     }
 
-
-    public void atualizaFoto(int sigla, Bitmap icone){
-        for (DadosOlimpiada olimp : listaOlimpiadasOpcoes){
-            if(olimp.getSigla().equals(sigla)){
-                int ic = bitmapToInt(icone);
-                olimp.setIconeOlimp(ic);
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-
-    public void atualizaFoto(String[] siglaOlimp, Bitmap[] foto){
-        for(int i = 0; i < siglaOlimp.length; i++){
-            for (DadosOlimpiada olimp : listaOlimpiadasOpcoes){
-                if(olimp.getSigla().equals(siglaOlimp[i])){
-                    int ic = bitmapToInt(foto[i]);
-                    olimp.setIconeOlimp(ic);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    public int bitmapToInt(Bitmap bitmap) {
-        return bitmap.hashCode();
-    }
 }
