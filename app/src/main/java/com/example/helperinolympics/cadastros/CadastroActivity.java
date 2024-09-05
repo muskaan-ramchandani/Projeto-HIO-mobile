@@ -3,6 +3,7 @@ package com.example.helperinolympics.cadastros;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -33,10 +34,9 @@ import java.util.regex.Pattern;
 
 public class CadastroActivity extends AppCompatActivity {
 
-    AppCompatButton cadastrar;
-    ImageButton btnVoltarAlunoOuProf;
     ActivityCadastroBinding binding;
     String msgErro= "";
+    boolean verificaEmail = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,7 @@ public class CadastroActivity extends AppCompatActivity {
                 boolean dadosCorretos= validarDadosCadastro(nomeCompleto, nomeUsuario, email, senha, confirmaSenha);
 
                 if(dadosCorretos){
-                    DadosAluno aluno = new DadosAluno(nomeCompleto, nomeUsuario, email, senha, confirmaSenha);
+                    DadosAluno aluno = new DadosAluno(nomeCompleto, nomeUsuario, email, senha);
                     new CadastrarAluno().execute(aluno);
 
                     Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
@@ -84,7 +84,7 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public boolean validarDadosCadastro(String nomeCompleto, String nomeUsuario, String email, String senha, String confirmaSenha){
-        boolean retorno = true;
+        boolean retorno;
 
         //verificando campos vazios
         if(nomeCompleto.isEmpty()||nomeUsuario.isEmpty()||email.isEmpty()||senha.isEmpty()||confirmaSenha.isEmpty()){
@@ -95,36 +95,38 @@ public class CadastroActivity extends AppCompatActivity {
             retorno = false;
         } else {
             new VerificarEmail().execute(email);
+            if(verificaEmail){
+                this.msgErro = "Já existe uma conta com este email.\nTente com outro ou faça o login!";
+                retorno = false;
+            }else{
+                retorno = true;
+            }
         }
 
         return retorno;
     }
 
     private class VerificarEmail extends AsyncTask<String, Void, Boolean> {
-
         @Override
         protected Boolean doInBackground(String... emails) {
             boolean emailExiste = false;
             String email = emails[0];
 
             try {
-                URL url = new URL("http://192.168.1.11/verificaExistenciaEmail.php");
+                URL url = new URL("http://192.168.1.11/phpHio/verificaExistenciaEmail.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
                 conn.setDoOutput(true);
 
-                // Criando JSON com o e-mail a ser verificado
                 JSONObject jsonEmail = new JSONObject();
                 jsonEmail.put("email", email);
 
-                // Enviando o JSON
                 try (OutputStream os = conn.getOutputStream()) {
                     byte[] input = jsonEmail.toString().getBytes(StandardCharsets.UTF_8);
                     os.write(input, 0, input.length);
                 }
 
-                // Lendo a resposta do servidor
                 int responseCode = conn.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -137,23 +139,13 @@ public class CadastroActivity extends AppCompatActivity {
 
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     emailExiste = jsonResponse.getBoolean("emailExiste");
+                    verificaEmail = emailExiste;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             return emailExiste;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean emailExiste) {
-            if (emailExiste) {
-                // Exibe uma mensagem se o e-mail já está cadastrado
-                Toast.makeText(CadastroActivity.this, "E-mail já cadastrado", Toast.LENGTH_LONG).show();
-            } else {
-                // Continua com o cadastro
-                Toast.makeText(CadastroActivity.this, "E-mail disponível", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
@@ -163,27 +155,48 @@ public class CadastroActivity extends AppCompatActivity {
         protected String doInBackground(DadosAluno... alunos) {
             DadosAluno aluno = alunos[0];
             try {
-                URL url = new URL("http://192.168.1.11/cadastraAluno.php");
+                URL url = new URL("http://192.168.1.11/phpHio/cadastraAluno.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json; utf-8");
                 conn.setDoOutput(true);
+                conn.setDoInput(true);
 
+                // Criar JSON para enviar ao servidor
                 JSONObject jsonAluno = new JSONObject();
                 jsonAluno.put("nomeCompleto", aluno.getNomeCompleto());
                 jsonAluno.put("nomeUsuario", aluno.getNomeUsuario());
                 jsonAluno.put("email", aluno.getEmail());
                 jsonAluno.put("senha", aluno.getSenha());
-                jsonAluno.put("confirmaSenha", aluno.getConfirmaSenha());
 
+                // Enviar o JSON para o servidor
                 try (OutputStream os = conn.getOutputStream()) {
                     byte[] input = jsonAluno.toString().getBytes(StandardCharsets.UTF_8);
                     os.write(input, 0, input.length);
                 }
 
+                // Capturar a resposta do servidor
                 int responseCode = conn.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                    return "Cadastro realizado com sucesso!";
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+
+                    // Converter a resposta em JSON
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    String status = jsonResponse.getString("status");
+
+                    if (status.equals("success")) {
+                        return "Cadastro realizado com sucesso!";
+                    } else {
+                        String message = jsonResponse.getString("message");
+                        return "Erro no cadastro: " + message;
+                    }
+
                 } else {
                     return "Erro no cadastro: " + responseCode;
                 }

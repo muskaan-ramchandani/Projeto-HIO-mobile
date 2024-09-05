@@ -1,34 +1,47 @@
 <?php
-    header('Content-Type: application/json');
-    header('Character-Encoding: utf-8');
+    header('Content-Type: application/json; charset=utf-8');
 
-    $json_entrada = json_decode(file_get_contents('php://input'));
+    $json_entrada = json_decode(file_get_contents('php://input'), true);
 
-    $nomeCompleto = $json_entrada->{'nomeCompleto'};
-    $nomeUsuario = $json_entrada->{'nomeUsuario'};
-    $email = $json_entrada->{'email'};
-    $senha = $json_entrada->{'senha'};
-    $confirmaSenha = $json_entrada->{'confirmaSenha'};
+    if (isset($json_entrada['nomeCompleto'], $json_entrada['nomeUsuario'], $json_entrada['email'], $json_entrada['senha'])) {
 
-    try {
-        $pdo = new PDO('mysql:host=192.168.1.11;dbname=hio;port=3306;charset=utf8','root','root');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $nomeCompleto = $json_entrada['nomeCompleto'];
+        $nomeUsuario = $json_entrada['nomeUsuario'];
+        $email = $json_entrada['email'];
+        $senha = $json_entrada['senha'];
 
-        $sql = 'INSERT INTO Aluno (nomeCompleto, nomeUsuario, email, senha, confirmaSenha) VALUES (:nomeCompleto, :nomeUsuario, :email, :senha, :confirmaSenha)';
-        $statement = $pdo->prepare($sql);
 
-        $statement->bindValue(':nomeCompleto', $nomeCompleto, PDO::PARAM_STR);
-        $statement->bindValue(':nomeUsuario', $nomeUsuario, PDO::PARAM_STR);
-        $statement->bindValue(':email', $email, PDO::PARAM_STR);
-        $statement->bindValue(':senha', $senha, PDO::PARAM_STR);
-        $statement->bindValue(':confirmaSenha', $confirmaSenha, PDO::PARAM_STR);
+        try {
+            $pdo = new PDO('mysql:host=localhost;dbname=hio;port=3306;charset=utf8', 'root', 'root');
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $statement->execute();
+            // Verifica se o e-mail já está cadastrado
+            $verificarEmail = $pdo->prepare('SELECT email FROM Aluno WHERE email = :email');
+            $verificarEmail->bindValue(':email', $email, PDO::PARAM_STR);
+            $verificarEmail->execute();
 
-        $json_saida = array("email" => $email);
-        echo json_encode($json_saida);
+            if ($verificarEmail->rowCount() > 0) {
+                echo json_encode(["status" => "error", "message" => "O e-mail já está cadastrado."]);
+                exit;
+            }
 
-    } catch (PDOException $e) {
-        echo json_encode(array("error" => $e->getMessage()));
+            $sql = 'INSERT INTO Aluno (nomeCompleto, nomeUsuario, email, senha) VALUES (:nomeCompleto, :nomeUsuario, :email, :senha)';
+            $statement = $pdo->prepare($sql);
+
+            $statement->bindValue(':nomeCompleto', $nomeCompleto, PDO::PARAM_STR);
+            $statement->bindValue(':nomeUsuario', $nomeUsuario, PDO::PARAM_STR);
+            $statement->bindValue(':email', $email, PDO::PARAM_STR);
+            $statement->bindValue(':senha', password_hash($senha, PASSWORD_DEFAULT), PDO::PARAM_STR); // Hash da senha
+
+            $statement->execute();
+
+            echo json_encode(["status" => "success", "message" => "Cadastro realizado com sucesso!"]);
+
+        } catch (PDOException $e) {
+            echo json_encode(["status" => "error", "message" => $e->getMessage()]);
+        }
+
+    } else {
+        echo json_encode(["status" => "error", "message" => "Dados incompletos."]);
     }
 ?>

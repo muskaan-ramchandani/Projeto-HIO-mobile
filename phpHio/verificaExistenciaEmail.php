@@ -7,7 +7,7 @@
     $email = $json_entrada->{'email'};
 
     try {
-        $pdo = new PDO('mysql:host=192.168.1.11;dbname=hio;port=3306;charset=utf8', 'root', 'root');
+        $pdo = new PDO('mysql:host=localhost;dbname=hio;port=3306;charset=utf8', 'root', 'root');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = 'SELECT COUNT(*) AS count FROM Aluno WHERE email = :email';

@@ -6,15 +6,14 @@ import android.os.Parcelable;
 import java.io.File;
 
 public class DadosAluno implements Parcelable {
-    private String nomeCompleto, nomeUsuario, email, senha, confirmaSenha;
+    private String nomeCompleto, nomeUsuario, email, senha;
     private File fotoPerfil;
 
-    public DadosAluno(String nomeCompleto, String nomeUsuario, String email, String senha, String confirmaSenha){
+    public DadosAluno(String nomeCompleto, String nomeUsuario, String email, String senha){
         setNomeCompleto(nomeCompleto);
         setNomeUsuario(nomeUsuario);
         setEmail(email);
         setSenha(senha);
-        setConfirmaSenha(confirmaSenha);
     }
 
     public String getNomeCompleto() {
@@ -49,14 +48,6 @@ public class DadosAluno implements Parcelable {
         this.senha = senha;
     }
 
-    public String getConfirmaSenha() {
-        return confirmaSenha;
-    }
-
-    public void setConfirmaSenha(String confirmaSenha) {
-        this.confirmaSenha = confirmaSenha;
-    }
-
     public File getFotoPerfil() {
         return fotoPerfil;
     }
@@ -70,8 +61,6 @@ public class DadosAluno implements Parcelable {
         nomeUsuario = in.readString();
         email = in.readString();
         senha = in.readString();
-        confirmaSenha = in.readString();
-
     }
 
     @Override
@@ -80,7 +69,6 @@ public class DadosAluno implements Parcelable {
         dest.writeString(nomeUsuario);
         dest.writeString(email);
         dest.writeString(senha);
-        dest.writeString(confirmaSenha);
     }
 
     @Override
