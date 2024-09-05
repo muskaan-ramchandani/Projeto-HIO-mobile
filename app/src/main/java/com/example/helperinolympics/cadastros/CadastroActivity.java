@@ -94,97 +94,69 @@ public class CadastroActivity extends AppCompatActivity {
             this.msgErro = "Senha e confirma senha não coincidem";
             retorno = false;
         } else {
-
-//            boolean emailValido;
-//            if (!email.isEmpty() && email.length() > 0) {
-//                String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-//                Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-//                Matcher matcher = pattern.matcher(email);
-//                if (matcher.matches()) {
-//                    emailValido = true;
-//                }else{
-//                    emailValido=false;
-//                }
-//            }else{
-//                emailValido=false;
-//            }
-
-//            if(emailValido){
-//                boolean emailExiste = verificarEmailNoServidor(email);
-//
-//                if (emailExiste) {
-//                    this.msgErro = "O email inserido já está cadastrado\nTente outro email ou faça login.";
-//                    retorno = false;
-//                }
-//            }else{
-//                retorno = false;
-//                this.msgErro="Email inválido";
-//            }
-
-            boolean emailExiste = verificarEmailNoServidor(email);
-            if (emailExiste) {
-                this.msgErro = "O email inserido já está cadastrado\nTente outro email ou faça login.";
-                retorno = false;
-            }else{
-                retorno = true;
-            }
+            new VerificarEmail().execute(email);
         }
-
 
         return retorno;
     }
 
-    public boolean verificarEmailNoServidor(String email) {
-        final boolean[] emailExiste = {false};
+    private class VerificarEmail extends AsyncTask<String, Void, Boolean> {
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://192.168.1.11/verificaExistenciaEmail.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json; utf-8");
-                    conn.setDoOutput(true);
+        @Override
+        protected Boolean doInBackground(String... emails) {
+            boolean emailExiste = false;
+            String email = emails[0];
 
-                    // Criando JSON com o e-mail a ser verificado
-                    JSONObject jsonEmail = new JSONObject();
-                    jsonEmail.put("email", email);
+            try {
+                URL url = new URL("http://192.168.1.11/verificaExistenciaEmail.php");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json; utf-8");
+                conn.setDoOutput(true);
 
-                    // Enviando o JSON
-                    try (OutputStream os = conn.getOutputStream()) {
-                        byte[] input = jsonEmail.toString().getBytes(StandardCharsets.UTF_8);
-                        os.write(input, 0, input.length);
-                    }
+                // Criando JSON com o e-mail a ser verificado
+                JSONObject jsonEmail = new JSONObject();
+                jsonEmail.put("email", email);
 
-                    // Lendo a resposta do servidor
-                    int responseCode = conn.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                        StringBuilder response = new StringBuilder();
-                        String inputLine;
-                        while ((inputLine = in.readLine()) != null) {
-                            response.append(inputLine);
-                        }
-                        in.close();
-
-                        JSONObject jsonResponse = new JSONObject(response.toString());
-                        emailExiste[0] = jsonResponse.getBoolean("emailExiste");
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                // Enviando o JSON
+                try (OutputStream os = conn.getOutputStream()) {
+                    byte[] input = jsonEmail.toString().getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
                 }
-            }
-        });
 
-        thread.start();
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+                // Lendo a resposta do servidor
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    StringBuilder response = new StringBuilder();
+                    String inputLine;
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    emailExiste = jsonResponse.getBoolean("emailExiste");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return emailExiste;
         }
-        return emailExiste[0];
+
+        @Override
+        protected void onPostExecute(Boolean emailExiste) {
+            if (emailExiste) {
+                // Exibe uma mensagem se o e-mail já está cadastrado
+                Toast.makeText(CadastroActivity.this, "E-mail já cadastrado", Toast.LENGTH_LONG).show();
+            } else {
+                // Continua com o cadastro
+                Toast.makeText(CadastroActivity.this, "E-mail disponível", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
+
 
     private class CadastrarAluno extends AsyncTask<DadosAluno, Void, String> {
         @Override
