@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -36,7 +37,6 @@ public class CadastroActivity extends AppCompatActivity {
 
     ActivityCadastroBinding binding;
     String msgErro= "";
-    boolean verificaEmail = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,117 +93,62 @@ public class CadastroActivity extends AppCompatActivity {
         }else if (!senha.equals(confirmaSenha)) {
             this.msgErro = "Senha e confirma senha não coincidem";
             retorno = false;
-        } else {
-            new VerificarEmail().execute(email);
-            if(verificaEmail){
-                this.msgErro = "Já existe uma conta com este email.\nTente com outro ou faça o login!";
-                retorno = false;
-            }else{
-                retorno = true;
-            }
+        }else if (!emailEValido(email)) {
+            this.msgErro = "Email inválido";
+            retorno = false;
+        }else{
+            retorno=true;
         }
 
         return retorno;
     }
 
-    private class VerificarEmail extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(String... emails) {
-            boolean emailExiste = false;
-            String email = emails[0];
-
-            try {
-                URL url = new URL("http://192.168.1.11/phpHio/verificaExistenciaEmail.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json; utf-8");
-                conn.setDoOutput(true);
-
-                JSONObject jsonEmail = new JSONObject();
-                jsonEmail.put("email", email);
-
-                try (OutputStream os = conn.getOutputStream()) {
-                    byte[] input = jsonEmail.toString().getBytes(StandardCharsets.UTF_8);
-                    os.write(input, 0, input.length);
-                }
-
-                int responseCode = conn.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        response.append(inputLine);
-                    }
-                    in.close();
-
-                    JSONObject jsonResponse = new JSONObject(response.toString());
-                    emailExiste = jsonResponse.getBoolean("emailExiste");
-                    verificaEmail = emailExiste;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return emailExiste;
-        }
+    public boolean emailEValido(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
     }
-
 
     private class CadastrarAluno extends AsyncTask<DadosAluno, Void, String> {
         @Override
         protected String doInBackground(DadosAluno... alunos) {
+            String msg="";
             DadosAluno aluno = alunos[0];
+            Log.d("CONEXAO", "tentando cadastro");
+
             try {
-                URL url = new URL("http://192.168.1.11/phpHio/cadastraAluno.php");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json; utf-8");
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
+                URL url = new URL("http://192.168.111.214/phpHio/cadastraAluno.php");
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("POST");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(true);
+                conexao.connect();
+                Log.d("CONEXAO", "Conexão estabelecida");
 
-                // Criar JSON para enviar ao servidor
-                JSONObject jsonAluno = new JSONObject();
-                jsonAluno.put("nomeCompleto", aluno.getNomeCompleto());
-                jsonAluno.put("nomeUsuario", aluno.getNomeUsuario());
-                jsonAluno.put("email", aluno.getEmail());
-                jsonAluno.put("senha", aluno.getSenha());
+                String parametros = "nomeCompleto=" + aluno.getNomeCompleto() +
+                        "&nomeUsuario=" + aluno.getNomeUsuario() +
+                        "&email=" + aluno.getEmail() +
+                        "&senha=" + aluno.getSenha();
 
-                // Enviar o JSON para o servidor
-                try (OutputStream os = conn.getOutputStream()) {
-                    byte[] input = jsonAluno.toString().getBytes(StandardCharsets.UTF_8);
-                    os.write(input, 0, input.length);
-                }
+                OutputStream os = conexao.getOutputStream();
+                byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+                os.close();
 
-                // Capturar a resposta do servidor
-                int responseCode = conn.getResponseCode();
+                int responseCode = conexao.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder response = new StringBuilder();
-                    String inputLine;
-                    while ((inputLine = in.readLine()) != null) {
-                        response.append(inputLine);
-                    }
-                    in.close();
-
-                    // Converter a resposta em JSON
-                    JSONObject jsonResponse = new JSONObject(response.toString());
-                    String status = jsonResponse.getString("status");
-
-                    if (status.equals("success")) {
-                        return "Cadastro realizado com sucesso!";
-                    } else {
-                        String message = jsonResponse.getString("message");
-                        return "Erro no cadastro: " + message;
-                    }
+                    Log.d("CONEXAO", "Conexão estabelecida");
+                    Log.d("ALUNO CADASTRADO:", aluno.toString());
 
                 } else {
-                    return "Erro no cadastro: " + responseCode;
+                    msg="Erro no cadastro: " + responseCode;
                 }
 
             } catch (Exception e) {
                 return "Erro: " + e.getMessage();
             }
+            return msg;
         }
 
         @Override
