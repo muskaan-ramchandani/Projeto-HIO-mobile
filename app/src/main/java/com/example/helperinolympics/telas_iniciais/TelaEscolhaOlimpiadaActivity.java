@@ -1,6 +1,8 @@
 package com.example.helperinolympics.telas_iniciais;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -149,7 +151,11 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
                     String nomeDrawable = olimpJSON.getString("icone");
 
-                    int drawableId = getResources().getIdentifier(nomeDrawable, "drawable", getPackageName());
+                    //Procurar drawable pelo nome no banco
+                    Context context = TelaEscolhaOlimpiadaActivity.this;
+                    Resources resources = context.getResources();
+                    int drawableId = resources.getIdentifier(nomeDrawable, "drawable",
+                            context.getPackageName());
 
                     if(drawableId!=0){
                         olimp.setIconeOlimp(drawableId);

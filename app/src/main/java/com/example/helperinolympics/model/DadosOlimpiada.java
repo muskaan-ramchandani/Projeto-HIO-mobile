@@ -47,10 +47,7 @@ public class DadosOlimpiada implements Parcelable {
     }
 
     public void setCor(String cor) {
-        //se cor é diferente da condição "cor diferente de qualquer opção"
-        if(!(cor!="Azul"&&cor!="Ciano"&&cor!="Laranja"&&cor!="Rosa")){
-            this.cor = cor;
-        }
+        this.cor = cor;
     }
 
     public boolean isSelected() {

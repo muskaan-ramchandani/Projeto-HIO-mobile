@@ -48,19 +48,41 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
 
         String valorCor = olimp.getCor();
         if (valorCor != null) {
-            if (valorCor.equals("Azul")) {
-                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-            } else if (valorCor.equals("Ciano")) {
-                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-            } else if (valorCor.equals("Laranja")) {
-                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-            } else if (valorCor.equals("Rosa")) {
-                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
-                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+
+            switch (valorCor){
+                case "Azul":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+                    break;
+                case "Ciano":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+                    break;
+                case "Laranja":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+                    break;
+                case "Rosa":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+                    break;
             }
+
+
+//            if (valorCor.equals("Azul")) {
+//                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+//                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+//            } else if (valorCor.equals("Ciano")) {
+//                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+//                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+//            } else if (valorCor.equals("Laranja")) {
+//                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+//                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+//            } else if (valorCor.equals("Rosa")) {
+//                holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+//                holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+//            }
+
         } else {
             holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
             holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
