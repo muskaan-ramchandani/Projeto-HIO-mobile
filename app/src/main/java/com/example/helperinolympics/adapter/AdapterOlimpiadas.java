@@ -86,4 +86,10 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
 
 
     public int getItemCount(){return listaOlimpiadas.size();}
+
+    public void atualizarOpcoes(List<DadosOlimpiada> olimpiadas){
+        this.listaOlimpiadas.clear();
+        this.listaOlimpiadas.addAll(olimpiadas);
+        this.notifyDataSetChanged();
+    }
 }

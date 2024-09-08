@@ -37,6 +37,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     ActivityCadastroBinding binding;
     String msgErro= "";
+    DadosAluno alunoCadastrado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +110,9 @@ public class CadastroActivity extends AppCompatActivity {
         protected String doInBackground(DadosAluno... alunos) {
             StringBuilder result = new StringBuilder();
             DadosAluno aluno = alunos[0];
+
+            alunoCadastrado = aluno;
+
             Log.d("CONEXAO", "tentando cadastro");
 
             try {
@@ -158,6 +162,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                     if (jsonResponse.getString("status").equals("success")) {
                         Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
+                        intent.putExtra("alunoCadastrado", alunoCadastrado);
                         startActivity(intent);
                         finish();
                     }

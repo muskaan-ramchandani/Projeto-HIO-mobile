@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -19,46 +20,61 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterEscolhaOlimpiadas;
 import com.example.helperinolympics.cadastros.CadastroActivity;
+import com.example.helperinolympics.databinding.ActivityTelaEscolhaOlimpiadaBinding;
+import com.example.helperinolympics.model.DadosAluno;
 import com.example.helperinolympics.model.DadosOlimpiada;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
-    RecyclerView rvOlimpiadasEscolher;
+    DadosAluno alunoCadastrado;
+    ActivityTelaEscolhaOlimpiadaBinding binding;
     List<DadosOlimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
     AdapterEscolhaOlimpiadas adapter = new AdapterEscolhaOlimpiadas(listaOlimpiadasOpcoes);
-    AppCompatButton btnFinalizar;
-    ImageView btnVoltarAoCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_escolha_olimpiada);
+        binding = ActivityTelaEscolhaOlimpiadaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-//        configurarRecycler();
+        Intent intentGet = getIntent();
 
-        btnFinalizar = findViewById(R.id.btnFinalizarEscolha);
-        btnFinalizar.setOnClickListener(new View.OnClickListener() {
+        if(intentGet!=null){
+            alunoCadastrado = intentGet.getParcelableExtra("alunoCadastrado");
+        }
+
+
+        binding.btnFinalizarEscolha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TelaEscolhaOlimpiadaActivity.this, InicialAlunoMenuDeslizanteActivity.class);
-                intent.putParcelableArrayListExtra("listaEscolhidas", new ArrayList<>(adapter.getListaEscolhidas()));
-                startActivity(intent);
-                finish(); //fechar activity
+
+                ArrayList<DadosOlimpiada> listaEscolhidas = new ArrayList<>(adapter.getListaEscolhidas());
+
+                //deve ter pelo menos 1 escolha de olimpíada
+                if(!listaEscolhidas.isEmpty()){
+                    new CadastrarOlimpiadasSelecionadas().execute(listaEscolhidas);
+                }else{
+                    Toast.makeText(TelaEscolhaOlimpiadaActivity.this, "Você deve escolher pelo menos uma olimpíada para prosseguir.", Toast.LENGTH_LONG);
+                }
             }
         });
 
-        btnVoltarAoCadastro = findViewById(R.id.btnVoltarAoCadastro);
-        btnVoltarAoCadastro.setOnClickListener(new View.OnClickListener() {
+        binding.btnVoltarAoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TelaEscolhaOlimpiadaActivity.this, CadastroActivity.class);
@@ -79,10 +95,9 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
     private void configurarRecycler() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvOlimpiadasEscolher = findViewById(R.id.recyclerViewEscolhaOlimpiadas);
-        rvOlimpiadasEscolher.setLayoutManager(layoutManager);
-        rvOlimpiadasEscolher.setHasFixedSize(true);
-        rvOlimpiadasEscolher.setAdapter(adapter);
+        binding.recyclerViewEscolhaOlimpiadas.setLayoutManager(layoutManager);
+        binding.recyclerViewEscolhaOlimpiadas.setHasFixedSize(true);
+        binding.recyclerViewEscolhaOlimpiadas.setAdapter(adapter);
 
         OlimpiadaDownload olimpDownload = new OlimpiadaDownload();
         olimpDownload.execute();
@@ -190,6 +205,74 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
                 Log.d("ERRO", e.toString());
             }
             return dados.toString();
+        }
+    }
+
+    private class CadastrarOlimpiadasSelecionadas extends AsyncTask<List<DadosOlimpiada>, Void, String> {
+        @Override
+        protected String doInBackground(List<DadosOlimpiada>... olimpSelecao) {
+            StringBuilder result = new StringBuilder();
+            Log.d("CONEXAO", "Tentando cadastro de olimpíadas selecionadas");
+
+            List<DadosOlimpiada> olimpiadasSelecionadas = olimpSelecao[0];
+
+            try {
+                for(DadosOlimpiada olimp : olimpiadasSelecionadas){
+                    URL url = new URL("http://192.168.1.6:8086/phpHio/cadastraOlimpiadasSelecionadas.php");
+                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                    conexao.setReadTimeout(1500);
+                    conexao.setConnectTimeout(500);
+                    conexao.setRequestMethod("POST");
+                    conexao.setDoInput(true);
+                    conexao.setDoOutput(true);
+                    conexao.connect();
+                    Log.d("CONEXAO", "Conexão estabelecida");
+
+                    String parametros = "sigla=" + olimp.getSigla() +
+                            "&emailAluno=" + alunoCadastrado.getEmail();
+
+                    OutputStream os = conexao.getOutputStream();
+                    byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
+                    os.close();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    reader.close();
+                }
+
+            } catch (Exception e) {
+                Log.e("Erro", e.getMessage());
+                return null;
+            }
+
+
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(result);
+                    String message = jsonResponse.getString("message");
+
+                    Toast.makeText(TelaEscolhaOlimpiadaActivity.this, message, Toast.LENGTH_LONG).show();
+
+                    if (jsonResponse.getString("status").equals("success")) {
+                        Intent intent = new Intent(TelaEscolhaOlimpiadaActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                        intent.putExtra("alunoCadastrado", alunoCadastrado);
+                        startActivity(intent);
+                        finish(); //fechar activity
+                    }
+
+                } catch (Exception e) {
+                    Log.e("Erro JSON", e.getMessage());
+                }
+            }
         }
     }
 
