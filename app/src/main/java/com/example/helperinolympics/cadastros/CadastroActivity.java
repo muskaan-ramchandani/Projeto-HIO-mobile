@@ -61,10 +61,6 @@ public class CadastroActivity extends AppCompatActivity {
                 if(dadosCorretos){
                     DadosAluno aluno = new DadosAluno(nomeCompleto, nomeUsuario, email, senha);
                     new CadastrarAluno().execute(aluno);
-
-                    Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
-                    startActivity(intent);
-                    finish(); //fechar activity
                 }else{
                     Toast.makeText(CadastroActivity.this, msgErro, Toast.LENGTH_LONG).show();
                 }
@@ -111,12 +107,12 @@ public class CadastroActivity extends AppCompatActivity {
     private class CadastrarAluno extends AsyncTask<DadosAluno, Void, String> {
         @Override
         protected String doInBackground(DadosAluno... alunos) {
-            String msg="";
+            StringBuilder result = new StringBuilder();
             DadosAluno aluno = alunos[0];
             Log.d("CONEXAO", "tentando cadastro");
 
             try {
-                URL url = new URL("http://192.168.111.214/phpHio/cadastraAluno.php");
+                URL url = new URL("http://192.168.1.6:8086/phpHio/cadastraAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -136,24 +132,40 @@ public class CadastroActivity extends AppCompatActivity {
                 os.write(input, 0, input.length);
                 os.close();
 
-                int responseCode = conexao.getResponseCode();
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    Log.d("CONEXAO", "Conexão estabelecida");
-                    Log.d("ALUNO CADASTRADO:", aluno.toString());
-
-                } else {
-                    msg="Erro no cadastro: " + responseCode;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
                 }
+                reader.close();
 
             } catch (Exception e) {
-                return "Erro: " + e.getMessage();
+                Log.e("Erro", e.getMessage());
+                return null;
             }
-            return msg;
+
+            return result.toString();
         }
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(CadastroActivity.this, result, Toast.LENGTH_LONG).show();
+            if (result != null) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(result);
+                    String message = jsonResponse.getString("message");
+
+                    Toast.makeText(CadastroActivity.this, message, Toast.LENGTH_LONG).show();
+
+                    if (jsonResponse.getString("status").equals("success")) {
+                        Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                } catch (Exception e) {
+                    Log.e("Erro JSON", e.getMessage());
+                }
+            }
         }
     }
 }

@@ -112,7 +112,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             List<DadosOlimpiada> olimpiadas = new ArrayList<>();
             Log.d("CONEXAO", "tentando fazer dowload");
             try {
-                URL url = new URL("http://192.168.111.214:8086/phpHio/carregaOlimpiadas.php");
+                URL url = new URL("http://192.168.1.6:8086/phpHio/carregaOlimpiadas.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
