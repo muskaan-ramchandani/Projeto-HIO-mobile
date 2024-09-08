@@ -28,10 +28,23 @@ DROP TABLE IF EXISTS Aluno;
 SELECT * FROM Aluno;
 CREATE TABLE Aluno(
 	nomeCompleto VARCHAR(200) NOT NULL,
-    nomeUsuario VARCHAR(10) NOT NULL,
+    nomeUsuario VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(100) NOT NULL,
     fotoPerfil LONGBLOB,
     PRIMARY KEY(email)
+);
+
+DROP TABLE IF EXISTS OlimpiadasSelecionadas;
+SELECT * FROM OlimpiadasSelecionadas;
+CREATE TABLE OlimpiadasSelecionadas(
+	id INT AUTO_INCREMENT NOT NULL,
+    sigla VARCHAR(10) NOT NULL,
+    emailAluno VARCHAR(100) NOT NULL,
+	PRIMARY KEY(id),
+	FOREIGN KEY(sigla) REFERENCES Olimpiada(sigla),
+    FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    CONSTRAINT olimpiadaNRepete UNIQUE (emailAluno, sigla) 
+    #Tabela com condição impedindo que uma olimpíada se repita para um mesmo aluno
 );
 
