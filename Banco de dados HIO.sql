@@ -28,9 +28,9 @@ DROP TABLE IF EXISTS Aluno;
 SELECT * FROM Aluno;
 CREATE TABLE Aluno(
 	nomeCompleto VARCHAR(200) NOT NULL,
-    nomeUsuario VARCHAR(10) NOT NULL,
+    nomeUsuario VARCHAR(20) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    senha VARCHAR(20) NOT NULL,
+    senha VARCHAR(100) NOT NULL,
     fotoPerfil LONGBLOB,
     PRIMARY KEY(email)
 );
