@@ -22,13 +22,17 @@ import com.example.helperinolympics.model.DadosAluno;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 import com.example.helperinolympics.telas_iniciais.TelaEscolhaOlimpiadaActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,38 +49,98 @@ public class CadastroActivity extends AppCompatActivity {
         binding= ActivityCadastroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.btnFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Intent intentVoltaEscolha = getIntent();
 
-                //pegando dados inseridos
-                String nomeCompleto = binding.editTextNomeCompleto.getText().toString();
-                String nomeUsuario = binding.editTextNomeUsuario.getText().toString();
-                String email = binding.editTextEmail.getText().toString();
-                String senha = binding.editTextSenha.getText().toString();
-                String confirmaSenha = binding.editTextConfirmarSenha.getText().toString();
+        //caso tenha voltado da tela de escolha de olimpíadas
+        if(intentVoltaEscolha!=null){
+            DadosAluno aluno = intentVoltaEscolha.getParcelableExtra("alunoCadastrado");
+
+            if(aluno!=null){
+                binding.editTextNomeCompleto.setText(aluno.getNomeCompleto());
+                binding.editTextNomeUsuario.setText(aluno.getNomeUsuario());
+                binding.editTextEmail.setText(aluno.getEmail());
+                binding.editTextSenha.setText(aluno.getSenha());
+                binding.editTextConfirmarSenha.setText(aluno.getSenha());
+
+                //email não pode ser alterado pq o cadastro já foi realizado
+                binding.editTextEmail.setEnabled(false);
+                binding.editTextEmail.setCursorVisible(false);
+                binding.editTextEmail.setFocusable(false);
+
+                //verificar se a pessoa alterou algo ou só deseja prosseguir
+                binding.btnFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        String nomeCompletoAtualizado = binding.editTextNomeCompleto.getText().toString();
+                        String nomeUsuarioAtualizado = binding.editTextNomeUsuario.getText().toString();
+                        String email = binding.editTextEmail.getText().toString();
+                        String senhaAtualizada = binding.editTextSenha.getText().toString();
+                        String confirmaSenhaAtualizada = binding.editTextConfirmarSenha.getText().toString();
 
 
-                boolean dadosCorretos= validarDadosCadastro(nomeCompleto, nomeUsuario, email, senha, confirmaSenha);
+                        boolean dadosCorretos= validarDadosCadastro(nomeCompletoAtualizado, nomeUsuarioAtualizado, email, senhaAtualizada, confirmaSenhaAtualizada);
 
-                if(dadosCorretos){
-                    DadosAluno aluno = new DadosAluno(nomeCompleto, nomeUsuario, email, senha);
-                    new CadastrarAluno().execute(aluno);
-                }else{
-                    Toast.makeText(CadastroActivity.this, msgErro, Toast.LENGTH_LONG).show();
-                }
+                        if(dadosCorretos){
 
+                            //editou dados (algum diferente do anterior)
+                            if(!aluno.getNomeCompleto().equals(nomeCompletoAtualizado)
+                                    || !aluno.getNomeUsuario().equals(nomeUsuarioAtualizado)
+                                    ||!aluno.getSenha().equals(senhaAtualizada)){
+
+                                new EditarAlunoTask(nomeCompletoAtualizado, nomeUsuarioAtualizado, email, senhaAtualizada).execute();
+
+                            }else{
+                                Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
+                                intent.putExtra("alunoCadastrado", aluno);
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        }else{
+                            Toast.makeText(CadastroActivity.this, msgErro, Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+            }else{
+                //caso o intent não seja o do tela escolha olimpiadas
+                binding.btnFinalizarCadastro.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        //pegando dados inseridos
+                        String nomeCompleto = binding.editTextNomeCompleto.getText().toString();
+                        String nomeUsuario = binding.editTextNomeUsuario.getText().toString();
+                        String email = binding.editTextEmail.getText().toString();
+                        String senha = binding.editTextSenha.getText().toString();
+                        String confirmaSenha = binding.editTextConfirmarSenha.getText().toString();
+
+
+                        boolean dadosCorretos= validarDadosCadastro(nomeCompleto, nomeUsuario, email, senha, confirmaSenha);
+
+                        if(dadosCorretos){
+                            DadosAluno aluno = new DadosAluno(nomeCompleto, nomeUsuario, email, senha);
+                            new CadastrarAluno().execute(aluno);
+                        }else{
+                            Toast.makeText(CadastroActivity.this, msgErro, Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+                binding.btnVoltarAEscolhaAlunoProf.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(CadastroActivity.this, CadastroAlunoProfessorActivity.class);
+                        startActivity(intent);
+                        finish(); //fechar activity
+                    }
+                });
             }
-        });
 
-        binding.btnVoltarAEscolhaAlunoProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CadastroActivity.this, CadastroAlunoProfessorActivity.class);
-                startActivity(intent);
-                finish(); //fechar activity
-            }
-        });
+        }
 
     }
 
@@ -116,7 +180,7 @@ public class CadastroActivity extends AppCompatActivity {
             Log.d("CONEXAO", "tentando cadastro");
 
             try {
-                URL url = new URL("http://192.168.1.6:8086/phpHio/cadastraAluno.php");
+                URL url = new URL("http://192.168.1.3:8086/phpHio/cadastraAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -173,4 +237,85 @@ public class CadastroActivity extends AppCompatActivity {
             }
         }
     }
+
+    private class EditarAlunoTask extends AsyncTask<Void, Void, String> {
+
+        private String nomeCompleto, nomeUsuario, email, senha;
+
+        public EditarAlunoTask(String nomeCompleto, String nomeUsuario, String email, String senha) {
+            this.nomeCompleto = nomeCompleto;
+            this.nomeUsuario = nomeUsuario;
+            this.email = email;
+            this.senha = senha;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String result = null;
+            try {
+                // URL do arquivo PHP
+                URL url = new URL("http://192.168.1.3:8086/phpHio/editarDadosAlunoExcetoEmail.php");
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setRequestMethod("POST");
+                conexao.setReadTimeout(15000);
+                conexao.setConnectTimeout(15000);
+                conexao.setDoInput(true);
+                conexao.setDoOutput(true);
+
+                String parametros = "nomeCompleto=" + URLEncoder.encode(nomeCompleto, "UTF-8") +
+                        "&nomeUsuario=" + URLEncoder.encode(nomeUsuario, "UTF-8") +
+                        "&email=" + URLEncoder.encode(email, "UTF-8") +
+                        "&senha=" + URLEncoder.encode(senha, "UTF-8");
+
+                OutputStream os = conexao.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                writer.write(parametros);
+                writer.flush();
+                writer.close();
+                os.close();
+                conexao.connect();
+
+                int responseCode = conexao.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    result = sb.toString();
+                    in.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            if (result != null) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(result);
+                    String message = jsonResponse.getString("message");
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+                    if (jsonResponse.getString("status").equals("success")) {
+                        Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
+                        DadosAluno alunoAtualizado = new DadosAluno(this.nomeCompleto, this.nomeUsuario, this.email, this.senha);
+                        intent.putExtra("alunoCadastrado", alunoAtualizado);
+                        startActivity(intent);
+                        finish();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Erro ao conectar ao servidor.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 }

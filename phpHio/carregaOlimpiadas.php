@@ -1,8 +1,12 @@
 <?php
 	header('Content-Type: application/json');
 	header('Character-Enconding: utf-8');
+	$servername = "localhost"; 
+	$username = "root";        
+	$password = "root";            
+	$dbname = "hio";     
 	
-	$pdo = new PDO('mysql:host=localhost;dbname=hio;port=3306;charset=utf8','root','root');
+	$pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
 	
 	$sql = 'SELECT nome, sigla, icone, cor FROM Olimpiada';
 	$statement = $pdo->prepare($sql);
