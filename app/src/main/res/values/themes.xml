@@ -26,6 +26,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
     <style name="Theme.HelperInOlympics.AppBarOverlay"  />
 
     <style name="Theme.HelperInOlympics.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

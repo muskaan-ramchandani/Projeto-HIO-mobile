@@ -20,9 +20,10 @@
 
         <!--Variar cor de acordo com a "cor da olimpíada"-->
         <FrameLayout
+            android:id="@+id/fundoBordaCardErros"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_ciano_acertos_erros">
+            tools:background="@drawable/card_ciano_acertos_erros">
 
             <!--Linear geral-->
             <LinearLayout

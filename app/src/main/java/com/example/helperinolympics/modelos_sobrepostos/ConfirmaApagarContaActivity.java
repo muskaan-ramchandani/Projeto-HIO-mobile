@@ -13,7 +13,7 @@ import com.example.helperinolympics.R;
 
 public class ConfirmaApagarContaActivity extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_senha_confirma_alterar_dados, container, false);
+        View view = inflater.inflate(R.layout.activity_confirma_apagar_conta, container, false);
 
 
         // Configurar o botão de fechar

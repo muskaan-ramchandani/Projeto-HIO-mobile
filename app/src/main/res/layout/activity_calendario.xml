@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarTopoCalendario"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@color/roxoPrincipal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtHIO"
+                android:layout_width="196dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/open_sans"
+                android:text="@string/nome_formatacao_Logo"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="385dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="@id/toolbarTopoCalendario"
+        app:layout_constraintEnd_toEndOf="@+id/toolbarTopoCalendario"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarTopoCalendario">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardCalendario"
+            android:layout_width="360dp"
+            android:layout_height="260dp"
+            android:layout_marginTop="6dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="6dp">
+
+           <LinearLayout
+               android:id="@+id/linearCalendario"
+               android:background="@color/white"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_marginTop="12dp"
+               android:layout_marginBottom="12dp"
+               android:layout_marginStart="15dp"
+               android:layout_marginEnd="15dp"
+               android:orientation="vertical">
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="50dp"
+                   android:gravity="center_horizontal|center_vertical"
+                   android:orientation="horizontal">
+
+                   <ImageButton
+                       android:id="@+id/btnVoltarMes"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_weight="1"
+                       android:scaleType="fitCenter"
+                       android:background="@android:color/transparent"
+                       app:srcCompat="@drawable/voltar_esquerda_redimensionado" />
+
+                   <TextView
+                       android:id="@+id/txtMesAno"
+                       android:layout_width="230dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/open_sans_bold"
+                       tools:text="Agosto 2024"
+                       android:gravity="center_horizontal"
+                       android:textColor="@color/roxoExtraBtnSelecionado"
+                       android:textSize="22sp"
+                       android:textStyle="bold" />
+
+                   <ImageButton
+                       android:id="@+id/btnAvancarMes"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_weight="1"
+                       android:scaleType="fitCenter"
+                       android:background="@android:color/transparent"
+                       app:srcCompat="@drawable/voltar_direita_redimensionado" />
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/diasSemanaCalendario"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@color/white"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="10dp">
+
+                   <TextView
+                       android:id="@+id/txtDomingo"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="D"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtSegunda"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="S"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtTerca"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="T"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtQuarta"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="Q"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtQuinta"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="Q"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtSexta"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="S"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp"
+                       android:layout_marginEnd="22dp"/>
+
+                   <TextView
+                       android:id="@+id/txtSabado"
+                       android:gravity="center_horizontal"
+                       android:layout_width="25dp"
+                       android:layout_height="wrap_content"
+                       android:fontFamily="@font/questrial"
+                       android:text="S"
+                       android:textColor="@color/cinza"
+                       android:textSize="13sp" />
+               </LinearLayout>
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/recyclerViewCalendario"
+                   android:layout_marginTop="3dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"/>
+
+           </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/txtEventos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Eventos:"
+            android:layout_marginTop="10dp"
+            android:paddingStart="15dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewEventosCalendario"
+                android:layout_width="360dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarBotoesInferiores"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/roxoPrincipal"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <LinearLayout
+            android:id="@+id/linearBotoesInferiores"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/roxoPrincipal"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/toolbarBotoesInferiores"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="0dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical"
+                android:background="@color/roxoPrincipal"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/btnAcessarHanking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="59dp"
+                    android:background="#00000000"
+                    android:src="@drawable/iconeranking"
+                    android:contentDescription="Botão para visualizar o hanking do aluno"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/txtHanking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/questrial"
+                    android:text="Ranking"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical"
+                android:background="@color/roxoPrincipal"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/btnRetornarInicio"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="#00000000"
+                    android:src="@drawable/simbolo_inicio"
+                    android:contentDescription="Botão para retornar à tela inicial do aluno caso não esteja nela"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/txtTelaInicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/questrial"
+                    android:text="Início"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="90dp"
+                android:layout_height="78dp"
+                android:orientation="vertical"
+                android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"
+                android:gravity="center">
+
+                <ImageButton
+                    android:id="@+id/btnCalendario"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="#00000000"
+                    android:src="@drawable/iconecalendario"
+                    android:contentDescription="Botão para visualizar o calendário do aluno"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/txtTelaCalendario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/questrial"
+                    android:text="Calendário"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

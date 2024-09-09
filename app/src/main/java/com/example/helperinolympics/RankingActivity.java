@@ -26,7 +26,7 @@ public class RankingActivity extends Activity {
 
     RecyclerView rvRanking;
     AdapterRanking adapter;
-    ImageButton retornaInicio, acessacalendario;
+    ImageButton retornaInicio, acessarCalendario;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -42,7 +42,15 @@ public class RankingActivity extends Activity {
             }
         });
 
-        acessacalendario= findViewById(R.id.btnCalendario);
+        acessarCalendario =findViewById(R.id.btnCalendario);
+        acessarCalendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RankingActivity.this, CalendarioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         dadosPodio();
         configurarRecyclerRanking();

@@ -5,6 +5,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,6 +48,24 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
 
         String valorQuestao = "<b>Alternativa marcada: </b>" + listaDadosAcertos.get(position).getQuestaoMarcadaCerta();
         holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
+
+        if (valorOlimpiada.equals("OBA")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+        } else if (valorOlimpiada.equals("OBF")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+        } else if (valorOlimpiada.equals("OBI")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+        } else if (valorOlimpiada.equals("OBMEP")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+        }else if (valorOlimpiada.equals("ONHB")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+        } else if (valorOlimpiada.equals("OBQ")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+        } else if (valorOlimpiada.equals("OBB")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+        } else if (valorOlimpiada.equals("ONC")) {
+            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+        }
     }
 
     @Override
@@ -62,6 +81,7 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
         TextView prof;
         TextView pergunta;
         TextView questao;
+        FrameLayout frameBorda;
 
         public AcertosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,6 +91,7 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
             prof=itemView.findViewById(R.id.txtProfQueFezQuestao);
             pergunta=itemView.findViewById(R.id.txtPerguntaAcertos);
             questao=itemView.findViewById(R.id.txtRespostaAcertos);
+            frameBorda=itemView.findViewById(R.id.fundoBordaAcertos);
         }
     }
 }

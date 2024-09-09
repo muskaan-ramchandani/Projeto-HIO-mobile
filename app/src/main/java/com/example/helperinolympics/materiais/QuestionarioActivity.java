@@ -75,9 +75,9 @@ public class QuestionarioActivity extends AppCompatActivity {
         rvQuestionario.setLayoutManager(layoutManager);
 
         List<DadosQuestionario> listaQuestionario = new ArrayList<>();
-        listaQuestionario.add(new DadosQuestionario(1, "Ponto material e corpo extenso", "material", "OBF", "Fundamentos da cinemática do ponto material"));
-        listaQuestionario.add(new DadosQuestionario(2, "Referencial e trajetória", "material", "OBF", "Fundamentos da cinemática do ponto material"));
-        listaQuestionario.add(new DadosQuestionario(3, "Distância percorrida e deslocamento", "material", "OBF", "Fundamentos da cinemática do ponto material"));
+        listaQuestionario.add(new DadosQuestionario(1, "Ponto material e corpo extenso", "material", "OBF", "pergunta 1" ,"Fundamentos da cinemática do ponto material"));
+        listaQuestionario.add(new DadosQuestionario(2, "Referencial e trajetória", "material", "OBF", "pergunta 2" ,"Fundamentos da cinemática do ponto material"));
+        listaQuestionario.add(new DadosQuestionario(3, "Distância percorrida e deslocamento", "material", "OBF", "pergunta 3" ,"Fundamentos da cinemática do ponto material"));
 
         adapter = new AdapterQuestionario(listaQuestionario);
         rvQuestionario.setAdapter(adapter);

@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,16 +47,28 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
         holder.nomeESigla.setText(olimp.getNome() + " - " + olimp.getSigla());
 
         String valorCor = olimp.getCor();
-        if (valorCor.equals("Azul")) {
-            holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-            holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-        } else if (valorCor.equals("Ciano")) {
-            holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-            holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-        } else if (valorCor.equals("Laranja")) {
-            holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-            holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-        } else if (valorCor.equals("Rosa")) {
+        if (valorCor != null) {
+
+            switch (valorCor){
+                case "Azul":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
+                    break;
+                case "Ciano":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
+                    break;
+                case "Laranja":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
+                    break;
+                case "Rosa":
+                    holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+                    holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
+                    break;
+            }
+
+        } else {
             holder.constraintFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
             holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
         }
@@ -97,8 +110,12 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
         }
     }
 
-
     public int getItemCount(){return listaOlimpiadasOpcoes.size();}
 
+    public void atualizarOpcoes(List<DadosOlimpiada> olimpiadas){
+        this.listaOlimpiadasOpcoes.clear();
+        this.listaOlimpiadasOpcoes.addAll(olimpiadas);
+        this.notifyDataSetChanged();
+    }
 
 }

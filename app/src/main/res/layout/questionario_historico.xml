@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal|center_vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardHistoricoTextoExibicao"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="15dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp">
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/fundo_titulo_flashcard"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fundo_titulo_flashcard">
+
+                    <TextView
+                        android:id="@+id/txtOlimpiadaQuestHistorico"
+                        android:layout_width="350dp"
+                        android:layout_height="60dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="25sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="OBMEP" />
+
+                    <ImageButton
+                        android:id="@+id/btnFecharQuestHistorico"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@android:color/transparent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/txtOlimpiadaQuestHistorico"
+                        app:srcCompat="@drawable/baseline_close_24" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtTituloQuestHistorico"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                tools:text="Título do questionario" />
+
+            <TextView
+                android:id="@+id/txtProfAutorQuestHistorico"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="Prof: Ana Castela" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtPerguntaHistoricoAcesso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:text="@string/pergunta_exemplo2" />
+                    <!--Mudar para tools quando criar perguntas no quest-->
+
+                <LinearLayout
+                    android:layout_width="333dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <ImageButton
+                        android:id="@+id/imgButtonVoltarQuestao"
+                        android:layout_width="74dp"
+                        android:layout_height="50dp"
+                        android:background="#00000000"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/btnvoltareavancarexercicioesquerda" />
+
+                    <Button
+                        android:id="@+id/btnAcessarQuestionario"
+                        android:layout_width="170dp"
+                        android:layout_height="60dp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/fundo_botoes_roxos"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Acessar questionário"
+                        android:textSize="15sp" />
+
+                    <ImageButton
+                        android:id="@+id/imgButtonVoltarDireita"
+                        android:layout_width="74dp"
+                        android:layout_height="50dp"
+                        android:background="#00000000"
+                        android:foregroundGravity="top"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/btnvoltareavancarexerciciodireita" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
