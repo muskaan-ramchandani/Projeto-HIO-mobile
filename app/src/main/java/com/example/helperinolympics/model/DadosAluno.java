@@ -9,6 +9,8 @@ public class DadosAluno implements Parcelable {
     private String nomeCompleto, nomeUsuario, email, senha;
     private File fotoPerfil;
 
+    public DadosAluno(){}
+
     public DadosAluno(String nomeCompleto, String nomeUsuario, String email, String senha){
         setNomeCompleto(nomeCompleto);
         setNomeUsuario(nomeUsuario);
