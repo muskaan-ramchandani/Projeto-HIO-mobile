@@ -4,26 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.CalendarioActivity;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.RankingActivity;
 import com.example.helperinolympics.adapter.AdapterOlimpiadas;
 import com.example.helperinolympics.databinding.ActivityMenuDeslizanteAlunoBinding;
-import com.example.helperinolympics.menu.ChatsAlunoActivity;
+import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.menu.FavoritosAlunoActivity;
 import com.example.helperinolympics.menu.ManualActivity;
@@ -111,7 +106,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
                  finish();
                  return true;
              }else if(itemID == R.id.nav_chats){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ChatsAlunoActivity.class));
+                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class));
                  finish();
                  return true;
              }else if(itemID == R.id.nav_manual){

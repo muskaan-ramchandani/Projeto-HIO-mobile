@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/roxoPrincipal">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTopoForum"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnVoltarATelaInicial"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="6dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/btnvoltarbranco" />
+
+        <TextView
+            android:id="@+id/txtForum"
+            android:layout_width="100dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Fórum"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imgfotoPerfil"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="125dp"
+            tools:srcCompat="@drawable/iconeperfilvazioredonda" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBarraPesquisaForum"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopoForum"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutTopoForum"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutTopoForum">
+
+        <SearchView
+            android:id="@+id/searchViewPerguntas"
+            android:layout_width="375dp"
+            android:layout_height="match_parent"
+            android:queryHint="Encontre respostas para sua pergunta"
+            android:background="@drawable/fundo_barra_pesquisa" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardItensForum"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        android:layout_marginTop="20dp"
+        app:cardElevation="10dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBarraPesquisaForum"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutBarraPesquisaForum"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutBarraPesquisaForum">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/fundo_card_forum">
+
+            <LinearLayout
+                android:id="@+id/linearBotoesTodosESeus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnTudo"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="Tudo"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    tools:textColor="@color/textoSelecionadoForum"
+                    tools:background="@drawable/fundo_botao_forum_selecionado" />
+
+                <Button
+                    android:id="@+id/btnSuasPerguntas"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="Suas perguntas"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:layout_marginStart="10dp"
+                    tools:textColor="@color/cinza"
+                    tools:background="@drawable/fundo_botao_forum_nao_selecionado" />
+
+            </LinearLayout>
+            
+            <FrameLayout
+                android:id="@+id/fragment_Forum"
+                android:layout_width="match_parent"
+                android:layout_height="505dp"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

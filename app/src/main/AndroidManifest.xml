@@ -67,17 +67,17 @@
 
         <!--Itens do menu-->
         <activity
-            android:name=".menu.ChatsAlunoActivity"
-            android:exported="false"
-            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
-
-        <activity
             android:name=".menu.ConfiguracoesActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
             android:name=".menu.FavoritosAlunoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+
+        <activity
+            android:name=".menu.ForumActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
