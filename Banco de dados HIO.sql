@@ -48,12 +48,14 @@ CREATE TABLE OlimpiadasSelecionadas(
     #Tabela com condição impedindo que uma olimpíada se repita para um mesmo aluno
 );
 
-DROP TABLE IF EXISTS professores;
-CREATE TABLE professores (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    nome_usuario VARCHAR(255) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL
+DROP TABLE IF EXISTS Professor;
+SELECT * FROM Professor;
+CREATE TABLE Professor (
+    nomeCompleto VARCHAR(200) NOT NULL,
+    nomeUsuario VARCHAR(20) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    fotoPerfil LONGBLOB,
+    PRIMARY KEY(email)
 );
 
