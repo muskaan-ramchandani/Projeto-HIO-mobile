@@ -8,6 +8,8 @@ public class DadosOlimpiada implements Parcelable {
     String nome, sigla, cor;
     private boolean isSelected;
 
+    public DadosOlimpiada(){}
+
     public DadosOlimpiada(int iconeOlimp, String nome, String sigla, String cor) {
         setIconeOlimp(iconeOlimp);
         setNome(nome);
@@ -45,10 +47,7 @@ public class DadosOlimpiada implements Parcelable {
     }
 
     public void setCor(String cor) {
-        //se cor é diferente da condição "cor diferente de qualquer opção"
-        if(!(cor!="Azul"&&cor!="Ciano"&&cor!="Laranja"&&cor!="Rosa")){
-            this.cor = cor;
-        }
+        this.cor = cor;
     }
 
     public boolean isSelected() {

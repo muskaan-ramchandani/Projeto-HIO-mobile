@@ -51,10 +51,10 @@
                 app:srcCompat="@drawable/iconenome" />
 
             <EditText
-                android:id="@+id/editUsuario"
+                android:id="@+id/editTextEmail"
                 android:layout_width="268dp"
                 android:layout_height="51dp"
-                android:hint="Usuário"
+                android:hint="Email"
                 android:textColorHint="#858585"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/black"

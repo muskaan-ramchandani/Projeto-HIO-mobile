@@ -1,0 +1,204 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.container {
+    display: flex;
+    height: 100vh;
+    position: relative;
+}
+
+
+.left-half, .right-half {
+    flex: 1;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: center;
+    position: relative;
+}
+
+
+.left-half {
+    background-color: white;
+}
+
+
+.right-half {
+    background-color: #c6a3ff;
+}
+
+
+.image-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48%;
+    height: auto;
+    top: 48%;
+    z-index: 1;
+}
+
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    object-fit: contain;
+}
+
+
+.text {
+    font-size: 45px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.white-text {
+    color: #c6a3ff;
+}
+
+
+.purple-text {
+    color: #5e17eb;
+}
+
+
+.professor-text, .aluno-text {
+    font-size: 28px;
+    font-weight: normal;
+    color: black;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+.btn {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.professor-btn {
+    background-color: #c6a3ff;
+}
+
+
+.aluno-btn {
+    background-color: #5e17eb;
+}
+
+
+/* Estilos para o botão de imagem à esquerda */
+.button-image-container-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+
+/* Estilos para o botão de imagem à direita */
+.button-image-container-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+
+.button-image {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.button-image img {
+    width: 60px;
+    height: auto;
+}
+
+
+/* Estilos para o modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.modal-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+}
+
+
+.modal-text {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: justify; 
+}
+
+
+.highlight {
+    color: #835ad2; 
+    text-decoration: underline; 
+}
+
+
+.modal-btn {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #8c52ff;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+
+

@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    color: black;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.olympics-button {
+    padding: 15px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+}
+
+
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.button-image {
+    width: 55px; 
+    height: 50px; 
+    margin-right: 10px;
+}
+
+.oba {
+    background-color: #cb6ce6;
+}
+
+.obf {
+    background-color: #5271ff;
+}
+
+.obi {
+    background-color: #ff914d;
+}
+
+.obmep {
+    background-color: #18b9cd;
+}
+
+.onhb {
+    background-color: #cb6ce6;
+}
+
+.obq {
+    background-color: #5271ff;
+}
+
+.obb {
+    background-color: #ff914d;
+}
+
+.onc {
+    background-color: #18b9cd;
+}
+
+.olympics-button:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .button-image {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+    }
+}
+.checkbox {
+    margin-right: 10px;
+    transform: scale(1.5); 
+}
