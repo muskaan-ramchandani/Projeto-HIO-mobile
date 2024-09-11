@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
-    <link rel="stylesheet" href="cssTelaCadastroProfessor.css">
+    <link rel="stylesheet" href="cadastra_professor.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script type="text/javascript" src="jsTelaCadastroProfessor.js" defer></script>
 </head>
 <body>
-    
     <div class="container">
         <div class="purple-section">
-            <img src="C:/Users/Muskaan Ramchandani/Desktop/HIOTelasWeb/hipoProfessor.png" alt="Hipo professor" class="purple-image">
+            <img src="C:\www\testeHio\imagens\hipoProfessor.png" alt="Hipo professor" class="purple-image">
             <p class="helper-text">Helper in Olympics</p>
         </div>
 
         <div class="form-container">
             <h1 class="title">Cadastre-se</h1>
-            <form id="orderForm">
+            <form id="orderForm" method="post" action="cadastra_professor.php">
                 <div class="field">
                     <label class="label" for="name">Nome completo</label>
                     <div class="control">
@@ -54,7 +53,11 @@
                         <button class="button is-primary" type="submit">Finalizar</button>
                     </div>
                 </div>
-                <div id="responseMessage" class="hidden"></div>
+                <?php if (isset($_GET['mensagem'])): ?>
+                    <div id="responseMessage" class="message">
+                        <p><?php echo htmlspecialchars($_GET['mensagem']); ?></p>
+                    </div>
+                <?php endif; ?>
             </form>
         </div>
     </div>

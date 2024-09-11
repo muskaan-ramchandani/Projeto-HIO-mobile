@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
-    <link rel="stylesheet" href="TelaCadastroAlunoProfessor.css">
+    <link rel="stylesheet" href="cadastroAlunoProfessor.css">
 </head>
 <body>
     <div class="container">
@@ -13,10 +13,13 @@
             <div class="professor-text">
                 Cadastra livros, vídeos e flashcards, datas de inscrição e fases de alguma olimpíada e cria questionários, além de poder auxiliar um aluno através dos chats.
             </div>
-            <button class="btn professor-btn">Sou Professor</button>
+            <!-- Formulário para redirecionar para a página de cadastro do professor -->
+            <form action="redirect.php" method="post">
+                <button type="submit" class="btn professor-btn">Sou Professor</button>
+            </form>
         </div>
         <div class="image-container">
-            <img src="C:/Users/Muskaan Ramchandani/Desktop/HIOTelasWeb/hipoAlegreOlhosFechados.png" alt="Imagem do hipo">
+            <img src="C:/Users/terez/Downloads/hipoAlegreDeOlhosFechados.png" alt="Imagem do hipo">
         </div>
         <div class="right-half">
             <div class="text purple-text">Aluno</div>
@@ -26,7 +29,6 @@
             <button class="btn aluno-btn" onclick="openModal()">Sou Aluno</button>
         </div>
     </div>
-
 
     <!-- Imagem do botão à esquerda -->
     <div class="button-image-container-left">
@@ -42,7 +44,6 @@
         </button>
     </div>
 
-
     <!-- Modal -->
     <div id="studentModal" class="modal">
         <div class="modal-content">
@@ -55,17 +56,14 @@
         </div>
     </div>
 
-
     <script>
         function openModal() {
             document.getElementById('studentModal').style.display = 'block';
         }
 
-
         function closeModal() {
             document.getElementById('studentModal').style.display = 'none';
         }
-
 
         // Fechar o modal quando o usuário clicar fora da modal
         window.onclick = function(event) {
