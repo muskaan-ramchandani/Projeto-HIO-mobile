@@ -115,7 +115,7 @@ body {
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 250px;
+    width: 300px;
     font-family: 'Open Sans', sans-serif;
     height: calc(100vh - 80px);
     overflow-y: auto;
