@@ -1,0 +1,44 @@
+package com.example.helperinolympics.model;
+
+public class DadosOlimpiadaForum {
+
+    private String siglaOlimpiada, corOlimp;
+    private int qntdPerguntasRelacionadas;
+    private int[] idsPerguntasForum;
+
+    public DadosOlimpiadaForum(String siglaOlimpiada){
+        setSiglaOlimpiada(siglaOlimpiada);
+    }
+
+    public String getSiglaOlimpiada() {
+        return siglaOlimpiada;
+    }
+
+    public void setSiglaOlimpiada(String siglaOlimpiada) {
+        this.siglaOlimpiada = siglaOlimpiada;
+    }
+
+    public String getCorOlimp() {
+        return corOlimp;
+    }
+
+    public void setCorOlimp(String corOlimp) {
+        this.corOlimp = corOlimp;
+    }
+
+    public int getQntdPerguntasRelacionadas() {
+        return qntdPerguntasRelacionadas;
+    }
+
+    public void setQntdPerguntasRelacionadas(int qntdPerguntasRelacionadas) {
+        this.qntdPerguntasRelacionadas = qntdPerguntasRelacionadas;
+    }
+
+    public int[] getIdsPerguntasForum() {
+        return idsPerguntasForum;
+    }
+
+    public void setIdsPerguntasForum(int[] idsPerguntasForum) {
+        this.idsPerguntasForum = idsPerguntasForum;
+    }
+}

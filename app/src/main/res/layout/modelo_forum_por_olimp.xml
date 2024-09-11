@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="190dp"
+    android:layout_height="170dp"
+    android:background="@android:color/transparent"
+    android:gravity="center_horizontal|center_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFundoOlimpForum"
+        android:layout_width="170dp"
+        android:layout_height="150dp"
+        android:gravity="center_vertical"
+        tools:background="@drawable/fundo_btn_olimp_rosa">
+
+        <LinearLayout
+            android:id="@+id/linearFundoOlimpForum"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:orientation="vertical"
+            tools:background="@drawable/fundo_btn_olimp_rosa">
+
+
+            <TextView
+                android:id="@+id/txtSiglaOlimpiada"
+                android:layout_width="150dp"
+                android:layout_height="27dp"
+                android:fontFamily="@font/questrial"
+                tools:text="@string/sigla_OBA"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:id="@+id/txtPerguntasRelacionadas"
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:fontFamily="@font/questrial"
+                tools:text="35 perguntas relacionadas"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

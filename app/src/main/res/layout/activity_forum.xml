@@ -117,7 +117,7 @@
             </LinearLayout>
             
             <FrameLayout
-                android:id="@+id/fragment_Forum"
+                android:id="@+id/fragmentForum"
                 android:layout_width="match_parent"
                 android:layout_height="505dp"
                 android:layout_marginTop="15dp"/>
