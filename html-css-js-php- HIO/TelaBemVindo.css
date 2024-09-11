@@ -1,0 +1,101 @@
+/* Estilizando o corpo da página */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Fonte padrão para o corpo da página */
+    background-color: #f5f5f5; /* Cor de fundo clara para contraste */
+    position: relative; /* Permite que o posicionamento absoluto funcione */
+    height: 100vh; /* Altura total da janela de visualização */
+    overflow: hidden; /* Remove barras de rolagem se houver */
+}
+
+/* Container principal */
+.container {
+    display: flex; /* Usando flexbox para layout */
+    height: 100vh; /* Altura total da janela de visualização */
+}
+
+/* Container para o texto */
+.text-container {
+    width: 50vw; /* Ocupa metade da tela */
+    padding: 20px; /* Espaçamento interno */
+    box-sizing: border-box; /* Inclui padding e bordas na largura total */
+}
+
+/* Estilizando o título "Bem vindo(a)" */
+.welcome {
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans */
+    font-size: 50px; /* Tamanho da fonte 50px */
+    color: #5e17eb; /* Cor do texto #5e17eb */
+    margin: 0;
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    margin-top: 80px; /* Espaçamento acima do título */
+}
+
+/* Estilizando o título "ao HIO!" */
+.hio {
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans */
+    font-size: 50px; /* Tamanho da fonte 50px */
+    color: #000000; /* Cor do texto preta */
+    margin: 0;
+    margin-top: 20px; /* Espaçamento acima do título */
+}
+
+
+.intro-text {
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 36px; 
+    color: #333333; 
+    margin: 20px 0; 
+    line-height: 1.5; 
+    text-align: justify; 
+    overflow: hidden; 
+}
+
+/* Estilos para a imagem na metade direita */
+.image-container {
+    width: 35vw; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    margin-bottom: 0%;
+}
+
+/* Estilizando a imagem */
+.image-container img {
+    width: 90%; 
+    height: auto; 
+    object-fit: cover 
+}
+
+/* Estilos para o botão de imagem à esquerda */
+.button-image-container-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+/* Estilos para o botão de imagem à direita */
+.button-image-container-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Estilos para o botão de imagem */
+.button-image {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Estilos para a imagem dentro do botão */
+.button-image img {
+    width: 60px; 
+    height: auto;
+}
