@@ -19,10 +19,11 @@ import com.example.helperinolympics.model.DadosOlimpiadaForum;
 
 import java.util.ArrayList;
 
-public class FragmentTudo extends Fragment {
-    private FragmentForumTudoBinding binding = FragmentForumTudoBinding.inflate(getLayoutInflater());
+public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnOlimpiadaClickListener {
+    private FragmentForumTudoBinding binding;
     private AdapterOlimpiadasForum adapter;
     private ArrayList<DadosOlimpiadaForum> olimpiadasF = new ArrayList<>();
+    private int clickCount = 0;
 
     @Nullable
     @Override
@@ -34,11 +35,7 @@ public class FragmentTudo extends Fragment {
     }
 
     private void setupFragmentNavigation() {
-        setChildFragment(new FragmentPerguntasRecentes());
-
-        // Configurar botões para trocar os fragmentos
-        binding.btnOlimpiadas.setOnClickListener(v -> setChildFragment(new FragmentOlimpiadas()));
-        binding.btnPerguntasRecentes.setOnClickListener(v -> setChildFragment(new FragmentPerguntasRecentes()));
+        setChildFragment(new FragmentPerguntasRecentes()); // Fragment inicial
     }
 
     private void setChildFragment(Fragment fragment) {
@@ -48,16 +45,33 @@ public class FragmentTudo extends Fragment {
         fragmentTransaction.commit();
     }
 
-    public void configurarRecyclerOlimpiadasForum(){
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+    public void configurarRecyclerOlimpiadasForum() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        adapter= new AdapterOlimpiadasForum(olimpiadasF);
+        adapter = new AdapterOlimpiadasForum(olimpiadasF, this);
         binding.recyclerPerguntasPorOlimpiada.setLayoutManager(layoutManager);
         binding.recyclerPerguntasPorOlimpiada.setHasFixedSize(true);
         binding.recyclerPerguntasPorOlimpiada.setAdapter(adapter);
 
-        //new InicialAlunoMenuDeslizanteActivity.OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
+        //SIMULAÇÃO DE DADOS
+        olimpiadasF.add(new DadosOlimpiadaForum("OBA", "Rosa", 25));
+        olimpiadasF.add(new DadosOlimpiadaForum("OBF", "Azul", 13));
+        olimpiadasF.add(new DadosOlimpiadaForum("OBI", "Laranja", 45));
+        olimpiadasF.add(new DadosOlimpiadaForum("OBMEP", "Ciano", 200));
+        olimpiadasF.add(new DadosOlimpiadaForum("ONC", "Ciano", 567));
 
-        adapter.notifyDataSetChanged(); //atualizar o recycler
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onOlimpiadaClick(DadosOlimpiadaForum olimp) {
+        clickCount++;
+
+        //Alternando fragmentos com base no número de cliques
+        if (clickCount % 2 == 1) {
+            setChildFragment(new FragmentPerguntasPorOlimpiada(olimp.getSiglaOlimpiada()));
+        } else {
+            setChildFragment(new FragmentPerguntasRecentes());
+        }
     }
 }

@@ -48,6 +48,8 @@ public class ForumActivity extends AppCompatActivity {
                 binding.btnSuasPerguntas.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_nao_selecionado));
                 binding.btnSuasPerguntas.setTextColor(getColor(color.cinza));
 
+                binding.searchViewPerguntas.setVisibility(View.VISIBLE);
+
                 setFragment(new FragmentTudo());
 
             }
@@ -61,6 +63,9 @@ public class ForumActivity extends AppCompatActivity {
 
                 binding.btnTudo.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_nao_selecionado));
                 binding.btnTudo.setTextColor(getColor(color.cinza));
+
+                binding.searchViewPerguntas.setVisibility(View.INVISIBLE);
+
 
                 setFragment(new FragmentSuasPerguntas());
 

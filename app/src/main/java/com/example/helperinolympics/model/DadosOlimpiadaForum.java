@@ -8,8 +8,10 @@ public class DadosOlimpiadaForum {
     private int qntdPerguntasRelacionadas;
     private ArrayList<Integer> idsPerguntasForum;
 
-    public DadosOlimpiadaForum(String siglaOlimpiada){
+    public DadosOlimpiadaForum(String siglaOlimpiada, String corOlimp, int qntdPerguntasRelacionadas){
         setSiglaOlimpiada(siglaOlimpiada);
+        setCorOlimp(corOlimp);
+        setQntdPerguntasRelacionadas(qntdPerguntasRelacionadas);
     }
 
     public String getSiglaOlimpiada() {
