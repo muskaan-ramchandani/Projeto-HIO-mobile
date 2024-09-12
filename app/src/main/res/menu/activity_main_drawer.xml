@@ -15,9 +15,9 @@
             android:title="@string/menu_favoritos"
             android:itemTextAppearance="@style/NavigationViewTextStyle"/>
         <item
-            android:id="@+id/nav_chats"
+            android:id="@+id/nav_forum"
             android:icon="@drawable/iconechats"
-            android:title="@string/menu_chats"
+            android:title="@string/menu_forum"
             android:itemTextAppearance="@style/NavigationViewTextStyle"/>
         <item
             android:id="@+id/nav_manual"

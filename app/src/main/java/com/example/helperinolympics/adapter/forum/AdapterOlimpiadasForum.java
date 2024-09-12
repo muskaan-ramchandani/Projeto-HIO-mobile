@@ -1,6 +1,5 @@
-package com.example.helperinolympics.adapter;
+package com.example.helperinolympics.adapter.forum;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

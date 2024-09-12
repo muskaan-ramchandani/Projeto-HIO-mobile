@@ -1,25 +1,17 @@
-package com.example.helperinolympics.adapter;
+package com.example.helperinolympics.adapter.forum;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.databinding.ModeloPerguntasForumBinding;
-import com.example.helperinolympics.model.DadosOlimpiada;
-import com.example.helperinolympics.model.DadosOlimpiadaForum;
 import com.example.helperinolympics.model.DadosPerguntasForum;
-import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
 import java.util.List;
 

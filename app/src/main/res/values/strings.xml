@@ -43,7 +43,7 @@
     <!--Itens do menu deslizante-->
     <string name="menu_perfil">Seu perfil</string>
     <string name="menu_favoritos">Favoritos</string>
-    <string name="menu_chats">Chats</string>
+    <string name="menu_forum">Fórum</string>
     <string name="menu_manual">Manual</string>
     <string name="menu_configuracoes">Configurações</string>
     <string name="menu_sair">Sair</string>

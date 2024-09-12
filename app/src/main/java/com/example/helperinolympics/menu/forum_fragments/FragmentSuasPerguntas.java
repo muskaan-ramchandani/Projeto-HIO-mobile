@@ -8,16 +8,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.adapter.AdapterOlimpiadasForum;
-import com.example.helperinolympics.adapter.AdapterPerguntasForum;
+import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumSuasPerguntasBinding;
-import com.example.helperinolympics.databinding.FragmentForumTudoBinding;
-import com.example.helperinolympics.model.DadosOlimpiadaForum;
 import com.example.helperinolympics.model.DadosPerguntasForum;
 
 import java.text.ParseException;
@@ -94,9 +89,9 @@ public class FragmentSuasPerguntas extends Fragment  {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         adapter= new AdapterPerguntasForum(perguntasNAORespondidas);
-        binding.recyclerSuasPerguntasNaoRespondidas.setLayoutManager(layoutManager);
-        binding.recyclerSuasPerguntasNaoRespondidas.setHasFixedSize(true);
-        binding.recyclerSuasPerguntasNaoRespondidas.setAdapter(adapter);
+        binding.recyclerSuasPerguntasSemResposta.setLayoutManager(layoutManager);
+        binding.recyclerSuasPerguntasSemResposta.setHasFixedSize(true);
+        binding.recyclerSuasPerguntasSemResposta.setAdapter(adapter);
 
         //new InicialAlunoMenuDeslizanteActivity.OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
 

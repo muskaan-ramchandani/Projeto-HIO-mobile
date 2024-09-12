@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.adapter.AdapterOlimpiadasForum;
+import com.example.helperinolympics.adapter.forum.AdapterOlimpiadasForum;
 import com.example.helperinolympics.databinding.FragmentForumTudoBinding;
 import com.example.helperinolympics.model.DadosOlimpiadaForum;
 
@@ -41,7 +41,7 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
     private void setChildFragment(Fragment fragment) {
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentForumPerguntas, fragment);  // Certifique-se que você tem um FrameLayout com esse ID no layout
+        fragmentTransaction.replace(R.id.fragmentForumPerguntas, fragment);
         fragmentTransaction.commit();
     }
 

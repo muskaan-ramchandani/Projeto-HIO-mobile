@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.adapter.AdapterPerguntasForum;
+import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumPerguntasPorOlimpiadaBinding;
 import com.example.helperinolympics.model.DadosPerguntasForum;
 

@@ -105,7 +105,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, FavoritosAlunoActivity.class));
                  finish();
                  return true;
-             }else if(itemID == R.id.nav_chats){
+             }else if(itemID == R.id.nav_forum){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class));
                  finish();
                  return true;

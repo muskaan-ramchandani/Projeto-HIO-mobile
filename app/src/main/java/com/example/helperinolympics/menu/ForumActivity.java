@@ -11,6 +11,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -32,20 +33,21 @@ public class ForumActivity extends AppCompatActivity {
         personalizarSearchHint();
 
         //Fragment inicial + configurações iniciais
+        binding.imgfotoPerfil.setImageResource(drawable.iconeperfilvazioredonda);
         setFragment(new FragmentTudo());
-        binding.btnTudo.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_selecionado));
+        binding.btnTudo.setBackgroundResource(R.drawable.fundo_botao_forum_selecionado);
         binding.btnTudo.setTextColor(getColor(R.color.textoSelecionadoForum));
-        binding.btnSuasPerguntas.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_nao_selecionado));
+        binding.btnSuasPerguntas.setBackgroundResource(R.drawable.fundo_botao_forum_nao_selecionado);
         binding.btnSuasPerguntas.setTextColor(getColor(color.cinza));
 
 
         binding.btnTudo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.btnTudo.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_selecionado));
+                binding.btnTudo.setBackgroundResource(R.drawable.fundo_botao_forum_selecionado);
                 binding.btnTudo.setTextColor(getColor(R.color.textoSelecionadoForum));
 
-                binding.btnSuasPerguntas.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_nao_selecionado));
+                binding.btnSuasPerguntas.setBackgroundResource(R.drawable.fundo_botao_forum_nao_selecionado);
                 binding.btnSuasPerguntas.setTextColor(getColor(color.cinza));
 
                 binding.searchViewPerguntas.setVisibility(View.VISIBLE);
@@ -58,10 +60,10 @@ public class ForumActivity extends AppCompatActivity {
         binding.btnSuasPerguntas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.btnSuasPerguntas.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_selecionado));
+                binding.btnSuasPerguntas.setBackgroundResource(R.drawable.fundo_botao_forum_selecionado);
                 binding.btnSuasPerguntas.setTextColor(getColor(R.color.textoSelecionadoForum));
 
-                binding.btnTudo.setBackgroundDrawable(getDrawable(R.drawable.fundo_botao_forum_nao_selecionado));
+                binding.btnTudo.setBackgroundResource(R.drawable.fundo_botao_forum_nao_selecionado);
                 binding.btnTudo.setTextColor(getColor(color.cinza));
 
                 binding.searchViewPerguntas.setVisibility(View.INVISIBLE);
@@ -77,12 +79,15 @@ public class ForumActivity extends AppCompatActivity {
     private void personalizarSearchHint() {
         binding = ActivityForumBinding.inflate(getLayoutInflater());
         SearchView barraPesquisa = binding.searchViewPerguntas;
-        EditText textoBarraPesquisa = barraPesquisa.findViewById(androidx.appcompat.R.id.search_src_text);
+
+        int searchTextId = getResources().getIdentifier("android:id/search_src_text", null, null);
+        EditText textoBarraPesquisa = barraPesquisa.findViewById(searchTextId);
+
 
         textoBarraPesquisa.setHintTextColor(getResources().getColor(R.color.cinza));
-        textoBarraPesquisa.setTextColor(getResources().getColor(color.black));
+        textoBarraPesquisa.setTextColor(getResources().getColor(R.color.black));
 
-        Typeface customFont = Typeface.createFromAsset(getAssets(), "@font/open_sans");
+        Typeface customFont = ResourcesCompat.getFont(this, R.font.open_sans);
         textoBarraPesquisa.setTypeface(customFont);
         textoBarraPesquisa.setHint("Encontre respostas para sua pergunta");
     }
@@ -93,4 +98,5 @@ public class ForumActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragmentForum, fragment);
         fragmentTransaction.commit();
     }
+
 }
