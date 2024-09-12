@@ -1,10 +1,12 @@
 package com.example.helperinolympics.model;
 
+import java.util.ArrayList;
+
 public class DadosOlimpiadaForum {
 
     private String siglaOlimpiada, corOlimp;
     private int qntdPerguntasRelacionadas;
-    private int[] idsPerguntasForum;
+    private ArrayList<Integer> idsPerguntasForum;
 
     public DadosOlimpiadaForum(String siglaOlimpiada){
         setSiglaOlimpiada(siglaOlimpiada);
@@ -34,11 +36,11 @@ public class DadosOlimpiadaForum {
         this.qntdPerguntasRelacionadas = qntdPerguntasRelacionadas;
     }
 
-    public int[] getIdsPerguntasForum() {
+    public ArrayList<Integer> getIdsPerguntasForum() {
         return idsPerguntasForum;
     }
 
-    public void setIdsPerguntasForum(int[] idsPerguntasForum) {
+    public void setIdsPerguntasForum(ArrayList<Integer> idsPerguntasForum) {
         this.idsPerguntasForum = idsPerguntasForum;
     }
 }

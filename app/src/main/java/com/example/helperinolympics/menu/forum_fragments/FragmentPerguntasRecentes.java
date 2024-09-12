@@ -6,21 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.adapter.AdapterOlimpiadas;
-import com.example.helperinolympics.adapter.AdapterOlimpiadasForum;
-import com.example.helperinolympics.databinding.FragmentForumTudoBinding;
-import com.example.helperinolympics.model.DadosOlimpiadaForum;
-import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
+import com.example.helperinolympics.adapter.AdapterPerguntasForum;
+import com.example.helperinolympics.model.DadosPerguntasForum;
+
 
 import java.util.ArrayList;
 
-public class Fragment_Tudo_Activity extends Fragment {
-    private FragmentForumTudoBinding binding = FragmentForumTudoBinding.inflate(getLayoutInflater());
-    private AdapterOlimpiadasForum adapter;
-    private ArrayList<DadosOlimpiadaForum> olimpiadasF = new ArrayList<>();
+public class FragmentPerguntasRecentes  extends Fragment {
+
+    private AdapterPerguntasForum adapter;
+    private ArrayList<DadosPerguntasForum> perguntasF = new ArrayList<>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_forum_tudo, container, false);
