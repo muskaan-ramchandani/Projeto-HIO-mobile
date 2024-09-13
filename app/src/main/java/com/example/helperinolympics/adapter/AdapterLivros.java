@@ -19,6 +19,8 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosLivros;
 import com.example.helperinolympics.model.DadosOlimpiada;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosViewHolder>{
@@ -45,7 +47,11 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
         String valorEdicao = "Edição: "+ livro.getEdicao();
         holder.edicao.setText(valorEdicao);
 
-        String valorData = "Data de publicação: "+ String.valueOf(livro.getDataPublicacao());
+        Date dataPublicacao = livro.getDataPublicacao();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = dateFormat.format(dataPublicacao);
+
+        String valorData = "Data de publicação: "+ dataFormatada;
         holder.dataPub.setText(valorData);
 
         int valorImagem = livro.getCapa();

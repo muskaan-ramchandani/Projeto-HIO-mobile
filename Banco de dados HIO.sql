@@ -3,7 +3,6 @@ DROP DATABASE IF exists HIO;
 USE hio;
 
 DROP TABLE IF EXISTS Olimpiada;
-
 CREATE TABLE Olimpiada(
     nome VARCHAR(300) NOT NULL,
     sigla VARCHAR(10) NOT NULL,
@@ -59,3 +58,43 @@ CREATE TABLE Professor (
     PRIMARY KEY(email)
 );
 
+DROP TABLE IF EXISTS Conteudo;
+SELECT * FROM Conteudo;
+CREATE TABLE Conteudo(
+	id INT NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    subtitulo VARCHAR(200) NOT NULL,
+    siglaOlimpiadaPertencente VARCHAR(10) NOT NULL,
+	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
+    PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS Livro;
+SELECT * FROM Livro;
+CREATE TABLE Livro(
+	id INT NOT NULL,
+    isbn VARCHAR(13) NOT NULL,
+    titulo VARCHAR(300) NOT NULL,
+    autor VARCHAR(200) NOT NULL,
+	edicao INT NOT NULL,
+    dataPublicacao DATE NOT NULL,
+    siglaOlimpiadaPertencente VARCHAR(10) NOT NULL,
+	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
+	CONSTRAINT livroNRepete UNIQUE (siglaOlimpiadaPertencente, isbn),
+    PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS ProvaAnterior;
+SELECT * FROM ProvaAnterior;
+CREATE TABLE ProvaAnterior(
+	id INT NOT NULL,
+    anoDaProva YEAR NOT NULL,
+    estado BOOLEAN NOT NULL,
+    fase INT NOT NULL,
+    profQuePostou VARCHAR(100) NOT NULL,
+    arquivoPdf LONGBLOB NOT NULL,
+	siglaOlimpiadaPertencente VARCHAR(10) NOT NULL,
+	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
+	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
+    PRIMARY KEY(id)
+);
