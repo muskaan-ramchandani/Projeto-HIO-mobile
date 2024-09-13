@@ -3,8 +3,10 @@ package com.example.helperinolympics.menu;
 import static com.example.helperinolympics.R.*;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -20,9 +22,12 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityForumBinding;
 import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.menu.forum_fragments.FragmentTudo;
+import com.example.helperinolympics.model.DadosAluno;
+import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;
+    DadosAluno alunoCadastrado;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,54 +36,63 @@ public class ForumActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         personalizarSearchHint();
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
 
-        //Fragment inicial + configurações iniciais
-        binding.imgfotoPerfil.setImageResource(drawable.iconeperfilvazioredonda);
+        // Fragment inicial + configurações iniciais
+        binding.imgfotoPerfil.setImageResource(R.drawable.iconeperfilvazioredonda);
+        atribuirFundoEBotao(binding.btnTudo, R.drawable.fundo_botao_forum_selecionado, R.color.textoSelecionadoForum);
+        atribuirFundoEBotao(binding.btnSuasPerguntas, R.drawable.fundo_botao_forum_nao_selecionado, R.color.cinza);
+
+        binding.linearBtnfazerPergunta.setVisibility(View.GONE);
+
         setFragment(new FragmentTudo());
-        binding.btnTudo.setBackgroundResource(R.drawable.fundo_botao_forum_selecionado);
-        binding.btnTudo.setTextColor(getColor(R.color.textoSelecionadoForum));
-        binding.btnSuasPerguntas.setBackgroundResource(R.drawable.fundo_botao_forum_nao_selecionado);
-        binding.btnSuasPerguntas.setTextColor(getColor(color.cinza));
 
-
-        binding.btnTudo.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnVoltarATelaInicial).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.btnTudo.setBackgroundResource(R.drawable.fundo_botao_forum_selecionado);
-                binding.btnTudo.setTextColor(getColor(R.color.textoSelecionadoForum));
+                Intent intent = new Intent(ForumActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                startActivity(intent);
+                finish();
 
-                binding.btnSuasPerguntas.setBackgroundResource(R.drawable.fundo_botao_forum_nao_selecionado);
-                binding.btnSuasPerguntas.setTextColor(getColor(color.cinza));
+            }
+        });
+        findViewById(R.id.btnTudo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                atribuirFundoEBotao(findViewById(R.id.btnTudo), R.drawable.fundo_botao_forum_selecionado, R.color.textoSelecionadoForum);
+                atribuirFundoEBotao(findViewById(R.id.btnSuasPerguntas), R.drawable.fundo_botao_forum_nao_selecionado, R.color.cinza);
 
-                binding.searchViewPerguntas.setVisibility(View.VISIBLE);
-
+                binding.linearLayoutBarraPesquisaForum.setVisibility(View.VISIBLE);
+                binding.linearBtnfazerPergunta.setVisibility(View.GONE);
                 setFragment(new FragmentTudo());
-
             }
         });
 
-        binding.btnSuasPerguntas.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnSuasPerguntas).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.btnSuasPerguntas.setBackgroundResource(R.drawable.fundo_botao_forum_selecionado);
-                binding.btnSuasPerguntas.setTextColor(getColor(R.color.textoSelecionadoForum));
+                Log.d("ForumActivity", "btnSuasPerguntas clicado");
+                atribuirFundoEBotao(findViewById(R.id.btnSuasPerguntas), R.drawable.fundo_botao_forum_selecionado, R.color.textoSelecionadoForum);
+                atribuirFundoEBotao(findViewById(R.id.btnTudo), R.drawable.fundo_botao_forum_nao_selecionado, R.color.cinza);
 
-                binding.btnTudo.setBackgroundResource(R.drawable.fundo_botao_forum_nao_selecionado);
-                binding.btnTudo.setTextColor(getColor(color.cinza));
-
-                binding.searchViewPerguntas.setVisibility(View.INVISIBLE);
-
-
+                binding.linearLayoutBarraPesquisaForum.setVisibility(View.GONE);
+                binding.linearBtnfazerPergunta.setVisibility(View.VISIBLE);
                 setFragment(new FragmentSuasPerguntas());
-
             }
         });
-
     }
 
+    private void atribuirFundoEBotao(View botao, int fundoResId, int corTextoResId) {
+        botao.setBackground(getDrawable(fundoResId));
+        if (botao instanceof androidx.appcompat.widget.AppCompatButton) {
+            ((androidx.appcompat.widget.AppCompatButton) botao).setTextColor(getColor(corTextoResId)); // Alterado para getColor
+        }
+    }
+
+
     private void personalizarSearchHint() {
-        binding = ActivityForumBinding.inflate(getLayoutInflater());
-        SearchView barraPesquisa = binding.searchViewPerguntas;
+        SearchView barraPesquisa = findViewById(R.id.searchViewPerguntas);
 
         int searchTextId = getResources().getIdentifier("android:id/search_src_text", null, null);
         EditText textoBarraPesquisa = barraPesquisa.findViewById(searchTextId);

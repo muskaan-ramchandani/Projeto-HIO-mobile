@@ -2,62 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="505dp"
-    android:background="@color/white"
+    android:background="#f8f6f6"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/txtSuasPerguntasRespondidas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:fontFamily="@font/open_sans_bold"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="Perguntas respondidas:"
-        android:layout_marginTop="10dp"
         android:paddingStart="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSuasPerguntasRespondidas"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_height="220dp" />
 
     <TextView
         android:id="@+id/txtSuasPerguntasSemResposta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:fontFamily="@font/open_sans_bold"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         android:text="Perguntas sem resposta:"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="10dp"
         android:paddingStart="15dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerSuasPerguntasSemResposta"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_height="220dp" />
 
-    <LinearLayout
-        android:id="@+id/linearBtn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal|center_vertical">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnFazerPergunta"
-            android:layout_width="330dp"
-            android:layout_height="35dp"
-            android:text="Faça uma pergunta!"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:textSize="17sp"
-            android:background="@drawable/fundo_arredondado_roxo_btn_selecionado"/>
-    </LinearLayout>
 
 
 </LinearLayout>

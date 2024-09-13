@@ -66,17 +66,39 @@
             android:background="@drawable/fundo_barra_pesquisa" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearBtnfazerPergunta"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopoForum"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutTopoForum"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutTopoForum">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFazerPergunta"
+            android:layout_width="375dp"
+            android:layout_height="match_parent"
+            android:text="Faça uma pergunta!"
+            android:textColor="@color/roxoPrincipal"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:background="@drawable/fundo_barra_pesquisa"/>
+    </LinearLayout>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardItensForum"
         android:layout_width="match_parent"
         android:layout_height="580dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="80dp"
         app:cardElevation="10dp"
         app:cardBackgroundColor="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutBarraPesquisaForum"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTopoForum"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/linearLayoutBarraPesquisaForum"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayoutBarraPesquisaForum">
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutTopoForum"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutTopoForum">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,7 +125,7 @@
                     tools:textColor="@color/textoSelecionadoForum"
                     tools:background="@drawable/fundo_botao_forum_selecionado" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSuasPerguntas"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
@@ -120,7 +142,7 @@
                 android:id="@+id/fragmentForum"
                 android:layout_width="match_parent"
                 android:layout_height="505dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="15dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

@@ -14,6 +14,10 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosPerguntasForum;
 
 import java.util.List;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 
 public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntasForum.PerguntasForumViewHolder>{ List<DadosPerguntasForum> listaPerguntasForum;
 
@@ -33,8 +37,11 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
         holder.titulo.setText(pergunta.getTitulo());
         holder.nomeDeUsuario.setText(pergunta.getNomeDeUsuario());
 
-        String data = pergunta.getDataPublicacao().toString();
-        holder.dataEOlimp.setText(data + " • "+pergunta.getOlimpiada());
+        Date dataPublicacao = pergunta.getDataPublicacao();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = dateFormat.format(dataPublicacao);
+
+        holder.dataEOlimp.setText(dataFormatada + " • " + pergunta.getOlimpiada());
 
         holder.pergunta.setText(pergunta.getPergunta());
         int qntdRespostasInt = pergunta.getQntdRespostas();
@@ -43,7 +50,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
         if(qntdRespostasInt>0){
             holder.respostas.setText(qntdRespostasString + " respostas • Clique aqui para exibir");
         }else{
-            holder.respostas.setText("0 respostas • A pergunta ainda não foi respondida");
+            holder.respostas.setText("0 respostas • A pergunta não foi respondida");
         }
 
 

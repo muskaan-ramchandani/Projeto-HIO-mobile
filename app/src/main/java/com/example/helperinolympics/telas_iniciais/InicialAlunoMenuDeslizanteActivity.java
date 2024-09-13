@@ -106,8 +106,12 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
                  finish();
                  return true;
              }else if(itemID == R.id.nav_forum){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class));
+
+                 Intent intentForum = new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class);
+                 intentForum.putExtra("alunoCadastrado", alunoCadastrado);
+                 startActivity(intentForum);
                  finish();
+
                  return true;
              }else if(itemID == R.id.nav_manual){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
