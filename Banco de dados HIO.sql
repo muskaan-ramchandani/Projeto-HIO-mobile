@@ -11,7 +11,6 @@ CREATE TABLE Olimpiada(
     PRIMARY KEY(sigla)
 );
 
-SELECT * FROM Olimpiada;
 INSERT INTO Olimpiada VALUES
     ('Olimpíada Brasileira de Astronomia', 'OBA', 'imgtelescopio', 'Rosa'),
     ('Olimpíada Brasileira de Física', 'OBF', 'imgmacacaindo', 'Azul'),
@@ -21,7 +20,6 @@ INSERT INTO Olimpiada VALUES
     ('Olimpíada Brasileira de Química', 'OBQ', 'imgtubodeensaio', 'Azul'),
     ('Olimpíada Brasileira de Biologia', 'OBB', 'imgdna', 'Laranja'),
     ('Olimpíada Nacional de Ciências', 'ONC', 'imgatomo', 'Ciano');
-
 
 DROP TABLE IF EXISTS Aluno;
 SELECT * FROM Aluno;
@@ -48,7 +46,6 @@ CREATE TABLE OlimpiadasSelecionadas(
 );
 
 DROP TABLE IF EXISTS Professor;
-SELECT * FROM Professor;
 CREATE TABLE Professor (
     nomeCompleto VARCHAR(200) NOT NULL,
     nomeUsuario VARCHAR(20) NOT NULL,
@@ -59,7 +56,6 @@ CREATE TABLE Professor (
 );
 
 DROP TABLE IF EXISTS Conteudo;
-SELECT * FROM Conteudo;
 CREATE TABLE Conteudo(
 	id INT AUTO_INCREMENT NOT NULL,
     titulo VARCHAR(200) NOT NULL,
@@ -98,7 +94,6 @@ INSERT INTO Conteudo(titulo, subtitulo, siglaOlimpiadaPertencente) VALUES
     
 
 DROP TABLE IF EXISTS Livro;
-SELECT * FROM Livro;
 CREATE TABLE Livro(
 	id INT NOT NULL,
     isbn VARCHAR(13) NOT NULL,
@@ -113,7 +108,7 @@ CREATE TABLE Livro(
 );
 
 DROP TABLE IF EXISTS ProvaAnterior;
-SELECT * FROM ProvaAnterior;
+
 CREATE TABLE ProvaAnterior(
 	id INT NOT NULL,
     anoDaProva YEAR NOT NULL,

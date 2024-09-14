@@ -1,39 +1,30 @@
 <?php
-// Configurações do banco de dados
-$dsn = 'mysql:host=localhost;dbname=hio;charset=utf8';
-$dbUsername = 'root';
-$dbPassword = 'root';
+session_start(); // Inicia ou retoma uma sessão existente
 
-$mensagem = '';
+$dsn = 'mysql:host=localhost;dbname=hio;charset=utf8';
+$username = 'root';
+$password = 'root';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Conectar ao banco de dados
-        $pdo = new PDO($dsn, $dbUsername, $dbPassword);
+        $pdo = new PDO($dsn, $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Verificar se os campos foram preenchidos
         if (isset($_POST['email'], $_POST['password'])) {
-            $emailOrUsername = trim($_POST['email']);
+            $email = trim($_POST['email']);
             $password = $_POST['password'];
 
-            // Verificar se o usuário existe
-            $sql = "SELECT senha FROM professores WHERE email = :emailOrUsername OR nome_usuario = :emailOrUsername";
+            $sql = "SELECT senha FROM Professor WHERE email = :email";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':emailOrUsername', $emailOrUsername);
+            $stmt->bindParam(':email', $email);
             $stmt->execute();
 
-            if ($stmt->rowCount() > 0) {
-                // Recuperar o hash da senha
-                $hashedPassword = $stmt->fetchColumn();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // Verificar a senha
-                if (password_verify($password, $hashedPassword)) {
-                    // Login bem-sucedido
-                    session_start();
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['user'] = $emailOrUsername; // Guardar o nome de usuário ou email
-                    header("Location: TelaInicialProfessor.html"); // Redirecionar para a página inicial do professor
+            if ($user) {
+                if (password_verify($password, $user['senha'])) {
+                    $_SESSION['email'] = $email; // Armazena o email na sessão
+                    header("Location: TelaInicialProfessor.html"); // Redireciona para a página inicial do professor
                     exit();
                 } else {
                     $mensagem = "Senha incorreta.";
@@ -48,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagem = "Erro: " . $e->getMessage();
     }
 
-    // Redirecionar de volta com uma mensagem
+    $pdo = null;
+
     header("Location: TelaRecepcao.html?mensagem=" . urlencode($mensagem));
     exit();
 }

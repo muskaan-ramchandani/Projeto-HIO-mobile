@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hashedPassword = password_hash(trim($password), PASSWORD_DEFAULT);
 
                 // Prepara a consulta SQL para inserir um novo professor
-                $sql = "INSERT INTO professores (nome, nome_usuario, email, senha) VALUES (:name, :username, :email, :senha)";
+                $sql = "INSERT INTO Professor (nomeCompleto, nomeUsuario, email, senha) VALUES (:name, :username, :email, :senha)";
                 $stmt = $pdo->prepare($sql);
 
                 // Associa os parâmetros aos valores fornecidos
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo = null;
 
     // Se ocorreu um erro, redireciona para o formulário com a mensagem de erro
-    header("Location: TelaCadastroProfessor.html?mensagem=" . urlencode($mensagem));
+    header("Location:TelaCadastroProfessor.html?mensagem=" . urlencode($mensagem));
     exit();
 }
 ?>
