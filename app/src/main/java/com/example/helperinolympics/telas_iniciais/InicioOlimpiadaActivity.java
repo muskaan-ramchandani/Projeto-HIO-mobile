@@ -3,8 +3,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 
@@ -48,6 +51,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
     DadosAluno alunoCadastrado;
     String siglaOlimpiada;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     ActivityTelaOlimpiadaBinding binding;
 
@@ -141,36 +145,11 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         binding.recyclerViewLivros.setHasFixedSize(true);
         binding.recyclerViewLivros.setAdapter(adapterLivros);
 
-        //DADOS FICTICIOS
-        Date dataPublicacao1 = null;
-        try {
-            // Converta a String para Date
-            dataPublicacao1 = sdf.parse("22/02/2022");
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if (siglaOlimpiada != null) {
+            new LivrosDownload().execute(siglaOlimpiada);
+        } else {
+            Log.d("ERRO_SIGLA", "A sigla da Olimpíada está nula");
         }
-        DadosLivros dado1 = new DadosLivros(1, R.drawable.imglivrofisica, "O Livro da Física", "Maria Souza" ,"3", dataPublicacao1);
-        livros.add(dado1);
-
-        Date dataPublicacao2 = null;
-        try {
-            // Converta a String para Date
-            dataPublicacao2 = sdf.parse("13/03/2013");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        DadosLivros dado2 = new DadosLivros(2, R.drawable.imglivrofisica, "O Livro 2", "Mariaana" ,"7", dataPublicacao2);
-        livros.add(dado2);
-
-        Date dataPublicacao3 = null;
-        try {
-            // Converta a String para Date
-            dataPublicacao3 = sdf.parse("01/01/1991");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        DadosLivros dado3 = new DadosLivros(3, R.drawable.imglivrofisica, "OUTRO", "Magali" ,"1", dataPublicacao3);
-        livros.add(dado3);
 
     }
 
@@ -290,5 +269,113 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
     }
 
+    private class LivrosDownload extends AsyncTask<String, Void, List<DadosLivros>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<DadosLivros> doInBackground(String... params) {
+            String siglaOlimpiada = params[0];
+            Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
+
+            List<DadosLivros> livros = new ArrayList<>();
+            try {
+                String urlString = "http://192.168.1.9:8086/phpHio/carregaLivroPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                        URLEncoder.encode(siglaOlimpiada, "UTF-8");
+                URL url = new URL(urlString);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(false);
+                conexao.connect();
+                Log.d("CONEXAO", "Conexão estabelecida");
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+                    Log.d("DADOS", jsonString);
+                    livros.addAll(converterParaList(jsonString));
+                }
+
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return livros;
+        }
+
+        @Override
+        protected void onPostExecute(List<DadosLivros> livros) {
+            super.onPostExecute(livros);
+            if (livros != null) {
+                adapterLivros.atualizarOpcoes(livros);
+                adapterLivros.notifyDataSetChanged();
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream dados = new ByteArrayOutputStream();
+            try {
+                int qtdBytesLido;
+                while ((qtdBytesLido = in.read(buffer)) != -1) {
+                    dados.write(buffer, 0, qtdBytesLido);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return dados.toString();
+        }
+
+        private List<DadosLivros> converterParaList(String jsonString) {
+            List<DadosLivros> livros = new ArrayList<>();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray("livros");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject livroJSON = jsonArray.getJSONObject(i);
+                    DadosLivros livro = new DadosLivros();
+
+                    livro.setId(livroJSON.getInt("id"));
+                    livro.setIsbn(livroJSON.getString("isbn"));
+                    livro.setTitulo(livroJSON.getString("titulo"));
+                    livro.setAutor(livroJSON.getString("autor"));
+                    livro.setEdicao(String.valueOf(livroJSON.getInt("edicao")));
+
+                    String dataPublicacaoString = livroJSON.getString("dataPublicacao");
+                    Date dataPublicacao = converterParaData(dataPublicacaoString);
+                    livro.setDataPublicacao(dataPublicacao);
+
+                    String capaBase64 = livroJSON.getString("capa");
+                    Bitmap bitmapCapa = decodeBase64ToBitmap(capaBase64);
+                    livro.setCapa(bitmapCapa);
+
+                    Log.d("Livro", livro.toString());
+                    livros.add(livro);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return livros;
+        }
+    }
+
+    private Date converterParaData(String dataString) {
+        try {
+            return dateFormat.parse(dataString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null; // Retorne null ou um valor padrão conforme necessário
+        }
+    }
+
+    public Bitmap decodeBase64ToBitmap(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 
 }

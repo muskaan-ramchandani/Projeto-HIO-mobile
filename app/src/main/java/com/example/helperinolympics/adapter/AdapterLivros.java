@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.DadosConteudo;
 import com.example.helperinolympics.model.DadosLivros;
 import com.example.helperinolympics.model.DadosOlimpiada;
 
@@ -54,9 +55,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
         String valorData = "Data de publicação: "+ dataFormatada;
         holder.dataPub.setText(valorData);
 
-        int valorImagem = livro.getCapa();
-        holder.capa.setImageResource(valorImagem);
-
+        holder.capa.setImageBitmap(livro.getCapa());
     }
 
 
@@ -86,4 +85,11 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
 
 
     public int getItemCount(){return listaLivros.size();}
+
+    public void atualizarOpcoes(List<DadosLivros> livros){
+        this.listaLivros.clear();
+        this.listaLivros.addAll(livros);
+        this.notifyDataSetChanged();
+    }
+
 }

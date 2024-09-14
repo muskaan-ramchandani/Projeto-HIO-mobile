@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="390dp"
-    android:layout_height="150dp"
+    android:layout_height="155dp"
     android:orientation="vertical"
     android:gravity="center_vertical|center_horizontal"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLivro1"
         android:layout_width="375dp"
-        android:layout_height="150dp"
+        android:layout_height="155dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="5dp"
         app:cardBackgroundColor="@android:color/transparent"
@@ -53,7 +53,7 @@
                     android:id="@+id/txtAutor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="@font/open_sans"
                     tools:text="Autor: Maria Souza"
                     android:textColor="#000000" />
@@ -79,7 +79,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnOndeComprar"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="26dp"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/fundo_botoes_comuns_lilas"
                     android:fontFamily="@font/open_sans_bold"
