@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px; /* Adiciona algum espaçamento interno */
+    box-sizing: border-box;
+}
+
+
+.barra .logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Faz com que a logo-container ocupe o espaço restante */
+}
+
+
+.barra .logo-container img {
+    height: 80px; /* Ajusta a altura da imagem */
+    margin-right: 10px; /* Espaço entre a imagem e o texto */
+}
+
+
+.barra .logo-container .text {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.barra .button-container {
+    display: flex;
+    align-items: flex-end; /* Alinha os botões na parte inferior da barra */
+    margin-left: auto; /* Alinha os botões à direita */
+}
+
+
+.barra .button-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px; /* Espaço entre os botões */
+    position: relative;
+}
+
+
+.barra .button-item img {
+    height: 50px; /* Ajusta a altura dos botões */
+}
+
+
+.barra .button-item .button-label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    margin-top: 1px; /* Espaço entre a imagem e o texto */
+    text-align: center;
+}
+
+
+.barra .button-item img:hover {
+    background-color: #a952ff; /* Cor de fundo quando o mouse passa sobre o botão */
+    border-radius: 7px; /* Adiciona cantos arredondados ao fundo */
+}
+.main-content {
+    margin-top: 67px;
+    text-align: center;
+    padding: 20px;
+}
+
+
+.main-content h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+}
+
+
+/* Ajustes para o container dos info-box */
+.info-box-container {
+    display: flex; /* Alinha os info-box horizontalmente */
+    justify-content: space-between; /* Espaça igualmente os info-box */
+    gap: 15px; /* Espaço entre os info-box */
+    flex-wrap: wrap; /* Permite quebra de linha se não houver espaço suficiente */
+    margin-top: 60px; /* Espaço acima do contêiner para separar das seções anteriores */
+}
+
+
+/* Ajusta a largura dos info-box dentro do container */
+.info-box {
+    background-color: #f8f6f6;
+    padding: 15px;
+    border-radius: 5px;
+    width: 30%; /* Ajusta a largura dos info-box para caber em três na linha */
+    box-sizing: border-box;
+    /* Adiciona um pouco de sombra para destaque */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Estilização do texto dentro do retângulo */
+.info-box p.title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
+/* Container para imagem, texto e botão dentro do retângulo */
+.info-box-content {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre os itens */
+    margin-top: 10px;
+}
+
+
+/* Estilização da imagem */
+.info-box-content img {
+    height: 20px;
+    margin-right: 2px; /* Espaço entre a imagem e o texto */
+}
+
+
+/* Estilização do texto ao lado da imagem */
+.info-box-content .info-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #000;
+    margin: 0;
+}
+
+
+/* Estilização do botão */
+.info-box-content .info-button {
+    background-color: #8c52ff; /* Cor de fundo do botão */
+    color: white; /* Cor do texto do botão */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 5px 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+/* Efeito ao passar o mouse sobre o botão */
+.info-box-content .info-button:hover {
+    background-color: #7a40d6;
+}
+
+
+/* Estilos da barra e conteúdo principal permanecem inalterados */
+
+
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed;
+    z-index: 1000; /* Garante que o modal esteja sobre outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+    max-width: 600px; /* Largura máxima do modal */
+    border-radius: 10px; /* Cantos arredondados */
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
