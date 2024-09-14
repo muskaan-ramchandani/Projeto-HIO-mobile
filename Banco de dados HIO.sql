@@ -11,7 +11,6 @@ CREATE TABLE Olimpiada(
     PRIMARY KEY(sigla)
 );
 
-SELECT * FROM Olimpiada;
 INSERT INTO Olimpiada VALUES
     ('Olimpíada Brasileira de Astronomia', 'OBA', 'imgtelescopio', 'Rosa'),
     ('Olimpíada Brasileira de Física', 'OBF', 'imgmacacaindo', 'Azul'),
@@ -24,7 +23,6 @@ INSERT INTO Olimpiada VALUES
 
 
 DROP TABLE IF EXISTS Aluno;
-SELECT * FROM Aluno;
 CREATE TABLE Aluno(
 	nomeCompleto VARCHAR(200) NOT NULL,
     nomeUsuario VARCHAR(20) NOT NULL,
@@ -35,7 +33,6 @@ CREATE TABLE Aluno(
 );
 
 DROP TABLE IF EXISTS OlimpiadasSelecionadas;
-SELECT * FROM OlimpiadasSelecionadas;
 CREATE TABLE OlimpiadasSelecionadas(
 	id INT AUTO_INCREMENT NOT NULL,
     sigla VARCHAR(10) NOT NULL,
@@ -48,7 +45,6 @@ CREATE TABLE OlimpiadasSelecionadas(
 );
 
 DROP TABLE IF EXISTS Professor;
-SELECT * FROM Professor;
 CREATE TABLE Professor (
     nomeCompleto VARCHAR(200) NOT NULL,
     nomeUsuario VARCHAR(20) NOT NULL,
@@ -59,7 +55,6 @@ CREATE TABLE Professor (
 );
 
 DROP TABLE IF EXISTS Conteudo;
-SELECT * FROM Conteudo;
 CREATE TABLE Conteudo(
 	id INT AUTO_INCREMENT NOT NULL,
     titulo VARCHAR(200) NOT NULL,
@@ -84,21 +79,20 @@ INSERT INTO Conteudo(titulo, subtitulo, siglaOlimpiadaPertencente) VALUES
     ('Conteúdo oba 4', 'Subtitulo 4', 'OBA'),
     ('Conteúdo oba 5', 'Subtitulo 5', 'OBA'),
     
-    ('Conteúdo oba 1', 'Subtitulo 1', 'OBB'),
-	('Conteúdo oba 2', 'Subtitulo 2', 'OBB'),
-    ('Conteúdo oba 3', 'Subtitulo 3', 'OBB'),
-    ('Conteúdo oba 4', 'Subtitulo 4', 'OBB'),
-    ('Conteúdo oba 5', 'Subtitulo 5', 'OBB'),
+    ('Conteúdo obb 1', 'Subtitulo 1', 'OBB'),
+	('Conteúdo obb 2', 'Subtitulo 2', 'OBB'),
+    ('Conteúdo obb 3', 'Subtitulo 3', 'OBB'),
+    ('Conteúdo obb 4', 'Subtitulo 4', 'OBB'),
+    ('Conteúdo obb 5', 'Subtitulo 5', 'OBB'),
     
-    ('Conteúdo oba 1', 'Subtitulo 1', 'OBI'),
-	('Conteúdo oba 2', 'Subtitulo 2', 'OBI'),
-    ('Conteúdo oba 3', 'Subtitulo 3', 'OBI'),
-    ('Conteúdo oba 4', 'Subtitulo 4', 'OBI'),
-    ('Conteúdo oba 5', 'Subtitulo 5', 'OBI');
+    ('Conteúdo obi 1', 'Subtitulo 1', 'OBI'),
+	('Conteúdo obi 2', 'Subtitulo 2', 'OBI'),
+    ('Conteúdo obi 3', 'Subtitulo 3', 'OBI'),
+    ('Conteúdo obi 4', 'Subtitulo 4', 'OBI'),
+    ('Conteúdo obi 5', 'Subtitulo 5', 'OBI');
     
 
 DROP TABLE IF EXISTS Livro;
-SELECT * FROM Livro;
 CREATE TABLE Livro(
 	id INT NOT NULL,
     isbn VARCHAR(13) NOT NULL,
@@ -113,7 +107,6 @@ CREATE TABLE Livro(
 );
 
 DROP TABLE IF EXISTS ProvaAnterior;
-SELECT * FROM ProvaAnterior;
 CREATE TABLE ProvaAnterior(
 	id INT NOT NULL,
     anoDaProva YEAR NOT NULL,
