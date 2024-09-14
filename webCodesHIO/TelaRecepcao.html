@@ -12,29 +12,34 @@
         <div class="square">
             <h1>Helper in Olympics</h1>
             <div class="image-container">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/hipoPrincipalComMedalha.png" alt="Hipo com medalha">
+                <img src="Imagens_Mobile_HIO/hipoComMedalhas.png" alt="Hipo com medalha">
             </div>
         </div>
         
         <!-- Parte branca da tela -->
         <div class="login-section">
             <h1 class="login-title">Entrar</h1>
-            <form id="login-form">
-                <input type="text" id="username-email" placeholder="Email ou nome de usuário" required>
-                <input type="password" id="password" placeholder="Senha" required>
+            <form id="login-form" method="post" action="verificar_login.php">
+                <input type="text" id="username-email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Senha" required>
                 <button type="submit"><b>Entrar</b></button>
                 <p class="forgot-password">Esqueceu sua senha? <a href="#" class="forgot-link">Clique aqui</a></p>
                 <button type="button" id="register-button" class="register-button">Cadastre-se</button>
             </form>
+            <?php if (isset($_GET['mensagem'])): ?>
+                <div id="responseMessage" class="message">
+                    <p><?php echo htmlspecialchars($_GET['mensagem']); ?></p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
     
-    <script src="TelaRecepcao.js"></script>
+    <script></script>
     <script>
         // Adiciona um ouvinte de evento ao botão "Cadastre-se"
         document.getElementById('register-button').addEventListener('click', function() {
             // Redireciona para a página de cadastro
-            window.location.href = 'file:///C:/Users/Muskaan%20Ramchandani/Desktop/HIOTelasWeb/TelaCadastroProfessor.html';
+            window.location.href = 'TelaBemVindo.html'; // Atualizado para URL relativa
         });
     </script>
 </body>

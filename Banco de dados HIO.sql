@@ -21,7 +21,6 @@ INSERT INTO Olimpiada VALUES
     ('Olimpíada Brasileira de Biologia', 'OBB', 'imgdna', 'Laranja'),
     ('Olimpíada Nacional de Ciências', 'ONC', 'imgatomo', 'Ciano');
 
-
 DROP TABLE IF EXISTS Aluno;
 CREATE TABLE Aluno(
 	nomeCompleto VARCHAR(200) NOT NULL,
@@ -107,6 +106,10 @@ CREATE TABLE Livro(
 );
 
 DROP TABLE IF EXISTS ProvaAnterior;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 10cc9dc6ee7b306bd64a3973bd6554f38395ee26
 CREATE TABLE ProvaAnterior(
 	id INT NOT NULL,
     anoDaProva YEAR NOT NULL,

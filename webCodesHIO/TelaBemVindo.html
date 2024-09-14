@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bem Vindo</title>
     <link rel="stylesheet" href="TelaBemVindo.css">
+    <script>
+      
+        function redirectToTelaCadastroAlunoProfessor() {
+            window.location.href = 'TelaCadastroAlunoProfessor.html';
+        }
+        
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('right-button').addEventListener('click', redirectToTelaCadastroAlunoProfessor);
+        });
+    </script>
 </head>
 <body>
     <div class="container">
@@ -23,21 +34,21 @@
 
         <!-- Container para a imagem -->
         <div class="image-container">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/hipoMostrandoAlgoDaEsquerda.png" alt="hipo apontando para esquerda">
+            <img src="Imagens_Mobile_HIO/hipoMostrandoAlgoDaEsquerda.png" alt="hipo apontando para esquerda">
         </div>
     </div>
 
     <!-- Botão de imagem à esquerda -->
     <div class="button-image-container-left">
         <button class="button-image">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Botão voltar esquerda">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Botão voltar esquerda">
         </button>
     </div>
    
     <!-- Botão de imagem à direita -->
     <div class="button-image-container-right">
-        <button class="button-image">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarEAvancarExercicioDireita.png" alt=Botão voltar direita">
+        <button id="right-button" class="button-image">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Botão voltar direita">
         </button>
     </div>
 </body>
