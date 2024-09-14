@@ -137,7 +137,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
     public void configurarRecyclerOlimpiadas(){
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterOlimpiadas(olimpiadas);
+        adapter= new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
         binding.recyclerViewTelaInicialOlimpiadas.setLayoutManager(layoutManager);
         binding.recyclerViewTelaInicialOlimpiadas.setHasFixedSize(true);
         binding.recyclerViewTelaInicialOlimpiadas.setAdapter(adapter);
@@ -161,7 +161,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             Log.d("CONEXAO", "Tentando fazer download");
 
             try {
-                URL url = new URL("http://192.168.1.3:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
+                URL url = new URL("http://192.168.1.9:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

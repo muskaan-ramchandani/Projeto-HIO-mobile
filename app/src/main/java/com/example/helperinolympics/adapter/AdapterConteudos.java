@@ -22,16 +22,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.materiais.TextoActivity;
+import com.example.helperinolympics.model.DadosAluno;
 import com.example.helperinolympics.model.DadosConteudo;
+import com.example.helperinolympics.model.DadosOlimpiada;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
 import java.util.List;
 
 public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.ConteudosViewHolder>{
     List<DadosConteudo> listaConteudos;
+    DadosAluno alunoCadastrado;
 
-    public AdapterConteudos(List<DadosConteudo> conteudos){
+    public AdapterConteudos(List<DadosConteudo> conteudos, DadosAluno alunoCadastrado){
         this.listaConteudos=conteudos;
+        this.alunoCadastrado = alunoCadastrado;
     }
 
     public AdapterConteudos.ConteudosViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
@@ -65,6 +69,7 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
             public void onClick(View v) {
                 Context context = v.getContext();
                 Intent intent = new Intent(context, TextoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 context.startActivity(intent);
 
                 if (context instanceof Activity) {
@@ -89,4 +94,10 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
 
 
     public int getItemCount(){return listaConteudos.size();}
+
+    public void atualizarOpcoes(List<DadosConteudo> conteudos){
+        this.listaConteudos.clear();
+        this.listaConteudos.addAll(conteudos);
+        this.notifyDataSetChanged();
+    }
 }

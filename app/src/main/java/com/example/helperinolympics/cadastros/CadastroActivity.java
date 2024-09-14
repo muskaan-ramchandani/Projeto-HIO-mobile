@@ -180,7 +180,7 @@ public class CadastroActivity extends AppCompatActivity {
             Log.d("CONEXAO", "tentando cadastro");
 
             try {
-                URL url = new URL("http://192.168.1.3:8086/phpHio/cadastraAluno.php");
+                URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -254,7 +254,7 @@ public class CadastroActivity extends AppCompatActivity {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://192.168.1.3:8086/phpHio/editarDadosAlunoExcetoEmail.php");
+                URL url = new URL("http://192.168.1.9:8086/phpHio/editarDadosAlunoExcetoEmail.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);

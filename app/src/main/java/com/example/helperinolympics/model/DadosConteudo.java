@@ -1,11 +1,15 @@
 package com.example.helperinolympics.model;
 
-public class DadosConteudo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class DadosConteudo  implements Parcelable{
 
     int id;
     String tituloConteudo, subtituloConteudo, olimpiadaPertencente, corFundo;
     private boolean isPressed;
 
+    public DadosConteudo(){}
 
     //id automatico no banco
     public DadosConteudo(int id, String tituloConteudo, String subtituloConteudo, String olimpiadaPertencente, String corFundo) {
@@ -64,4 +68,39 @@ public class DadosConteudo {
     public void setPressed(boolean pressed) {
         isPressed = pressed;
     }
+
+    protected DadosConteudo(Parcel in) {
+        id = in.readInt();
+        tituloConteudo = in.readString();
+        subtituloConteudo = in.readString();
+        olimpiadaPertencente = in.readString();
+        corFundo = in.readString();
+
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(tituloConteudo);
+        dest.writeString(subtituloConteudo);
+        dest.writeString(olimpiadaPertencente);
+        dest.writeString(corFundo);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<DadosConteudo> CREATOR = new Parcelable.Creator<DadosConteudo>() {
+        @Override
+        public DadosConteudo createFromParcel(Parcel in) {
+            return new DadosConteudo(in);
+        }
+
+        @Override
+        public DadosConteudo[] newArray(int size) {
+            return new DadosConteudo[size];
+        }
+    };
 }
