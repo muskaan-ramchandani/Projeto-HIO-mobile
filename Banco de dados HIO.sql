@@ -93,7 +93,7 @@ INSERT INTO Conteudo(titulo, subtitulo, siglaOlimpiadaPertencente) VALUES
 
 DROP TABLE IF EXISTS Livro;
 CREATE TABLE Livro(
-	id INT NOT NULL,
+	id INT AUTO_INCREMENT NOT NULL,
     isbn VARCHAR(13) NOT NULL,
     titulo VARCHAR(300) NOT NULL,
     autor VARCHAR(200) NOT NULL,
@@ -106,12 +106,8 @@ CREATE TABLE Livro(
 );
 
 DROP TABLE IF EXISTS ProvaAnterior;
-<<<<<<< HEAD
-=======
-
->>>>>>> 10cc9dc6ee7b306bd64a3973bd6554f38395ee26
 CREATE TABLE ProvaAnterior(
-	id INT NOT NULL,
+	id INT AUTO_INCREMENT NOT NULL,
     anoDaProva YEAR NOT NULL,
     estado BOOLEAN NOT NULL,
     fase INT NOT NULL,
