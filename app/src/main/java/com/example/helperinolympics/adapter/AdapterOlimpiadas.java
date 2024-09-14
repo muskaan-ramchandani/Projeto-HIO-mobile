@@ -28,7 +28,6 @@ import java.util.List;
 public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.OlimpiadasViewHolder>{
     List<DadosOlimpiada> listaOlimpiadas;
     DadosAluno alunoAtual;
-    String siglaDaOlimpiadaSelecionada;
 
     public AdapterOlimpiadas(List<DadosOlimpiada> olimpiadas, DadosAluno alunoAtual){
         this.listaOlimpiadas=olimpiadas;
@@ -42,10 +41,10 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
 
     public void onBindViewHolder(@NonNull AdapterOlimpiadas.OlimpiadasViewHolder holder, int position) {
         DadosOlimpiada olimp = listaOlimpiadas.get(position);
-        siglaDaOlimpiadaSelecionada = olimp.getSigla();
 
         holder.icone.setImageResource(olimp.getIconeOlimp());
         holder.nomeESigla.setText(olimp.getNome() + " - " + olimp.getSigla());
+        holder.siglaDaOlimpiadaSelecionada = olimp.getSigla();
 
         String valorCor = olimp.getCor();
         if (valorCor.equals("Azul")) {
@@ -71,7 +70,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
         TextView nomeESigla;
         CardView cardFundo;
         LinearLayout linearFundo;
-
+        String siglaDaOlimpiadaSelecionada;
 
         public OlimpiadasViewHolder(@NonNull View itemView, final Context context){
             super(itemView);
@@ -80,6 +79,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
             cardFundo=itemView.findViewById(R.id.cardFundoOlimpiada);
             linearFundo=itemView.findViewById(R.id.linearFundoCardOlimpiada);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -87,7 +87,6 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
                     intent.putExtra("alunoCadastrado", alunoAtual);
                     intent.putExtra("siglaOlimpiada", siglaDaOlimpiadaSelecionada);
                     Log.d("SIGLA_OLIMPIADA", "Sigla: " + siglaDaOlimpiadaSelecionada);
-
 
                     ((AppCompatActivity)context).startActivity(intent);
                 }

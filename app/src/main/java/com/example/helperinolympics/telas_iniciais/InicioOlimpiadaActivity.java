@@ -29,6 +29,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,16 +61,8 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(InicioOlimpiadaActivity.this, TelaLoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Intent intent = new Intent(InicioOlimpiadaActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
@@ -95,8 +88,6 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         } else {
             Log.d("ERRO_SIGLA", "A sigla da Olimpíada está nula");
         }
-
-        adapterConteudos.notifyDataSetChanged();
 
     }
 
@@ -180,10 +171,13 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         @Override
         protected List<DadosConteudo> doInBackground(String... params) {
             String siglaOlimpiada = params[0];
-            Log.d("CONEXAO", "Tentando fazer download");
+            Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
 
+            List<DadosConteudo> conteudos = new ArrayList<>();
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" + siglaOlimpiada);
+                String urlString = "http://192.168.1.9:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                        URLEncoder.encode(siglaOlimpiada, "UTF-8");
+                URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -209,8 +203,10 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<DadosConteudo> conteudos) {
             super.onPostExecute(conteudos);
-            adapterConteudos.atualizarOpcoes(conteudos);
-            adapterConteudos.notifyDataSetChanged();
+            if (conteudos != null) {
+                adapterConteudos.atualizarOpcoes(conteudos);
+                adapterConteudos.notifyDataSetChanged();
+            }
         }
 
         private String converterParaJSONString(InputStream in) {
@@ -239,7 +235,6 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
                     conteudo.setId(conteudoJSON.getInt("id"));
                     conteudo.setTituloConteudo(conteudoJSON.getString("titulo"));
                     conteudo.setSubtituloConteudo(conteudoJSON.getString("subtitulo"));
-                    conteudo.setOlimpiadaPertencente(conteudoJSON.getString("siglaOlimpiadaPertencente"));
 
                     String[] cores = {"Rosa", "Azul", "Laranja", "Ciano"};
                     int colorIndex = i % cores.length; // Alterna as cores ciclicamente
@@ -255,5 +250,6 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
             return conteudos;
         }
     }
+
 
 }
