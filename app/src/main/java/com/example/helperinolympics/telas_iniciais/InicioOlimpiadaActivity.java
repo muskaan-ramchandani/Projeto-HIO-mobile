@@ -16,6 +16,7 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterConteudos;
 import com.example.helperinolympics.adapter.AdapterLivros;
 import com.example.helperinolympics.adapter.AdapterProvasAnteriores;
+import com.example.helperinolympics.databinding.ActivityTelaOlimpiadaBinding;
 import com.example.helperinolympics.model.DadosAluno;
 import com.example.helperinolympics.model.DadosConteudo;
 import com.example.helperinolympics.model.DadosLivros;
@@ -41,7 +42,6 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     List<DadosConteudo> conteudos = new ArrayList<>();
     List<DadosLivros> livros = new ArrayList<>();
     List<DadosProvasAnteriores> provas = new ArrayList<>();
-    RecyclerView rvConteudos, rvLivros, rvProvasAnteriores;
     AdapterConteudos adapterConteudos;
     AdapterLivros adapterLivros;
     AdapterProvasAnteriores adapterProvasAnteriores;
@@ -49,14 +49,21 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     DadosAluno alunoCadastrado;
     String siglaOlimpiada;
 
+    ActivityTelaOlimpiadaBinding binding;
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_olimpiada);
+        binding = ActivityTelaOlimpiadaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
         siglaOlimpiada = getIntent().getStringExtra("siglaOlimpiada");
         Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
 
+        configurarDetalhesTela(siglaOlimpiada);
+        configurarRecyclerConteudos();
+        configurarRecyclerLivros();
+        configurarRecyclerProvas();
 
         findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,21 +75,55 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
             }
         });
 
-        configurarRecyclerConteudos();
-        configurarRecyclerLivros();
-        configurarRecyclerProvas();
+    }
+
+    private void configurarDetalhesTela(String siglaOlimpiada) {
+
+        switch (siglaOlimpiada){
+            case "OBA":
+                binding.txtNomeOlimp.setText("OBA");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgtelescopio);
+                break;
+            case "OBF":
+                binding.txtNomeOlimp.setText("OBF");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgmacacaindo);
+                break;
+            case "OBI":
+                binding.txtNomeOlimp.setText("OBI");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgcomputador);
+                break;
+            case "OBMEP":
+                binding.txtNomeOlimp.setText("OBMEP");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgoperacoesbasicas);
+                break;
+            case "ONHB":
+                binding.txtNomeOlimp.setText("ONHB");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgpapiro);
+                break;
+            case "OBQ":
+                binding.txtNomeOlimp.setText("OBQ");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgtubodeensaio);
+                break;
+            case "OBB":
+                binding.txtNomeOlimp.setText("OBB");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgdna);
+                break;
+            case "ONC":
+                binding.txtNomeOlimp.setText("ONC");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgatomo);
+                break;
+        }
+
     }
 
     public void configurarRecyclerConteudos(){
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterConteudos= new AdapterConteudos(conteudos, alunoCadastrado);
-        rvConteudos=findViewById(R.id.recyclerViewConteudosOlimpiada);
-        rvConteudos.setLayoutManager(layoutManager);
-        rvConteudos.setHasFixedSize(true);
-        rvConteudos.setAdapter(adapterConteudos);
+        binding.recyclerViewConteudosOlimpiada.setLayoutManager(layoutManager);
+        binding.recyclerViewConteudosOlimpiada.setHasFixedSize(true);
+        binding.recyclerViewConteudosOlimpiada.setAdapter(adapterConteudos);
 
-        //get olimpiada
         if (siglaOlimpiada != null) {
             new ConteudosDownload().execute(siglaOlimpiada);
         } else {
@@ -96,10 +137,9 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterLivros= new AdapterLivros(livros);
-        rvLivros=findViewById(R.id.recyclerViewLivros);
-        rvLivros.setLayoutManager(layoutManager);
-        rvLivros.setHasFixedSize(true);
-        rvLivros.setAdapter(adapterLivros);
+        binding.recyclerViewLivros.setLayoutManager(layoutManager);
+        binding.recyclerViewLivros.setHasFixedSize(true);
+        binding.recyclerViewLivros.setAdapter(adapterLivros);
 
         //DADOS FICTICIOS
         Date dataPublicacao1 = null;
@@ -137,10 +177,9 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     private void configurarRecyclerProvas() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterProvasAnteriores= new AdapterProvasAnteriores(provas);
-        rvProvasAnteriores=findViewById(R.id.recyclerViewProvasAnteriores);
-        rvProvasAnteriores.setLayoutManager(layoutManager);
-        rvProvasAnteriores.setHasFixedSize(true);
-        rvProvasAnteriores.setAdapter(adapterProvasAnteriores);
+        binding.recyclerViewProvasAnteriores.setLayoutManager(layoutManager);
+        binding.recyclerViewProvasAnteriores.setHasFixedSize(true);
+        binding.recyclerViewProvasAnteriores.setAdapter(adapterProvasAnteriores);
 
 
         //DADOS FICTICIOS
