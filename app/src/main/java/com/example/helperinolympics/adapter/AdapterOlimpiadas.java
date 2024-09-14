@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.DadosAluno;
 import com.example.helperinolympics.model.DadosOlimpiada;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
@@ -25,9 +27,11 @@ import java.util.List;
 
 public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.OlimpiadasViewHolder>{
     List<DadosOlimpiada> listaOlimpiadas;
+    DadosAluno alunoAtual;
 
-    public AdapterOlimpiadas(List<DadosOlimpiada> olimpiadas){
+    public AdapterOlimpiadas(List<DadosOlimpiada> olimpiadas, DadosAluno alunoAtual){
         this.listaOlimpiadas=olimpiadas;
+        this.alunoAtual= alunoAtual;
     }
 
     public AdapterOlimpiadas.OlimpiadasViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
@@ -40,6 +44,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
 
         holder.icone.setImageResource(olimp.getIconeOlimp());
         holder.nomeESigla.setText(olimp.getNome() + " - " + olimp.getSigla());
+        holder.siglaDaOlimpiadaSelecionada = olimp.getSigla();
 
         String valorCor = olimp.getCor();
         if (valorCor.equals("Azul")) {
@@ -65,7 +70,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
         TextView nomeESigla;
         CardView cardFundo;
         LinearLayout linearFundo;
-
+        String siglaDaOlimpiadaSelecionada;
 
         public OlimpiadasViewHolder(@NonNull View itemView, final Context context){
             super(itemView);
@@ -74,10 +79,15 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
             cardFundo=itemView.findViewById(R.id.cardFundoOlimpiada);
             linearFundo=itemView.findViewById(R.id.linearFundoCardOlimpiada);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, InicioOlimpiadaActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoAtual);
+                    intent.putExtra("siglaOlimpiada", siglaDaOlimpiadaSelecionada);
+                    Log.d("SIGLA_OLIMPIADA", "Sigla: " + siglaDaOlimpiadaSelecionada);
+
                     ((AppCompatActivity)context).startActivity(intent);
                 }
             });

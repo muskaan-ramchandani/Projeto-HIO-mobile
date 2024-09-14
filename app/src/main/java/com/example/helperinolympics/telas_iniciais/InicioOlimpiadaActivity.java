@@ -1,6 +1,9 @@
 package com.example.helperinolympics.telas_iniciais;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,10 +16,21 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterConteudos;
 import com.example.helperinolympics.adapter.AdapterLivros;
 import com.example.helperinolympics.adapter.AdapterProvasAnteriores;
+import com.example.helperinolympics.databinding.ActivityTelaOlimpiadaBinding;
+import com.example.helperinolympics.model.DadosAluno;
 import com.example.helperinolympics.model.DadosConteudo;
 import com.example.helperinolympics.model.DadosLivros;
+import com.example.helperinolympics.model.DadosOlimpiada;
 import com.example.helperinolympics.model.DadosProvasAnteriores;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,82 +42,94 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     List<DadosConteudo> conteudos = new ArrayList<>();
     List<DadosLivros> livros = new ArrayList<>();
     List<DadosProvasAnteriores> provas = new ArrayList<>();
-    RecyclerView rvConteudos, rvLivros, rvProvasAnteriores;
     AdapterConteudos adapterConteudos;
     AdapterLivros adapterLivros;
     AdapterProvasAnteriores adapterProvasAnteriores;
 
+    DadosAluno alunoCadastrado;
+    String siglaOlimpiada;
+
+    ActivityTelaOlimpiadaBinding binding;
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_olimpiada);
+        binding = ActivityTelaOlimpiadaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(InicioOlimpiadaActivity.this, TelaLoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+        siglaOlimpiada = getIntent().getStringExtra("siglaOlimpiada");
+        Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
+
+        configurarDetalhesTela(siglaOlimpiada);
+        configurarRecyclerConteudos();
+        configurarRecyclerLivros();
+        configurarRecyclerProvas();
 
         findViewById(R.id.btnIniciar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InicioOlimpiadaActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
         });
 
-        configurarRecyclerConteudos();
-        configurarRecyclerLivros();
-        configurarRecyclerProvas();
+    }
+
+    private void configurarDetalhesTela(String siglaOlimpiada) {
+
+        switch (siglaOlimpiada){
+            case "OBA":
+                binding.txtNomeOlimp.setText("OBA");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgtelescopio);
+                break;
+            case "OBF":
+                binding.txtNomeOlimp.setText("OBF");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgmacacaindo);
+                break;
+            case "OBI":
+                binding.txtNomeOlimp.setText("OBI");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgcomputador);
+                break;
+            case "OBMEP":
+                binding.txtNomeOlimp.setText("OBMEP");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgoperacoesbasicas);
+                break;
+            case "ONHB":
+                binding.txtNomeOlimp.setText("ONHB");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgpapiro);
+                break;
+            case "OBQ":
+                binding.txtNomeOlimp.setText("OBQ");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgtubodeensaio);
+                break;
+            case "OBB":
+                binding.txtNomeOlimp.setText("OBB");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgdna);
+                break;
+            case "ONC":
+                binding.txtNomeOlimp.setText("ONC");
+                binding.imgSimboloOlimpiada.setImageResource(R.drawable.imgatomo);
+                break;
+        }
+
     }
 
     public void configurarRecyclerConteudos(){
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        adapterConteudos= new AdapterConteudos(conteudos);
-        rvConteudos=findViewById(R.id.recyclerViewConteudosOlimpiada);
-        rvConteudos.setLayoutManager(layoutManager);
-        rvConteudos.setHasFixedSize(true);
-        rvConteudos.setAdapter(adapterConteudos);
+        adapterConteudos= new AdapterConteudos(conteudos, alunoCadastrado);
+        binding.recyclerViewConteudosOlimpiada.setLayoutManager(layoutManager);
+        binding.recyclerViewConteudosOlimpiada.setHasFixedSize(true);
+        binding.recyclerViewConteudosOlimpiada.setAdapter(adapterConteudos);
 
-
-        //DADOS FICTICIOS ENQUANTO NÃO HÁ BANCO
-        DadosConteudo dado1 = new DadosConteudo(1, "Mecânica Clássica", "Fundamentos da cinemática do ponto material",
-                "OBF", "Rosa");
-        conteudos.add(dado1);
-
-        DadosConteudo dado2 = new DadosConteudo(2, "Dilatação Superficial", "Conceito e fórmulas",
-                "OBF", "Azul");
-        conteudos.add(dado2);
-
-        DadosConteudo dado3 = new DadosConteudo(3, "Estática e Hidrostática", "Princípios Básicos",
-                "OBF", "Laranja");
-        conteudos.add(dado3);
-
-        DadosConteudo dado4 = new DadosConteudo(4, "Termologia", "Termometria, Calorimetria, Termodinâmica",
-                "OBF", "Ciano");
-        conteudos.add(dado4);
-
-        DadosConteudo dado5 = new DadosConteudo(5, "Campo Elétrico", "Energia e trabalho",
-                "OBF", "Rosa");
-        conteudos.add(dado5);
-
-        adapterConteudos.notifyDataSetChanged();
-
-        /*QUANDO TIVER OS ASSUNTOS PARA CADA OLIMPIADA NO BANCO
-
-        Intent intent = getIntent();
-        ArrayList<DadosConteudo> listaRecebida = intent.getParcelableArrayListExtra("listaEscolhidas");
-        if (listaRecebida != null) {
-            olimpiadas.clear();
-            olimpiadas.addAll(listaRecebida);
-            adapter.notifyDataSetChanged();
+        if (siglaOlimpiada != null) {
+            new ConteudosDownload().execute(siglaOlimpiada);
         } else {
-            Log.e("InicialAlunoMenuDeslizanteActivity", "Nenhuma lista de olimpiadas foi recebida.");
-        }*/
+            Log.d("ERRO_SIGLA", "A sigla da Olimpíada está nula");
+        }
+
     }
 
     private void configurarRecyclerLivros() {
@@ -111,10 +137,9 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterLivros= new AdapterLivros(livros);
-        rvLivros=findViewById(R.id.recyclerViewLivros);
-        rvLivros.setLayoutManager(layoutManager);
-        rvLivros.setHasFixedSize(true);
-        rvLivros.setAdapter(adapterLivros);
+        binding.recyclerViewLivros.setLayoutManager(layoutManager);
+        binding.recyclerViewLivros.setHasFixedSize(true);
+        binding.recyclerViewLivros.setAdapter(adapterLivros);
 
         //DADOS FICTICIOS
         Date dataPublicacao1 = null;
@@ -152,10 +177,9 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     private void configurarRecyclerProvas() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterProvasAnteriores= new AdapterProvasAnteriores(provas);
-        rvProvasAnteriores=findViewById(R.id.recyclerViewProvasAnteriores);
-        rvProvasAnteriores.setLayoutManager(layoutManager);
-        rvProvasAnteriores.setHasFixedSize(true);
-        rvProvasAnteriores.setAdapter(adapterProvasAnteriores);
+        binding.recyclerViewProvasAnteriores.setLayoutManager(layoutManager);
+        binding.recyclerViewProvasAnteriores.setHasFixedSize(true);
+        binding.recyclerViewProvasAnteriores.setAdapter(adapterProvasAnteriores);
 
 
         //DADOS FICTICIOS
@@ -175,5 +199,96 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         provas.add(dado5);
 
     }
+
+    private class ConteudosDownload extends AsyncTask<String, Void, List<DadosConteudo>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<DadosConteudo> doInBackground(String... params) {
+            String siglaOlimpiada = params[0];
+            Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
+
+            List<DadosConteudo> conteudos = new ArrayList<>();
+            try {
+                String urlString = "http://192.168.1.9:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                        URLEncoder.encode(siglaOlimpiada, "UTF-8");
+                URL url = new URL(urlString);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(false);
+                conexao.connect();
+                Log.d("CONEXAO", "Conexão estabelecida");
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+                    Log.d("DADOS", jsonString);
+                    conteudos.addAll(converterParaList(jsonString));
+                }
+
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return conteudos;
+        }
+
+        @Override
+        protected void onPostExecute(List<DadosConteudo> conteudos) {
+            super.onPostExecute(conteudos);
+            if (conteudos != null) {
+                adapterConteudos.atualizarOpcoes(conteudos);
+                adapterConteudos.notifyDataSetChanged();
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream dados = new ByteArrayOutputStream();
+            try {
+                int qtdBytesLido;
+                while ((qtdBytesLido = in.read(buffer)) != -1) {
+                    dados.write(buffer, 0, qtdBytesLido);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return dados.toString();
+        }
+
+        private List<DadosConteudo> converterParaList(String jsonString) {
+            List<DadosConteudo> conteudos = new ArrayList<>();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray("conteudos");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject conteudoJSON = jsonArray.getJSONObject(i);
+                    DadosConteudo conteudo = new DadosConteudo();
+
+                    conteudo.setId(conteudoJSON.getInt("id"));
+                    conteudo.setTituloConteudo(conteudoJSON.getString("titulo"));
+                    conteudo.setSubtituloConteudo(conteudoJSON.getString("subtitulo"));
+
+                    String[] cores = {"Rosa", "Azul", "Laranja", "Ciano"};
+                    int colorIndex = i % cores.length; // Alterna as cores ciclicamente
+                    String corEscolhida = cores[colorIndex];
+                    conteudo.setCorFundo(corEscolhida);
+
+                    Log.d("Conteudo", conteudo.toString());
+                    conteudos.add(conteudo);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return conteudos;
+        }
+    }
+
 
 }

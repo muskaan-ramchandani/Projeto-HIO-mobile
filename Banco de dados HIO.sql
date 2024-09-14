@@ -61,13 +61,41 @@ CREATE TABLE Professor (
 DROP TABLE IF EXISTS Conteudo;
 SELECT * FROM Conteudo;
 CREATE TABLE Conteudo(
-	id INT NOT NULL,
+	id INT AUTO_INCREMENT NOT NULL,
     titulo VARCHAR(200) NOT NULL,
     subtitulo VARCHAR(200) NOT NULL,
     siglaOlimpiadaPertencente VARCHAR(10) NOT NULL,
 	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
+	CONSTRAINT tituloNRepete UNIQUE (siglaOlimpiadaPertencente, titulo),
     PRIMARY KEY(id)
 );
+
+##DDOS FICTICIOS PARA TESTE (SERAO CADASTRADOS PELOS PROFESSORES)
+INSERT INTO Conteudo(titulo, subtitulo, siglaOlimpiadaPertencente) VALUES
+    ('Mecânica Clássica', 'Fundamentos da cinemática do ponto material', 'OBF'),
+    ('Dilatação Superficial', 'Conceito e fórmulas', 'OBF'),
+    ('Estática e Hidrostática', 'Princípios Básicos', 'OBF'),
+    ('Termologia', 'Termometria, Calorimetria, Termodinâmica', 'OBF'),
+	('Campo Elétrico', 'Energia e trabalho', 'OBF'),
+    
+    ('Conteúdo oba 1', 'Subtitulo 1', 'OBA'),
+	('Conteúdo oba 2', 'Subtitulo 2', 'OBA'),
+    ('Conteúdo oba 3', 'Subtitulo 3', 'OBA'),
+    ('Conteúdo oba 4', 'Subtitulo 4', 'OBA'),
+    ('Conteúdo oba 5', 'Subtitulo 5', 'OBA'),
+    
+    ('Conteúdo oba 1', 'Subtitulo 1', 'OBB'),
+	('Conteúdo oba 2', 'Subtitulo 2', 'OBB'),
+    ('Conteúdo oba 3', 'Subtitulo 3', 'OBB'),
+    ('Conteúdo oba 4', 'Subtitulo 4', 'OBB'),
+    ('Conteúdo oba 5', 'Subtitulo 5', 'OBB'),
+    
+    ('Conteúdo oba 1', 'Subtitulo 1', 'OBI'),
+	('Conteúdo oba 2', 'Subtitulo 2', 'OBI'),
+    ('Conteúdo oba 3', 'Subtitulo 3', 'OBI'),
+    ('Conteúdo oba 4', 'Subtitulo 4', 'OBI'),
+    ('Conteúdo oba 5', 'Subtitulo 5', 'OBI');
+    
 
 DROP TABLE IF EXISTS Livro;
 SELECT * FROM Livro;
