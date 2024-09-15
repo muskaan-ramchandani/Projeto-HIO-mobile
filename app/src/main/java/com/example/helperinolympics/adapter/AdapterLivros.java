@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +28,11 @@ import java.util.List;
 
 public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosViewHolder>{
     List<DadosLivros> listaLivros;
+    private Context context;
 
-    public AdapterLivros(List<DadosLivros> livros){
+
+    public AdapterLivros(List<DadosLivros> livros, Context context){
+        this.context = context;
         this.listaLivros=livros;
     }
 
@@ -56,6 +61,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
         holder.dataPub.setText(valorData);
 
         holder.capa.setImageBitmap(livro.getCapa());
+        holder.livroParaPesquisa = livro.getTitulo();
     }
 
 
@@ -63,6 +69,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
         TextView titulo, autor, edicao, dataPub;
         ImageView capa;
         Button ondeComprar;
+        String livroParaPesquisa;
 
         public LivrosViewHolder(@NonNull View itemView, final Context context){
             super(itemView);
@@ -77,12 +84,26 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
             ondeComprar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //exibir onde
+                    abrirPesquisaGoogle(livroParaPesquisa);
                 }
             });
         }
     }
 
+    private String criarUrlPesquisa(String livro) {
+        String urlBase = "https://www.google.com/search?q=";
+        return urlBase + Uri.encode(livro + " livro comprar");
+    }
+
+    private void abrirPesquisaGoogle(String termoDePesquisa) {
+        String urlPesquisa = criarUrlPesquisa(termoDePesquisa);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPesquisa));
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivity(intent);
+        } else {
+            Toast.makeText(context, "Nenhum aplicativo encontrado para abrir o link", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public int getItemCount(){return listaLivros.size();}
 
