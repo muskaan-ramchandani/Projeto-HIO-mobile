@@ -1,27 +1,47 @@
 <?php
-// Parâmetros de conexão com o banco de dados
-$host = 'localhost';
-$dbname = 'hio';
+$dsn = 'mysql:host=localhost;dbname=hio;charset=utf8';
 $username = 'root';
 $password = 'root';
 
 try {
-    // Conectando ao banco de dados usando PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Query para selecionar os nomes e siglas das olimpíadas
-    $query = "SELECT nome, sigla FROM Olimpiada";
-    $stmt = $pdo->prepare($query);
+    $sql = "SELECT * FROM Olimpiada";
+    $stmt = $pdo->prepare($sql);
     $stmt->execute();
 
-    // Pegando os resultados
-    $olimpiadas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Retornando os dados em formato JSON
-    echo json_encode($olimpiadas);
+    foreach ($result as $row) {
+        $cor = htmlspecialchars($row["cor"]);
+        $corHex = '#ffffff'; // Cor padrão (branco) caso a cor não seja reconhecida
+        switch (strtolower($cor)) {
+            case 'rosa':
+                $corHex = '#CB6CE6';
+                break;
+            case 'ciano':
+                $corHex = '#18B9CD';
+                break;
+            case 'azul':
+                $corHex = '#5271FF';
+                break;
+            case 'laranja':
+                $corHex = '#FF914D';
+                break;
+        }
+
+        echo '<div class="carousel-item" style="background-color: ' . $corHex . ';">';
+        echo '<a href="#" class="olympics-button" style="background-color: ' . $corHex . ';">';
+        echo '<img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/' . htmlspecialchars($row["icone"]) . '.png" alt="' . htmlspecialchars($row["nome"]) . '" class="button-icon">';
+        echo htmlspecialchars($row["nome"]);
+        echo '</a>';
+        echo '</div>';
+    }
 
 } catch (PDOException $e) {
-    echo json_encode(['error' => 'Erro na conexão com o banco de dados: ' . $e->getMessage()]);
+    echo "<p>Erro: " . $e->getMessage() . "</p>";
 }
+
+$pdo = null;
 ?>

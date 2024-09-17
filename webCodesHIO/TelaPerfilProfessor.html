@@ -9,7 +9,7 @@
 </head>
 <body>
     <!-- Menu -->
-     <div class="menu">
+    <div class="menu">
         <div class="menu-icon" onclick="toggleMenu()">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -25,7 +25,6 @@
         </div>
     </div>
 
-
     <!-- Conteúdo do Perfil -->
     <div class="content">
         <!-- Imagem no canto superior direito -->
@@ -33,18 +32,32 @@
             <img src="Imagens_Mobile_HIO/iconePerfilVazioRedonda.png" alt="Imagem">
         </div>
 
-
         <div class="profile-container">
-            <h1 class="profile-name">Nome Completo do Professor</h1>
-            <div class="profile-username">nomeUser1234</div>
-            <div class="profile-email">emailDoProf@gmail.com</div>
+            <h1 class="profile-name" id="profileName">Nome Completo do Professor</h1>
+            <div class="profile-username" id="profileUsername">nomeUser1234</div>
+            <div class="profile-email" id="profileEmail">emailDoProf@gmail.com</div>
             <hr class="profile-divider">
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('get_professor.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error('Erro:', data.error);
+                        return;
+                    }
+
+                    document.getElementById('profileName').textContent = data.nome;
+                    document.getElementById('profileUsername').textContent = data.usuario;
+                    document.getElementById('profileEmail').textContent = data.email;
+                })
+                .catch(error => console.error('Erro ao buscar dados do professor:', error));
+        });
+    </script>
 
     <script src="TelaPerfilProfessor.js"></script>
 </body>
 </html>
-
-

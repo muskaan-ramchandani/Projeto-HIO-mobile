@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.menu {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    z-index: 1000;
+}
+
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #5e17eb;
+    margin: 3px 0;
+    transition: background-color 0.3s;
+}
+
+
+.menu-icon.active {
+    background-color: #6531c9;
+}
+
+
+.menu-icon.active .bar {
+    background-color: #fff;
+}
+
+
+.helper-text {
+    display: none;
+    margin-left: 10px;
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    color: #fff;
+    background-color: #6531c9;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+.menu-icon.active + .helper-text {
+    display: inline;
+}
+
+
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    background-color: #5e17eb;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    font-family: 'Open Sans', sans-serif;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+
+.menu-content a {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 20px;
+}
+
+
+.menu-content a:hover {
+    background-color: #a952ff;
+}
+
+
+.menu-icon-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+.message-box-img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 260px;
+    height: auto;
+    z-index: 2;
+}
+
+
+.content {
+    margin-left: 250px; /* Compensa a largura do menu */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ajusta a largura do conteúdo para não sobrepor o menu */
+}
+
+
+.profile-container {
+    text-align: left;
+}
+
+
+.profile-name {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+.profile-username, .profile-email {
+    font-size: 23px;
+    color: #333;
+    margin: 5px 0;
+}
+
+
+.profile-email {
+    color: #000;
+}
+
+
+.perfil-img {
+    position: absolute;
+    top: 20px; /* Distância do topo */
+    right: 144px; /* Distância da direita */
+    width: 150px;
+    height: auto;
+    z-index: 2;
+}
+
+
+.perfil-img img {
+    width: 100%;
+    height: auto; /* Mantém a proporção da altura */
+    display: block; /* Remove espaços abaixo da imagem */
+}
+
+
+.profile-divider {
+    border: 0;
+    border-top: 3px solid #a6a6a6;
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
