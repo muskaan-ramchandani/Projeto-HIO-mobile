@@ -1,0 +1,405 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 1000; /* Garante que a barra fique sobre outros elementos */
+}
+
+
+.barra .logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+.barra .logo-container img {
+    height: 80px;
+    margin-right: 10px;
+}
+
+
+.barra .logo-container .text {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.barra .botao-adicionais {
+    background-color: white;
+    color: #8c52ff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.barra .botao-adicionais:hover {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.barra .botao-voltar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
+
+
+.barra .botao-voltar {
+    height: 30px;
+    cursor: pointer;
+}
+
+
+.barra .botao-voltar-texto {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+
+.botao-adicionais {
+    background-color: #8c52ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+/* styles.css */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.botao-adicionais {
+    background-color: #8c52ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.menu {
+    display: none; /* Oculta o menu por padrão */
+    position: absolute;
+    top: 100%; /* Posiciona o menu logo abaixo do botão */
+    right: 0; /* Posiciona o menu à esquerda do botão */
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Garante que o menu fique acima de outros elementos */
+}
+
+
+.menu-item {
+    display: block;
+    color: #8c52ff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 5px 0;
+    padding: 5px;
+    right: 0;
+}
+
+
+.menu-item:hover {
+    background-color: #ededed; /* Cor de destaque ao passar o mouse */
+}
+
+
+
+
+.conteudos-titulo {
+    margin: 80px 10px 10px; /* Margem abaixo da barra */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 10px; /* Margem ao redor do carrossel */
+}
+
+
+.carousel-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px; /* Espaço ao redor dos botões de navegação */
+}
+
+
+.button-icon {
+    width: 60px; /* Reduz a largura dos ícones */
+    height: 60px; /* Reduz a altura dos ícones */
+}
+
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap;
+}
+
+
+.carousel-item {
+    min-width: calc(50% - 10px); /* Exibe dois itens por vez */
+    margin-right: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+
+.carousel-item:last-child {
+    margin-right: 0;
+}
+
+
+.olympics-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px; /* Ajusta o padding */
+    border-radius: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 19px; /* Ajusta o tamanho da fonte */
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    text-align: center;
+    min-width: 200px; /* Ajusta a largura mínima dos botões */
+    height: 100px; /* Ajusta a altura dos botões */
+}
+
+
+.olympics-button:hover {
+    opacity: 0.9;
+}
+
+
+/*Recomendações de livros */
+.recomendacoes-titulo {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    margin: 40px 10px; /* Margem ao redor do texto */
+    text-align: left; /* Centraliza o texto */
+
+
+}
+
+
+.info-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cartões se movam para a linha seguinte se não houver espaço suficiente */
+    gap: 70px; /* Aumentado o espaçamento entre os cartões */
+    padding: 10px; /* Espaçamento interno */
+}
+
+
+.info-card {
+    background-color: #f8f6f6;
+    border-radius: 8px; /* Mantido o border-radius para bordas arredondadas */
+    padding: 15px; /* Reduzido o padding para diminuir o tamanho do retângulo */
+    display: flex;
+    align-items: flex-start; /* Alinha a imagem e o texto ao topo */
+    justify-content: flex-start; /* Ajusta o alinhamento para o início */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+    max-width: 550px; /* Reduzido a largura máxima do retângulo */
+    width: 100%; /* Garante que o retângulo use a largura disponível até o máximo */
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura total */
+}
+
+
+.info-card-img {
+    width: 95px; /* Reduzido o tamanho da imagem */
+    height: auto;
+    margin-right: 10px; /* Ajustado o espaço entre a imagem e o texto */
+}
+
+
+.info-card-content {
+    flex: 1;
+}
+
+
+.info-card-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px; /* Mantido o tamanho da fonte do título */
+    font-weight: bold;
+    color: black;
+    margin-bottom: 4px; /* Diminuído o espaço abaixo do título */
+}
+
+
+.info-card-author,
+.info-card-publisher,
+.info-card-edition,
+.info-card-publication {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px; /* Ajustado o tamanho da fonte das informações adicionais */
+    color: black;
+    margin-bottom: 2px; /* Diminuído o espaço abaixo das informações */
+}
+
+
+.info-card-button {
+    background-color: #c6a3ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px; /* Ajustado o padding para um botão menor */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px; /* Mantido o tamanho da fonte do botão */
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin-top: 10px; /* Ajustado o espaço acima do botão */
+}
+
+
+.info-card-button:hover {
+    background-color: #b78cfa;
+}
+
+
+/* Provas anteriores */
+.provas-anteriores-titulo {
+    margin: 80px 10px 10px; /* Margem abaixo da barra */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.provas-card {
+    background-color: #f8f6f6; /* Cor de fundo dos botões */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 25px; /* Padding interno dos botões */
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+    align-items: flex-start; /* Alinha os itens ao início */
+    justify-content: flex-start; /* Ajusta o alinhamento para o início */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra do botão */
+    max-width: 350px; /* Largura máxima do botão */
+    width: 100%; /* Garante que o botão use a largura disponível até o máximo */
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura total */
+    border: none; /* Remove borda padrão */
+    cursor: pointer; /* Mostra o cursor de pointer para indicar que é clicável */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves */
+    text-align: left; /* Alinha o texto ao lado esquerdo */
+    color: black; /* Cor do texto */
+}
+
+
+.provas-card b {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px; /* Tamanho da fonte para o ano */
+    font-weight: bold;
+    color: black; /* Cor do texto do ano */
+    margin-bottom: 5px; /* Espaçamento abaixo do ano */
+}
+
+
+.provas-card p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px; /* Tamanho da fonte para as informações */
+    color: black; /* Cor do texto das informações */
+    margin: 2px 0; /* Espaçamento entre as linhas */
+}
+
+
+.provas-card:hover {
+    background-color: #f8f6f6; /* Muda a cor de fundo ao passar o mouse */
+    transform: scale(1.02); /* Levemente aumenta o tamanho do botão */
+}
+
+
+.provas-card:active {
+    background-color: #f8f6f6; /* Muda a cor de fundo ao clicar */
+    transform: scale(0.98); /* Levemente diminui o tamanho do botão */
+}
+
+
+.additional-info {
+    display: flex;
+    align-items: center; /* Corrigido para alinhar ao centro verticalmente */
+    margin-top: 10px; /* Espaçamento acima do círculo roxo */
+}
+
+
+.additional-info img {
+    width: 20px; /* Tamanho do círculo roxo */
+    height: 20px; /* Tamanho do círculo roxo */
+    margin-right: 10px; /* Espaçamento entre o círculo e o texto */
+}
+
+
+.additional-info span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px; /* Tamanho da fonte ao lado do círculo */
+    color: white; /* Cor do texto ao lado do círculo */
+}
+
+

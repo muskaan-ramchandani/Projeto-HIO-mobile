@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helper in Olympics</title>
+    <link rel="stylesheet" href="TelaInicialProfessor.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"> <!-- Link para a fonte Open Sans -->
+    
+    <style>
+        /* Estilos relacionados ao carousel */
+        .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    justify-content: center; /* Centraliza os itens */
+    gap: 10px; /* Espaço entre os itens */
+}
+
+.carousel-item {
+    flex: 0 0 45%; /* Dois itens ocupando 45% cada */
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.olympics-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    width: 100%;
+    height: 80px; /* Altura ajustada */
+    color: white;
+}
+
+.olympics-button img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.carousel {
+    width: 100%; /* Ocupa toda a largura */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+</style>
+
+   
+</head>
+<body>
+    <div class="menu">
+        <!-- conteúdo omitido para foco no objetivo -->
+    </div>
+
+    <div class="message-box">
+        <div class="message-text">
+            <div class="message-line">Olá mestres!</div>
+            <div class="message-line">Está procurando por alguma olimpíada?</div>
+        </div>
+        <input type="text" id="searchField" class="search-input" placeholder="Procure pelo nome ou pela sigla:">
+        <img src="Imagens_Mobile_HIO/hipoPrincipalComMedalha.png" alt="Hipo com medalha" class="message-box-img">
+    </div>
+
+    <div class="previous-olympics">
+        Olimpíadas acessadas anteriormente:
+    </div>
+
+    <!-- Carousel -->
+    <div class="carousel-container">
+        <button id="prevButton" class="carousel-button" onclick="prevSlide()">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
+        </button>
+        <div class="carousel">
+            <div class="carousel-inner" id="carouselInner">
+                <!-- Os itens do carrossel serão preenchidos dinamicamente com as olimpíadas do JSON -->
+            </div>
+        </div>
+        <button id="nextButton" class="carousel-button" onclick="nextSlide()">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir">
+        </button>
+    </div>
+
+    <!-- Questionários omitidos para foco no objetivo -->
+
+    <script>
+      let currentSlide = 0;
+const slides = document.querySelectorAll('.carousel-item');
+const totalSlides = slides.length;
+
+function updateCarousel() {
+    const carouselInner = document.getElementById('carouselInner');
+    const slideWidth = slides[0].offsetWidth + 10; // Adiciona a margem
+    const offset = -currentSlide * (slideWidth * 2); // Movimenta dois itens por vez
+    carouselInner.style.transform = `translateX(${offset}px)`;
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides - 2) {
+        currentSlide++;
+    } else {
+        currentSlide = 0;
+    }
+    updateCarousel();
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        currentSlide--;
+    } else {
+        currentSlide = totalSlides - 2;
+    }
+    updateCarousel();
+}
+
+        
+    </script>
+</body>
+</html>
