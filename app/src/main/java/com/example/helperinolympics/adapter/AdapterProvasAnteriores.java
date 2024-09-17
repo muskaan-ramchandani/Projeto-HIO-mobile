@@ -1,9 +1,15 @@
 package com.example.helperinolympics.adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.Manifest;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosProvasAnteriores;
 
@@ -75,6 +84,10 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
                 @Override
                 public void onClick(View v) {
 
+//                    if (!hasStoragePermissions()) {
+//                        requestStoragePermissions();
+//                    }
+
                     if (pdfBytes != null && pdfBytes.length > 0) {
                         salvarPdfNoDispositivo(pdfBytes, context);
                     } else {
@@ -126,5 +139,32 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         this.listaProvasAnteriores.addAll(provas);
         this.notifyDataSetChanged();
     }
+
+//    private boolean hasStoragePermissions() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            return Environment.isExternalStorageManager();
+//        } else {
+//            return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+//                    && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+//        }
+//    }
+//
+//    private void requestStoragePermissions() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            try {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+//                intent.setData(Uri.parse("package:" + getPackageName()));
+//                startActivity(intent);
+//            } catch (Exception e) {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+//                startActivity(intent);
+//            }
+//        } else {
+//            ActivityCompat.requestPermissions(this, new String[]{
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE
+//            }, PERMISSION_REQUEST_CODE);
+//        }
+//    }
 
 }
