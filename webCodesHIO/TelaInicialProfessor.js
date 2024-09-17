@@ -14,84 +14,71 @@ function toggleMenu() {
         helperText.style.display = 'inline';
     }
 }
+let currentSlide = 0;
+let totalSlides = 0;
+let olimpiadas = [];
 
+// Função para carregar as olimpíadas usando AJAX e preencher o carousel
+function loadOlimpiadas() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'TelaInicialProfessor.php', true);
 
-// Carrossel das Olimpíadas
-let currentSlideIndex = 0;
-const slidesToShow = 2; // Número de slides a serem exibidos
+    xhr.onload = function () {
+        if (this.status === 200) {
+            olimpiadas = JSON.parse(this.responseText);
 
+            if (olimpiadas.error) {
+                console.error('Erro ao carregar as olimpíadas:', olimpiadas.error);
+            } else {
+                // Criando os itens do carousel dinamicamente
+                totalSlides = olimpiadas.length;
+                updateCarousel();
+            }
+        }
+    };
 
+    xhr.send();
+}
+
+// Função para atualizar o carousel com os itens atuais
 function updateCarousel() {
     const carouselInner = document.getElementById('carouselInner');
-    const items = document.querySelectorAll('.carousel-item');
-    const totalItems = items.length;
+    carouselInner.innerHTML = ''; // Limpa o conteúdo anterior
 
+    // Adiciona o item da olimpíada atual ao carousel
+    const currentOlimpiada = olimpiadas[currentSlide];
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'carousel-item';
 
-    // Atualiza a posição do carrossel
-    carouselInner.style.transform = `translateX(${-currentSlideIndex * (100 / slidesToShow)}%)`;
+    const olympicsButton = document.createElement('a');
+    olympicsButton.href = '#';
+    olympicsButton.className = 'olympics-button';
+    olympicsButton.style.backgroundColor = '#cb6ce6'; // Ajuste a cor conforme desejado
 
+    const icon = document.createElement('img');
+    icon.src = 'Imagens_Mobile_HIO/imgTelescopio.png'; // Altere para o ícone desejado
+    icon.className = 'button-icon';
 
-    // Desativa/ativa os botões conforme necessário
-    document.getElementById('prevButton').disabled = currentSlideIndex === 0;
-    document.getElementById('nextButton').disabled = currentSlideIndex >= totalItems - slidesToShow;
+    const span = document.createElement('span');
+    span.textContent = currentOlimpiada.nome + ' (' + currentOlimpiada.sigla + ')';
+
+    olympicsButton.appendChild(icon);
+    olympicsButton.appendChild(span);
+    itemDiv.appendChild(olympicsButton);
+    carouselInner.appendChild(itemDiv);
 }
 
-
+// Função para mostrar o slide anterior
 function prevSlide() {
-    if (currentSlideIndex > 0) {
-        currentSlideIndex -= 1;
-        updateCarousel();
-    }
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
 }
 
-
+// Função para mostrar o próximo slide
 function nextSlide() {
-    const totalItems = document.querySelectorAll('.carousel-item').length;
-    if (currentSlideIndex < totalItems - slidesToShow) {
-        currentSlideIndex += 1;
-        updateCarousel();
-    }
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
 }
 
-
-// Carrossel de questionários
-let currentQuestionnaireIndex = 0;
-
-
-function updateQuestionnairesCarousel() {
-    const carouselInner = document.getElementById('questionnairesCarouselInner');
-    const items = document.querySelectorAll('.questionnaires-carousel-item');
-    const totalItems = items.length;
-
-
-    // Atualiza a posição do carrossel
-    carouselInner.style.transform = `translateX(${-currentQuestionnaireIndex * 100}%)`;
-
-
-    // Desativa/ativa os botões conforme necessário
-    document.getElementById('prevQuestionnaireButton').disabled = currentQuestionnaireIndex === 0;
-    document.getElementById('nextQuestionnaireButton').disabled = currentQuestionnaireIndex >= totalItems - 1;
-}
-
-
-function prevQuestionnaireSlide() {
-    if (currentQuestionnaireIndex > 0) {
-        currentQuestionnaireIndex--;
-        updateQuestionnairesCarousel();
-    }
-}
-
-
-function nextQuestionnaireSlide() {
-    const totalItems = document.querySelectorAll('.questionnaires-carousel-item').length;
-    if (currentQuestionnaireIndex < totalItems - 1) {
-        currentQuestionnaireIndex++;
-        updateQuestionnairesCarousel();
-    }
-}
-
-
-// Inicializa os carrosséis
-updateCarousel();
-updateQuestionnairesCarousel();
-
+// Chama a função ao carregar a página
+window.onload = loadOlimpiadas;
