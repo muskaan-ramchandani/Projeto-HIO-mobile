@@ -4,330 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
+    <link rel="stylesheet" href="TelaInicialProfessor.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
-    <link rel="stylesheet" href="TelaOlimpiadaProfessor.css"> <!-- Link para o CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .carousel-container {
+            display: flex;
+            align-items: center;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none; /* Para ocultar a barra de rolagem no Firefox */
+        }
+        .carousel::-webkit-scrollbar {
+            display: none; /* Para ocultar a barra de rolagem no Chrome */
+        }
+        .carousel-item {
+            flex: 0 0 auto;
+            margin: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .button-icon {
+            width: 100px; /* Ajuste o tamanho conforme necessário */
+            height: 100px; /* Ajuste o tamanho conforme necessário */
+        }
+        .olympics-button {
+            display: block;
+            text-align: center;
+            padding: 20px;
+            border-radius: 5px;
+            color: #fff; /* Texto em branco para contraste com as cores de fundo */
+            text-decoration: none;
+        }
+        .carousel-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .carousel-button img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
 </head>
 <body>
-    <div class="barra">
-        <div class="logo-container">
-            <img src="Imagens_Mobile_HIO/imgMacaCaindo.png" alt="Maça caindo">
-            <div class="text">OBF 2024 - Olimpíada Brasileira de Física</div>
-        </div>
-        <button class="botao-adicionais" onclick="toggleMenu()">Adicionar itens</button>
-    <div id="menu" class="menu">
-        <a href="#" class="menu-item">Adicionar conteúdo</a>
-        <a href="#" class="menu-item">Recomendar Livro</a>
-        <a href="#" class="menu-item">Adicionar Prova Anterior</a>
-    </div>
-        <div class="botao-voltar-container">
-            <img src="Imagens_Mobile_HIO/btnVoltarBRANCO.png" alt="Botão Voltar" class="botao-voltar">
-            <div class="botao-voltar-texto">Voltar</div>
-        </div>
-    </div>
-    <div class="conteudos-titulo">Conteúdos:</div>
 
+    <div class="menu">
+        <!-- Menu code... -->
+    </div>
 
-    <!-- Carrossel de Conteúdos -->
+    <div class="message-box">
+        <!-- Message box code... -->
+    </div>
+
+    <!-- Texto adicional -->
+    <div class="previous-olympics">
+        Olimpíadas acessadas anteriormente:
+    </div>
+
     <div class="carousel-container">
-        <button id="prevContent" class="carousel-button" onclick="prevContentSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltar.png" alt="Voltar" class="button-icon">
+        <button id="prevButton" class="carousel-button" onclick="prevSlide()">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
         </button>
-        <div class="carousel" id="contentCarousel">
-            <div class="carousel-inner" id="contentCarouselInner">
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #cb6ce6;">
-                        Mecânica Clássica: Fundamentos da cinemática do ponto material
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #5271ff;">
-                        Dilatação superficial: Conceito e fórmulas
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #ff9900;">
-                        Mecânica Clássica: Fundamentos da cinemática do ponto material
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #18b9cd;">
-                        Dilatação superficial: Conceito e fórmulas
-                    </a>
-                </div>
+        <div class="carousel">
+            <div class="carousel-inner" id="carouselInner">
+                <!-- Itens do carrossel serão inseridos aqui pelo JavaScript -->
             </div>
         </div>
-        <button id="nextContent" class="carousel-button" onclick="nextContentSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
+        <button id="nextButton" class="carousel-button" onclick="nextSlide()">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir">
         </button>
     </div>
 
-
-    <div class="recomendacoes-titulo">Recomendações de livros:</div>
-
-
-    <!-- Carrossel de Recomendações -->
-    <div class="carousel-container">
-        <button id="prevBooks" class="carousel-button" onclick="prevBooksSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="button-icon">
-        </button>
-        <div class="carousel" id="booksCarousel">
-            <div class="carousel-inner" id="booksCarouselInner">
-                <div class="carousel-item">
-                    <div class="info-card">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/livroFisica.jpg" alt="Imagem do Livro" class="info-card-img">
-                        <div class="info-card-content">
-                            <div class="info-card-title">Física básica para provas - 13 exercícios</div>
-                            <div class="info-card-author">Autor: Maria Souza</div>
-                            <div class="info-card-publisher">Editora: EdiCase</div>
-                            <div class="info-card-edition">Edição: 1</div>
-                            <div class="info-card-publication">Publicação: 24/12/2006</div>
-                            <button class="info-card-button">Onde comprar?</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="info-card">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/livroFisica.jpg" alt="Imagem do Livro" class="info-card-img">
-                        <div class="info-card-content">
-                            <div class="info-card-title">Física para Universitários</div>
-                            <div class="info-card-author">Autor: João Pereira</div>
-                            <div class="info-card-publisher">Editora: LivroEdit</div>
-                            <div class="info-card-edition">Edição: 2</div>
-                            <div class="info-card-publication">Publicação: 15/03/2015</div>
-                            <button class="info-card-button">Onde comprar?</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="info-card">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/livroFisica.jpg" alt="Imagem do Livro" class="info-card-img">
-                        <div class="info-card-content">
-                            <div class="info-card-title">Fundamentos da Física Moderna</div>
-                            <div class="info-card-author">Autor: Ana Silva</div>
-                            <div class="info-card-publisher">Editora: TechBooks</div>
-                            <div class="info-card-edition">Edição: 3</div>
-                            <div class="info-card-publication">Publicação: 05/08/2020</div>
-                            <button class="info-card-button">Onde comprar?</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="info-card">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/livroFisica.jpg" alt="Imagem do Livro" class="info-card-img">
-                        <div class="info-card-content">
-                            <div class="info-card-title">Teoria e Exercícios de Física</div>
-                            <div class="info-card-author">Autor: Carlos Almeida</div>
-                            <div class="info-card-publisher">Editora: EduBooks</div>
-                            <div class="info-card-edition">Edição: 1</div>
-                            <div class="info-card-publication">Publicação: 10/11/2018</div>
-                            <button class="info-card-button">Onde comprar?</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button id="nextBooks" class="carousel-button" onclick="nextBooksSlide()">
-            <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
-        </button>
+    <div class="previous-questionnaires">
+        Seus questionários:
     </div>
-
-
-    <div class="provas-anteriores-titulo">Provas anteriores:</div>
-
-
-<!-- Carrossel de Provas anteriores -->
-<div class="carousel-container">
-    <button id="prevExams" class="carousel-button" onclick="prevExamsSlide()">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="button-icon">
-    </button>
-    <div class="carousel" id="examsCarousel">
-        <div class="carousel-inner" id="examsCarouselInner">
-            <!--  carrossel de provas anteriores -->
-            <div class="carousel-item">
-                <div class="provas-card">
-                    <b>Prova 2 - 2022</b>
-                    <p>Estado: Respondida</p>
-                    <p>Fase: 1</p>
-                    <div class="additional-info">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/circuloRoxo.jpg" alt="Imagem">
-                        Demi Lovato
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="provas-card">
-                    <b>Prova 2 - 2021</b>
-                    <p>Estado: Não Respondida</p>
-                    <p>Fase: 2</p>
-                    <div class="additional-info">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/circuloRoxo.jpg" alt="Imagem">
-                        John Doe
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="provas-card">
-                    <b>Prova 3 - 2020</b>
-                    <p>Estado: Respondida</p>
-                    <p>Fase: 3</p>
-                    <div class="additional-info">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/circuloRoxo.jpg" alt="Imagem">
-                        Jane Smith
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="provas-card">
-                    <b>Prova 4 - 2019</b>
-                    <p>Estado: Não Respondida</p>
-                    <p>Fase: 4</p>
-                    <div class="additional-info">
-                        <img src="C:/Users/Muskaan/HIOTelasWeb/circuloRoxo.jpg" alt="Imagem">
-                        Mark Johnson
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="questionnaires-carousel-container">
+        <!-- Questionnaires carousel code... -->
     </div>
-    <button id="nextExams" class="carousel-button" onclick="nextExamsSlide()">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
-    </button>
-</div>
-
-
-
 
     <script>
-        let currentContentIndex = 0;
-        let currentBooksIndex = 0;
-        let currentExamsIndex = 0;
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('TelaIncialProfessor.php')
+                .then(response => response.json())
+                .then(data => {
+                    const carouselInner = document.getElementById('carouselInner');
+                    data.forEach(olimpiada => {
+                        let corHex = '#ffffff'; // Cor padrão (branco) caso a cor não seja reconhecida
+                        switch (olimpiada.cor.toLowerCase()) {
+                            case 'rosa':
+                                corHex = '#CB6CE6';
+                                break;
+                            case 'ciano':
+                                corHex = '#18B9CD';
+                                break;
+                            case 'azul':
+                                corHex = '#5271FF';
+                                break;
+                            case 'laranja':
+                                corHex = '#FF914D';
+                                break;
+                        }
 
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'carousel-item';
+                        itemDiv.innerHTML = `
+                            <a href="#" class="olympics-button" style="background-color: ${corHex};">
+                                <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/${olimpiada.icone}.png" alt="${olimpiada.nome}" class="button-icon">
+                                <div>${olimpiada.nome}</div>
+                            </a>
+                        `;
+                        carouselInner.appendChild(itemDiv);
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar os dados:', error));
+        });
 
-        // Conteudos
-        function prevContentSlide() {
-            const items = document.querySelectorAll('#contentCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentContentIndex > 0) {
-                currentContentIndex -= 2;
-            } else {
-                currentContentIndex = Math.max(totalItems - 2, 0);
-            }
-            updateContentCarousel();
+        function prevSlide() {
+            // Lógica para o botão de voltar
         }
 
-
-        function nextContentSlide() {
-            const items = document.querySelectorAll('#contentCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentContentIndex < totalItems - 2) {
-                currentContentIndex += 2;
-            } else {
-                currentContentIndex = 0;
-            }
-            updateContentCarousel();
+        function nextSlide() {
+            // Lógica para o botão de avançar
         }
 
-
-        function updateContentCarousel() {
-            const carouselInner = document.getElementById('contentCarouselInner');
-            const itemWidth = document.querySelector('#contentCarousel .carousel-item').offsetWidth;
-            const gap = 10; // Espaço entre os itens
-            const offset = -currentContentIndex * (itemWidth + gap);
-            carouselInner.style.transform = `translateX(${offset}px)`;
+        function prevQuestionnaireSlide() {
+            // Lógica para o botão de voltar questionário
         }
 
-
-        //Recomendação de livros
-        function prevBooksSlide() {
-            const items = document.querySelectorAll('#booksCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentBooksIndex > 0) {
-                currentBooksIndex -= 2;
-            } else {
-                currentBooksIndex = Math.max(totalItems - 2, 0);
-            }
-            updateBooksCarousel();
+        function nextQuestionnaireSlide() {
+            // Lógica para o botão de avançar questionário
         }
-
-
-        function nextBooksSlide() {
-            const items = document.querySelectorAll('#booksCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentBooksIndex < totalItems - 2) {
-                currentBooksIndex += 2;
-            } else {
-                currentBooksIndex = 0;
-            }
-            updateBooksCarousel();
-        }
-
-
-        function updateBooksCarousel() {
-            const carouselInner = document.getElementById('booksCarouselInner');
-            const itemWidth = document.querySelector('#booksCarousel .carousel-item').offsetWidth;
-            const gap = 10; // Espaço entre os itens
-            const offset = -currentBooksIndex * (itemWidth + gap);
-            carouselInner.style.transform = `translateX(${offset}px)`;
-        }
-
-
-        //Provas anteriores
-
-
-        function prevExamsSlide() {
-            const items = document.querySelectorAll('#examsCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentExamsIndex > 0) {
-                currentExamsIndex -= 2;
-            } else {
-                currentExamsIndex = Math.max(totalItems - 2, 0);
-            }
-            updateExamsCarousel();
-        }
-
-
-        function nextExamsSlide() {
-            const items = document.querySelectorAll('#examsCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentExamsIndex < totalItems - 2) {
-                currentExamsIndex += 2;
-            } else {
-                currentExamsIndex = 0;
-            }
-            updateExamsCarousel();
-        }
-
-
-        function updateExamsCarousel() {
-            const carouselInner = document.getElementById('examsCarouselInner');
-            const itemWidth = document.querySelector('#examsCarousel .carousel-item').offsetWidth;
-            const gap = 10; // Espaço entre os itens
-            const offset = -currentExamsIndex * (itemWidth + gap);
-            carouselInner.style.transform = `translateX(${offset}px)`;
-        }
-
-
-        window.onload = () => {
-            updateContentCarousel(); // Atualiza a posição inicial do carrossel de conteúdos
-            updateBooksCarousel(); // Atualiza a posição inicial do carrossel de livros
-            updateExamsCarousel(); // Atualiza a posição inicial do carrossel de provas
-        };
-
-
-        //Menu
-        // script.js
-    function toggleMenu() {
-    var menu = document.getElementById('menu');
-        if (menu.style.display === 'block') {
-        menu.style.display = 'none';
-    }   else {
-        menu.style.display = 'block';
-    }
-}
-
-
     </script>
 </body>
 </html>
-
-

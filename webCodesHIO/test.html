@@ -5,63 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
     <link rel="stylesheet" href="TelaInicialProfessor.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"> <!-- Link para a fonte Open Sans -->
-    
-    <style>
-        /* Estilos relacionados ao carousel */
-        .carousel-inner {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    justify-content: center; /* Centraliza os itens */
-    gap: 10px; /* Espaço entre os itens */
-}
-
-.carousel-item {
-    flex: 0 0 45%; /* Dois itens ocupando 45% cada */
-    box-sizing: border-box;
-    padding: 5px;
-}
-
-.olympics-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 10px;
-    width: 100%;
-    height: 80px; /* Altura ajustada */
-    color: white;
-}
-
-.olympics-button img {
-    width: 30px;
-    height: 30px;
-    margin-bottom: 5px;
-}
-
-.carousel {
-    width: 100%; /* Ocupa toda a largura */
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
-
-.carousel-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}
-
-</style>
-
-   
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
 </head>
 <body>
     <div class="menu">
-        <!-- conteúdo omitido para foco no objetivo -->
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <span class="helper-text" id="helperText">Helper in Olympics</span>
+        <div class="menu-content" id="menuContent">
+            <a href="TelaPerfilProfessor.html"><img src="Imagens_Mobile_HIO/iconeSeuPerfil.png" alt="Perfil" class="menu-icon-img"> Seu Perfil</a>
+            <a href="#"><img src="Imagens_Mobile_HIO/iconeChats.png" alt="Fórum" class="menu-icon-img"> Fórum</a>
+            <a href="#"><img src="Imagens_Mobile_HIO/iconeManual.png" alt="Manual" class="menu-icon-img"> Manual</a>
+            <a href="#"><img src="Imagens_Mobile_HIO/iconeConfiguracoes.png" alt="Configurações" class="menu-icon-img"> Configurações</a>
+            <a href="#"><img src="Imagens_Mobile_HIO/iconeSair.png" alt="Sair" class="menu-icon-img"> Sair</a>
+        </div>
     </div>
 
     <div class="message-box">
@@ -76,15 +36,13 @@
     <div class="previous-olympics">
         Olimpíadas acessadas anteriormente:
     </div>
-
-    <!-- Carousel -->
     <div class="carousel-container">
         <button id="prevButton" class="carousel-button" onclick="prevSlide()">
             <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
         </button>
         <div class="carousel">
             <div class="carousel-inner" id="carouselInner">
-                <!-- Os itens do carrossel serão preenchidos dinamicamente com as olimpíadas do JSON -->
+                <?php include 'carrossel_olimpiadas.php'; ?>
             </div>
         </div>
         <button id="nextButton" class="carousel-button" onclick="nextSlide()">
@@ -92,39 +50,72 @@
         </button>
     </div>
 
-    <!-- Questionários omitidos para foco no objetivo -->
+    <div class="previous-questionnaires">
+        Seus questionários:
+    </div>
+    <div class="questionnaires-carousel-container">
+        <button id="prevQuestionnaireButton" class="carousel-button" onclick="prevQuestionnaireSlide()">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
+        </button>
+        <div class="questionnaires-carousel">
+            <div class="questionnaires-carousel-inner" id="questionnairesCarouselInner">
+                <!-- Dados dos questionários -->
+                <!-- Adicione seus questionários aqui -->
+            </div>
+        </div>
+        <button id="nextQuestionnaireButton" class="carousel-button" onclick="nextQuestionnaireSlide()">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir">
+        </button>
+    </div>
 
-    <script>
-      let currentSlide = 0;
-const slides = document.querySelectorAll('.carousel-item');
-const totalSlides = slides.length;
-
-function updateCarousel() {
-    const carouselInner = document.getElementById('carouselInner');
-    const slideWidth = slides[0].offsetWidth + 10; // Adiciona a margem
-    const offset = -currentSlide * (slideWidth * 2); // Movimenta dois itens por vez
-    carouselInner.style.transform = `translateX(${offset}px)`;
-}
-
-function nextSlide() {
-    if (currentSlide < totalSlides - 2) {
-        currentSlide++;
-    } else {
-        currentSlide = 0;
+    <script>function toggleMenu() {
+        var menuContent = document.getElementById('menuContent');
+        var menuIcon = document.querySelector('.menu-icon');
+        var helperText = document.getElementById('helperText');
+    
+        if (menuContent.style.display === 'block') {
+            menuContent.style.display = 'none';
+            menuIcon.classList.remove('active');
+            helperText.style.display = 'none';
+        } else {
+            menuContent.style.display = 'block';
+            menuIcon.classList.add('active');
+            helperText.style.display = 'inline';
+        }
     }
-    updateCarousel();
-}
-
-function prevSlide() {
-    if (currentSlide > 0) {
-        currentSlide--;
-    } else {
-        currentSlide = totalSlides - 2;
+    
+    function loadOlimpiadas() {
+        // Função para carregar as olimpíadas - Agora gerado pelo PHP
     }
-    updateCarousel();
-}
-
-        
+    
+    function prevSlide() {
+        const carouselInner = document.getElementById('carouselInner');
+        const firstItem = carouselInner.querySelector('.carousel-item');
+        carouselInner.appendChild(firstItem); // Move o primeiro item para o final
+    }
+    
+    function nextSlide() {
+        const carouselInner = document.getElementById('carouselInner');
+        const lastItem = carouselInner.querySelector('.carousel-item:last-child');
+        carouselInner.insertBefore(lastItem, carouselInner.firstChild); // Move o último item para o início
+    }
+    
+    function prevQuestionnaireSlide() {
+        const questionnairesCarouselInner = document.getElementById('questionnairesCarouselInner');
+        const firstItem = questionnairesCarouselInner.querySelector('.questionnaires-carousel-item');
+        questionnairesCarouselInner.appendChild(firstItem); // Move o primeiro item para o final
+    }
+    
+    function nextQuestionnaireSlide() {
+        const questionnairesCarouselInner = document.getElementById('questionnairesCarouselInner');
+        const lastItem = questionnairesCarouselInner.querySelector('.questionnaires-carousel-item:last-child');
+        questionnairesCarouselInner.insertBefore(lastItem, questionnairesCarouselInner.firstChild); // Move o último item para o início
+    }
+    
+    // Inicializa o carrossel se necessário
+    window.onload = function() {
+        loadOlimpiadas();
+    }
     </script>
 </body>
 </html>
