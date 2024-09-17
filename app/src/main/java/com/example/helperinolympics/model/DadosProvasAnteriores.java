@@ -4,16 +4,19 @@ public class DadosProvasAnteriores {
 
     private int id, anoProva, fase;
     private boolean estado;
-    private  String userProf;
-    //fazer um pro pdf
+    private  String userProf, siglaOlimpiadaPertencente;
+    byte[] arquivoPdfBytes;
 
+    public DadosProvasAnteriores(){}
 
-    public DadosProvasAnteriores(int id, int anoProva, int fase, boolean estado, String userProf) {
+    public DadosProvasAnteriores(int id, int anoProva, int fase, boolean estado, String userProf, String siglaOlimpiadaPertencente, byte[] arquivoPdfBytes) {
         setId(id);
         setAnoProva(anoProva);
         setFase(fase);
         setEstado(estado);
         setUserProf(userProf);
+        setSiglaOlimpiadaPertencente(siglaOlimpiadaPertencente);
+        setArquivoPdfBytes(arquivoPdfBytes);
     }
 
     public int getId() {
@@ -54,5 +57,21 @@ public class DadosProvasAnteriores {
 
     public void setUserProf(String userProf) {
         this.userProf = userProf;
+    }
+
+    public String getSiglaOlimpiadaPertencente() {
+        return siglaOlimpiadaPertencente;
+    }
+
+    public void setSiglaOlimpiadaPertencente(String siglaOlimpiadaPertencente) {
+        this.siglaOlimpiadaPertencente = siglaOlimpiadaPertencente;
+    }
+
+    public byte[] getArquivoPdfBytes() {
+        return arquivoPdfBytes;
+    }
+
+    public void setArquivoPdfBytes(byte[] arquivoPdfBytes) {
+        this.arquivoPdfBytes = arquivoPdfBytes;
     }
 }

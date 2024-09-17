@@ -2,6 +2,7 @@ package com.example.helperinolympics.telas_iniciais;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,10 +11,10 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterConteudos;
@@ -160,23 +161,11 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         binding.recyclerViewProvasAnteriores.setHasFixedSize(true);
         binding.recyclerViewProvasAnteriores.setAdapter(adapterProvasAnteriores);
 
-
-        //DADOS FICTICIOS
-        DadosProvasAnteriores dado1 = new DadosProvasAnteriores(1, 2022, 3, true, "demiLov");
-        provas.add(dado1);
-
-        DadosProvasAnteriores dado2 = new DadosProvasAnteriores(2, 2019, 2, false, "doroteia");
-        provas.add(dado2);
-
-        DadosProvasAnteriores dado3 = new DadosProvasAnteriores(3, 2006, 1, false, "luanSantana");
-        provas.add(dado3);
-
-        DadosProvasAnteriores dado4 = new DadosProvasAnteriores(4, 2020, 5, true, "picasso");
-        provas.add(dado4);
-
-        DadosProvasAnteriores dado5 = new DadosProvasAnteriores(5, 2015, 1, false, "marianaContaUm");
-        provas.add(dado5);
-
+        if (siglaOlimpiada != null) {
+            new ProvasDownload().execute(siglaOlimpiada);
+        } else {
+            Log.d("ERRO_SIGLA", "A sigla da Olimpíada está nula");
+        }
     }
 
     private class ConteudosDownload extends AsyncTask<String, Void, List<DadosConteudo>> {
@@ -369,13 +358,118 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
             return dateFormat.parse(dataString);
         } catch (ParseException e) {
             e.printStackTrace();
-            return null; // Retorne null ou um valor padrão conforme necessário
+            return null;
         }
     }
 
     public Bitmap decodeBase64ToBitmap(String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    private class ProvasDownload extends AsyncTask<String, Void, List<DadosProvasAnteriores>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<DadosProvasAnteriores> doInBackground(String... params) {
+            String siglaOlimpiada = params[0];
+            Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
+
+            List<DadosProvasAnteriores> provasLista = new ArrayList<>();
+            try {
+                String urlString = "http://192.168.1.9:8086/phpHio/carregaProvaPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                        URLEncoder.encode(siglaOlimpiada, "UTF-8");
+                URL url = new URL(urlString);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(false);
+                conexao.connect();
+                Log.d("CONEXAO", "Conexão estabelecida");
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+                    Log.d("DADOS", jsonString);
+                    provas.addAll(converterParaList(jsonString));
+                    provasLista.addAll(converterParaList(jsonString));
+
+                }
+
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return provasLista;
+        }
+
+        @Override
+        protected void onPostExecute(List<DadosProvasAnteriores> provas) {
+            super.onPostExecute(provas);
+            if (provas != null) {
+                adapterProvasAnteriores.atualizarOpcoes(provas);
+                adapterProvasAnteriores.notifyDataSetChanged();
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream dados = new ByteArrayOutputStream();
+            try {
+                int qtdBytesLido;
+                while ((qtdBytesLido = in.read(buffer)) != -1) {
+                    dados.write(buffer, 0, qtdBytesLido);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return dados.toString();
+        }
+
+        private List<DadosProvasAnteriores> converterParaList(String jsonString) {
+            List<DadosProvasAnteriores> provas = new ArrayList<>();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray("provas");
+
+                if(jsonArray==null){
+                    Toast.makeText(InicioOlimpiadaActivity.this, "Não há provas cadastradas para esta olimipiada", Toast.LENGTH_SHORT).show();
+                }else{
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject provasJSON = jsonArray.getJSONObject(i);
+                        DadosProvasAnteriores prova = new DadosProvasAnteriores();
+
+                        prova.setId(provasJSON.getInt("id"));
+                        prova.setAnoProva(provasJSON.getInt("anoDaProva"));
+                        prova.setFase(provasJSON.getInt("fase"));
+                        prova.setUserProf(provasJSON.getString("profQuePostou"));
+                        prova.setSiglaOlimpiadaPertencente(siglaOlimpiada);
+
+                        if(provasJSON.getInt("estado")==1){
+                            prova.setEstado(true);
+                        }else{
+                            prova.setEstado(false);
+                        }
+
+                        String base64Pdf = provasJSON.getString("arquivoPdf");
+                        byte[] pdfBytes = Base64.decode(base64Pdf, Base64.DEFAULT);
+                        prova.setArquivoPdfBytes(pdfBytes);
+
+
+                        Log.d("Prova", prova.toString());
+                        provas.add(prova);
+                    }
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return provas;
+        }
     }
 
 }
