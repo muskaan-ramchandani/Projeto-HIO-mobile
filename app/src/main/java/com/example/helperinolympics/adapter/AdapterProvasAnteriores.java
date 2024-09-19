@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -19,9 +20,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.helperinolympics.Manifest;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosProvasAnteriores;
 
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasAnteriores.ProvasAnterioresViewHolder>{
+    private static final int REQUEST_WRITE_PERMISSION = 100; // Código de requisição para a permissão
     List<DadosProvasAnteriores> listaProvasAnteriores;
 
     public AdapterProvasAnteriores(List<DadosProvasAnteriores> provas){
@@ -67,27 +69,21 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
     }
 
 
-    public class ProvasAnterioresViewHolder extends RecyclerView.ViewHolder{
+    public class ProvasAnterioresViewHolder extends RecyclerView.ViewHolder {
         TextView ano, estado, fase, prof;
         byte[] pdfBytes;
 
-        public ProvasAnterioresViewHolder(@NonNull View itemView, final Context context){
+        public ProvasAnterioresViewHolder(@NonNull View itemView, final Context context) {
             super(itemView);
 
-            ano=itemView.findViewById(R.id.txtAnoProvaAnterior);
-            estado=itemView.findViewById(R.id.txtEstadoProvaAnterior);
-            fase=itemView.findViewById(R.id.txtFaseProvaAnterior);
-            prof=itemView.findViewById(R.id.txtUserProf);
-
+            ano = itemView.findViewById(R.id.txtAnoProvaAnterior);
+            estado = itemView.findViewById(R.id.txtEstadoProvaAnterior);
+            fase = itemView.findViewById(R.id.txtFaseProvaAnterior);
+            prof = itemView.findViewById(R.id.txtUserProf);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-//                    if (!hasStoragePermissions()) {
-//                        requestStoragePermissions();
-//                    }
-
                     if (pdfBytes != null && pdfBytes.length > 0) {
                         salvarPdfNoDispositivo(pdfBytes, context);
                     } else {
@@ -98,11 +94,27 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         }
     }
 
-    public int getItemCount(){return listaProvasAnteriores.size();}
+    public int getItemCount() {
+        return listaProvasAnteriores.size();
+    }
 
-    private void salvarPdfNoDispositivo(byte[] pdfBytes, Context context) {
+    public void salvarPdfNoDispositivo(byte[] pdfBytes, Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) context,
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_WRITE_PERMISSION);
+            } else {
+                salvarPdf(pdfBytes, context);
+            }
+        } else {
+            salvarPdf(pdfBytes, context);
+        }
+    }
+
+    private void salvarPdf(byte[] pdfBytes, Context context) {
         try {
-
             File file = new File(context.getExternalFilesDir(null), "prova_olimpiada.pdf");
 
             // Escrevendo bytes
@@ -119,10 +131,10 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
     private void abrirPdf(File arquivoPDF, Context context) {
         if (arquivoPDF.exists()) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            Uri pdfUri = Uri.fromFile(arquivoPDF);
+            Uri pdfUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", arquivoPDF);
 
             intent.setDataAndType(pdfUri, "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NO_HISTORY);
 
             try {
                 context.startActivity(intent);
@@ -134,37 +146,10 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         }
     }
 
-    public void atualizarOpcoes(List<DadosProvasAnteriores> provas){
+    public void atualizarOpcoes(List<DadosProvasAnteriores> provas) {
         this.listaProvasAnteriores.clear();
         this.listaProvasAnteriores.addAll(provas);
         this.notifyDataSetChanged();
     }
-
-//    private boolean hasStoragePermissions() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            return Environment.isExternalStorageManager();
-//        } else {
-//            return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-//                    && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-//        }
-//    }
-//
-//    private void requestStoragePermissions() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            try {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-//                intent.setData(Uri.parse("package:" + getPackageName()));
-//                startActivity(intent);
-//            } catch (Exception e) {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-//                startActivity(intent);
-//            }
-//        } else {
-//            ActivityCompat.requestPermissions(this, new String[]{
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                    Manifest.permission.READ_EXTERNAL_STORAGE
-//            }, PERMISSION_REQUEST_CODE);
-//        }
-//    }
 
 }
