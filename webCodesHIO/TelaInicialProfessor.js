@@ -14,26 +14,64 @@ function toggleMenu() {
     }
 }
 
-function prevSlide() {
-    const carouselInner = document.getElementById('carouselInner');
-    const firstItem = carouselInner.querySelector('.carousel-item');
-    carouselInner.appendChild(firstItem); // Move o primeiro item para o final
+function scrollCarrossel(distance) {
+    const carrossel = document.getElementById('carrossel');
+    carrossel.scrollBy({
+        left: distance,
+        behavior: 'smooth'
+    });
 }
 
-function nextSlide() {
-    const carouselInner = document.getElementById('carouselInner');
-    const lastItem = carouselInner.querySelector('.carousel-item:last-child');
-    carouselInner.insertBefore(lastItem, carouselInner.firstChild); // Move o último item para o início
+
+
+async function carregarOlimpiadas() {
+    try {
+        const response = await fetch('TelaInicialProfessor.php');
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+            console.error(data.error);
+            return;
+        }
+
+        const carrossel = document.getElementById('carrossel');
+        carrossel.innerHTML = '';  // Limpa o conteúdo anterior
+
+        data.forEach(olimpiada => {
+            const div = document.createElement('div');
+            div.classList.add('olimpiada');
+            div.style.backgroundColor = obterCorHex(olimpiada.cor);
+
+            div.innerHTML = `
+                <a href="TelaOlimpiadaProfessor.html?sigla=${olimpiada.sigla}">
+                    <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/${olimpiada.icone}.png" alt="${olimpiada.nome}">
+                    <div class="info">
+                        <h2>${olimpiada.nome}</h2>
+                        <p>Sigla: ${olimpiada.sigla}</p>
+                        <p class="cor">Cor: ${olimpiada.cor}</p>
+                    </div>
+                </a>
+            `;
+            carrossel.appendChild(div);
+        });
+    } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+    }
 }
 
-function prevQuestionnaireSlide() {
-    const questionnairesCarouselInner = document.getElementById('questionnairesCarouselInner');
-    const firstItem = questionnairesCarouselInner.querySelector('.questionnaires-carousel-item');
-    questionnairesCarouselInner.appendChild(firstItem); // Move o primeiro item para o final
+function obterCorHex(cor) {
+    switch (cor.toLowerCase()) {
+        case 'rosa': return '#CB6CE6';
+        case 'ciano': return '#18B9CD';
+        case 'azul': return '#5271FF';
+        case 'laranja': return '#FF914D';
+        default: return '#ffffff';  // Branco por padrão
+    }
 }
 
-function nextQuestionnaireSlide() {
-    const questionnairesCarouselInner = document.getElementById('questionnairesCarouselInner');
-    const lastItem = questionnairesCarouselInner.querySelector('.questionnaires-carousel-item:last-child');
-    questionnairesCarouselInner.insertBefore(lastItem, questionnairesCarouselInner.firstChild); // Move o último item para o início
-}
+// Carregar as Olimpíadas ao carregar a página
+window.onload = carregarOlimpiadas;

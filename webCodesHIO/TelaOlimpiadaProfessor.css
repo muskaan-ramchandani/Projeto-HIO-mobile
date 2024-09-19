@@ -96,10 +96,7 @@ body {
 }
 
 
-/* styles.css */
-body {
-    font-family: 'Open Sans', sans-serif;
-}
+/* menu */
 
 
 .container {
@@ -117,8 +114,6 @@ body {
     border-radius: 5px;
     font-size: 16px;
 }
-
-
 .menu {
     display: none; /* Oculta o menu por padrão */
     position: absolute;
@@ -139,13 +134,349 @@ body {
     font-weight: bold;
     font-size: 15px;
     margin: 5px 0;
-    padding: 5px;
+    padding: 10px;
     right: 0;
 }
 
 
 .menu-item:hover {
     background-color: #ededed; /* Cor de destaque ao passar o mouse */
+}
+
+
+/* Estilos para o modal */
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed;
+    z-index: 1; /* Garante que o modal fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* Centraliza o modal */
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px; /* Máximo de largura do modal */
+    position: relative;
+}
+
+
+.modal h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+    color: #835ad2;
+}
+
+
+.modal-body {
+    padding: 20px;
+}
+
+
+.modal-body label {
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+
+.modal-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+
+.btn-primary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-primary:hover {
+    background-color: #8c52ff;
+}
+
+
+.btn-secondary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-secondary:hover {
+    background-color: #8c52ff;
+}
+
+
+#prevContent {
+    left: 0;
+}
+
+
+#nextContent {
+    right: 0;
+}
+
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.close:hover {
+    color: #aaa; /* Cor de destaque ao passar o mouse */
+}
+
+
+
+
+/* Modal para recomendar livro */
+
+
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed;
+    z-index: 1000; /* Garante que o modal fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Centraliza o modal verticalmente e horizontalmente */
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.modal h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+    color: #835ad2;
+}
+
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.modal-input {
+    width: 100%; /* Largura completa para os campos */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+
+.file-upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.file-upload input[type="file"] {
+    flex: 1;
+}
+
+
+.file-upload button {
+    background-color: #8c52ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.file-upload button:hover {
+    background-color: #7a47e2; /* Cor de destaque ao passar o mouse */
+}
+
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.btn-primary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-primary:hover {
+    background-color: #7a47e2;
+}
+
+
+.btn-secondary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-secondary:hover {
+    background-color: #7a47e2;
+}
+
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.close:hover {
+    color: #aaa; /* Cor de destaque ao passar o mouse */
+}
+
+
+/* Grupo de botões de rádio */
+.radio-group label {
+    margin-right: 15px;
+}
+
+
+/* Grupo de upload de arquivos */
+#pdf-file-name {
+    display: block;
+    margin-top: 5px;
+}
+
+
+
+
+/*Provas anteriores*/
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-body {
+    margin-bottom: 15px;
+}
+
+
+.modal-footer {
+    text-align: right;
 }
 
 
@@ -177,8 +508,8 @@ body {
 
 
 .button-icon {
-    width: 60px; /* Reduz a largura dos ícones */
-    height: 60px; /* Reduz a altura dos ícones */
+    width: 60px;
+    height: 60px;
 }
 
 
@@ -258,20 +589,20 @@ body {
 
 .info-card {
     background-color: #f8f6f6;
-    border-radius: 8px; /* Mantido o border-radius para bordas arredondadas */
-    padding: 15px; /* Reduzido o padding para diminuir o tamanho do retângulo */
+    border-radius: 8px;
+    padding: 15px;
     display: flex;
-    align-items: flex-start; /* Alinha a imagem e o texto ao topo */
-    justify-content: flex-start; /* Ajusta o alinhamento para o início */
+    align-items: flex-start;
+    justify-content: flex-start;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
-    max-width: 550px; /* Reduzido a largura máxima do retângulo */
+    max-width: 550px;
     width: 100%; /* Garante que o retângulo use a largura disponível até o máximo */
     box-sizing: border-box; /* Inclui padding e borda na largura e altura total */
 }
 
 
 .info-card-img {
-    width: 95px; /* Reduzido o tamanho da imagem */
+    width: 95px;
     height: auto;
     margin-right: 10px; /* Ajustado o espaço entre a imagem e o texto */
 }
@@ -284,10 +615,10 @@ body {
 
 .info-card-title {
     font-family: 'Open Sans', sans-serif;
-    font-size: 20px; /* Mantido o tamanho da fonte do título */
+    font-size: 20px;
     font-weight: bold;
     color: black;
-    margin-bottom: 4px; /* Diminuído o espaço abaixo do título */
+    margin-bottom: 4px;
 }
 
 
@@ -298,7 +629,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px; /* Ajustado o tamanho da fonte das informações adicionais */
     color: black;
-    margin-bottom: 2px; /* Diminuído o espaço abaixo das informações */
+    margin-bottom: 2px;
 }
 
 
@@ -334,7 +665,7 @@ body {
 
 
 .provas-card {
-    background-color: #f8f6f6; /* Cor de fundo dos botões */
+    background-color: #f8f6f6;
     border-radius: 8px; /* Bordas arredondadas */
     padding: 25px; /* Padding interno dos botões */
     display: flex;
@@ -342,14 +673,14 @@ body {
     align-items: flex-start; /* Alinha os itens ao início */
     justify-content: flex-start; /* Ajusta o alinhamento para o início */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra do botão */
-    max-width: 350px; /* Largura máxima do botão */
-    width: 100%; /* Garante que o botão use a largura disponível até o máximo */
+    max-width: 350px;
+    width: 100%;
     box-sizing: border-box; /* Inclui padding e borda na largura e altura total */
     border: none; /* Remove borda padrão */
     cursor: pointer; /* Mostra o cursor de pointer para indicar que é clicável */
     transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves */
-    text-align: left; /* Alinha o texto ao lado esquerdo */
-    color: black; /* Cor do texto */
+    text-align: left;
+    color: black;
 }
 
 
@@ -357,16 +688,16 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px; /* Tamanho da fonte para o ano */
     font-weight: bold;
-    color: black; /* Cor do texto do ano */
+    color: black;
     margin-bottom: 5px; /* Espaçamento abaixo do ano */
 }
 
 
 .provas-card p {
     font-family: 'Open Sans', sans-serif;
-    font-size: 15px; /* Tamanho da fonte para as informações */
-    color: black; /* Cor do texto das informações */
-    margin: 2px 0; /* Espaçamento entre as linhas */
+    font-size: 15px;
+    color: black;
+    margin: 2px 0;
 }
 
 

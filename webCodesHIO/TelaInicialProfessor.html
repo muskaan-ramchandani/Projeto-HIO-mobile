@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
     <link rel="stylesheet" href="TelaInicialProfessor.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"> <!-- Link para a fonte Open Sans -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
 </head>
 <body>
     <div class="menu">
@@ -33,63 +33,26 @@
         <img src="Imagens_Mobile_HIO/hipoPrincipalComMedalha.png" alt="Hipo com medalha" class="message-box-img">
     </div>
 
-    <div class="previous-olympics">
-        Olimpíadas acessadas anteriormente:
-    </div>
+    <div class="previous-questionnaires">Olimpíadas anteriores</div>
+    <div class="carrossel" id="carrossel"></div>
 
-    <div class="carousel-container">
-        <button id="prevButton" class="carousel-button" onclick="prevSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
+    <div class="carrossel-controls">
+        <button onclick="scrollCarrossel(-200)">
+            <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/left-arrow.png" alt="Esquerda" style="width: 30px; height: 30px;">
         </button>
-        <div class="carousel">
-            <div class="carousel-inner" id="carouselInner">
-                <?php include 'TelaIncialProfessor.php'; ?>
-            </div>
-        </div>
-        <button id="nextButton" class="carousel-button" onclick="nextSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir">
+        <button onclick="scrollCarrossel(200)">
+            <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/right-arrow.png" alt="Direita" style="width: 30px; height: 30px;">
         </button>
     </div>
 
-    <div class="previous-questionnaires">
-        Seus questionários:
-    </div>
+    <div class="previous-questionnaires">Seus questionários:</div>
     <div class="questionnaires-carousel-container">
         <button id="prevQuestionnaireButton" class="carousel-button" onclick="prevQuestionnaireSlide()">
             <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
         </button>
         <div class="questionnaires-carousel">
             <div class="questionnaires-carousel-inner" id="questionnairesCarouselInner">
-                <div class="questionnaires-carousel-item">
-                    <div class="questionnaire-item">
-                        <div class="questionnaire-info">
-                            <p><strong>OBF</strong> - Mecânica Clássica</p>
-                            <p><strong>Repouso</strong></p>
-                            <p>200 respostas</p>
-                        </div>
-                        <a href="#" class="visualize-button">Visualizar</a>
-                    </div>
-                </div>
-                <div class="questionnaires-carousel-item">
-                    <div class="questionnaire-item">
-                        <div class="questionnaire-info">
-                            <p><strong>OBF</strong> - Mecânica Clássica</p>
-                            <p><strong>Gravidade</strong></p>
-                            <p>150 respostas</p>
-                        </div>
-                        <a href="#" class="visualize-button">Visualizar</a>
-                    </div>
-                </div>
-                <div class="questionnaires-carousel-item">
-                    <div class="questionnaire-item">
-                        <div class="questionnaire-info">
-                            <p><strong>OBI</strong> - Algoritmos</p>
-                            <p><strong>Complexidade</strong></p>
-                            <p>180 respostas</p>
-                        </div>
-                        <a href="#" class="visualize-button">Visualizar</a>
-                    </div>
-                </div>
+                <!-- Aqui você pode adicionar questionários, se desejar -->
             </div>
         </div>
         <button id="nextQuestionnaireButton" class="carousel-button" onclick="nextQuestionnaireSlide()">
@@ -97,6 +60,7 @@
         </button>
     </div>
 
-    <script src="TelaInicialProfessor.js"></script>
+    <script src="TelaInicialProfessor.js">
+    </script>
 </body>
 </html>

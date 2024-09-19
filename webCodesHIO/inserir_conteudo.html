@@ -5,100 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inserir Conteúdo</title>
     <style>
-
-    /* Define uma fonte padrão e um tamanho base para o texto */
-body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-/* Estiliza o título da página */
-h1 {
-    text-align: center;
-    color: #333;
-    margin-top: 20px;
-}
-
-/* Estiliza o contêiner do formulário */
-form {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Estiliza os rótulos dos campos */
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-/* Estiliza os campos de entrada */
-input[type="text"],
-input[type="number"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Inclui o padding e border no width total */
-}
-
-/* Estiliza a área de texto */
-textarea {
-    height: 150px; /* Altura fixa para a área de texto */
-    resize: vertical; /* Permite que o usuário redimensione verticalmente */
-}
-
-/* Estiliza o botão de envio */
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 15px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-/* Altera a cor de fundo do botão ao passar o mouse */
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Estiliza a mensagem de sucesso ou erro */
-.message {
-    text-align: center;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    background-color: #dff0d8;
-    border: 1px solid #d6e9c6;
-    border-radius: 4px;
-    color: #3c763d;
-}
-
-/* Estiliza mensagens de erro */
-.message.error {
-    background-color: #f2dede;
-    border: 1px solid #ebccd1;
-    color: #a94442;
-}
-
+        /* Seu CSS aqui */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #dff0d8;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+        }
+        .message.error {
+            background-color: #f2dede;
+            border: 1px solid #ebccd1;
+            color: #a94442;
+        }
     </style>
 </head>
 <body>
     <h1>Inserir Novo Conteúdo</h1>
-    <form action="inserir_conteudo.php" method="post">
+    <form action="processa_conteudo.php" method="post">
         <label for="titulo">Título:</label>
         <input type="text" id="titulo" name="titulo" required>
         
@@ -106,9 +80,29 @@ button:hover {
         <input type="text" id="subtitulo" name="subtitulo" required>
         
         <label for="siglaOlimpiada">Sigla da Olimpíada:</label>
-        <input type="text" id="siglaOlimpiada" name="siglaOlimpiada" required>
+        <select id="siglaOlimpiada" name="siglaOlimpiada" required>
+            <!-- As opções serão carregadas dinamicamente -->
+        </select>
         
         <button type="submit">Adicionar Conteúdo</button>
     </form>
+
+    <script>
+        // Carregar as olimpíadas no seletor quando o documento estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('buscar_olimpiadas.php')
+                .then(response => response.json())
+                .then(data => {
+                    const select = document.getElementById('siglaOlimpiada');
+                    data.forEach(olimpiada => {
+                        const option = document.createElement('option');
+                        option.value = olimpiada.sigla;
+                        option.textContent = olimpiada.nome;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar olimpíadas:', error));
+        });
+    </script>
 </body>
 </html>
