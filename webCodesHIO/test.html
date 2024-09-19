@@ -4,118 +4,113 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
-    <link rel="stylesheet" href="TelaInicialProfessor.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+
 </head>
 <body>
-    <div class="menu">
-        <div class="menu-icon" onclick="toggleMenu()">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <span class="helper-text" id="helperText">Helper in Olympics</span>
-        <div class="menu-content" id="menuContent">
-            <a href="TelaPerfilProfessor.html"><img src="Imagens_Mobile_HIO/iconeSeuPerfil.png" alt="Perfil" class="menu-icon-img"> Seu Perfil</a>
-            <a href="#"><img src="Imagens_Mobile_HIO/iconeChats.png" alt="Fórum" class="menu-icon-img"> Fórum</a>
-            <a href="#"><img src="Imagens_Mobile_HIO/iconeManual.png" alt="Manual" class="menu-icon-img"> Manual</a>
-            <a href="#"><img src="Imagens_Mobile_HIO/iconeConfiguracoes.png" alt="Configurações" class="menu-icon-img"> Configurações</a>
-            <a href="#"><img src="Imagens_Mobile_HIO/iconeSair.png" alt="Sair" class="menu-icon-img"> Sair</a>
-        </div>
-    </div>
+<!-- Modal para recomendar livros -->
+<div id="bookModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="hideBookModal()">&times;</span>
+        <h2>Recomendar Livro</h2>
+        <div class="modal-body">
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" class="modal-input">
 
-    <div class="message-box">
-        <div class="message-text">
-            <div class="message-line">Olá mestres!</div>
-            <div class="message-line">Está procurando por alguma olimpíada?</div>
-        </div>
-        <input type="text" id="searchField" class="search-input" placeholder="Procure pelo nome ou pela sigla:">
-        <img src="Imagens_Mobile_HIO/hipoPrincipalComMedalha.png" alt="Hipo com medalha" class="message-box-img">
-    </div>
+            <label for="title">Título:</label>
+            <input type="text" id="title" class="modal-input">
 
-    <div class="previous-olympics">
-        Olimpíadas acessadas anteriormente:
-    </div>
-    <div class="carousel-container">
-        <button id="prevButton" class="carousel-button" onclick="prevSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
-        </button>
-        <div class="carousel">
-            <div class="carousel-inner" id="carouselInner">
-                <?php include 'carrossel_olimpiadas.php'; ?>
+            <label for="author">Autor:</label>
+            <input type="text" id="author" class="modal-input">
+
+            <label for="edition">Número da Edição:</label>
+            <input type="text" id="edition" class="modal-input">
+
+            <label for="publication-date">Data de Publicação:</label>
+            <input type="date" id="publication-date" class="modal-input">
+
+            <!-- Botão para adicionar a capa do livro -->
+            <div class="cover-upload">
+                <button class="btn btn-primary" onclick="document.getElementById('cover').click()">Adicionar Capa do Livro</button>
+                <input type="file" id="cover" class="modal-input" accept="image/*" style="display: none;">
+                <span id="cover-file-name">Nenhum arquivo selecionado</span>
             </div>
         </div>
-        <button id="nextButton" class="carousel-button" onclick="nextSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir">
-        </button>
-    </div>
-
-    <div class="previous-questionnaires">
-        Seus questionários:
-    </div>
-    <div class="questionnaires-carousel-container">
-        <button id="prevQuestionnaireButton" class="carousel-button" onclick="prevQuestionnaireSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar">
-        </button>
-        <div class="questionnaires-carousel">
-            <div class="questionnaires-carousel-inner" id="questionnairesCarouselInner">
-                <!-- Dados dos questionários -->
-                <!-- Adicione seus questionários aqui -->
-            </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="addBook()">Adicionar</button>
+            <button class="btn btn-secondary" onclick="hideBookModal()">Cancelar</button>
         </div>
-        <button id="nextQuestionnaireButton" class="carousel-button" onclick="nextQuestionnaireSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir">
-        </button>
     </div>
+</div>
 
-    <script>function toggleMenu() {
-        var menuContent = document.getElementById('menuContent');
-        var menuIcon = document.querySelector('.menu-icon');
-        var helperText = document.getElementById('helperText');
-    
-        if (menuContent.style.display === 'block') {
-            menuContent.style.display = 'none';
-            menuIcon.classList.remove('active');
-            helperText.style.display = 'none';
+<script>
+// Função para mostrar o modal
+function showBookModal() {
+    document.getElementById('bookModal').style.display = 'block';
+}
+
+// Função para esconder o modal
+function hideBookModal() {
+    document.getElementById('bookModal').style.display = 'none';
+}
+
+// Atualiza o nome do arquivo selecionado
+document.getElementById('cover').addEventListener('change', function() {
+    var fileName = this.files[0] ? this.files[0].name : 'Nenhum arquivo selecionado';
+    document.getElementById('cover-file-name').textContent = fileName;
+});
+
+// Função para enviar os dados do livro ao backend
+async function addBook() {
+    const isbn = document.getElementById('isbn').value;
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const edition = document.getElementById('edition').value;
+    const publicationDate = document.getElementById('publication-date').value;
+    const cover = document.getElementById('cover').files[0];
+
+    // Verifica se todos os campos foram preenchidos
+    if (!isbn || !title || !author || !edition || !publicationDate) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+    }
+
+    // FormData para enviar os dados
+    const formData = new FormData();
+    formData.append('isbn', isbn);
+    formData.append('title', title);
+    formData.append('author', author);
+    formData.append('edition', edition);
+    formData.append('publicationDate', publicationDate);
+    if (cover) formData.append('cover', cover); // Adiciona a capa se existir
+
+    try {
+        const response = await fetch('TelaRecomendarLivro.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('Livro recomendado com sucesso!');
+            hideBookModal();
+            // Limpa os campos após sucesso
+            document.getElementById('isbn').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('author').value = '';
+            document.getElementById('edition').value = '';
+            document.getElementById('publication-date').value = '';
+            document.getElementById('cover-file-name').textContent = 'Nenhum arquivo selecionado';
         } else {
-            menuContent.style.display = 'block';
-            menuIcon.classList.add('active');
-            helperText.style.display = 'inline';
+            alert('Erro ao recomendar livro: ' + result.error);
         }
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao enviar o livro: ' + error.message);
     }
-    
-    function loadOlimpiadas() {
-        // Função para carregar as olimpíadas - Agora gerado pelo PHP
-    }
-    
-    function prevSlide() {
-        const carouselInner = document.getElementById('carouselInner');
-        const firstItem = carouselInner.querySelector('.carousel-item');
-        carouselInner.appendChild(firstItem); // Move o primeiro item para o final
-    }
-    
-    function nextSlide() {
-        const carouselInner = document.getElementById('carouselInner');
-        const lastItem = carouselInner.querySelector('.carousel-item:last-child');
-        carouselInner.insertBefore(lastItem, carouselInner.firstChild); // Move o último item para o início
-    }
-    
-    function prevQuestionnaireSlide() {
-        const questionnairesCarouselInner = document.getElementById('questionnairesCarouselInner');
-        const firstItem = questionnairesCarouselInner.querySelector('.questionnaires-carousel-item');
-        questionnairesCarouselInner.appendChild(firstItem); // Move o primeiro item para o final
-    }
-    
-    function nextQuestionnaireSlide() {
-        const questionnairesCarouselInner = document.getElementById('questionnairesCarouselInner');
-        const lastItem = questionnairesCarouselInner.querySelector('.questionnaires-carousel-item:last-child');
-        questionnairesCarouselInner.insertBefore(lastItem, questionnairesCarouselInner.firstChild); // Move o último item para o início
-    }
-    
-    // Inicializa o carrossel se necessário
-    window.onload = function() {
-        loadOlimpiadas();
-    }
-    </script>
+}
+</script>
+
+
 </body>
 </html>

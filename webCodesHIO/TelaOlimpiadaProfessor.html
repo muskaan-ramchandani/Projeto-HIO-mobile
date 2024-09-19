@@ -32,14 +32,15 @@
 <div id="modalAddContent" class="modal">
     <div class="modal-content">
         <span class="close" onclick="hideModal('modalAddContent')">&times;</span>
-        <h2>Adicionar conteúdo</h2>
+        <h2>Adicionar conteúdo para <span id="olympiadName"></span></h2> <!-- Exibe o nome da Olimpíada -->
         <div class="modal-body">
             <label for="titleAddContent">Título:</label>
             <input type="text" id="titleAddContent" class="modal-input">
             <label for="subtitleAddContent">Subtítulo:</label>
             <input type="text" id="subtitleAddContent" class="modal-input">
-            <label for="siglaOlimpiada">Sigla da Olimpíada:</label>
-            <input type="text" id="siglaOlimpiada" class="modal-input">
+            <!-- O campo de sigla foi removido porque ele será definido automaticamente -->
+
+            <input type="hidden" id="siglaOlimpiada" class="modal-input">
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" onclick="addContent()">Adicionar</button>
@@ -141,7 +142,7 @@
 
 
     <div class="botao-voltar-container">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarBRANCO.png" alt="Botão Voltar" class="botao-voltar">
+        <img src="Imagens_Mobile_HIO/btnVoltarBRANCO.png" alt="Botão Voltar" class="botao-voltar">
         <div class="botao-voltar-texto">Voltar</div>
     </div>
 </div>
@@ -151,7 +152,7 @@
 <!-- Carrossel de Conteúdos -->
 <div class="carousel-container">
     <button id="prevContent" class="carousel-button" onclick="prevContentSlide()">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="button-icon">
+        <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="button-icon">
     </button>
     <div class="carousel" id="contentCarousel">
         <div class="carousel-inner" id="contentCarouselInner">
@@ -178,7 +179,7 @@
         </div>
     </div>
     <button id="nextContent" class="carousel-button" onclick="nextContentSlide()">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
+        <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
     </button>
 </div>
 
@@ -189,7 +190,7 @@
 <!-- Carrossel de Recomendações -->
 <div class="carousel-container">
     <button id="prevBooks" class="carousel-button" onclick="prevBooksSlide()">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="button-icon">
+        <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Voltar" class="button-icon">
     </button>
     <div class="carousel" id="booksCarousel">
         <div class="carousel-inner" id="booksCarouselInner">
@@ -248,7 +249,7 @@
         </div>
     </div>
     <button id="nextBooks" class="carousel-button" onclick="nextBooksSlide()">
-        <img src="C:/Users/Muskaan/HIOTelasWeb/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
+        <img src="ima btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
     </button>
 </div>
 
@@ -367,6 +368,9 @@
 
                 // Log para depuração
                 console.log('Cor aplicada:', corHex);
+
+                document.getElementById('olympiadName').innerText = data.nome;  // Nome da Olimpíada no título
+                document.getElementById('siglaOlimpiada').value = data.sigla;   
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
@@ -665,16 +669,19 @@ document.getElementById('uploadPdfBtn').addEventListener('click', function() {
     if (!titulo || !subtitulo || !siglaOlimpiadaPertencente) {
         alert('Por favor, preencha todos os campos.');
         return;
-    }
+    }  
+
+    console.log(`Adicionando conteúdo: ${titulo}, ${subtitulo} para a Olimpíada: ${siglaOlimpiadaPertencente}`);
+
 
     try {
         const response = await fetch('TelaAdicionarConteudo.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams({
-                titulo, // Use 'titulo' em vez de 'title'
-                subtitulo, // Use 'subtitulo' em vez de 'subtitle'
-                siglaOlimpiadaPertencente
+                titulo: titulo,
+            subtitulo: subtitulo,
+            siglaOlimpiadaPertencente: siglaOlimpiadaPertencente
             })
         });
 

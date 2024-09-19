@@ -23,7 +23,8 @@ if (isset($_GET['sigla'])) {
             echo json_encode([
                 'nome' => $olimpiada['nome'],
                 'icone' => $olimpiada['icone'],
-                'cor' => $olimpiada['cor']
+                'cor' => $olimpiada['cor'],
+                'sigla' => $olimpiada['sigla']
             ]);
         } else {
             echo json_encode(['error' => 'Olimpíada não encontrada.']);
