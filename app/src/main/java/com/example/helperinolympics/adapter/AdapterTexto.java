@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.materiais.TextoActivity;
+import com.example.helperinolympics.model.DadosAluno;
+import com.example.helperinolympics.model.DadosConteudo;
 import com.example.helperinolympics.model.DadosTexto;
 import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
 
@@ -19,9 +22,15 @@ import java.util.List;
 
 public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHolder> {
     private List<DadosTexto> listaTexto;
+    private DadosAluno alunoCadastrado;
+    private DadosConteudo conteudo;
+    private String olimpiadaPertencente;
 
-    public AdapterTexto(List<DadosTexto> listaTexto) {
+    public AdapterTexto(List<DadosTexto> listaTexto, DadosAluno alunoCadastrado, DadosConteudo conteudo, String olimpiadaPertencente) {
         this.listaTexto = listaTexto;
+        this.alunoCadastrado= alunoCadastrado;
+        this.conteudo = conteudo;
+        this.olimpiadaPertencente = olimpiadaPertencente;
     }
 
     @NonNull
@@ -34,12 +43,15 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
     @Override
     public void onBindViewHolder(@NonNull TextoViewHolder holder, int position) {
         DadosTexto texto = listaTexto.get(position);
+        holder.txt = texto;
 
         String valorUserProf = texto.getProfessorCadastrou();
         holder.userProf.setText(valorUserProf);
 
         String valorTitulo = texto.getTitulo();
         holder.titulo.setText(valorTitulo);
+
+        holder.textoString=texto.getTexto();
     }
 
     @Override
@@ -49,6 +61,8 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
 
     public class TextoViewHolder extends RecyclerView.ViewHolder {
         TextView titulo, userProf;
+        String textoString;
+        DadosTexto txt;
 
         public TextoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,12 +74,23 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, AcessoTextoActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoCadastrado);
+                    intent.putExtra("conteudo", conteudo);
+                    intent.putExtra("olimpiada", olimpiadaPertencente);
+                    intent.putExtra("texto", txt);
                     context.startActivity(intent);
+
                     if (context instanceof Activity) {
                         ((Activity) context).finish();
                     }
                 }
             });
         }
+    }
+
+    public void atualizarOpcoes(List<DadosTexto> textos){
+        this.listaTexto.clear();
+        this.listaTexto.addAll(textos);
+        this.notifyDataSetChanged();
     }
 }

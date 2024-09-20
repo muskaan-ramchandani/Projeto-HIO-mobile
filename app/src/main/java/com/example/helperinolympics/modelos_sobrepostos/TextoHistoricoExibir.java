@@ -24,7 +24,7 @@ public class TextoHistoricoExibir extends DialogFragment {
         View view = inflater.inflate(R.layout.texto_historico, container, false);
 
         TextView olimpiada = view.findViewById(R.id.txtOlimpiadaTextoHistorico);
-        olimpiada.setText(texto.getOlimpiadaPertencente());
+//        olimpiada.setText(texto.getOlimpiadaPertencente());
 
         TextView titulo = view.findViewById(R.id.txtTituloTextoHistorico);
         titulo.setText(texto.getTitulo());

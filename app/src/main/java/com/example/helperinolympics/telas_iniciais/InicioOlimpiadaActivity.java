@@ -124,7 +124,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     public void configurarRecyclerConteudos(){
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        adapterConteudos= new AdapterConteudos(conteudos, alunoCadastrado);
+        adapterConteudos= new AdapterConteudos(conteudos, alunoCadastrado, siglaOlimpiada);
         binding.recyclerViewConteudosOlimpiada.setLayoutManager(layoutManager);
         binding.recyclerViewConteudosOlimpiada.setHasFixedSize(true);
         binding.recyclerViewConteudosOlimpiada.setAdapter(adapterConteudos);

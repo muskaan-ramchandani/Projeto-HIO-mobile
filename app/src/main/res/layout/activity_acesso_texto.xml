@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".telas_de_acesso.AcessoTextoActivity">
 
 
@@ -121,7 +122,7 @@
         android:id="@+id/txtProfAutorDoTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Por: Profa Ana Castela"
+        tools:text="Por: Profa Ana Castela"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:fontFamily="@font/open_sans"
@@ -147,14 +148,19 @@
             android:layout_height="450dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtTextoCriado"
+            <ScrollView
                 android:layout_width="380dp"
-                android:layout_height="450dp"
-                android:fontFamily="@font/open_sans"
-                android:text="Cinemática Escalar é um dos principais ramos da Mecânica. Trata-se da área que estuda o movimento dos corpos sem atribuir-lhes uma causa. A palavra escalar refere-se ao fato de lidarmos com movimentos unicamente unidimensionais, ou seja, que se desenvolvem unicamente ao longo de uma direção do espaço, dispensando, dessa forma, o tratamento vetorial das grandezas físicas envolvidas. Para o estudo da Cinemática Escalar, alguns conceitos são de grande importância, portanto, trataremos aqui daqueles que são fundamentais para o seu entendimento.  Conceitos fundamentais da Cinemática Escalar  → Corpo: É uma porção limitada de matéria e é constituído por partículas, mas pode ser tratado macroscopicamente como um único corpo no âmbito da Cinemática Escalar.  → Ponto material: É todo corpo cujas dimensões podem ser desprezadas em relação às distâncias envolvidas. "
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:layout_height="450dp">
+
+                <TextView
+                    android:id="@+id/txtTextoCriado"
+                    android:layout_width="380dp"
+                    android:layout_height="450dp"
+                    android:fontFamily="@font/open_sans"
+                    tools:text="Cinemática Escalar é um dos principais ramos da Mecânica. Trata-se da área que estuda o movimento dos corpos sem atribuir-lhes uma causa. A palavra escalar refere-se ao fato de lidarmos com movimentos unicamente unidimensionais, ou seja, que se desenvolvem unicamente ao longo de uma direção do espaço, dispensando, dessa forma, o tratamento vetorial das grandezas físicas envolvidas. Para o estudo da Cinemática Escalar, alguns conceitos são de grande importância, portanto, trataremos aqui daqueles que são fundamentais para o seu entendimento.  Conceitos fundamentais da Cinemática Escalar  → Corpo: É uma porção limitada de matéria e é constituído por partículas, mas pode ser tratado macroscopicamente como um único corpo no âmbito da Cinemática Escalar.  → Ponto material: É todo corpo cujas dimensões podem ser desprezadas em relação às distâncias envolvidas. "
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </ScrollView>
         </LinearLayout>
     </ScrollView>
 
