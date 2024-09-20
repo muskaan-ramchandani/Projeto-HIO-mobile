@@ -15,47 +15,65 @@
         async function carregarOlimpiada() {
             const params = new URLSearchParams(window.location.search);
             const sigla = params.get('sigla');
-
+        
             if (!sigla) {
                 console.error('Nenhuma sigla fornecida.');
                 return;
             }
-
+        
             try {
-                const response = await fetch(`TelaOlimpiadaProfessor.php?sigla=${sigla}`);
-                const data = await response.json();
-
-                if (data.error) {
-                    console.error(data.error);
+                // Buscar dados da Olimpíada
+                const responseOlimpiada = await fetch(`TelaOlimpiadaProfessor.php?sigla=${sigla}`);
+                const dataOlimpiada = await responseOlimpiada.json();
+        
+                if (dataOlimpiada.error) {
+                    console.error(dataOlimpiada.error);
                     return;
                 }
-
-                // Preencher os dados no HTML
+        
+                // Preencher os dados da Olimpíada no HTML
                 document.getElementById('logoContainer').innerHTML = `
-                    <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/${data.icone}.png" alt="${data.nome}">
-                    <div class="text">${data.nome}</div>
+                    <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/${dataOlimpiada.icone}.png" alt="${dataOlimpiada.nome}">
+                    <div class="text">${dataOlimpiada.nome}</div>
                 `;
-
-                document.getElementById('content').innerHTML = `
-                    <h1>Bem-vindo à ${data.nome}</h1>
-                    <p>Detalhes da Olimpíada aparecerão aqui...</p>
-                `;
-
-                // Alterar a cor de fundo do logo-container e da barra usando a função obterCorHex
-                const corHex = obterCorHex(data.cor.trim()); // Remove possíveis espaços extras
+        
+                const corHex = obterCorHex(dataOlimpiada.cor.trim());
                 document.getElementById('logoContainer').style.backgroundColor = corHex;
                 document.getElementById('barra').style.backgroundColor = corHex;
-
-                // Log para depuração
-                console.log('Cor aplicada:', corHex);
-
-                document.getElementById('olympiadName').innerText = data.nome;  // Nome da Olimpíada no título
-                document.getElementById('siglaOlimpiada').value = data.sigla;   
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error);
-            }
-        }
         
+                // Carregar conteúdos da Olimpíada
+                const responseConteudos = await fetch(`TelaOlimpiadaProfessorConteudo.php?sigla=${sigla}`);
+                const conteudos = await responseConteudos.json();
+        
+                if (conteudos.error) {
+                    console.error(conteudos.error);
+                    return;
+                }
+        
+                // Processar e exibir os conteúdos
+                const contentContainer = document.getElementById('contentSpinner');
+                let spinnerContent = '<div class="spinner-horizontal">';
+        
+                conteudos.forEach(conteudo => {
+                    spinnerContent += `
+                        <div class="spinner-item">
+                            <h3>${conteudo.titulo}</h3>
+                            <p>${conteudo.subtitulo}</p>
+                        </div>
+                    `;
+                });
+        
+                spinnerContent += '</div>';
+                contentContainer.innerHTML = spinnerContent;
+        
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+            }
+        
+        
+        }
+        window.onload = carregarOlimpiada;
+
 
     function prevContentSlide() {
     const items = document.querySelectorAll('#contentCarouselInner .carousel-item');

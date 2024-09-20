@@ -734,3 +734,35 @@ body {
 }
 
 
+.spinner-horizontal {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.spinner-item {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.spinner-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.spinner-item p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.content-spinner-container {
+    width: 100%;
+    margin: 20px 0;
+}
