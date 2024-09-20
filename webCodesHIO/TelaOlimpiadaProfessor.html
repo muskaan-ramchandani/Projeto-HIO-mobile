@@ -38,8 +38,7 @@
             <input type="text" id="titleAddContent" class="modal-input">
             <label for="subtitleAddContent">Subtítulo:</label>
             <input type="text" id="subtitleAddContent" class="modal-input">
-            <!-- O campo de sigla foi removido porque ele será definido automaticamente -->
-
+    
             <input type="hidden" id="siglaOlimpiada" class="modal-input">
         </div>
         <div class="modal-footer">
@@ -54,45 +53,42 @@
 
 
     <!-- Modal para recomendar livros-->
-<div id="bookModal" class="modal">
-<div class="modal-content">
-    <span class="close" onclick="hideBookModal()">&times;</span>
-    <h2>Recomendar Livro</h2>
-    <div class="modal-body">
-        <label for="isbn">ISBN:</label>
-        <input type="text" id="isbn" class="modal-input">
-
-
-        <label for="title">Título:</label>
-        <input type="text" id="title" class="modal-input">
-
-
-        <label for="author">Autor:</label>
-        <input type="text" id="author" class="modal-input">
-
-
-        <label for="edition">Número da Edição:</label>
-        <input type="text" id="edition" class="modal-input">
-
-
-        <label for="publication-date">Data de Publicação:</label>
-        <input type="text" id="publication-date" class="modal-input">
-
-
-        <!-- Botão para adicionar a capa do livro -->
-        <div class="cover-upload">
-            <button class="btn btn-primary" onclick="document.getElementById('cover').click()">Adicionar Capa do Livro</button>
-            <input type="file" id="cover" class="modal-input" accept="image/*" style="display: none;">
-            <span id="cover-file-name"></span>
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="hideBookModal()">&times;</span>
+            <h2>Recomendar Livro para <span id="olympiadName"></span></h2> <!-- Nome da Olimpíada aqui -->
+            <div class="modal-body">
+                <label for="isbn">ISBN:</label>
+                <input type="text" id="isbn" class="modal-input">
+    
+                <label for="title">Título:</label>
+                <input type="text" id="title" class="modal-input">
+    
+                <label for="author">Autor:</label>
+                <input type="text" id="author" class="modal-input">
+    
+                <label for="edition">Número da Edição:</label>
+                <input type="text" id="edition" class="modal-input">
+    
+                <label for="publication-date">Data de Publicação:</label>
+                <input type="date" id="publication-date" class="modal-input">
+    
+                <!-- Botão para adicionar a capa do livro -->
+                <div class="cover-upload">
+                    <button class="btn btn-primary" onclick="document.getElementById('cover').click()">Adicionar Capa do Livro</button>
+                    <input type="file" id="cover" class="modal-input" accept="image/*" style="display: none;">
+                    <span id="cover-file-name"></span>
+                </div>
+    
+                <input type="hidden" id="siglaOlimpiada" class="modal-input"> <!-- Campo oculto para a sigla -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="addBook()">Adicionar</button>
+                <button class="btn btn-secondary" onclick="hideBookModal()">Cancelar</button>
+            </div>
         </div>
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" onclick="addBook()">Adicionar</button>
-        <button class="btn btn-secondary" onclick="hideBookModal()">Cancelar</button>
-    </div>
-</div>
-</div>
-
+    
 
     <!-- Modal para adicionar prova anterior -->
 <div id="modalAddExam" class="modal">
@@ -699,6 +695,60 @@ document.getElementById('uploadPdfBtn').addEventListener('click', function() {
     }
 }
 
+async function addBook() {
+    const isbn = document.getElementById('isbn').value;
+    const titulo = document.getElementById('title').value;
+    const autor = document.getElementById('author').value;
+    const edicao = document.getElementById('edition').value;
+    const dataPublicacao = document.getElementById('publication-date').value;
+    const siglaOlimpiadaPertencente = document.getElementById('siglaOlimpiada').value;
+
+    // Tratamento do arquivo da capa
+    const coverFile = document.getElementById('cover').files[0];
+    if (!coverFile) {
+        alert('Por favor, selecione uma capa do livro.');
+        return;
+    }
+
+    if (!isbn || !titulo || !autor || !edicao || !dataPublicacao || !siglaOlimpiadaPertencente) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('isbn', isbn);
+    formData.append('titulo', titulo);
+    formData.append('autor', autor);
+    formData.append('edicao', edicao);
+    formData.append('dataPublicacao', dataPublicacao);
+    formData.append('siglaOlimpiadaPertencente', siglaOlimpiadaPertencente);
+    formData.append('cover', coverFile);
+
+    try {
+        const response = await fetch('TelaRecomendarLivro.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert('Livro adicionado com sucesso!');
+            hideBookModal();
+            // Atualize a lista de livros ou faça outras ações conforme necessário
+        } else {
+            alert('Erro ao adicionar livro: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+    }
+}
+
+// Chame a função carregarOlimpiadaParaLivro quando abrir o modal
+function showAddBookModal() {
+    carregarOlimpiada();
+    document.getElementById('bookModal').style.display = 'block';
+}
 
     </script>
 </body>
