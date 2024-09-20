@@ -25,7 +25,7 @@
 
 
         <TextView
-            android:id="@+id/txtConteudo"
+            android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"

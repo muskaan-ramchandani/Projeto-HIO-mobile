@@ -51,6 +51,9 @@ public class AcessoTextoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AcessoTextoActivity.this, TextoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish();
             }
@@ -69,6 +72,9 @@ public class AcessoTextoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AcessoTextoActivity.this, VideoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish();
             }
