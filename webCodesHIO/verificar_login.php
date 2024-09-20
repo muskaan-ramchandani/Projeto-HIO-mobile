@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user) {
                 if (password_verify($password, $user['senha'])) {
                     $_SESSION['email'] = $email; // Armazena o email na sessão
-                    header("Location: TelaInicialProfessor.html"); // Redireciona para a página inicial do professor
+                    header("Location: TelaInicialProfessor.html?email=" . urlencode($email));
                     exit();
                 } else {
                     $mensagem = "Senha incorreta.";

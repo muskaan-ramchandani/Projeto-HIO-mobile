@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
+
 if (isset($_GET['sigla'])) {
     $sigla = $_GET['sigla'];
 

@@ -73,5 +73,19 @@ function obterCorHex(cor) {
     }
 }
 
-// Carregar as Olimpíadas ao carregar a página
+
 window.onload = carregarOlimpiadas;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    const emailProfessor = params.get('email');
+
+    // Verifica se o email foi capturado corretamente
+    if (!emailProfessor || emailProfessor.trim() === '') {
+        window.location.href = 'TelaRecepcao.html'; // Redireciona se não houver email
+    } else {
+        console.log('Email capturado:', emailProfessor);
+        localStorage.setItem('emailProfessor', emailProfessor); // Armazena no LocalStorage
+    }
+});
+
