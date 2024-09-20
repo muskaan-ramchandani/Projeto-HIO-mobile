@@ -24,11 +24,13 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
     private List<DadosTexto> listaTexto;
     private DadosAluno alunoCadastrado;
     private DadosConteudo conteudo;
+    private String olimpiadaPertencente;
 
-    public AdapterTexto(List<DadosTexto> listaTexto, DadosAluno alunoCadastrado, DadosConteudo conteudo) {
+    public AdapterTexto(List<DadosTexto> listaTexto, DadosAluno alunoCadastrado, DadosConteudo conteudo, String olimpiadaPertencente) {
         this.listaTexto = listaTexto;
         this.alunoCadastrado= alunoCadastrado;
         this.conteudo = conteudo;
+        this.olimpiadaPertencente = olimpiadaPertencente;
     }
 
     @NonNull
@@ -41,6 +43,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
     @Override
     public void onBindViewHolder(@NonNull TextoViewHolder holder, int position) {
         DadosTexto texto = listaTexto.get(position);
+        holder.txt = texto;
 
         String valorUserProf = texto.getProfessorCadastrou();
         holder.userProf.setText(valorUserProf);
@@ -59,6 +62,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
     public class TextoViewHolder extends RecyclerView.ViewHolder {
         TextView titulo, userProf;
         String textoString;
+        DadosTexto txt;
 
         public TextoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +76,8 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
                     Intent intent = new Intent(context, AcessoTextoActivity.class);
                     intent.putExtra("alunoCadastrado", alunoCadastrado);
                     intent.putExtra("conteudo", conteudo);
+                    intent.putExtra("olimpiada", olimpiadaPertencente);
+                    intent.putExtra("texto", txt);
                     context.startActivity(intent);
 
                     if (context instanceof Activity) {

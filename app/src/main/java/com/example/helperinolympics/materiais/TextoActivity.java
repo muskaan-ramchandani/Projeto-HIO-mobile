@@ -157,7 +157,7 @@ public class TextoActivity extends AppCompatActivity {
             Log.d("ERRO_ID_CONTEUDO", "O id do conteúdo está nulo");
         }
 
-        adapter = new AdapterTexto(listaTexto, alunoCadastrado, conteudo);
+        adapter = new AdapterTexto(listaTexto, alunoCadastrado, conteudo, siglaOlimpiada);
         binding.recyclerviewTexto.setAdapter(adapter);
     }
 
