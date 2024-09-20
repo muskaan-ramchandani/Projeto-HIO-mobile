@@ -53,6 +53,12 @@ CREATE TABLE Professor (
     PRIMARY KEY(email)
 );
 
+#VALORES FICTÍCIOS
+INSERT INTO Professor(nomeCompleto,nomeUsuario, email, senha)
+VALUES ('Muskaan Ramchandani', 'muskaan.r13', 'ramchandani@gmail.com', '1302'),
+('Juan Marcello Dell Oso', 'juanDellOso', 'juan@gmail.com', 'juan'),
+('Maria Dorotéia Cunha Sevalho', 'doroteia', 'marydorotty@gmail.com', '1609');
+
 DROP TABLE IF EXISTS Conteudo;
 CREATE TABLE Conteudo(
 	id INT AUTO_INCREMENT NOT NULL,
