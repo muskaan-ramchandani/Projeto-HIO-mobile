@@ -47,6 +47,8 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
 
         String valorTitulo = texto.getTitulo();
         holder.titulo.setText(valorTitulo);
+
+        holder.textoString=texto.getTexto();
     }
 
     @Override
@@ -56,6 +58,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
 
     public class TextoViewHolder extends RecyclerView.ViewHolder {
         TextView titulo, userProf;
+        String textoString;
 
         public TextoViewHolder(@NonNull View itemView) {
             super(itemView);

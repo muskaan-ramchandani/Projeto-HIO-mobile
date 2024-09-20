@@ -32,10 +32,12 @@ import java.util.List;
 public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.ConteudosViewHolder>{
     List<DadosConteudo> listaConteudos;
     DadosAluno alunoCadastrado;
+    String siglaOlimp = null;
 
-    public AdapterConteudos(List<DadosConteudo> conteudos, DadosAluno alunoCadastrado){
+    public AdapterConteudos(List<DadosConteudo> conteudos, DadosAluno alunoCadastrado, String siglaOlimp){
         this.listaConteudos=conteudos;
         this.alunoCadastrado = alunoCadastrado;
+        this.siglaOlimp = siglaOlimp;
     }
 
     public AdapterConteudos.ConteudosViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
@@ -71,6 +73,7 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
                 Intent intent = new Intent(context, TextoActivity.class);
                 intent.putExtra("alunoCadastrado", alunoCadastrado);
                 intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimp);
                 context.startActivity(intent);
 
                 if (context instanceof Activity) {

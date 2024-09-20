@@ -36,6 +36,7 @@ public class TextoActivity extends AppCompatActivity {
 
     private DadosAluno alunoCadastrado;
     private DadosConteudo conteudo;
+    private String siglaOlimpiada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,11 @@ public class TextoActivity extends AppCompatActivity {
         //recebendo os dados da outra tela
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
         conteudo = getIntent().getParcelableExtra("conteudo");
+        siglaOlimpiada = getIntent().getStringExtra("olimpiada");
+
 
         //iniciando configurações
-        configurarDetalhesTela(conteudo.getOlimpiadaPertencente());
+        configurarDetalhesTela(siglaOlimpiada);
         configurarRecyclerTexto();
 
 
@@ -56,6 +59,8 @@ public class TextoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TextoActivity.this, InicioOlimpiadaActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("siglaOlimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish(); //fechar activity
             }
@@ -65,6 +70,9 @@ public class TextoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TextoActivity.this, QuestionarioActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish();
             }
@@ -74,6 +82,9 @@ public class TextoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TextoActivity.this, VideoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish();
             }
@@ -83,6 +94,9 @@ public class TextoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TextoActivity.this, FlashcardActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish();
             }
@@ -179,8 +193,8 @@ public class TextoActivity extends AppCompatActivity {
                     if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         String jsonString = converterParaJSONString(in);
                         Log.d("DADOS", jsonString);
-                        textos.addAll(converterParaList(jsonString));
                         listaTexto.addAll(converterParaList(jsonString));
+                        textos.addAll(converterParaList(jsonString));
                     }
 
                 }finally {

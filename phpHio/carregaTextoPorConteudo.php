@@ -33,11 +33,12 @@ if (empty($idConteudoPertencente)) {
     PRIMARY KEY(id)
 );*/
 
- $sql = "
-SELECT t.id, t.titulo, t.texto AS profQuePostou
+$sql = "
+SELECT t.id, t.titulo, t.texto, p.nomeUsuario AS profQuePostou
 FROM Texto t
 JOIN Professor p ON t.profQuePostou = p.email
 WHERE t.idConteudoPertencente = :idConteudoPertencente";
+
 
 $statement = $pdo->prepare($sql);
 $statement->bindParam(':idConteudoPertencente', $idConteudoPertencente);

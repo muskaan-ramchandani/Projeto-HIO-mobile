@@ -121,7 +121,7 @@
         android:id="@+id/txtProfAutorDoTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Por: Profa Ana Castela"
+        tools:text="Por: Profa Ana Castela"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:fontFamily="@font/open_sans"
