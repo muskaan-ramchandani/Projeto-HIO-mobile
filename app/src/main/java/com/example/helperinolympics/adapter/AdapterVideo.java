@@ -69,16 +69,8 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.VideoViewHol
                 @Override
                 public void onClick(View v) {
 
-
-
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkVideo));
-
-                    // Verificar se há app pra abrir o video
-                    if (intent.resolveActivity(context.getPackageManager()) != null) {
-                        context.startActivity(intent);
-                    } else {
-                        Toast.makeText(context, "Nenhum aplicativo encontrado para abrir o link", Toast.LENGTH_SHORT).show();
-                    }
+                    context.startActivity(intent);
                 }
             });
         }

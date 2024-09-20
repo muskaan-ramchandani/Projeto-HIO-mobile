@@ -55,7 +55,7 @@ public class VideoActivity extends AppCompatActivity {
         conteudo = getIntent().getParcelableExtra("conteudo");
         siglaOlimpiada = getIntent().getStringExtra("olimpiada");
 
-        configurarDetalhesTela(siglaOlimpiada);
+        configurarDetalhesTela(siglaOlimpiada, conteudo);
         configurarRecyclerVideo();
 
         findViewById(R.id.imgButtonVoltarAOlimpPeloVideo).setOnClickListener(new View.OnClickListener() {
@@ -107,7 +107,9 @@ public class VideoActivity extends AppCompatActivity {
 
     }
 
-    private void configurarDetalhesTela(String siglaOlimpiada) {
+    private void configurarDetalhesTela(String siglaOlimpiada, DadosConteudo conteudo) {
+
+        binding.txtTema.setText(conteudo.getTituloConteudo());
 
         switch (siglaOlimpiada){
             case "OBA":
