@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.materiais.TextoActivity;
+import com.example.helperinolympics.model.DadosAluno;
+import com.example.helperinolympics.model.DadosConteudo;
 import com.example.helperinolympics.model.DadosTexto;
 import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
 
@@ -19,9 +22,13 @@ import java.util.List;
 
 public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHolder> {
     private List<DadosTexto> listaTexto;
+    private DadosAluno alunoCadastrado;
+    private DadosConteudo conteudo;
 
-    public AdapterTexto(List<DadosTexto> listaTexto) {
+    public AdapterTexto(List<DadosTexto> listaTexto, DadosAluno alunoCadastrado, DadosConteudo conteudo) {
         this.listaTexto = listaTexto;
+        this.alunoCadastrado= alunoCadastrado;
+        this.conteudo = conteudo;
     }
 
     @NonNull
@@ -60,12 +67,21 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, AcessoTextoActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoCadastrado);
+                    intent.putExtra("conteudo", conteudo);
                     context.startActivity(intent);
+
                     if (context instanceof Activity) {
                         ((Activity) context).finish();
                     }
                 }
             });
         }
+    }
+
+    public void atualizarOpcoes(List<DadosTexto> textos){
+        this.listaTexto.clear();
+        this.listaTexto.addAll(textos);
+        this.notifyDataSetChanged();
     }
 }

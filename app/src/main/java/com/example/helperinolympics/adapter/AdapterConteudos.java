@@ -70,6 +70,7 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
                 Context context = v.getContext();
                 Intent intent = new Intent(context, TextoActivity.class);
                 intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
                 context.startActivity(intent);
 
                 if (context instanceof Activity) {
