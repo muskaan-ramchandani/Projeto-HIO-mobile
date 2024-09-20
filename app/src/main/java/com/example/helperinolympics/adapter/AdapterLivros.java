@@ -98,11 +98,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
     private void abrirPesquisaGoogle(String termoDePesquisa) {
         String urlPesquisa = criarUrlPesquisa(termoDePesquisa);
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPesquisa));
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
-            context.startActivity(intent);
-        } else {
-            Toast.makeText(context, "Nenhum aplicativo encontrado para abrir o link", Toast.LENGTH_SHORT).show();
-        }
+        context.startActivity(intent);
     }
 
     public int getItemCount(){return listaLivros.size();}
