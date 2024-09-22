@@ -8,11 +8,48 @@
                 case 'ciano': return '#18B9CD';
                 case 'azul': return '#5271FF';
                 case 'laranja': return '#FF914D';
-                default: return '#ffffff';  // Branco por padrão
+                default: return '#ffffff';  
             }
         }
 
         async function carregarOlimpiada() {
+            const params = new URLSearchParams(window.location.search);
+            const sigla = params.get('sigla');
+            if (!sigla) {
+                console.error('Nenhuma sigla fornecida.');
+                return;
+            }
+            try {
+                const response = await fetch(`TelaOlimpiadaProfessor.php?sigla=${sigla}`);
+                const data = await response.json();
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+                // Preencher os dados no HTML
+                document.getElementById('logoContainer').innerHTML = `
+                    <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/${data.icone}.png" alt="${data.nome}">
+                    <div class="text">${data.nome}</div>
+                `;
+                document.getElementById('content').innerHTML = `
+                    <h1>Bem-vindo à ${data.nome}</h1>
+                    <p>Detalhes da Olimpíada aparecerão aqui...</p>
+                `;
+               
+                const corHex = obterCorHex(data.cor.trim()); 
+                document.getElementById('logoContainer').style.backgroundColor = corHex;
+                document.getElementById('barra').style.backgroundColor = corHex;
+                // Log para depuração
+                console.log('Cor aplicada:', corHex);
+                document.getElementById('olympiadName').innerText = data.nome;  
+                document.getElementById('siglaOlimpiada').value = data.sigla;   
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+            }
+        }
+
+        async function carregarOlimpiadaConteudo() {
+            
             const params = new URLSearchParams(window.location.search);
             const sigla = params.get('sigla');
         
@@ -22,31 +59,25 @@
             }
         
             try {
-                // Buscar dados da Olimpíada
-                const responseOlimpiada = await fetch(`TelaOlimpiadaProfessor.php?sigla=${sigla}`);
-                const dataOlimpiada = await responseOlimpiada.json();
-        
-                if (dataOlimpiada.error) {
-                    console.error(dataOlimpiada.error);
-                    return;
+                // Buscar conteúdos da Olimpíada
+                const responseConteudos = await fetch(`TelaOlimpiadaProfessorConteudo.php?sigla=${sigla}`);
+                
+                // Verificar se a requisição foi bem-sucedida
+                if (!responseConteudos.ok) {
+                    throw new Error(`Erro na requisição: ${responseConteudos.status}`);
                 }
         
-                // Preencher os dados da Olimpíada no HTML
-                document.getElementById('logoContainer').innerHTML = `
-                    <img src="http://192.168.0.81:8080/webCodesHIO/Imagens_Mobile_HIO/${dataOlimpiada.icone}.png" alt="${dataOlimpiada.nome}">
-                    <div class="text">${dataOlimpiada.nome}</div>
-                `;
-        
-                const corHex = obterCorHex(dataOlimpiada.cor.trim());
-                document.getElementById('logoContainer').style.backgroundColor = corHex;
-                document.getElementById('barra').style.backgroundColor = corHex;
-        
-                // Carregar conteúdos da Olimpíada
-                const responseConteudos = await fetch(`TelaOlimpiadaProfessorConteudo.php?sigla=${sigla}`);
                 const conteudos = await responseConteudos.json();
         
                 if (conteudos.error) {
                     console.error(conteudos.error);
+                    return;
+                }
+        
+                // Verificar se há conteúdos
+                if (conteudos.length === 0) {
+                    console.warn('Nenhum conteúdo encontrado.');
+                    document.getElementById('contentSpinner').innerHTML = '<p>Nenhum conteúdo disponível.</p>';
                     return;
                 }
         
@@ -56,7 +87,7 @@
         
                 conteudos.forEach(conteudo => {
                     spinnerContent += `
-                        <div class="spinner-item">
+                        <div class="spinner-item" data-id="${conteudo.id}">
                             <h3>${conteudo.titulo}</h3>
                             <p>${conteudo.subtitulo}</p>
                         </div>
@@ -66,13 +97,28 @@
                 spinnerContent += '</div>';
                 contentContainer.innerHTML = spinnerContent;
         
+                
+                document.querySelectorAll('.spinner-item').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const conteudoId = this.getAttribute('data-id');
+                        window.location.href = `TelaFlashCard.html?id=${conteudoId}`;
+                    });
+                });
+        
             } catch (error) {
-                console.error('Erro ao carregar dados:', error);
+                console.error('Erro ao carregar conteúdos:', error);
             }
-        
-        
         }
-        window.onload = carregarOlimpiada;
+        
+        // Chamar função no carregamento da página
+
+        
+        window.onload = function() {
+            carregarOlimpiada();
+            carregarOlimpiadaConteudo();
+        };
+        
+       
 
 
     function prevContentSlide() {
@@ -81,14 +127,14 @@
     const itemsToShow = 2; // Número de itens a serem exibidos por vez
 
 
-    // Atualiza o índice do conteúdo atual
+  
     if (currentContentIndex > 0) {
         currentContentIndex -= itemsToShow;
     } else {
         currentContentIndex = Math.max(totalItems - itemsToShow, 0);
     }
    
-    // Atualiza a visualização do carrossel
+    
     updateContentCarousel();
 }
 
@@ -96,17 +142,16 @@
     function nextContentSlide() {
     const items = document.querySelectorAll('#contentCarouselInner .carousel-item');
     const totalItems = items.length;
-    const itemsToShow = 2; // Número de itens a serem exibidos por vez
+    const itemsToShow = 2; 
 
 
-    // Atualiza o índice do conteúdo atual
     if (currentContentIndex < totalItems - itemsToShow) {
         currentContentIndex += itemsToShow;
     } else {
         currentContentIndex = 0;
     }
    
-    // Atualiza a visualização do carrossel
+
     updateContentCarousel();
 }
 
@@ -247,7 +292,7 @@
 });
 
 
-    // Fecha o modal se o usuário clicar fora do conteúdo
+
     window.onclick = function(event) {
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {

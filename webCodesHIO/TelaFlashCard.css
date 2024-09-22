@@ -5,6 +5,12 @@ body {
 }
 
 
+
+
+
+
+
+
 .barra {
     background-color: #8c52ff;
     position: fixed;
@@ -19,6 +25,12 @@ body {
 }
 
 
+
+
+
+
+
+
 .barra .logo-container {
     display: flex;
     align-items: center;
@@ -26,10 +38,22 @@ body {
 }
 
 
+
+
+
+
+
+
 .barra .logo-container img {
     height: 80px; /* Ajusta a altura da imagem */
     margin-right: 10px; /* Espaço entre a imagem e o texto */
 }
+
+
+
+
+
+
 
 
 .barra .logo-container .text {
@@ -40,11 +64,23 @@ body {
 }
 
 
+
+
+
+
+
+
 .barra .button-container {
     display: flex;
     align-items: flex-end; /* Alinha os botões na parte inferior da barra */
     margin-left: auto; /* Alinha os botões à direita */
 }
+
+
+
+
+
+
 
 
 .barra .button-item {
@@ -56,9 +92,21 @@ body {
 }
 
 
+
+
+
+
+
+
 .barra .button-item img {
     height: 50px; /* Ajusta a altura dos botões */
 }
+
+
+
+
+
+
 
 
 .barra .button-item .button-label {
@@ -69,6 +117,12 @@ body {
     margin-top: 1px; /* Espaço entre a imagem e o texto */
     text-align: center;
 }
+
+
+
+
+
+
 
 
 .barra .button-item img:hover {
@@ -82,12 +136,24 @@ body {
 }
 
 
+
+
+
+
+
+
 .main-content h1 {
     font-family: 'Open Sans', sans-serif;
     font-size: 30px;
     font-weight: bold;
     color: black;
 }
+
+
+
+
+
+
 
 
 /* Ajustes para o container dos info-box */
@@ -98,6 +164,12 @@ body {
     flex-wrap: wrap; /* Permite quebra de linha se não houver espaço suficiente */
     margin-top: 60px; /* Espaço acima do contêiner para separar das seções anteriores */
 }
+
+
+
+
+
+
 
 
 /* Ajusta a largura dos info-box dentro do container */
@@ -112,6 +184,12 @@ body {
 }
 
 
+
+
+
+
+
+
 /* Estilização do texto dentro do retângulo */
 .info-box p.title {
     font-family: 'Open Sans', sans-serif;
@@ -124,6 +202,12 @@ body {
 }
 
 
+
+
+
+
+
+
 /* Container para imagem, texto e botão dentro do retângulo */
 .info-box-content {
     display: flex;
@@ -133,11 +217,23 @@ body {
 }
 
 
+
+
+
+
+
+
 /* Estilização da imagem */
 .info-box-content img {
     height: 20px;
     margin-right: 2px; /* Espaço entre a imagem e o texto */
 }
+
+
+
+
+
+
 
 
 /* Estilização do texto ao lado da imagem */
@@ -147,6 +243,12 @@ body {
     color: #000;
     margin: 0;
 }
+
+
+
+
+
+
 
 
 /* Estilização do botão */
@@ -164,13 +266,31 @@ body {
 }
 
 
+
+
+
+
+
+
 /* Efeito ao passar o mouse sobre o botão */
 .info-box-content .info-button:hover {
     background-color: #7a40d6;
 }
 
 
+
+
+
+
+
+
 /* Estilos da barra e conteúdo principal permanecem inalterados */
+
+
+
+
+
+
 
 
 .modal {
@@ -186,6 +306,12 @@ body {
 }
 
 
+
+
+
+
+
+
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
@@ -197,6 +323,12 @@ body {
 }
 
 
+
+
+
+
+
+
 .close {
     color: #aaa;
     float: right;
@@ -205,9 +337,60 @@ body {
 }
 
 
+
+
+
+
+
+
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* Espaçamento acima e abaixo */
+     z-index: 10;
+}
+
+
+
+
+.custom-button {
+    background-color: #e9e8e8;
+    color: #898989;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px; /* Arredondamento dos botões */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin: 0 10px; /* Espaçamento entre os botões */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    transition: background-color 0.3s; /* Transição suave de cor */
+}
+
+
+
+
+.custom-button:hover {
+    background-color: #5e17eb; /* Cor ao passar o mouse */
+    color: white; /* Muda a cor do texto ao passar o mouse */
+}
+
+
+
+
+
+
+
