@@ -70,32 +70,6 @@ CREATE TABLE Conteudo(
     PRIMARY KEY(id)
 );
 
-##DDOS FICTICIOS PARA TESTE (SERAO CADASTRADOS PELOS PROFESSORES)
-INSERT INTO Conteudo(titulo, subtitulo, siglaOlimpiadaPertencente) VALUES
-    ('Mecânica Clássica', 'Fundamentos da cinemática do ponto material', 'OBF'),
-    ('Dilatação Superficial', 'Conceito e fórmulas', 'OBF'),
-    ('Estática e Hidrostática', 'Princípios Básicos', 'OBF'),
-    ('Termologia', 'Termometria, Calorimetria, Termodinâmica', 'OBF'),
-	('Campo Elétrico', 'Energia e trabalho', 'OBF'),
-    
-    ('Conteúdo oba 1', 'Subtitulo 1', 'OBA'),
-	('Conteúdo oba 2', 'Subtitulo 2', 'OBA'),
-    ('Conteúdo oba 3', 'Subtitulo 3', 'OBA'),
-    ('Conteúdo oba 4', 'Subtitulo 4', 'OBA'),
-    ('Conteúdo oba 5', 'Subtitulo 5', 'OBA'),
-    
-    ('Conteúdo obb 1', 'Subtitulo 1', 'OBB'),
-	('Conteúdo obb 2', 'Subtitulo 2', 'OBB'),
-    ('Conteúdo obb 3', 'Subtitulo 3', 'OBB'),
-    ('Conteúdo obb 4', 'Subtitulo 4', 'OBB'),
-    ('Conteúdo obb 5', 'Subtitulo 5', 'OBB'),
-    
-    ('Conteúdo obi 1', 'Subtitulo 1', 'OBI'),
-	('Conteúdo obi 2', 'Subtitulo 2', 'OBI'),
-    ('Conteúdo obi 3', 'Subtitulo 3', 'OBI'),
-    ('Conteúdo obi 4', 'Subtitulo 4', 'OBI'),
-    ('Conteúdo obi 5', 'Subtitulo 5', 'OBI');
-    
 
 DROP TABLE IF EXISTS Livro;
 CREATE TABLE Livro(
@@ -122,6 +96,45 @@ CREATE TABLE ProvaAnterior(
     arquivoPdf LONGBLOB NOT NULL,
 	siglaOlimpiadaPertencente VARCHAR(10) NOT NULL,
 	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
+	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
+    PRIMARY KEY(id)
+);
+
+#MATERIAIS
+DROP TABLE IF EXISTS Texto;
+CREATE TABLE Texto(
+	id INT AUTO_INCREMENT NOT NULL,
+    titulo VARCHAR(300) NOT NULL,
+    texto TEXT NOT NULL,
+    profQuePostou VARCHAR(100) NOT NULL,
+    idConteudoPertencente INT NOT NULL,
+    FOREIGN KEY(idConteudoPertencente) REFERENCES Conteudo(id), 
+	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
+    PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS Video;
+CREATE TABLE Video(
+	id INT AUTO_INCREMENT NOT NULL,
+    capa LONGBLOB NOT NULL,
+    titulo VARCHAR(300) NOT NULL,
+    link TEXT NOT NULL,
+	profQuePostou VARCHAR(100) NOT NULL,
+    idConteudoPertencente INT NOT NULL,
+	FOREIGN KEY(idConteudoPertencente) REFERENCES Conteudo(id), 
+	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
+    PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS Flashcard;
+CREATE TABLE Flashcard(
+	id INT AUTO_INCREMENT NOT NULL,
+    imagem LONGBLOB NOT NULL,
+    titulo VARCHAR(300) NOT NULL,
+    texto TEXT NOT NULL,
+	profQuePostou VARCHAR(100) NOT NULL,
+    idConteudoPertencente INT NOT NULL,
+	FOREIGN KEY(idConteudoPertencente) REFERENCES Conteudo(id), 
 	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
     PRIMARY KEY(id)
 );

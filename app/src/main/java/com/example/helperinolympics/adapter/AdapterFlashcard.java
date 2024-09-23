@@ -2,6 +2,7 @@ package com.example.helperinolympics.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.DadosFlashcard;
-import com.example.helperinolympics.model.DadosVideo;
 import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 
 import java.util.List;
@@ -39,11 +39,17 @@ public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.Flas
 
 
     public void onBindViewHolder(@NonNull FlashcardViewHolder holder, int position) {
-        DadosFlashcard flashcard = listaFlashcard.get(position);
+        holder.flashcard = listaFlashcard.get(position);
 
+        String valorTitulo=listaFlashcard.get(position).getTitulo();
+        holder.titulo.setText(valorTitulo);
 
-        holder.conteudo.setText(flashcard.getTitulo());
-        holder.userProf.setText(flashcard.getProfessorCadastrou());
+        String valorUser=listaFlashcard.get(position).getProfQuePostou();
+        holder.userProf.setText(valorUser);
+
+        holder.id = listaFlashcard.get(position).getId();
+        holder.idConteudoPertencente = listaFlashcard.get(position).getIdConteudoPertencente();
+
     }
 
 
@@ -54,23 +60,32 @@ public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.Flas
 
 
     public class FlashcardViewHolder extends RecyclerView.ViewHolder {
-        TextView conteudo, userProf;
+        DadosFlashcard flashcard;
+        TextView titulo, userProf;
+        int id, idConteudoPertencente;
 
         public FlashcardViewHolder(@NonNull View itemView) {
             super(itemView);
-            conteudo = itemView.findViewById(R.id.txtConteudo);
+
+            titulo = itemView.findViewById(R.id.txtConteudo);
             userProf = itemView.findViewById(R.id.txtUserProf);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashcardModelo notificationDialogFragment = new FlashcardModelo();
+                    FlashcardModelo notificationDialogFragment = new FlashcardModelo(flashcard);
                     notificationDialogFragment.show(fragmentManager, "notificationDialog");
                 }
             });
 
         }
 
+    }
+
+    public void atualizarOpcoes(List<DadosFlashcard> videos){
+        this.listaFlashcard.clear();
+        this.listaFlashcard.addAll(videos);
+        this.notifyDataSetChanged();
     }
 
 }

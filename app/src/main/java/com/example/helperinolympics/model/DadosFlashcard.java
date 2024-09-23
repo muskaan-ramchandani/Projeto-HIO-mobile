@@ -1,23 +1,21 @@
 package com.example.helperinolympics.model;
 
+import android.graphics.Bitmap;
+
 public class DadosFlashcard {
-    private int id;
-    private String titulo, professorCadastrou, olimpiadaPertencente, temaPertencente;
+    private String titulo, texto, profQuePostou;
+    private int id, idConteudoPertencente;
+    private Bitmap imagem;
 
-    public DadosFlashcard(int id, String titulo, String professorCadastrou, String olimpiadaPertencente, String temaPertencente) {
+    public DadosFlashcard(){}
+
+    public DadosFlashcard(String titulo, String texto, String profQuePostou, int id, int idConteudoPertencente, Bitmap imagem) {
         setTitulo(titulo);
-        setProfessorCadastrou(professorCadastrou);
-        setOlimpiadaPertencente(olimpiadaPertencente);
-        setTemaPertencente(temaPertencente);
+        setTexto(texto);
+        setProfQuePostou(profQuePostou);
         setId(id);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        setIdConteudoPertencente(idConteudoPertencente);
+        setImagem(imagem);
     }
 
     public String getTitulo() {
@@ -28,29 +26,43 @@ public class DadosFlashcard {
         this.titulo = titulo;
     }
 
-    public String getProfessorCadastrou() {
-        return professorCadastrou;
+    public String getTexto() {
+        return texto;
     }
 
-    public void setProfessorCadastrou(String professorCadastrou) {
-        this.professorCadastrou = professorCadastrou;
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
 
-    public String getOlimpiadaPertencente() {
-        return olimpiadaPertencente;
+    public String getProfQuePostou() {
+        return profQuePostou;
     }
 
-    public void setOlimpiadaPertencente(String olimpiadaPertencente) {
-        this.olimpiadaPertencente = olimpiadaPertencente;
+    public void setProfQuePostou(String profQuePostou) {
+        this.profQuePostou = profQuePostou;
     }
 
-    public String getTemaPertencente() {
-        return temaPertencente;
+    public int getId() {
+        return id;
     }
 
-    public void setTemaPertencente(String temaPertencente) {
-        this.temaPertencente = temaPertencente;
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public int getIdConteudoPertencente() {
+        return idConteudoPertencente;
+    }
 
+    public void setIdConteudoPertencente(int idConteudoPertencente) {
+        this.idConteudoPertencente = idConteudoPertencente;
+    }
+
+    public Bitmap getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(Bitmap imagem) {
+        this.imagem = imagem;
+    }
 }

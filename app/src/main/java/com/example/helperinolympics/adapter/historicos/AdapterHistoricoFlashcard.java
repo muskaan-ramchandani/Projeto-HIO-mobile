@@ -40,7 +40,7 @@ public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHisto
 
 
         holder.conteudo.setText(flashcard.getTitulo());
-        holder.userProf.setText(flashcard.getProfessorCadastrou());
+//        holder.userProf.setText(flashcard.getProfessorCadastrou());
     }
 
 
@@ -61,8 +61,8 @@ public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHisto
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    FlashcardModelo notificationDialogFragment = new FlashcardModelo();
-                    notificationDialogFragment.show(fragmentManager, "notificationDialog");
+//                    FlashcardModelo notificationDialogFragment = new FlashcardModelo();
+//                    notificationDialogFragment.show(fragmentManager, "notificationDialog");
                 }
             });
 

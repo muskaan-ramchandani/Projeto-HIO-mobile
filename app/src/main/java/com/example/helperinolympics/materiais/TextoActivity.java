@@ -51,7 +51,7 @@ public class TextoActivity extends AppCompatActivity {
 
 
         //iniciando configurações
-        configurarDetalhesTela(siglaOlimpiada);
+        configurarDetalhesTela(siglaOlimpiada, conteudo);
         configurarRecyclerTexto();
 
 
@@ -104,7 +104,9 @@ public class TextoActivity extends AppCompatActivity {
 
     }
 
-    private void configurarDetalhesTela(String siglaOlimpiada) {
+    private void configurarDetalhesTela(String siglaOlimpiada, DadosConteudo conteudo) {
+
+        binding.txtTema.setText(conteudo.getTituloConteudo());
 
         switch (siglaOlimpiada){
             case "OBA":
