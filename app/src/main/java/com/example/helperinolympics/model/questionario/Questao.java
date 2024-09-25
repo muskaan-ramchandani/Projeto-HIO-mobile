@@ -6,14 +6,15 @@ public class Questao {
 
     //id é o número da pergunta pelo padrão de cadastro auto incremento do banco
     private int id, idQuestionarioPertencente;
-    private String txtPergunta;
+    private String txtPergunta, explicacaoResposta;
 
     public Questao(){}
 
-    public Questao(int id, int idQuestionarioPertencente, String txtPergunta) {
+    public Questao(int id, int idQuestionarioPertencente, String txtPergunta, String explicacaoResposta) {
         setId(id);
         setIdQuestionarioPertencente(idQuestionarioPertencente);
         setTxtPergunta(txtPergunta);
+        setExplicacaoResposta(explicacaoResposta);
     }
 
     public int getId() {
@@ -38,5 +39,13 @@ public class Questao {
 
     public void setTxtPergunta(String txtPergunta) {
         this.txtPergunta = txtPergunta;
+    }
+
+    public String getExplicacaoResposta() {
+        return explicacaoResposta;
+    }
+
+    public void setExplicacaoResposta(String explicacaoResposta) {
+        this.explicacaoResposta = explicacaoResposta;
     }
 }

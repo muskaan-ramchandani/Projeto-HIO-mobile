@@ -24,10 +24,11 @@ if (empty($idConteudoPertencente)) {
 /*	CREATE TABLE Questao(
 	id INT AUTO_INCREMENT NOT NULL,
 	txtPergunta TEXT NOT NULL,
+    explicacaoResposta
     idQuestionarioPertencente INT NOT NULL, */
 
 $sql = "
-SELECT id, txtPergunta 
+SELECT id, txtPergunta, explicacaoResposta
 FROM Questao qt
 WHERE idQuestionarioPertencente = :idQuestionarioPertencente";
 

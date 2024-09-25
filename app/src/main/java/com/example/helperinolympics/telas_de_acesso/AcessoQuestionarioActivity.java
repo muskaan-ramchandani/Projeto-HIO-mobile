@@ -1,5 +1,6 @@
 package com.example.helperinolympics.telas_de_acesso;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.helperinolympics.QuestionarioCorrecaoActivity;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityQuestionarioAcessoBinding;
 import com.example.helperinolympics.materiais.FragmentPerguntaRespostasQuestionario;
@@ -43,7 +45,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
 
     private ArrayList<Questao> listaDeQuestoes = new ArrayList<>();
 
-    private int contNumeroQuestoes;
+    private int contNumeroQuestoes, totalQuestoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +73,36 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         }
 
         //exibindo primeira questao ao ter o acesso de um questionario
-        configurarQuestaoASerExibida(listaDeQuestoes.get(0));
         contNumeroQuestoes = 0;
+        totalQuestoes = listaDeQuestoes.size();
+        configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+
+        binding.progressBar.setMax(totalQuestoes);
+        atualizarProgresso(contNumeroQuestoes);
 
         binding.btnResponder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
+                proximaQuestao();
 
             }
         });
 
+    }
 
+    private void atualizarProgresso(int questoesRespondidas) {
+        binding.progressBar.setProgress(questoesRespondidas);
+    }
 
+    public void proximaQuestao() {
+        if (contNumeroQuestoes < totalQuestoes) {
+            contNumeroQuestoes++;
+            atualizarProgresso(contNumeroQuestoes);
+            configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+        }else{
+            Intent intent = new Intent(AcessoQuestionarioActivity.this, QuestionarioCorrecaoActivity.class);
+
+        }
     }
 
     private void configurarQuestaoASerExibida(Questao questao) {
@@ -175,6 +192,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                     questao.setId(questaoJSON.getInt("id"));
                     questao.setTxtPergunta(questaoJSON.getString("txtPergunta"));
                     questao.setIdQuestionarioPertencente(quest.getId());
+                    questao.setExplicacaoResposta(questaoJSON.getString("explicacaoResposta"));
 
 
                     Log.d("Questão  ", questao.toString());

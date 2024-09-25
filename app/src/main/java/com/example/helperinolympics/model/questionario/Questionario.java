@@ -12,7 +12,7 @@ public class Questionario implements Parcelable {
 
     public Questionario(){}
 
-    public Questionario(int id, String titulo, String professorCadastrou, int idConteudoPertencente) {
+    public Questionario(int id,String titulo, String professorCadastrou, int idConteudoPertencente) {
         setTitulo(titulo);
         setProfessorCadastrou(professorCadastrou);
         setIdConteudoPertencente(idConteudoPertencente);

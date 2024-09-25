@@ -1,8 +1,10 @@
 package com.example.helperinolympics.materiais;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,18 @@ import com.example.helperinolympics.adapter.AdapterAlternativasQuestionario;
 import com.example.helperinolympics.databinding.FragmentQuestionarioBinding;
 import com.example.helperinolympics.model.questionario.Alternativas;
 import com.example.helperinolympics.model.questionario.Questao;
+import com.example.helperinolympics.model.questionario.Questionario;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     private AdapterAlternativasQuestionario adapter;
@@ -54,14 +66,14 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         String valorPergunta= "<b>Pergunta " +questao.getId()+"</b><br>"+questao.getTxtPergunta();
         pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
 
-
+        configurarRecyclerAlternativas();
 
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null; // Libera o binding quando a view é destruída
+        binding = null;
     }
 
 
@@ -71,16 +83,111 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         binding.recyclerAlternativas.setLayoutManager(layoutManager);
         binding.recyclerAlternativas.setHasFixedSize(true);
 
-//        Integer idConteudo = conteudo.getId();
-//
-//        if (idConteudo != null) {
-//            new FlashcardsDownload().execute(idConteudo);
-//        } else {
-//            Log.d("ERRO_ID_CONTEUDO", "O id do conteúdo está nulo");
-//        }
+        new AlternativasDownload().execute(idQuestionarioPertencente, idQuestaoPertencente);
 
-        adapter=new AdapterAlternativasQuestionario(listaAlternativas);
+        adapter=new AdapterAlternativasQuestionario(listaAlternativas, context);
         binding.recyclerAlternativas.setAdapter(adapter);
+    }
+
+    private class AlternativasDownload extends AsyncTask<Integer, Void, List<Alternativas>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected List<Alternativas> doInBackground(Integer... params) {
+            int idQuestionarioPertencente = params[0];
+            int idQuestaoPertencente = params[1];
+
+            Log.d("ID_QUESTIONARIO_RECEBIDO", "Id questionário Recebido: " + idQuestionarioPertencente);
+            Log.d("ID_QUESTAO_RECEBIDA", "Id questão Recebida: " + idQuestaoPertencente);
+
+
+            List<Alternativas> alternativas = new ArrayList<>();
+            try {
+                String urlString = "http://192.168.1.9:8086/phpHio/carregaAlternativasPorQuestao.php?"+
+                        "idQuestionarioPertencente=" + URLEncoder.encode(String.valueOf(idQuestionarioPertencente), "UTF-8")+
+                        "idQuestaoPertencente=" + URLEncoder.encode(String.valueOf(idQuestaoPertencente), "UTF-8");
+
+                URL url = new URL(urlString);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(false);
+                conexao.connect();
+                Log.d("CONEXAO", "Conexão estabelecida");
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+                    Log.d("DADOS", jsonString);
+                    listaAlternativas.addAll(converterParaList(jsonString));
+                    alternativas.addAll(converterParaList(jsonString));
+                }
+
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return alternativas;
+        }
+
+        @Override
+        protected void onPostExecute(List<Alternativas> alternativas) {
+            super.onPostExecute(alternativas);
+            if (alternativas != null) {
+                adapter.atualizarOpcoes(alternativas);
+                adapter.notifyDataSetChanged();
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream dados = new ByteArrayOutputStream();
+            try {
+                int qtdBytesLido;
+                while ((qtdBytesLido = in.read(buffer)) != -1) {
+                    dados.write(buffer, 0, qtdBytesLido);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return dados.toString();
+        }
+
+        private List<Alternativas> converterParaList(String jsonString) {
+            List<Alternativas> alternativas = new ArrayList<>();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray("alternativasDaQuestao");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject alternativaJSON = jsonArray.getJSONObject(i);
+                    Alternativas alternativa = new Alternativas();
+
+
+                    alternativa.setId(alternativaJSON.getInt("id"));
+                    alternativa.setIdQuestionarioPertencente(idQuestionarioPertencente);
+                    alternativa.setIdQuestaoPertencente(idQuestaoPertencente);
+                    alternativa.setTextoAlternativa(alternativaJSON.getString("textoAlternativa"));
+
+                    if(alternativaJSON.getInt("corretaOuErrada")==1){
+                        alternativa.setCorretaOuErrada(true);
+                    }else{
+                        alternativa.setCorretaOuErrada(false);
+                    }
+
+
+                    Log.d("Alternativas  ", alternativa.toString());
+                    alternativas.add(alternativa);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return alternativas;
+        }
     }
 
 }

@@ -24,7 +24,7 @@ public class QuestionarioHistoricoExibir extends DialogFragment {
         View view = inflater.inflate(R.layout.questionario_historico, container, false);
 
         TextView olimpiada = view.findViewById(R.id.txtOlimpiadaQuestHistorico);
-        olimpiada.setText(questionario.getOlimpiadaPertencente());
+        //olimpiada.setText(questionario.getOlimpiadaPertencente());
 
         TextView titulo = view.findViewById(R.id.txtTituloQuestHistorico);
         titulo.setText(questionario.getTitulo());
@@ -33,7 +33,7 @@ public class QuestionarioHistoricoExibir extends DialogFragment {
         autor.setText("Por: " + questionario.getProfessorCadastrou());
 
         TextView pergunta = view.findViewById(R.id.txtPerguntaHistoricoAcesso);
-        pergunta.setText(questionario.getPergunta());
+        //pergunta.setText(questionario.getPergunta());
 
         // Configurar o botão de fechar
         view.findViewById(R.id.btnFecharQuestHistorico).setOnClickListener(new View.OnClickListener() {

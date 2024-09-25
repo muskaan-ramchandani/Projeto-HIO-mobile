@@ -1,68 +1,43 @@
 package com.example.helperinolympics.model;
 
 public class Acertos {
-    private String olimpiadaQuestaoCerta;
-    private String assuntoQuestaoCerta;
-    private String topicoDaQuestaoCerta;
-    private String profQuestaoCerta;
-    private String perguntaQuestaoCerta;
-    private String questaoMarcadaCerta;
+    private int id, idAlternativaMarcada, idQuestionarioPertencente, idQuestaoPertencente;
 
-
-    public Acertos(String olimpiadaQuestaoCerta, String assuntoQuestaoCerta, String topicoDaQuestaoCerta, String profQuestaoCerta, String perguntaQuestaoCerta, String questaoMarcadaCerta) {
-        setOlimpiadaQuestaoCerta(olimpiadaQuestaoCerta);
-        setAssuntoQuestaoCerta(assuntoQuestaoCerta);
-        setTopicoDaQuestaoCerta(topicoDaQuestaoCerta);
-        setProfQuestaoCerta(profQuestaoCerta);
-        setPerguntaQuestaoCerta(perguntaQuestaoCerta);
-        setQuestaoMarcadaCerta(questaoMarcadaCerta);
+    public Acertos(int idAlternativaMarcada, int idQuestionarioPertencente, int idQuestaoPertencente) {
+        setIdAlternativaMarcada(idAlternativaMarcada);
+        setIdQuestionarioPertencente(idQuestionarioPertencente);
+        setIdQuestaoPertencente(idQuestaoPertencente);
     }
 
-    public String getOlimpiadaQuestaoCerta() {
-        return olimpiadaQuestaoCerta;
+    public int getId() {
+        return id;
     }
 
-    public void setOlimpiadaQuestaoCerta(String olimpiadaQuestaoCerta) {
-        this.olimpiadaQuestaoCerta = olimpiadaQuestaoCerta;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAssuntoQuestaoCerta() {
-        return assuntoQuestaoCerta;
+    public int getIdAlternativaMarcada() {
+        return idAlternativaMarcada;
     }
 
-    public void setAssuntoQuestaoCerta(String assuntoQuestaoCerta) {
-        this.assuntoQuestaoCerta = assuntoQuestaoCerta;
+    public void setIdAlternativaMarcada(int idAlternativaMarcada) {
+        this.idAlternativaMarcada = idAlternativaMarcada;
     }
 
-    public String getTopicoDaQuestaoCerta() {
-        return topicoDaQuestaoCerta;
+    public int getIdQuestionarioPertencente() {
+        return idQuestionarioPertencente;
     }
 
-    public void setTopicoDaQuestaoCerta(String topicoDaQuestaoCerta) {
-        this.topicoDaQuestaoCerta = topicoDaQuestaoCerta;
+    public void setIdQuestionarioPertencente(int idQuestionarioPertencente) {
+        this.idQuestionarioPertencente = idQuestionarioPertencente;
     }
 
-    public String getProfQuestaoCerta() {
-        return profQuestaoCerta;
+    public int getIdQuestaoPertencente() {
+        return idQuestaoPertencente;
     }
 
-    public void setProfQuestaoCerta(String profQuestaoCerta) {
-        this.profQuestaoCerta = profQuestaoCerta;
-    }
-
-    public String getPerguntaQuestaoCerta() {
-        return perguntaQuestaoCerta;
-    }
-
-    public void setPerguntaQuestaoCerta(String perguntaQuestaoCerta) {
-        this.perguntaQuestaoCerta = perguntaQuestaoCerta;
-    }
-
-    public String getQuestaoMarcadaCerta() {
-        return questaoMarcadaCerta;
-    }
-
-    public void setQuestaoMarcadaCerta(String questaoMarcadaCerta) {
-        this.questaoMarcadaCerta = questaoMarcadaCerta;
+    public void setIdQuestaoPertencente(int idQuestaoPertencente) {
+        this.idQuestaoPertencente = idQuestaoPertencente;
     }
 }

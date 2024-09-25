@@ -1,23 +1,38 @@
 package com.example.helperinolympics.adapter;
 
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.Acertos;
+import com.example.helperinolympics.model.Erros;
 import com.example.helperinolympics.model.questionario.Alternativas;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<AdapterAlternativasQuestionario.AlternativasQuestionarioViewHolder> {
     private List<Alternativas> listaAlternativas;
+    static Context context;
 
-    public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas) {
+    public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas,  Context context) {
         this.listaAlternativas = listaAlternativas;
+        this.context =context;
     }
 
     @NonNull
@@ -29,11 +44,13 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
     @Override
     public void onBindViewHolder(@NonNull AlternativasQuestionarioViewHolder holder, int position) {
-          Alternativas alternativa = listaAlternativas.get(position);
+        holder.listaAlternativas=  listaAlternativas;
+        Alternativas alternativa = listaAlternativas.get(position);
 
           holder.textoAlternativa.setText(alternativa.getTextoAlternativa());
           holder.id = alternativa.getId();
           holder.idQuestionarioPertencente= alternativa.getIdQuestionarioPertencente();
+          holder.idQuestaoPertencente = alternativa.getIdQuestaoPertencente();
           holder.corretaOuErrada = alternativa.isCorretaOuErrada();
     }
 
@@ -44,8 +61,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
     public static class AlternativasQuestionarioViewHolder extends RecyclerView.ViewHolder {
         TextView textoAlternativa;
-        int id, idQuestionarioPertencente;
+        int id, idQuestionarioPertencente, idQuestaoPertencente;
         boolean corretaOuErrada;
+        List<Alternativas> listaAlternativas;
 
         public AlternativasQuestionarioViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,9 +74,31 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                 @Override
                 public void onClick(View v) {
 
-                    if(corretaOuErrada ==true){
+                    //Estabelecer que, para cada acerto, são +10 pontos para o aluno
+                    if(corretaOuErrada){
 
-                    }else if(corretaOuErrada == false){
+                        //cadastrar acerto
+                        Acertos acerto = new Acertos(id, idQuestionarioPertencente, idQuestaoPertencente);
+                        new CadastrarAcertos().execute(acerto);
+
+                        //adicionar pontuação
+
+
+                    }//Para cada erro são -2 pontos
+                    else{
+                        int idAlternativaCorreta = 0;
+
+                        for(int i=0; i<listaAlternativas.size(); i++){
+                            if(listaAlternativas.get(i).isCorretaOuErrada()==true){
+                                idAlternativaCorreta = listaAlternativas.get(i).getId();
+                            }
+                        }
+
+                        //cadastrar erro
+                        Erros erro = new Erros(id, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente);
+                        new CadastrarErros().execute(erro);
+
+                        //diminuir pontuacao
 
                     }
                 }
@@ -73,4 +113,118 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
         this.listaAlternativas.addAll(alternativas);
         this.notifyDataSetChanged();
     }
+
+    private static class CadastrarAcertos extends AsyncTask<Acertos, Void, String> {
+
+        @Override
+        protected String doInBackground(Acertos... acertos) {
+            StringBuilder result = new StringBuilder();
+            Acertos acerto = acertos[0];
+
+            try {
+                URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraAcertosAluno.php");
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("POST");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(true);
+                conexao.connect();
+
+                String parametros = "idAlternativaMarcada=" + acerto.getIdAlternativaMarcada() +
+                        "&idQuestionarioPertencente=" + acerto.getIdQuestionarioPertencente() +
+                        "&idQuestaoPertencente=" + acerto.getIdQuestaoPertencente();
+
+                OutputStream os = conexao.getOutputStream();
+                byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+                os.close();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                reader.close();
+
+            } catch (Exception e) {
+                Log.e("Erro", e.getMessage());
+                return null;
+            }
+
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(result);
+                    String message = jsonResponse.getString("message");
+                    Log.e("Msg", message);
+
+                } catch (Exception e) {
+                    Log.e("Erro JSON", e.getMessage());
+                }
+            }
+        }
+    }
+
+    private static class CadastrarErros extends AsyncTask<Erros, Void, String> {
+
+        @Override
+        protected String doInBackground(Erros... erros) {
+            StringBuilder result = new StringBuilder();
+            Erros erro = erros[0];
+
+            try {
+                URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraErrosAluno.php");
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(1500);
+                conexao.setConnectTimeout(500);
+                conexao.setRequestMethod("POST");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(true);
+                conexao.connect();
+
+                String parametros = "idAlternativaMarcada=" + erro.getIdAlternativaMarcada() +
+                        "&idAlternativaCorreta="+ erro.getIdAlternativaCorreta()+
+                        "&idQuestionarioPertencente=" + erro.getIdQuestionarioPertencente() +
+                        "&idQuestaoPertencente=" + erro.getIdQuestaoPertencente();
+
+                OutputStream os = conexao.getOutputStream();
+                byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+                os.close();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result.append(line);
+                }
+                reader.close();
+
+            } catch (Exception e) {
+                Log.e("Erro", e.getMessage());
+                return null;
+            }
+
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                try {
+                    JSONObject jsonResponse = new JSONObject(result);
+                    String message = jsonResponse.getString("message");
+                    Log.e("Msg", message);
+
+                } catch (Exception e) {
+                    Log.e("Erro JSON", e.getMessage());
+                }
+            }
+        }
+    }
+
 }
