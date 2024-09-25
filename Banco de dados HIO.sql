@@ -149,3 +149,24 @@ CREATE TABLE Questionario(
 	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
 	PRIMARY KEY(id)
 );
+    
+DROP TABLE IF EXISTS Questao;
+CREATE TABLE Questao(
+	id INT AUTO_INCREMENT NOT NULL,
+	txtPergunta TEXT NOT NULL,
+    idQuestionarioPertencente INT NOT NULL,
+	FOREIGN KEY(idQuestionarioPertencente) REFERENCES Questionario(id), 
+	PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS AlternativasQuestao;
+CREATE TABLE AlternativasQuestao(
+	id INT AUTO_INCREMENT NOT NULL,
+	textoAlternativa TEXT NOT NULL,
+    corretaOuErrada BOOLEAN NOT NULL,
+    idQuestionarioPertencente INT NOT NULL,
+    idQuestaoPertencente INT NOT NULL,
+	FOREIGN KEY(idQuestionarioPertencente) REFERENCES Questionario(id), 
+	FOREIGN KEY(idQuestaoPertencente) REFERENCES Questao(id), 
+	PRIMARY KEY(id)
+);
