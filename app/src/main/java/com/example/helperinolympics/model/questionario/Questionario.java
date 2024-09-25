@@ -1,6 +1,12 @@
 package com.example.helperinolympics.model.questionario;
 
-public class Questionario {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+
+public class Questionario implements Parcelable {
     private int id, idConteudoPertencente;
     private String titulo, professorCadastrou;
 
@@ -44,4 +50,36 @@ public class Questionario {
     public void setIdConteudoPertencente(int idConteudoPertencente) {
         this.idConteudoPertencente = idConteudoPertencente;
     }
+
+    protected Questionario(Parcel in) {
+        id = in.readInt();
+        titulo = in.readString();
+        professorCadastrou = in.readString();
+        idConteudoPertencente = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(titulo);
+        dest.writeString(professorCadastrou);
+        dest.writeInt(idConteudoPertencente);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<Questionario> CREATOR = new Parcelable.Creator<Questionario>() {
+        @Override
+        public Questionario createFromParcel(Parcel in) {
+            return new Questionario(in);
+        }
+
+        @Override
+        public Questionario[] newArray(int size) {
+            return new Questionario[size];
+        }
+    };
 }

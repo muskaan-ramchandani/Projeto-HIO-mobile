@@ -17,7 +17,6 @@ import com.example.helperinolympics.adapter.AdapterQuestionario;
 import com.example.helperinolympics.databinding.ActivityQuestionarioBinding;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Conteudo;
-import com.example.helperinolympics.model.Flashcard;
 import com.example.helperinolympics.model.questionario.Questionario;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
@@ -160,12 +159,11 @@ public class QuestionarioActivity extends AppCompatActivity {
             Log.d("ERRO_ID_CONTEUDO", "O id do conteúdo está nulo");
         }
 
-        adapter = new AdapterQuestionario(listaQuestionario);
+        adapter = new AdapterQuestionario(listaQuestionario, alunoCadastrado, conteudo, siglaOlimpiada);
         binding.recyclerviewQuestionario.setAdapter(adapter);
     }
 
-    //sem alterações ainda
-    private class QuestionariosDownload extends AsyncTask<Integer, Void, List<Flashcard>> {
+    private class QuestionariosDownload extends AsyncTask<Integer, Void, List<Questionario>> {
 
         @Override
         protected void onPreExecute() {
@@ -173,13 +171,13 @@ public class QuestionarioActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<Flashcard> doInBackground(Integer... params) {
+        protected List<Questionario> doInBackground(Integer... params) {
             int idConteudo = params[0];
             Log.d("ID_CONTEUDO_RECEBIDO", "Id conteúdo Recebido: " + idConteudo);
 
-            List<Flashcard> flashs = new ArrayList<>();
+            List<Questionario> questionarios = new ArrayList<>();
             try {
-                String urlString = "http://192.168.1.9:8086/phpHio/carregaFlashcardPorConteudo.php?idConteudoPertencente=" +
+                String urlString = "http://192.168.1.9:8086/phpHio/carregaQuestionarioPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -195,21 +193,21 @@ public class QuestionarioActivity extends AppCompatActivity {
                     InputStream in = conexao.getInputStream();
                     String jsonString = converterParaJSONString(in);
                     Log.d("DADOS", jsonString);
-                    listaFlashcard.addAll(converterParaList(jsonString));
-                    flashs.addAll(converterParaList(jsonString));
+                    listaQuestionario.addAll(converterParaList(jsonString));
+                    questionarios.addAll(converterParaList(jsonString));
                 }
 
             } catch (Exception e) {
                 Log.d("ERRO", e.toString());
             }
-            return flashs;
+            return questionarios;
         }
 
         @Override
-        protected void onPostExecute(List<Flashcard> flashs) {
-            super.onPostExecute(flashs);
-            if (flashs != null) {
-                adapter.atualizarOpcoes(flashs);
+        protected void onPostExecute(List<Questionario> questionarios) {
+            super.onPostExecute(questionarios);
+            if (questionarios != null) {
+                adapter.atualizarOpcoes(questionarios);
                 adapter.notifyDataSetChanged();
             }
         }
@@ -228,41 +226,30 @@ public class QuestionarioActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<Flashcard> converterParaList(String jsonString) {
-            List<Flashcard> flashs = new ArrayList<>();
+        private List<Questionario> converterParaList(String jsonString) {
+            List<Questionario> questionarios = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray jsonArray = jsonObject.getJSONArray("flashcards");
+                JSONArray jsonArray = jsonObject.getJSONArray("questionarios");
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject flashJSON = jsonArray.getJSONObject(i);
-                    Flashcard flashcard = new Flashcard();
+                    JSONObject questionarioJSON = jsonArray.getJSONObject(i);
+                    Questionario questionario = new Questionario();
 
-                    flashcard.setId(flashJSON.getInt("id"));
+                    questionario.setId(questionarioJSON.getInt("id"));
 
                     int idConteudo = conteudo.getId();
 
-                    flashcard.setIdConteudoPertencente(idConteudo);
-                    flashcard.setTitulo(flashJSON.getString("titulo"));
-                    flashcard.setProfQuePostou(flashJSON.getString("profQuePostou"));
-                    flashcard.setTexto(flashJSON.getString("texto"));
+                    questionario.setIdConteudoPertencente(idConteudo);
+                    questionario.setTitulo(questionarioJSON.getString("titulo"));
+                    questionario.setProfessorCadastrou(questionarioJSON.getString("profQuePostou"));
 
-
-                    String imgBase64 = flashJSON.getString("imagem");
-                    Bitmap bitmapImage = decodeBase64ToBitmap(imgBase64);
-                    flashcard.setImagem(bitmapImage);
-
-                    Log.d("Flashcard", flashcard.toString());
-                    flashs.add(flashcard);
+                    Log.d("Questionário ", questionario.toString());
+                    questionarios.add(questionario);
                 }
             } catch (Exception e) {
                 Log.d("ERRO", e.toString());
             }
-            return flashs;
+            return questionarios;
         }
-    }
-
-    public Bitmap decodeBase64ToBitmap(String base64String) {
-        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }
