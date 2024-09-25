@@ -12,15 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.calendario.AdapterDatasCalendario;
 import com.example.helperinolympics.adapter.calendario.AdapterEventos;
-import com.example.helperinolympics.model.DadosEventos;
+import com.example.helperinolympics.model.Eventos;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -157,7 +154,7 @@ public class CalendarioActivity extends AppCompatActivity {
         rvListaEventos.setLayoutManager(layoutManager);
         rvListaEventos.setHasFixedSize(true);
 
-        List<DadosEventos> listaEventos = new ArrayList<>();
+        List<Eventos> listaEventos = new ArrayList<>();
         adapter = new AdapterEventos(listaEventos);
         rvListaEventos.setAdapter(adapter);
 
@@ -174,7 +171,7 @@ public class CalendarioActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        DadosEventos dados1 = new DadosEventos(1, data1, "OBA", "Inscrição",
+        Eventos dados1 = new Eventos(1, data1, "OBA", "Inscrição",
                 "09h às 19h", "https://link_para_inscricao");
         listaEventos.add(dados1);
 
@@ -185,7 +182,7 @@ public class CalendarioActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        DadosEventos dados2 = new DadosEventos(2, data2, "OBMEP", "Prova Fase 2",
+        Eventos dados2 = new Eventos(2, data2, "OBMEP", "Prova Fase 2",
                 "06h às 12h", "https://link_para_prova");
         listaEventos.add(dados2);
 
@@ -196,7 +193,7 @@ public class CalendarioActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        DadosEventos dados3 = new DadosEventos(3, data3, "OBI", "Prova Fase 1",
+        Eventos dados3 = new Eventos(3, data3, "OBI", "Prova Fase 1",
                 "00h01 às 23h59", "https://link_para_prova_OBI");
         listaEventos.add(dados3);
 

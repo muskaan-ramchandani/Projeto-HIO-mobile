@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="375dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="6dp" >
+
+        <LinearLayout
+            android:id="@+id/linearTextoAlternativa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/fundo_alternativa"
+            android:gravity="center_horizontal|center_vertical">
+
+            <TextView
+                android:id="@+id/textoAlternativa"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/questrial"
+                android:gravity="center"
+                android:textColor="@color/cinza"
+                android:textSize="16sp"
+                tools:text="A resposta é isso isso isso isso isso" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

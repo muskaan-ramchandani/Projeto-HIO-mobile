@@ -1,6 +1,6 @@
 package com.example.helperinolympics.model;
 
-public class DadosErros {
+public class Erros {
     private String olimpiadaQuestaoErrada;
     private String assuntoQuestaoErrada;
     private String topicoDaQuestaoErrada;
@@ -10,7 +10,7 @@ public class DadosErros {
     private String questaoCorrecaoDaErrada;
 
 
-    public DadosErros(String olimpiadaQuestaoErrada, String assuntoQuestaoErrada, String topicoDaQuestaoErrada, String profQuestaoErrada,String perguntaQuestaoErrada, String questaoMarcadaErrada, String questaoCorrecaoDaErrada) {
+    public Erros(String olimpiadaQuestaoErrada, String assuntoQuestaoErrada, String topicoDaQuestaoErrada, String profQuestaoErrada, String perguntaQuestaoErrada, String questaoMarcadaErrada, String questaoCorrecaoDaErrada) {
         setOlimpiadaQuestaoErrada(olimpiadaQuestaoErrada);
         setAssuntoQuestaoErrada(assuntoQuestaoErrada);
         setTopicoDaQuestaoErrada(topicoDaQuestaoErrada);

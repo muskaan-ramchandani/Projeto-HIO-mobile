@@ -1,7 +1,5 @@
 package com.example.helperinolympics.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,32 +7,24 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.materiais.TextoActivity;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosOlimpiada;
-import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
 
 import java.util.List;
 
 public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.ConteudosViewHolder>{
-    List<DadosConteudo> listaConteudos;
-    DadosAluno alunoCadastrado;
+    List<Conteudo> listaConteudos;
+    Aluno alunoCadastrado;
     String siglaOlimp = null;
 
-    public AdapterConteudos(List<DadosConteudo> conteudos, DadosAluno alunoCadastrado, String siglaOlimp){
+    public AdapterConteudos(List<Conteudo> conteudos, Aluno alunoCadastrado, String siglaOlimp){
         this.listaConteudos=conteudos;
         this.alunoCadastrado = alunoCadastrado;
         this.siglaOlimp = siglaOlimp;
@@ -46,7 +36,7 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
     }
 
     public void onBindViewHolder(@NonNull AdapterConteudos.ConteudosViewHolder holder, int position) {
-        DadosConteudo conteudo = listaConteudos.get(position);
+        Conteudo conteudo = listaConteudos.get(position);
 
         String valorTitulo = conteudo.getTituloConteudo();
         String valorSubtitulo = conteudo.getSubtituloConteudo();
@@ -99,7 +89,7 @@ public class AdapterConteudos extends RecyclerView.Adapter<AdapterConteudos.Cont
 
     public int getItemCount(){return listaConteudos.size();}
 
-    public void atualizarOpcoes(List<DadosConteudo> conteudos){
+    public void atualizarOpcoes(List<Conteudo> conteudos){
         this.listaConteudos.clear();
         this.listaConteudos.addAll(conteudos);
         this.notifyDataSetChanged();

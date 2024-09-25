@@ -1,15 +1,15 @@
 package com.example.helperinolympics.model;
 
-public class DadosProvasAnteriores {
+public class ProvasAnteriores {
 
     private int id, anoProva, fase;
     private boolean estado;
     private  String userProf, siglaOlimpiadaPertencente;
     byte[] arquivoPdfBytes;
 
-    public DadosProvasAnteriores(){}
+    public ProvasAnteriores(){}
 
-    public DadosProvasAnteriores(int id, int anoProva, int fase, boolean estado, String userProf, String siglaOlimpiadaPertencente, byte[] arquivoPdfBytes) {
+    public ProvasAnteriores(int id, int anoProva, int fase, boolean estado, String userProf, String siglaOlimpiadaPertencente, byte[] arquivoPdfBytes) {
         setId(id);
         setAnoProva(anoProva);
         setFase(fase);

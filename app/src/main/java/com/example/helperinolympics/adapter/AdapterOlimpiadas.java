@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,18 +16,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosOlimpiada;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Olimpiada;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.OlimpiadasViewHolder>{
-    List<DadosOlimpiada> listaOlimpiadas;
-    DadosAluno alunoAtual;
+    List<Olimpiada> listaOlimpiadas;
+    Aluno alunoAtual;
 
-    public AdapterOlimpiadas(List<DadosOlimpiada> olimpiadas, DadosAluno alunoAtual){
+    public AdapterOlimpiadas(List<Olimpiada> olimpiadas, Aluno alunoAtual){
         this.listaOlimpiadas=olimpiadas;
         this.alunoAtual= alunoAtual;
     }
@@ -40,7 +37,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
     }
 
     public void onBindViewHolder(@NonNull AdapterOlimpiadas.OlimpiadasViewHolder holder, int position) {
-        DadosOlimpiada olimp = listaOlimpiadas.get(position);
+        Olimpiada olimp = listaOlimpiadas.get(position);
 
         holder.icone.setImageResource(olimp.getIconeOlimp());
         holder.nomeESigla.setText(olimp.getNome() + " - " + olimp.getSigla());
@@ -97,7 +94,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
 
     public int getItemCount(){return listaOlimpiadas.size();}
 
-    public void atualizarOpcoes(List<DadosOlimpiada> olimpiadas){
+    public void atualizarOpcoes(List<Olimpiada> olimpiadas){
         this.listaOlimpiadas.clear();
         this.listaOlimpiadas.addAll(olimpiadas);
         this.notifyDataSetChanged();

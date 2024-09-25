@@ -1,37 +1,30 @@
 package com.example.helperinolympics.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosOlimpiada;
-import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
+import com.example.helperinolympics.model.Olimpiada;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolhaOlimpiadas.OlimpiadasEscolhaViewHolder>{
-    List<DadosOlimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
-    List<DadosOlimpiada> listaEscolhidas= new ArrayList<>();
+    List<Olimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
+    List<Olimpiada> listaEscolhidas= new ArrayList<>();
 
 
-    public AdapterEscolhaOlimpiadas(List<DadosOlimpiada> olimpiadas){
+    public AdapterEscolhaOlimpiadas(List<Olimpiada> olimpiadas){
         this.listaOlimpiadasOpcoes=olimpiadas;
     }
 
@@ -41,7 +34,7 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
     }
 
     public void onBindViewHolder(@NonNull AdapterEscolhaOlimpiadas.OlimpiadasEscolhaViewHolder holder, int position) {
-        DadosOlimpiada olimp = listaOlimpiadasOpcoes.get(position);
+        Olimpiada olimp = listaOlimpiadasOpcoes.get(position);
 
         holder.icone.setImageResource(olimp.getIconeOlimp());
         holder.nomeESigla.setText(olimp.getNome() + " - " + olimp.getSigla());
@@ -88,7 +81,7 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
 
     }
 
-    public List<DadosOlimpiada> getListaEscolhidas() {
+    public List<Olimpiada> getListaEscolhidas() {
         return listaEscolhidas;
     }
 
@@ -112,7 +105,7 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
 
     public int getItemCount(){return listaOlimpiadasOpcoes.size();}
 
-    public void atualizarOpcoes(List<DadosOlimpiada> olimpiadas){
+    public void atualizarOpcoes(List<Olimpiada> olimpiadas){
         this.listaOlimpiadasOpcoes.clear();
         this.listaOlimpiadasOpcoes.addAll(olimpiadas);
         this.notifyDataSetChanged();

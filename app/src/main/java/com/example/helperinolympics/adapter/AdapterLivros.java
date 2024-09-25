@@ -8,30 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosLivros;
-import com.example.helperinolympics.model.DadosOlimpiada;
+import com.example.helperinolympics.model.Livros;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosViewHolder>{
-    List<DadosLivros> listaLivros;
+    List<Livros> listaLivros;
     private Context context;
 
 
-    public AdapterLivros(List<DadosLivros> livros, Context context){
+    public AdapterLivros(List<Livros> livros, Context context){
         this.context = context;
         this.listaLivros=livros;
     }
@@ -42,7 +36,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
     }
 
     public void onBindViewHolder(@NonNull AdapterLivros.LivrosViewHolder holder, int position) {
-        DadosLivros livro = listaLivros.get(position);
+        Livros livro = listaLivros.get(position);
 
         String valorTitulo = livro.getTitulo();
         holder.titulo.setText(valorTitulo);
@@ -103,7 +97,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
 
     public int getItemCount(){return listaLivros.size();}
 
-    public void atualizarOpcoes(List<DadosLivros> livros){
+    public void atualizarOpcoes(List<Livros> livros){
         this.listaLivros.clear();
         this.listaLivros.addAll(livros);
         this.notifyDataSetChanged();

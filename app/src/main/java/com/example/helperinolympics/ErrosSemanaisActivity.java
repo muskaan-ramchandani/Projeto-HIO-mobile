@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterDadosErros;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
-import com.example.helperinolympics.model.DadosErros;
+import com.example.helperinolympics.model.Erros;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
@@ -52,17 +52,17 @@ public class ErrosSemanaisActivity extends Activity {
         rVListaErros.setLayoutManager(layoutManager);
         rVListaErros.setHasFixedSize(true);
 
-        List<DadosErros> listaErros = new ArrayList<>();
+        List<Erros> listaErros = new ArrayList<>();
         errosAdapter = new AdapterDadosErros(listaErros);
         rVListaErros.setAdapter(errosAdapter);
 
         //DADOS PARA TESTE
-        DadosErros dados1 = new DadosErros("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
+        Erros dados1 = new Erros("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
                 "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um booleab.", "O determinante de uma matriz quadrada é sempre um número real.");
 
         listaErros.add(dados1);
 
-        DadosErros dados2 = new DadosErros("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
+        Erros dados2 = new Erros("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
                 "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
         listaErros.add(dados2);

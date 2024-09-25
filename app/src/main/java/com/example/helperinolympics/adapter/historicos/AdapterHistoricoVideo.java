@@ -1,7 +1,5 @@
 package com.example.helperinolympics.adapter.historicos;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosVideo;
+import com.example.helperinolympics.model.Video;
 
 import java.util.List;
 
 public class AdapterHistoricoVideo extends RecyclerView.Adapter<AdapterHistoricoVideo.VideoHistoricoViewHolder> {
-    private List<DadosVideo> listaVideo;
+    private List<Video> listaVideo;
 
     // Constructor to initialize the list
-    public AdapterHistoricoVideo(List<DadosVideo> listaVideo) {
+    public AdapterHistoricoVideo(List<Video> listaVideo) {
         this.listaVideo = listaVideo;
     }
 
@@ -35,7 +33,7 @@ public class AdapterHistoricoVideo extends RecyclerView.Adapter<AdapterHistorico
 
 
     public void onBindViewHolder(@NonNull AdapterHistoricoVideo.VideoHistoricoViewHolder holder, int position) {
-        DadosVideo video = listaVideo.get(position);
+        Video video = listaVideo.get(position);
 
         String valorTema=video.getTitulo();
         holder.conteudo.setText(valorTema);

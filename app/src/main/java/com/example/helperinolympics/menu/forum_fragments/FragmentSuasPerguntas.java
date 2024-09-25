@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumSuasPerguntasBinding;
-import com.example.helperinolympics.model.DadosPerguntasForum;
+import com.example.helperinolympics.model.PerguntasForum;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,8 +23,8 @@ import java.util.Date;
 public class FragmentSuasPerguntas extends Fragment  {
     private FragmentForumSuasPerguntasBinding binding;
     private AdapterPerguntasForum adapter;
-    private ArrayList<DadosPerguntasForum> perguntasRespondidas = new ArrayList<>();
-    private ArrayList<DadosPerguntasForum> perguntasNAORespondidas = new ArrayList<>();
+    private ArrayList<PerguntasForum> perguntasRespondidas = new ArrayList<>();
+    private ArrayList<PerguntasForum> perguntasNAORespondidas = new ArrayList<>();
 
 
     @Nullable
@@ -56,7 +56,7 @@ public class FragmentSuasPerguntas extends Fragment  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        perguntasRespondidas.add(new DadosPerguntasForum(1, R.drawable.iconeperfilvazioredonda, 12, "Equação geral e reduzida",
+        perguntasRespondidas.add(new PerguntasForum(1, R.drawable.iconeperfilvazioredonda, 12, "Equação geral e reduzida",
                 "user466", "Quais seriam os métodos para achar uma equação geral a partir de uma matriz? Existem outras formas de fazer isso? E como chego na reduzida?",
                 "OBMEP", null, dataPublicacao1));
 
@@ -66,7 +66,7 @@ public class FragmentSuasPerguntas extends Fragment  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        perguntasRespondidas.add(new DadosPerguntasForum(2, R.drawable.iconeperfilvazioredonda, 50, "HTML com JavaScript",
+        perguntasRespondidas.add(new PerguntasForum(2, R.drawable.iconeperfilvazioredonda, 50, "HTML com JavaScript",
                 "noeminoeme", "Uma questão solicitava a criação de um formulário e o tratamento de eventos de 2 botões utilizando o JavaScript, porém não estou conseguindo conectar o arquivo html ao js. Quais seriam as maneiras de fazer isso? Como posso resolver?",
                 "OBI", null, dataPublicacao2));
 
@@ -76,7 +76,7 @@ public class FragmentSuasPerguntas extends Fragment  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        perguntasRespondidas.add(new DadosPerguntasForum(3, R.drawable.iconeperfilvazioredonda, 500, "Dúvida",
+        perguntasRespondidas.add(new PerguntasForum(3, R.drawable.iconeperfilvazioredonda, 500, "Dúvida",
                 "naosei", "Dúvida",
                 "ONHB", null, dataPublicacao3));
 
@@ -102,7 +102,7 @@ public class FragmentSuasPerguntas extends Fragment  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        perguntasNAORespondidas.add(new DadosPerguntasForum(1, R.drawable.iconeperfilvazioredonda, 0, "Equação geral e reduzida",
+        perguntasNAORespondidas.add(new PerguntasForum(1, R.drawable.iconeperfilvazioredonda, 0, "Equação geral e reduzida",
                 "user466", "Quais seriam os métodos para achar uma equação geral a partir de uma matriz? Existem outras formas de fazer isso? E como chego na reduzida?",
                 "OBMEP", null, dataPublicacao1));
 
@@ -112,7 +112,7 @@ public class FragmentSuasPerguntas extends Fragment  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        perguntasNAORespondidas.add(new DadosPerguntasForum(2, R.drawable.iconeperfilvazioredonda, 0, "HTML com JavaScript",
+        perguntasNAORespondidas.add(new PerguntasForum(2, R.drawable.iconeperfilvazioredonda, 0, "HTML com JavaScript",
                 "noeminoeme", "Uma questão solicitava a criação de um formulário e o tratamento de eventos de 2 botões utilizando o JavaScript, porém não estou conseguindo conectar o arquivo html ao js. Quais seriam as maneiras de fazer isso? Como posso resolver?",
                 "OBI", null, dataPublicacao2));
 
@@ -122,7 +122,7 @@ public class FragmentSuasPerguntas extends Fragment  {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        perguntasNAORespondidas.add(new DadosPerguntasForum(3, R.drawable.iconeperfilvazioredonda, 0, "Dúvida",
+        perguntasNAORespondidas.add(new PerguntasForum(3, R.drawable.iconeperfilvazioredonda, 0, "Dúvida",
                 "naosei", "Dúvida",
                 "ONHB", null, dataPublicacao3));
 

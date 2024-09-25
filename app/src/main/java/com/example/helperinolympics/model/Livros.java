@@ -8,16 +8,16 @@ import android.os.Parcelable;
 import java.io.ByteArrayOutputStream;
 import java.util.Date;
 
-public class DadosLivros  implements Parcelable {
+public class Livros implements Parcelable {
 
     int id;
     Bitmap capa;
     String titulo, autor, edicao, isbn, siglaOlimpiadaPertencente;
     Date dataPublicacao;
 
-    public DadosLivros(){}
+    public Livros(){}
 
-    public DadosLivros(int id, Bitmap capa, String isbn, String titulo, String autor, String edicao, String siglaOlimpiadaPertencente, Date dataPublicacao) {
+    public Livros(int id, Bitmap capa, String isbn, String titulo, String autor, String edicao, String siglaOlimpiadaPertencente, Date dataPublicacao) {
         setId(id);
         setCapa(capa);
         setIsbn(isbn);
@@ -92,7 +92,7 @@ public class DadosLivros  implements Parcelable {
         this.dataPublicacao = dataPublicacao;
     }
 
-    protected DadosLivros(Parcel in) {
+    protected Livros(Parcel in) {
         id = in.readInt();
         isbn = in.readString();
         titulo = in.readString();
@@ -147,15 +147,15 @@ public class DadosLivros  implements Parcelable {
         return 0;
     }
 
-    public static final Parcelable.Creator<DadosConteudo> CREATOR = new Parcelable.Creator<DadosConteudo>() {
+    public static final Parcelable.Creator<Conteudo> CREATOR = new Parcelable.Creator<Conteudo>() {
         @Override
-        public DadosConteudo createFromParcel(Parcel in) {
-            return new DadosConteudo(in);
+        public Conteudo createFromParcel(Parcel in) {
+            return new Conteudo(in);
         }
 
         @Override
-        public DadosConteudo[] newArray(int size) {
-            return new DadosConteudo[size];
+        public Conteudo[] newArray(int size) {
+            return new Conteudo[size];
         }
     };
 }

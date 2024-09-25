@@ -1,7 +1,5 @@
 package com.example.helperinolympics.adapter.historicos;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +10,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosTexto;
-import com.example.helperinolympics.modelos_sobrepostos.RecadoProfWebActivity;
+import com.example.helperinolympics.model.Texto;
 import com.example.helperinolympics.modelos_sobrepostos.TextoHistoricoExibir;
-import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
 
 import java.util.List;
 
 public class AdapterHistoricoTexto extends RecyclerView.Adapter<AdapterHistoricoTexto.TextoHistoricoViewHolder> {
-private List<DadosTexto> listaTxt;
+private List<Texto> listaTxt;
 private FragmentManager fragmentManager;
-private DadosTexto texto;
+private Texto texto;
 
 // Constructor to initialize the list
-public AdapterHistoricoTexto(List<DadosTexto> listaTxt, FragmentManager fragmentManager) {
+public AdapterHistoricoTexto(List<Texto> listaTxt, FragmentManager fragmentManager) {
     this.listaTxt = listaTxt;
     this.fragmentManager = fragmentManager;
 }
@@ -40,7 +36,7 @@ public AdapterHistoricoTexto.TextoHistoricoViewHolder onCreateViewHolder(@NonNul
 
 
 public void onBindViewHolder(@NonNull AdapterHistoricoTexto.TextoHistoricoViewHolder holder, int position) {
-    DadosTexto txt = listaTxt.get(position);
+    Texto txt = listaTxt.get(position);
     this.texto = listaTxt.get(position);
 
     holder.conteudo.setText(txt.getTitulo());

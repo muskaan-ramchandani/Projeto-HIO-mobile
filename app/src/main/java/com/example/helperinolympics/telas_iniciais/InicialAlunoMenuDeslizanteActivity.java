@@ -24,8 +24,8 @@ import com.example.helperinolympics.menu.FavoritosAlunoActivity;
 import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.menu.SairActivity;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosOlimpiada;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Olimpiada;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -44,9 +44,9 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
     private NavigationView navView;
     private ActivityMenuDeslizanteAlunoBinding binding;
 
-    List<DadosOlimpiada> olimpiadas = new ArrayList<>();
+    List<Olimpiada> olimpiadas = new ArrayList<>();
     AdapterOlimpiadas adapter;
-    DadosAluno alunoCadastrado;
+    Aluno alunoCadastrado;
 
 
     @Override
@@ -147,7 +147,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         adapter.notifyDataSetChanged(); //atualizar o recycler
     }
 
-    private class OlimpiadasSelecionadasDownload extends AsyncTask<String, Void, List<DadosOlimpiada>> {
+    private class OlimpiadasSelecionadasDownload extends AsyncTask<String, Void, List<Olimpiada>> {
 
         @Override
         protected void onPreExecute() {
@@ -155,8 +155,8 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         }
 
         @Override
-        protected List<DadosOlimpiada> doInBackground(String... params) {
-            List<DadosOlimpiada> olimpiadas = new ArrayList<>();
+        protected List<Olimpiada> doInBackground(String... params) {
+            List<Olimpiada> olimpiadas = new ArrayList<>();
             String emailAluno = params[0];
             Log.d("CONEXAO", "Tentando fazer download");
 
@@ -185,7 +185,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         }
 
         @Override
-        protected void onPostExecute(List<DadosOlimpiada> olimpiadas) {
+        protected void onPostExecute(List<Olimpiada> olimpiadas) {
             super.onPostExecute(olimpiadas);
             adapter.atualizarOpcoes(olimpiadas);
             adapter.notifyDataSetChanged();
@@ -205,14 +205,14 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             return dados.toString();
         }
 
-        private List<DadosOlimpiada> converterParaList(String jsonString) {
-            List<DadosOlimpiada> olimpiadas = new ArrayList<>();
+        private List<Olimpiada> converterParaList(String jsonString) {
+            List<Olimpiada> olimpiadas = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("olimpiadas");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject olimpJSON = jsonArray.getJSONObject(i);
-                    DadosOlimpiada olimp = new DadosOlimpiada();
+                    Olimpiada olimp = new Olimpiada();
                     olimp.setNome(olimpJSON.getString("nome"));
                     olimp.setSigla(olimpJSON.getString("sigla"));
                     String nomeDrawable = olimpJSON.getString("icone");

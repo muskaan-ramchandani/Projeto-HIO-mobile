@@ -1,8 +1,5 @@
 package com.example.helperinolympics.menu;
 
-import static com.example.helperinolympics.R.*;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -22,12 +19,12 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityForumBinding;
 import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.menu.forum_fragments.FragmentTudo;
-import com.example.helperinolympics.model.DadosAluno;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;
-    DadosAluno alunoCadastrado;
+    Aluno alunoCadastrado;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

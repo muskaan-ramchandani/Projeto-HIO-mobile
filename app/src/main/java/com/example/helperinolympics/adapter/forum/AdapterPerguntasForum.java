@@ -11,17 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosPerguntasForum;
+import com.example.helperinolympics.model.PerguntasForum;
 
 import java.util.List;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 
-public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntasForum.PerguntasForumViewHolder>{ List<DadosPerguntasForum> listaPerguntasForum;
+public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntasForum.PerguntasForumViewHolder>{ List<PerguntasForum> listaPerguntasForum;
 
-    public AdapterPerguntasForum(List<DadosPerguntasForum> perguntas){
+    public AdapterPerguntasForum(List<PerguntasForum> perguntas){
         this.listaPerguntasForum=perguntas;
     }
 
@@ -31,7 +30,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
     }
 
     public void onBindViewHolder(@NonNull AdapterPerguntasForum.PerguntasForumViewHolder holder, int position) {
-        DadosPerguntasForum pergunta = listaPerguntasForum.get(position);
+        PerguntasForum pergunta = listaPerguntasForum.get(position);
 
         holder.fotoPerfil.setImageResource(pergunta.getFotoPerfil());
         holder.titulo.setText(pergunta.getTitulo());
@@ -83,7 +82,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
 
     public int getItemCount(){return listaPerguntasForum.size();}
 
-    public void atualizarOpcoes(List<DadosPerguntasForum> perguntas){
+    public void atualizarOpcoes(List<PerguntasForum> perguntas){
         this.listaPerguntasForum.clear();
         this.listaPerguntasForum.addAll(perguntas);
         this.notifyDataSetChanged();

@@ -3,13 +3,13 @@ package com.example.helperinolympics.model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class DadosPerguntasForum {
+public class PerguntasForum {
     private int id, fotoPerfil, qntdRespostas;
     private String titulo, nomeDeUsuario, pergunta, olimpiada;
     private ArrayList<String> respostasRecebidas;
     private Date dataPublicacao;
 
-    public DadosPerguntasForum(int id, int fotoPerfil, int qntdRespostas, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, ArrayList<String> respostasRecebidas, Date dataPublicacao) {
+    public PerguntasForum(int id, int fotoPerfil, int qntdRespostas, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, ArrayList<String> respostasRecebidas, Date dataPublicacao) {
         setId(id);
         setFotoPerfil(fotoPerfil);
         setQntdRespostas(qntdRespostas);

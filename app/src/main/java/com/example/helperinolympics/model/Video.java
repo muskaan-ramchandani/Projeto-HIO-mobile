@@ -2,14 +2,14 @@ package com.example.helperinolympics.model;
 
 import android.graphics.Bitmap;
 
-public class DadosVideo {
+public class Video {
     private String titulo, linkVideo, professorRecomendou;
     private int id, idConteudoPertencente;
     private Bitmap capaVideo;
 
-    public DadosVideo(){}
+    public Video(){}
 
-    public DadosVideo(int id, String titulo, String linkVideo, String professorRecomendou, int idConteudoPertencente, Bitmap capaVideo) {
+    public Video(int id, String titulo, String linkVideo, String professorRecomendou, int idConteudoPertencente, Bitmap capaVideo) {
         setId(id);
         setTitulo(titulo);
         setLinkVideo(linkVideo);

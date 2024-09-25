@@ -8,18 +8,16 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterVideo;
 import com.example.helperinolympics.databinding.ActivityVideoBinding;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosVideo;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
+import com.example.helperinolympics.model.Video;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
 import org.json.JSONArray;
@@ -30,19 +28,17 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class VideoActivity extends AppCompatActivity {
     private AdapterVideo adapter;
-    private List<DadosVideo> listaVideo= new ArrayList<>();
+    private List<Video> listaVideo= new ArrayList<>();
 
     private ActivityVideoBinding binding;
 
-    private DadosAluno alunoCadastrado;
-    private DadosConteudo conteudo;
+    private Aluno alunoCadastrado;
+    private Conteudo conteudo;
     private String siglaOlimpiada;
 
     public void onCreate (Bundle savedInstanceState){
@@ -107,7 +103,7 @@ public class VideoActivity extends AppCompatActivity {
 
     }
 
-    private void configurarDetalhesTela(String siglaOlimpiada, DadosConteudo conteudo) {
+    private void configurarDetalhesTela(String siglaOlimpiada, Conteudo conteudo) {
 
         binding.txtTema.setText(conteudo.getTituloConteudo());
 
@@ -166,7 +162,7 @@ public class VideoActivity extends AppCompatActivity {
         binding.recyclerviewVideo.setAdapter(adapter);
     }
 
-    private class VideosDownload extends AsyncTask<Integer, Void, List<DadosVideo>> {
+    private class VideosDownload extends AsyncTask<Integer, Void, List<Video>> {
 
         @Override
         protected void onPreExecute() {
@@ -174,11 +170,11 @@ public class VideoActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<DadosVideo> doInBackground(Integer... params) {
+        protected List<Video> doInBackground(Integer... params) {
             int idConteudo = params[0];
             Log.d("ID_CONTEUDO_RECEBIDO", "Id conteúdo Recebido: " + idConteudo);
 
-            List<DadosVideo> videos = new ArrayList<>();
+            List<Video> videos = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.9:8086/phpHio/carregaVideoPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
@@ -207,7 +203,7 @@ public class VideoActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosVideo> videos) {
+        protected void onPostExecute(List<Video> videos) {
             super.onPostExecute(videos);
             if (videos != null) {
                 adapter.atualizarOpcoes(videos);
@@ -229,14 +225,14 @@ public class VideoActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<DadosVideo> converterParaList(String jsonString) {
-            List<DadosVideo> videos = new ArrayList<>();
+        private List<Video> converterParaList(String jsonString) {
+            List<Video> videos = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("videos");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject videoJSON = jsonArray.getJSONObject(i);
-                    DadosVideo video = new DadosVideo();
+                    Video video = new Video();
 
 
                     video.setId(videoJSON.getInt("id"));

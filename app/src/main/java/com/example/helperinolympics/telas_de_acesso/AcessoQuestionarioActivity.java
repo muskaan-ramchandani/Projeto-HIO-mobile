@@ -25,32 +25,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_questionario_acesso);
 
-        findViewById(R.id.btnTextoPeloAcessoQuest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AcessoQuestionarioActivity.this, TextoActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
-        findViewById(R.id.btnVideoPeloAcessoQuest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AcessoQuestionarioActivity.this, VideoActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        findViewById(R.id.btnFlashcardPeloAcessoQuest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AcessoQuestionarioActivity.this, FlashcardActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
     }
 }

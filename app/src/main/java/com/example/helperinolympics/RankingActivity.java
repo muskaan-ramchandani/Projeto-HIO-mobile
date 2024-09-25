@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterRanking;
-import com.example.helperinolympics.model.DadosRanking;
+import com.example.helperinolympics.model.Ranking;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 import java.util.ArrayList;
@@ -74,54 +73,54 @@ public class RankingActivity extends Activity {
 
         rvRanking.addItemDecoration(dividerItemDecoration);
 
-        List<DadosRanking> listaRanking = new ArrayList<>();
+        List<Ranking> listaRanking = new ArrayList<>();
         adapter = new AdapterRanking(listaRanking);
         rvRanking.setAdapter(adapter);
 
 
         //DADOS FICTICIOS
-        DadosRanking dado4 = new DadosRanking(4, R.drawable.iconeseuperfil, 12330, "estevaoferreira");
+        Ranking dado4 = new Ranking(4, R.drawable.iconeseuperfil, 12330, "estevaoferreira");
         listaRanking.add(dado4);
 
-        DadosRanking dado5 = new DadosRanking(5, R.drawable.iconeseuperfil, 12325, "pantera");
+        Ranking dado5 = new Ranking(5, R.drawable.iconeseuperfil, 12325, "pantera");
         listaRanking.add(dado5);
 
-        DadosRanking dado6= new DadosRanking(6, R.drawable.iconeseuperfil, 12320, "noemiGadelha");
+        Ranking dado6= new Ranking(6, R.drawable.iconeseuperfil, 12320, "noemiGadelha");
         listaRanking.add(dado6);
 
-        DadosRanking dado7 = new DadosRanking(7, R.drawable.iconeseuperfil, 12315, "hannaMontana");
+        Ranking dado7 = new Ranking(7, R.drawable.iconeseuperfil, 12315, "hannaMontana");
         listaRanking.add(dado7);
 
-        DadosRanking dado8 = new DadosRanking(8, R.drawable.iconeseuperfil, 12310, "thiagooo");
+        Ranking dado8 = new Ranking(8, R.drawable.iconeseuperfil, 12310, "thiagooo");
         listaRanking.add(dado8);
 
-        DadosRanking dado9 = new DadosRanking(9, R.drawable.iconeseuperfil, 12305, "paulista");
+        Ranking dado9 = new Ranking(9, R.drawable.iconeseuperfil, 12305, "paulista");
         listaRanking.add(dado9);
 
-        DadosRanking dado10 = new DadosRanking(10, R.drawable.iconeseuperfil, 12300, "mahDiva");
+        Ranking dado10 = new Ranking(10, R.drawable.iconeseuperfil, 12300, "mahDiva");
         listaRanking.add(dado10);
 
-        DadosRanking dado11 = new DadosRanking(11, R.drawable.iconeseuperfil, 12299, "lunaa");
+        Ranking dado11 = new Ranking(11, R.drawable.iconeseuperfil, 12299, "lunaa");
         listaRanking.add(dado11);
 
-        DadosRanking dado12 = new DadosRanking(12, R.drawable.iconeseuperfil, 1, "besties");
+        Ranking dado12 = new Ranking(12, R.drawable.iconeseuperfil, 1, "besties");
         listaRanking.add(dado12);
 
-        DadosRanking dado13 = new DadosRanking(13, R.drawable.iconeseuperfil, 0, "muska");
+        Ranking dado13 = new Ranking(13, R.drawable.iconeseuperfil, 0, "muska");
         listaRanking.add(dado13);
     }
 
     public void dadosPodio(){
 
         //DADOS FICTICIOS PODIO
-        List<DadosRanking> listaRankingPodio = new ArrayList<>();
-        DadosRanking dado1 = new DadosRanking(1, R.drawable.iconeseuperfil, 12400, "User123");
+        List<Ranking> listaRankingPodio = new ArrayList<>();
+        Ranking dado1 = new Ranking(1, R.drawable.iconeseuperfil, 12400, "User123");
         listaRankingPodio.add(dado1);
 
-        DadosRanking dado2 = new DadosRanking(2, R.drawable.iconeseuperfil, 12340, "User321");
+        Ranking dado2 = new Ranking(2, R.drawable.iconeseuperfil, 12340, "User321");
         listaRankingPodio.add(dado2);
 
-        DadosRanking dado3 = new DadosRanking(3, R.drawable.iconeseuperfil, 12335, "User213");
+        Ranking dado3 = new Ranking(3, R.drawable.iconeseuperfil, 12335, "User213");
         listaRankingPodio.add(dado3);
 
         //Atribuindo aos itens da activity

@@ -1,10 +1,6 @@
 package com.example.helperinolympics.model;
 
-import static android.provider.Settings.System.getString;
-
-import com.example.helperinolympics.R;
-
-public class DadosAcertos {
+public class Acertos {
     private String olimpiadaQuestaoCerta;
     private String assuntoQuestaoCerta;
     private String topicoDaQuestaoCerta;
@@ -13,7 +9,7 @@ public class DadosAcertos {
     private String questaoMarcadaCerta;
 
 
-    public DadosAcertos(String olimpiadaQuestaoCerta, String assuntoQuestaoCerta, String topicoDaQuestaoCerta, String profQuestaoCerta, String perguntaQuestaoCerta, String questaoMarcadaCerta) {
+    public Acertos(String olimpiadaQuestaoCerta, String assuntoQuestaoCerta, String topicoDaQuestaoCerta, String profQuestaoCerta, String perguntaQuestaoCerta, String questaoMarcadaCerta) {
         setOlimpiadaQuestaoCerta(olimpiadaQuestaoCerta);
         setAssuntoQuestaoCerta(assuntoQuestaoCerta);
         setTopicoDaQuestaoCerta(topicoDaQuestaoCerta);

@@ -12,21 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.materiais.TextoActivity;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
+import com.example.helperinolympics.model.Texto;
 import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
 
 import java.util.List;
 
 public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHolder> {
-    private List<DadosTexto> listaTexto;
-    private DadosAluno alunoCadastrado;
-    private DadosConteudo conteudo;
+    private List<Texto> listaTexto;
+    private Aluno alunoCadastrado;
+    private Conteudo conteudo;
     private String olimpiadaPertencente;
 
-    public AdapterTexto(List<DadosTexto> listaTexto, DadosAluno alunoCadastrado, DadosConteudo conteudo, String olimpiadaPertencente) {
+    public AdapterTexto(List<Texto> listaTexto, Aluno alunoCadastrado, Conteudo conteudo, String olimpiadaPertencente) {
         this.listaTexto = listaTexto;
         this.alunoCadastrado= alunoCadastrado;
         this.conteudo = conteudo;
@@ -42,7 +41,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
 
     @Override
     public void onBindViewHolder(@NonNull TextoViewHolder holder, int position) {
-        DadosTexto texto = listaTexto.get(position);
+        Texto texto = listaTexto.get(position);
         holder.txt = texto;
 
         String valorUserProf = texto.getProfessorCadastrou();
@@ -62,7 +61,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
     public class TextoViewHolder extends RecyclerView.ViewHolder {
         TextView titulo, userProf;
         String textoString;
-        DadosTexto txt;
+        Texto txt;
 
         public TextoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,7 +87,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
         }
     }
 
-    public void atualizarOpcoes(List<DadosTexto> textos){
+    public void atualizarOpcoes(List<Texto> textos){
         this.listaTexto.clear();
         this.listaTexto.addAll(textos);
         this.notifyDataSetChanged();

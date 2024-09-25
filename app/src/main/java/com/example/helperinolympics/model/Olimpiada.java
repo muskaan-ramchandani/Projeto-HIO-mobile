@@ -3,14 +3,14 @@ package com.example.helperinolympics.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class DadosOlimpiada implements Parcelable {
+public class Olimpiada implements Parcelable {
     int iconeOlimp;
     String nome, sigla, cor;
     private boolean isSelected;
 
-    public DadosOlimpiada(){}
+    public Olimpiada(){}
 
-    public DadosOlimpiada(int iconeOlimp, String nome, String sigla, String cor) {
+    public Olimpiada(int iconeOlimp, String nome, String sigla, String cor) {
         setIconeOlimp(iconeOlimp);
         setNome(nome);
         setSigla(sigla);
@@ -58,7 +58,7 @@ public class DadosOlimpiada implements Parcelable {
         isSelected = selected;
     }
 
-    protected DadosOlimpiada(Parcel in) {
+    protected Olimpiada(Parcel in) {
         iconeOlimp = in.readInt();
         nome = in.readString();
         sigla = in.readString();
@@ -78,15 +78,15 @@ public class DadosOlimpiada implements Parcelable {
         return 0;
     }
 
-    public static final Creator<DadosOlimpiada> CREATOR = new Creator<DadosOlimpiada>() {
+    public static final Creator<Olimpiada> CREATOR = new Creator<Olimpiada>() {
         @Override
-        public DadosOlimpiada createFromParcel(Parcel in) {
-            return new DadosOlimpiada(in);
+        public Olimpiada createFromParcel(Parcel in) {
+            return new Olimpiada(in);
         }
 
         @Override
-        public DadosOlimpiada[] newArray(int size) {
-            return new DadosOlimpiada[size];
+        public Olimpiada[] newArray(int size) {
+            return new Olimpiada[size];
         }
     };
 }

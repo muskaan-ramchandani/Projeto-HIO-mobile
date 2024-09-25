@@ -10,18 +10,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.adapter.AdapterFlashcard;
-import com.example.helperinolympics.model.DadosFlashcard;
-import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
+import com.example.helperinolympics.model.Flashcard;
 
 import java.util.List;
 
 public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHistoricoFlashcard.FlashcardHistoricoViewHolder> {
-    private List<DadosFlashcard> listaFlashcard;
+    private List<Flashcard> listaFlashcard;
     private FragmentManager fragmentManager;
 
     // Constructor to initialize the list
-    public AdapterHistoricoFlashcard(List<DadosFlashcard> listaFlashcard, FragmentManager fragmentManager) {
+    public AdapterHistoricoFlashcard(List<Flashcard> listaFlashcard, FragmentManager fragmentManager) {
         this.listaFlashcard = listaFlashcard;
         this.fragmentManager = fragmentManager;
     }
@@ -36,7 +34,7 @@ public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHisto
 
 
     public void onBindViewHolder(@NonNull AdapterHistoricoFlashcard.FlashcardHistoricoViewHolder holder, int position) {
-        DadosFlashcard flashcard = listaFlashcard.get(position);
+        Flashcard flashcard = listaFlashcard.get(position);
 
 
         holder.conteudo.setText(flashcard.getTitulo());

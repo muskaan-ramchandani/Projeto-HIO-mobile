@@ -63,7 +63,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="Pergunta"> <b> Pergunta:</b>  Qual item corresponde a uma porção limitada de matéria constituída por partículas?</string>
+    <string name="Pergunta"> <b>Pergunta 1:</b>&#10;Qual item corresponde a uma porção limitada de matéria constituída por partículas?</string>
 
 
     <string name="btn_inicio_descricao">Botão para retornar à tela inicial</string>

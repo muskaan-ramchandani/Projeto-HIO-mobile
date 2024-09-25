@@ -6,9 +6,6 @@ import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityAcessoTextoBinding;
@@ -16,15 +13,15 @@ import com.example.helperinolympics.materiais.FlashcardActivity;
 import com.example.helperinolympics.materiais.QuestionarioActivity;
 import com.example.helperinolympics.materiais.TextoActivity;
 import com.example.helperinolympics.materiais.VideoActivity;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
+import com.example.helperinolympics.model.Texto;
 
 public class AcessoTextoActivity extends AppCompatActivity {
 
-    private DadosAluno alunoCadastrado;
-    private DadosConteudo conteudo;
-    private DadosTexto texto;
+    private Aluno alunoCadastrado;
+    private Conteudo conteudo;
+    private Texto texto;
     private String siglaOlimpiada;
 
     private ActivityAcessoTextoBinding binding;
@@ -90,7 +87,7 @@ public class AcessoTextoActivity extends AppCompatActivity {
         });
     }
 
-    private void configurarVisualizacaoTexto(DadosTexto texto) {
+    private void configurarVisualizacaoTexto(Texto texto) {
 
         binding.txtTituloTexto.setText(texto.getTitulo());
         binding.txtProfAutorDoTexto.setText("Por: "+ texto.getProfessorCadastrou());

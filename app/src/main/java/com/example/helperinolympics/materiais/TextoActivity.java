@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterTexto;
 import com.example.helperinolympics.databinding.ActivityTextoBinding;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
+import com.example.helperinolympics.model.Texto;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
 import org.json.JSONArray;
@@ -30,12 +30,12 @@ import java.util.List;
 
 public class TextoActivity extends AppCompatActivity {
     private AdapterTexto adapter;
-    private List<DadosTexto> listaTexto = new ArrayList<>();
+    private List<Texto> listaTexto = new ArrayList<>();
 
     private ActivityTextoBinding binding;
 
-    private DadosAluno alunoCadastrado;
-    private DadosConteudo conteudo;
+    private Aluno alunoCadastrado;
+    private Conteudo conteudo;
     private String siglaOlimpiada;
 
     @Override
@@ -104,7 +104,7 @@ public class TextoActivity extends AppCompatActivity {
 
     }
 
-    private void configurarDetalhesTela(String siglaOlimpiada, DadosConteudo conteudo) {
+    private void configurarDetalhesTela(String siglaOlimpiada, Conteudo conteudo) {
 
         binding.txtTema.setText(conteudo.getTituloConteudo());
 
@@ -163,7 +163,7 @@ public class TextoActivity extends AppCompatActivity {
         binding.recyclerviewTexto.setAdapter(adapter);
     }
 
-    private class TextosDownload extends AsyncTask<Integer, Void, List<DadosTexto>> {
+    private class TextosDownload extends AsyncTask<Integer, Void, List<Texto>> {
 
         @Override
         protected void onPreExecute() {
@@ -171,11 +171,11 @@ public class TextoActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<DadosTexto> doInBackground(Integer... params) {
+        protected List<Texto> doInBackground(Integer... params) {
             int idConteudo = params[0];
             Log.d("ID_CONTEUDO_RECEBIDO", "Id conteúdo Recebido: " + idConteudo);
 
-            List<DadosTexto> textos = new ArrayList<>();
+            List<Texto> textos = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.9:8086/phpHio/carregaTextoPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
@@ -213,7 +213,7 @@ public class TextoActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosTexto> textos) {
+        protected void onPostExecute(List<Texto> textos) {
             super.onPostExecute(textos);
             if (textos != null) {
                 adapter.atualizarOpcoes(textos);
@@ -235,14 +235,14 @@ public class TextoActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<DadosTexto> converterParaList(String jsonString) {
-            List<DadosTexto> textos = new ArrayList<>();
+        private List<Texto> converterParaList(String jsonString) {
+            List<Texto> textos = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("textos");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject textoJSON = jsonArray.getJSONObject(i);
-                    DadosTexto texto = new DadosTexto();
+                    Texto texto = new Texto();
 
                     texto.setId(textoJSON.getInt("id"));
                     texto.setTitulo(textoJSON.getString("titulo"));

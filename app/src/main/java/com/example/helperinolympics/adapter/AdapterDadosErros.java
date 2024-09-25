@@ -12,16 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosErros;
+import com.example.helperinolympics.model.Erros;
 
 import java.util.List;
 
 public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.ErrosViewHolder>{
 
-    private List<DadosErros> listaDadosErros;
+    private List<Erros> listaDadosErros;
 
-    public AdapterDadosErros(List<DadosErros> listaDadosErros) {
-        this.listaDadosErros = listaDadosErros;
+    public AdapterDadosErros(List<Erros> listaErros) {
+        this.listaDadosErros = listaErros;
     }
     public AdapterDadosErros.ErrosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewItemListaErros = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_erros, parent, false);

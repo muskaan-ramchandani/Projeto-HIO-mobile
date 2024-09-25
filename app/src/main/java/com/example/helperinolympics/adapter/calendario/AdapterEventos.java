@@ -11,16 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosEventos;
+import com.example.helperinolympics.model.Eventos;
 
 import java.util.List;
 
 public class AdapterEventos extends RecyclerView.Adapter<AdapterEventos.EventosViewHolder>{
 
-    private List<DadosEventos> listaDadosEventos;
+    private List<Eventos> listaDadosEventos;
 
-    public AdapterEventos(List<DadosEventos> listaDadosEventos) {
-        this.listaDadosEventos = listaDadosEventos;
+    public AdapterEventos(List<Eventos> listaEventos) {
+        this.listaDadosEventos = listaEventos;
     }
     public AdapterEventos.EventosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewItemListaEventos = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_eventos, parent, false);

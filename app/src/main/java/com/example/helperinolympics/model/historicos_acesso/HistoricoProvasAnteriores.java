@@ -1,9 +1,9 @@
 package com.example.helperinolympics.model.historicos_acesso;
 
-public class DadosHistoricoProvasAnteriores  {
+public class HistoricoProvasAnteriores {
     private int idItem;
 
-    public DadosHistoricoProvasAnteriores(int idItem ){
+    public HistoricoProvasAnteriores(int idItem ){
         setIdItem(idItem);
     }
 

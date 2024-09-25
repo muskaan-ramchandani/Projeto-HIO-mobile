@@ -2,13 +2,13 @@ package com.example.helperinolympics.model;
 
 import java.util.ArrayList;
 
-public class DadosOlimpiadaForum {
+public class OlimpiadaForum {
 
     private String siglaOlimpiada, corOlimp;
     private int qntdPerguntasRelacionadas;
     private ArrayList<Integer> idsPerguntasForum;
 
-    public DadosOlimpiadaForum(String siglaOlimpiada, String corOlimp, int qntdPerguntasRelacionadas){
+    public OlimpiadaForum(String siglaOlimpiada, String corOlimp, int qntdPerguntasRelacionadas){
         setSiglaOlimpiada(siglaOlimpiada);
         setCorOlimp(corOlimp);
         setQntdPerguntasRelacionadas(qntdPerguntasRelacionadas);

@@ -12,13 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosFlashcard;
+import com.example.helperinolympics.model.Flashcard;
 
 
 public class FlashcardModelo extends DialogFragment {
-    DadosFlashcard flashcard;
+    Flashcard flashcard;
 
-    public FlashcardModelo(DadosFlashcard flashcard){
+    public FlashcardModelo(Flashcard flashcard){
         this.flashcard = flashcard;
     }
     @Nullable
@@ -39,7 +39,7 @@ public class FlashcardModelo extends DialogFragment {
         return view;
     }
 
-    private void configurarExibicaoFlashcard(View view, DadosFlashcard flashcard) {
+    private void configurarExibicaoFlashcard(View view, Flashcard flashcard) {
         TextView titulo = view.findViewById(R.id.txtTopico);
         titulo.setText(flashcard.getTitulo());
 

@@ -1,6 +1,5 @@
 package com.example.helperinolympics.adapter;
 
-import android.content.Context;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosAcertos;
+import com.example.helperinolympics.model.Acertos;
 
 import java.util.List;
 
 public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcertos.AcertosViewHolder>{
 
-    private List<DadosAcertos> listaDadosAcertos;
+    private List<Acertos> listaDadosAcertos;
 
-    public AdapterDadosAcertos(List<DadosAcertos> listaDadosAcertos) {
+    public AdapterDadosAcertos(List<Acertos> listaDadosAcertos) {
         this.listaDadosAcertos = listaDadosAcertos;
     }
     public AcertosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

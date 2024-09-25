@@ -1,9 +1,9 @@
 package com.example.helperinolympics.model;
 
-public class DadosCorrecao {
+public class Correcao {
     private String pergunta, alternativaCorreta, explicacao;
 
-    public DadosCorrecao(String pergunta, String alternativaCorreta, String explicacao) {
+    public Correcao(String pergunta, String alternativaCorreta, String explicacao) {
         setPergunta(pergunta);
         setAlternativaCorreta(alternativaCorreta);
         setExplicacao(explicacao);

@@ -1,9 +1,5 @@
 package com.example.helperinolympics.telas_iniciais;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -21,11 +17,10 @@ import com.example.helperinolympics.adapter.AdapterConteudos;
 import com.example.helperinolympics.adapter.AdapterLivros;
 import com.example.helperinolympics.adapter.AdapterProvasAnteriores;
 import com.example.helperinolympics.databinding.ActivityTelaOlimpiadaBinding;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosLivros;
-import com.example.helperinolympics.model.DadosOlimpiada;
-import com.example.helperinolympics.model.DadosProvasAnteriores;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
+import com.example.helperinolympics.model.Livros;
+import com.example.helperinolympics.model.ProvasAnteriores;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,14 +38,14 @@ import java.util.List;
 
 public class InicioOlimpiadaActivity extends AppCompatActivity {
 
-    List<DadosConteudo> conteudos = new ArrayList<>();
-    List<DadosLivros> livros = new ArrayList<>();
-    List<DadosProvasAnteriores> provas = new ArrayList<>();
+    List<Conteudo> conteudos = new ArrayList<>();
+    List<Livros> livros = new ArrayList<>();
+    List<ProvasAnteriores> provas = new ArrayList<>();
     AdapterConteudos adapterConteudos;
     AdapterLivros adapterLivros;
     AdapterProvasAnteriores adapterProvasAnteriores;
 
-    DadosAluno alunoCadastrado;
+    Aluno alunoCadastrado;
     String siglaOlimpiada;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -168,7 +163,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
     }
 
-    private class ConteudosDownload extends AsyncTask<String, Void, List<DadosConteudo>> {
+    private class ConteudosDownload extends AsyncTask<String, Void, List<Conteudo>> {
 
         @Override
         protected void onPreExecute() {
@@ -176,11 +171,11 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<DadosConteudo> doInBackground(String... params) {
+        protected List<Conteudo> doInBackground(String... params) {
             String siglaOlimpiada = params[0];
             Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
 
-            List<DadosConteudo> conteudos = new ArrayList<>();
+            List<Conteudo> conteudos = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.9:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
@@ -208,7 +203,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosConteudo> conteudos) {
+        protected void onPostExecute(List<Conteudo> conteudos) {
             super.onPostExecute(conteudos);
             if (conteudos != null) {
                 adapterConteudos.atualizarOpcoes(conteudos);
@@ -230,14 +225,14 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<DadosConteudo> converterParaList(String jsonString) {
-            List<DadosConteudo> conteudos = new ArrayList<>();
+        private List<Conteudo> converterParaList(String jsonString) {
+            List<Conteudo> conteudos = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("conteudos");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject conteudoJSON = jsonArray.getJSONObject(i);
-                    DadosConteudo conteudo = new DadosConteudo();
+                    Conteudo conteudo = new Conteudo();
 
                     conteudo.setId(conteudoJSON.getInt("id"));
                     conteudo.setTituloConteudo(conteudoJSON.getString("titulo"));
@@ -258,7 +253,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
     }
 
-    private class LivrosDownload extends AsyncTask<String, Void, List<DadosLivros>> {
+    private class LivrosDownload extends AsyncTask<String, Void, List<Livros>> {
 
         @Override
         protected void onPreExecute() {
@@ -266,11 +261,11 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<DadosLivros> doInBackground(String... params) {
+        protected List<Livros> doInBackground(String... params) {
             String siglaOlimpiada = params[0];
             Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
 
-            List<DadosLivros> livros = new ArrayList<>();
+            List<Livros> livros = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.9:8086/phpHio/carregaLivroPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
@@ -298,7 +293,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosLivros> livros) {
+        protected void onPostExecute(List<Livros> livros) {
             super.onPostExecute(livros);
             if (livros != null) {
                 adapterLivros.atualizarOpcoes(livros);
@@ -320,14 +315,14 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<DadosLivros> converterParaList(String jsonString) {
-            List<DadosLivros> livros = new ArrayList<>();
+        private List<Livros> converterParaList(String jsonString) {
+            List<Livros> livros = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("livros");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject livroJSON = jsonArray.getJSONObject(i);
-                    DadosLivros livro = new DadosLivros();
+                    Livros livro = new Livros();
 
                     livro.setId(livroJSON.getInt("id"));
                     livro.setIsbn(livroJSON.getString("isbn"));
@@ -367,7 +362,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-    private class ProvasDownload extends AsyncTask<String, Void, List<DadosProvasAnteriores>> {
+    private class ProvasDownload extends AsyncTask<String, Void, List<ProvasAnteriores>> {
 
         @Override
         protected void onPreExecute() {
@@ -375,11 +370,11 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<DadosProvasAnteriores> doInBackground(String... params) {
+        protected List<ProvasAnteriores> doInBackground(String... params) {
             String siglaOlimpiada = params[0];
             Log.d("SIGLA_RECEBIDA", "Sigla Recebida: " + siglaOlimpiada);
 
-            List<DadosProvasAnteriores> provasLista = new ArrayList<>();
+            List<ProvasAnteriores> provasLista = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.9:8086/phpHio/carregaProvaPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
@@ -409,7 +404,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosProvasAnteriores> provas) {
+        protected void onPostExecute(List<ProvasAnteriores> provas) {
             super.onPostExecute(provas);
             if (provas != null) {
                 adapterProvasAnteriores.atualizarOpcoes(provas);
@@ -431,8 +426,8 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<DadosProvasAnteriores> converterParaList(String jsonString) {
-            List<DadosProvasAnteriores> provas = new ArrayList<>();
+        private List<ProvasAnteriores> converterParaList(String jsonString) {
+            List<ProvasAnteriores> provas = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("provas");
@@ -442,7 +437,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
                 }else{
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject provasJSON = jsonArray.getJSONObject(i);
-                        DadosProvasAnteriores prova = new DadosProvasAnteriores();
+                        ProvasAnteriores prova = new ProvasAnteriores();
 
                         prova.setId(provasJSON.getInt("id"));
                         prova.setAnoProva(provasJSON.getInt("anoDaProva"));

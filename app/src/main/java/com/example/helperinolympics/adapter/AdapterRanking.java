@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosRanking;
+import com.example.helperinolympics.model.Ranking;
 
 import java.util.List;
 
 public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingViewHolder> {
 
-    private List<DadosRanking> listaRanking;
+    private List<Ranking> listaRanking;
 
-    public AdapterRanking(List<DadosRanking> listaRanking){
+    public AdapterRanking(List<Ranking> listaRanking){
         this.listaRanking = listaRanking;
     }
 

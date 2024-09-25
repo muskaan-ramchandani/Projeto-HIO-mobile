@@ -11,12 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosQuestionario;
+import com.example.helperinolympics.model.questionario.Questionario;
 
 public class QuestionarioHistoricoExibir extends DialogFragment {
-    DadosQuestionario questionario;
+    Questionario questionario;
 
-    public QuestionarioHistoricoExibir(DadosQuestionario questionario){
+    public QuestionarioHistoricoExibir(Questionario questionario){
         this.questionario = questionario;
     }
 

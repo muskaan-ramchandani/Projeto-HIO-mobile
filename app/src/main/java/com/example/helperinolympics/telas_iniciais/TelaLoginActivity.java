@@ -3,20 +3,14 @@ package com.example.helperinolympics.telas_iniciais;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.helperinolympics.R;
-import com.example.helperinolympics.cadastros.CadastroActivity;
 import com.example.helperinolympics.databinding.ActivityLoginBinding;
-import com.example.helperinolympics.materiais.TextoActivity;
-import com.example.helperinolympics.model.DadosAluno;
+import com.example.helperinolympics.model.Aluno;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +23,7 @@ import java.net.URL;
 public class TelaLoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-    DadosAluno alunoLogado = null;
+    Aluno alunoLogado = null;
     String email;
     String senha;
 
@@ -147,7 +141,7 @@ public class TelaLoginActivity extends AppCompatActivity {
     }
 
 
-    private class AlunoDownload extends AsyncTask<String, Void, DadosAluno> {
+    private class AlunoDownload extends AsyncTask<String, Void, Aluno> {
 
         @Override
         protected void onPreExecute() {
@@ -155,7 +149,7 @@ public class TelaLoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected DadosAluno doInBackground(String... params) {
+        protected Aluno doInBackground(String... params) {
             String email = params[0];
             Log.d("CONEXAO", "Tentando retornar dados do aluno");
 
@@ -190,7 +184,7 @@ public class TelaLoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(DadosAluno aluno) {
+        protected void onPostExecute(Aluno aluno) {
             super.onPostExecute(aluno);
             if (aluno == null) {
                 Toast.makeText(TelaLoginActivity.this, "Erro ao buscar dados do aluno", Toast.LENGTH_LONG).show();
@@ -216,15 +210,15 @@ public class TelaLoginActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private DadosAluno converterParaAluno(String jsonString) {
-            DadosAluno aluno = null;
+        private Aluno converterParaAluno(String jsonString) {
+            Aluno aluno = null;
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 String status = jsonObject.getString("status");
 
                 if (status.equals("success")) {
                     JSONObject alunoJSON = jsonObject.getJSONObject("aluno");
-                    aluno = new DadosAluno();
+                    aluno = new Aluno();
                     aluno.setNomeCompleto(alunoJSON.getString("nomeCompleto"));
                     aluno.setNomeUsuario(alunoJSON.getString("nomeUsuario"));
                     aluno.setEmail(alunoJSON.getString("email"));

@@ -16,4 +16,7 @@
 
     <color name="textoSelecionadoForum">#5e17eb</color>
     <color name= "btnSelecionadoForum">#d8cfeb</color>
+
+    <color name= "fundoSelecionado">#6D7383</color>
+
 </resources>

@@ -1,12 +1,8 @@
 package com.example.helperinolympics.adapter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,17 +10,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosFlashcard;
+import com.example.helperinolympics.model.Flashcard;
 import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 
 import java.util.List;
 
 public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.FlashcardViewHolder> {
-    private List<DadosFlashcard> listaFlashcard;
+    private List<Flashcard> listaFlashcard;
     private FragmentManager fragmentManager;
 
     // Constructor to initialize the list
-    public AdapterFlashcard(List<DadosFlashcard> listaFlashcard, FragmentManager fragmentManager) {
+    public AdapterFlashcard(List<Flashcard> listaFlashcard, FragmentManager fragmentManager) {
         this.listaFlashcard = listaFlashcard;
         this.fragmentManager = fragmentManager;
     }
@@ -60,7 +56,7 @@ public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.Flas
 
 
     public class FlashcardViewHolder extends RecyclerView.ViewHolder {
-        DadosFlashcard flashcard;
+        Flashcard flashcard;
         TextView titulo, userProf;
         int id, idConteudoPertencente;
 
@@ -82,7 +78,7 @@ public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.Flas
 
     }
 
-    public void atualizarOpcoes(List<DadosFlashcard> videos){
+    public void atualizarOpcoes(List<Flashcard> videos){
         this.listaFlashcard.clear();
         this.listaFlashcard.addAll(videos);
         this.notifyDataSetChanged();

@@ -3,16 +3,16 @@ package com.example.helperinolympics.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class DadosConteudo  implements Parcelable{
+public class Conteudo implements Parcelable{
 
     int id;
     String tituloConteudo, subtituloConteudo, olimpiadaPertencente, corFundo;
     private boolean isPressed;
 
-    public DadosConteudo(){}
+    public Conteudo(){}
 
     //id automatico no banco
-    public DadosConteudo(int id, String tituloConteudo, String subtituloConteudo, String olimpiadaPertencente, String corFundo) {
+    public Conteudo(int id, String tituloConteudo, String subtituloConteudo, String olimpiadaPertencente, String corFundo) {
         setId(id);
         setTituloConteudo(tituloConteudo);
         setSubtituloConteudo(subtituloConteudo);
@@ -69,7 +69,7 @@ public class DadosConteudo  implements Parcelable{
         isPressed = pressed;
     }
 
-    protected DadosConteudo(Parcel in) {
+    protected Conteudo(Parcel in) {
         id = in.readInt();
         tituloConteudo = in.readString();
         subtituloConteudo = in.readString();
@@ -92,15 +92,15 @@ public class DadosConteudo  implements Parcelable{
         return 0;
     }
 
-    public static final Parcelable.Creator<DadosConteudo> CREATOR = new Parcelable.Creator<DadosConteudo>() {
+    public static final Parcelable.Creator<Conteudo> CREATOR = new Parcelable.Creator<Conteudo>() {
         @Override
-        public DadosConteudo createFromParcel(Parcel in) {
-            return new DadosConteudo(in);
+        public Conteudo createFromParcel(Parcel in) {
+            return new Conteudo(in);
         }
 
         @Override
-        public DadosConteudo[] newArray(int size) {
-            return new DadosConteudo[size];
+        public Conteudo[] newArray(int size) {
+            return new Conteudo[size];
         }
     };
 }

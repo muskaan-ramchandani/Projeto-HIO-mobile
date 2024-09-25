@@ -138,3 +138,14 @@ CREATE TABLE Flashcard(
 	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
     PRIMARY KEY(id)
 );
+
+DROP TABLE IF EXISTS Questionario;
+CREATE TABLE Questionario(
+	id INT AUTO_INCREMENT NOT NULL,
+	titulo VARCHAR(300) NOT NULL,
+    profQuePostou VARCHAR(100) NOT NULL,
+    idConteudoPertencente INT NOT NULL,
+	FOREIGN KEY(idConteudoPertencente) REFERENCES Conteudo(id), 
+	FOREIGN KEY(profQuePostou) REFERENCES Professor(email),
+	PRIMARY KEY(id)
+);

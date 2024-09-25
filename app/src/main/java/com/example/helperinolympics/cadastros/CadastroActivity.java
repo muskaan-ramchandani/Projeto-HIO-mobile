@@ -6,20 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityCadastroBinding;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.telas_iniciais.TelaEscolhaOlimpiadaActivity;
 
 import org.json.JSONException;
@@ -34,14 +26,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CadastroActivity extends AppCompatActivity {
 
     ActivityCadastroBinding binding;
     String msgErro= "";
-    DadosAluno alunoCadastrado;
+    Aluno alunoCadastrado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +44,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         //caso tenha voltado da tela de escolha de olimpíadas
         if(intentVoltaEscolha!=null){
-            DadosAluno aluno = intentVoltaEscolha.getParcelableExtra("alunoCadastrado");
+            Aluno aluno = intentVoltaEscolha.getParcelableExtra("alunoCadastrado");
 
             if(aluno!=null){
                 binding.editTextNomeCompleto.setText(aluno.getNomeCompleto());
@@ -121,7 +112,7 @@ public class CadastroActivity extends AppCompatActivity {
                         boolean dadosCorretos= validarDadosCadastro(nomeCompleto, nomeUsuario, email, senha, confirmaSenha);
 
                         if(dadosCorretos){
-                            DadosAluno aluno = new DadosAluno(nomeCompleto, nomeUsuario, email, senha);
+                            Aluno aluno = new Aluno(nomeCompleto, nomeUsuario, email, senha);
                             new CadastrarAluno().execute(aluno);
                         }else{
                             Toast.makeText(CadastroActivity.this, msgErro, Toast.LENGTH_LONG).show();
@@ -169,11 +160,11 @@ public class CadastroActivity extends AppCompatActivity {
         return pattern.matcher(email).matches();
     }
 
-    private class CadastrarAluno extends AsyncTask<DadosAluno, Void, String> {
+    private class CadastrarAluno extends AsyncTask<Aluno, Void, String> {
         @Override
-        protected String doInBackground(DadosAluno... alunos) {
+        protected String doInBackground(Aluno... alunos) {
             StringBuilder result = new StringBuilder();
-            DadosAluno aluno = alunos[0];
+            Aluno aluno = alunos[0];
 
             alunoCadastrado = aluno;
 
@@ -304,7 +295,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                     if (jsonResponse.getString("status").equals("success")) {
                         Intent intent = new Intent(CadastroActivity.this, TelaEscolhaOlimpiadaActivity.class);
-                        DadosAluno alunoAtualizado = new DadosAluno(this.nomeCompleto, this.nomeUsuario, this.email, this.senha);
+                        Aluno alunoAtualizado = new Aluno(this.nomeCompleto, this.nomeUsuario, this.email, this.senha);
                         intent.putExtra("alunoCadastrado", alunoAtualizado);
                         startActivity(intent);
                         finish();

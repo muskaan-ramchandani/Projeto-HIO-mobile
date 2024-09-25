@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterOlimpiadasForum;
 import com.example.helperinolympics.databinding.FragmentForumTudoBinding;
-import com.example.helperinolympics.model.DadosOlimpiadaForum;
+import com.example.helperinolympics.model.OlimpiadaForum;
 
 import java.util.ArrayList;
 
 public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnOlimpiadaClickListener {
     private FragmentForumTudoBinding binding;
     private AdapterOlimpiadasForum adapter;
-    private ArrayList<DadosOlimpiadaForum> olimpiadasF = new ArrayList<>();
+    private ArrayList<OlimpiadaForum> olimpiadasF = new ArrayList<>();
     private int clickCount = 0;
 
     @Nullable
@@ -54,17 +54,17 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
         binding.recyclerPerguntasPorOlimpiada.setAdapter(adapter);
 
         //SIMULAÇÃO DE DADOS
-        olimpiadasF.add(new DadosOlimpiadaForum("OBA", "Rosa", 25));
-        olimpiadasF.add(new DadosOlimpiadaForum("OBF", "Azul", 13));
-        olimpiadasF.add(new DadosOlimpiadaForum("OBI", "Laranja", 45));
-        olimpiadasF.add(new DadosOlimpiadaForum("OBMEP", "Ciano", 200));
-        olimpiadasF.add(new DadosOlimpiadaForum("ONC", "Ciano", 567));
+        olimpiadasF.add(new OlimpiadaForum("OBA", "Rosa", 25));
+        olimpiadasF.add(new OlimpiadaForum("OBF", "Azul", 13));
+        olimpiadasF.add(new OlimpiadaForum("OBI", "Laranja", 45));
+        olimpiadasF.add(new OlimpiadaForum("OBMEP", "Ciano", 200));
+        olimpiadasF.add(new OlimpiadaForum("ONC", "Ciano", 567));
 
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onOlimpiadaClick(DadosOlimpiadaForum olimp) {
+    public void onOlimpiadaClick(OlimpiadaForum olimp) {
         clickCount++;
 
         //Alternando fragmentos com base no número de cliques

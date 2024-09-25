@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosCorrecao;
+import com.example.helperinolympics.model.Correcao;
 
 import java.util.List;
 
 public class AdapterCorrecao extends RecyclerView.Adapter<AdapterCorrecao.CorrecaoViewHolder>{
 
-    private List<DadosCorrecao> listaQuestoesCorrigidas;
+    private List<Correcao> listaQuestoesCorrigidas;
 
-    public AdapterCorrecao(List<DadosCorrecao> listaQuestoesCorrigidas) {
+    public AdapterCorrecao(List<Correcao> listaQuestoesCorrigidas) {
         this.listaQuestoesCorrigidas = listaQuestoesCorrigidas;
     }
     public AdapterCorrecao.CorrecaoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -2,13 +2,13 @@ package com.example.helperinolympics.model;
 
 import java.util.Date;
 
-public class DadosEventos {
+public class Eventos {
 
     private int id;
     private Date data;
     private String olimpiadaRelacionada, tipoEvento, horario, link;
 
-    public DadosEventos(int id, Date data, String olimpiadaRelacionada, String tipoEvento, String horario, String link) {
+    public Eventos(int id, Date data, String olimpiadaRelacionada, String tipoEvento, String horario, String link) {
         setId(id);
         setData(data);
         setOlimpiadaRelacionada(olimpiadaRelacionada);

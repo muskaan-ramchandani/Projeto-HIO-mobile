@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterCorrecao;
 import com.example.helperinolympics.materiais.QuestionarioActivity;
-import com.example.helperinolympics.model.DadosCorrecao;
+import com.example.helperinolympics.model.Correcao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,20 +65,20 @@ public class QuestionarioCorrecaoActivity extends Activity {
         rVListaCorrecao.setLayoutManager(layoutManager);
         rVListaCorrecao.setHasFixedSize(true);
 
-        List<DadosCorrecao> listaCorrecao = new ArrayList<>();
+        List<Correcao> listaCorrecao = new ArrayList<>();
         correcaoAdapter = new AdapterCorrecao(listaCorrecao);
         rVListaCorrecao.setAdapter(correcaoAdapter);
 
 
         //DADOS PARA TESTE
-        DadosCorrecao dados1 = new DadosCorrecao("Para quê serve o uso da estrutura if/else?",
+        Correcao dados1 = new Correcao("Para quê serve o uso da estrutura if/else?",
                 "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.",
                 "A estrutura if/else é uma construção de controle de fluxo fundamental em muitas linguagens de programação. Quando um programa chega a um bloco if/else, ele avalia a condição dentro do parêntese após o if. Se a condição for verdadeira, o programa executa o bloco de código imediatamente seguinte ao if. Se a condição for falsa, e houver uma cláusula else, o programa executa o bloco de código imediatamente seguinte ao else.\n" +
                         "Isso permite que o programa tome decisões dinâmicas e execute diferentes caminhos de código com base nas condições em tempo de execução.");
 
         listaCorrecao.add(dados1);
 
-        DadosCorrecao dados2 = new DadosCorrecao("Qual é a finalidade da instrução switch em Java, e como ela difere da instrução if-else?",
+        Correcao dados2 = new Correcao("Qual é a finalidade da instrução switch em Java, e como ela difere da instrução if-else?",
                 "A instrução switch é usada para executar diferentes partes de código com base no valor de uma expressão, enquanto if-else é usado apenas para verificar se uma condição é verdadeira ou falsa.",
                 "A instrução switch é usada para executar diferentes partes de código com base no valor de uma expressão específica. Ela permite que um programa execute diferentes blocos de código de acordo com o valor de uma variável, utilizando a estrutura case para definir os diferentes caminhos.\n" +
                         "\n" +

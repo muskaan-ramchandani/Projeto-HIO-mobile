@@ -11,15 +11,15 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosOlimpiadaForum;
+import com.example.helperinolympics.model.OlimpiadaForum;
 
 import java.util.List;
 
 public class AdapterOlimpiadasForum extends RecyclerView.Adapter<AdapterOlimpiadasForum.OlimpiadasForumViewHolder> {
-    List<DadosOlimpiadaForum> listaOlimpiadasForum;
+    List<OlimpiadaForum> listaOlimpiadasForum;
     OnOlimpiadaClickListener listener; // Interface para comunicação
 
-    public AdapterOlimpiadasForum(List<DadosOlimpiadaForum> olimpiadasF, OnOlimpiadaClickListener listener) {
+    public AdapterOlimpiadasForum(List<OlimpiadaForum> olimpiadasF, OnOlimpiadaClickListener listener) {
         this.listaOlimpiadasForum = olimpiadasF;
         this.listener = listener;
     }
@@ -33,7 +33,7 @@ public class AdapterOlimpiadasForum extends RecyclerView.Adapter<AdapterOlimpiad
 
     @Override
     public void onBindViewHolder(@NonNull OlimpiadasForumViewHolder holder, int position) {
-        DadosOlimpiadaForum olimp = listaOlimpiadasForum.get(position);
+        OlimpiadaForum olimp = listaOlimpiadasForum.get(position);
 
         holder.txtSiglaOlimpiada.setText(olimp.getSiglaOlimpiada());
         String qntdPerguntas = String.valueOf(olimp.getQntdPerguntasRelacionadas());
@@ -62,7 +62,7 @@ public class AdapterOlimpiadasForum extends RecyclerView.Adapter<AdapterOlimpiad
         return listaOlimpiadasForum.size();
     }
 
-    public void atualizarOpcoes(List<DadosOlimpiadaForum> olimpiadas) {
+    public void atualizarOpcoes(List<OlimpiadaForum> olimpiadas) {
         this.listaOlimpiadasForum.clear();
         this.listaOlimpiadasForum.addAll(olimpiadas);
         this.notifyDataSetChanged();
@@ -85,6 +85,6 @@ public class AdapterOlimpiadasForum extends RecyclerView.Adapter<AdapterOlimpiad
 
     // Interface para o clique
     public interface OnOlimpiadaClickListener {
-        void onOlimpiadaClick(DadosOlimpiadaForum olimp);
+        void onOlimpiadaClick(OlimpiadaForum olimp);
     }
 }

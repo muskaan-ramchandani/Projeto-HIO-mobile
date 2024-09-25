@@ -12,15 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosQuestionario;
+import com.example.helperinolympics.model.questionario.Questionario;
 import com.example.helperinolympics.telas_de_acesso.AcessoQuestionarioActivity;
 
 import java.util.List;
 
 public class AdapterQuestionario extends RecyclerView.Adapter<AdapterQuestionario.QuestionarioViewHolder> {
-    private List<DadosQuestionario> listaQuestionario;
+    private List<Questionario> listaQuestionario;
 
-    public AdapterQuestionario(List<DadosQuestionario> listaQuestionario) {
+    public AdapterQuestionario(List<Questionario> listaQuestionario) {
         this.listaQuestionario = listaQuestionario;
     }
 
@@ -33,7 +33,7 @@ public class AdapterQuestionario extends RecyclerView.Adapter<AdapterQuestionari
 
     @Override
     public void onBindViewHolder(@NonNull QuestionarioViewHolder holder, int position) {
-        DadosQuestionario questionario = listaQuestionario.get(position);
+        Questionario questionario = listaQuestionario.get(position);
         holder.conteudo.setText(questionario.getTitulo());
         holder.userProf.setText(questionario.getProfessorCadastrou());
     }
@@ -63,5 +63,11 @@ public class AdapterQuestionario extends RecyclerView.Adapter<AdapterQuestionari
                 }
             });
         }
+    }
+
+    public void atualizarOpcoes(List<Questionario> quests){
+        this.listaQuestionario.clear();
+        this.listaQuestionario.addAll(quests);
+        this.notifyDataSetChanged();
     }
 }

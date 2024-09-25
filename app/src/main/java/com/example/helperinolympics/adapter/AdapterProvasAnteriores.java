@@ -1,7 +1,5 @@
 package com.example.helperinolympics.adapter;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -9,8 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +20,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosProvasAnteriores;
+import com.example.helperinolympics.model.ProvasAnteriores;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,9 +29,9 @@ import java.util.List;
 
 public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasAnteriores.ProvasAnterioresViewHolder>{
     private static final int REQUEST_WRITE_PERMISSION = 100; // Código de requisição para a permissão
-    List<DadosProvasAnteriores> listaProvasAnteriores;
+    List<ProvasAnteriores> listaProvasAnteriores;
 
-    public AdapterProvasAnteriores(List<DadosProvasAnteriores> provas){
+    public AdapterProvasAnteriores(List<ProvasAnteriores> provas){
         this.listaProvasAnteriores=provas;
     }
 
@@ -45,7 +41,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
     }
 
     public void onBindViewHolder(@NonNull AdapterProvasAnteriores.ProvasAnterioresViewHolder holder, int position) {
-        DadosProvasAnteriores prova = listaProvasAnteriores.get(position);
+        ProvasAnteriores prova = listaProvasAnteriores.get(position);
 
         String valorAno= String.valueOf(prova.getAnoProva());
         holder.ano.setText(valorAno);
@@ -146,7 +142,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         }
     }
 
-    public void atualizarOpcoes(List<DadosProvasAnteriores> provas) {
+    public void atualizarOpcoes(List<ProvasAnteriores> provas) {
         this.listaProvasAnteriores.clear();
         this.listaProvasAnteriores.addAll(provas);
         this.notifyDataSetChanged();

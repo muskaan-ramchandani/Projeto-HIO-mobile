@@ -1,33 +1,27 @@
 package com.example.helperinolympics.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosVideo;
+import com.example.helperinolympics.model.Video;
 
 import java.util.List;
 
 public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.VideoViewHolder> {
-    private List<DadosVideo> listaVideos;
+    private List<Video> listaVideos;
 
-    public AdapterVideo(List<DadosVideo>listaVideos){this.listaVideos=listaVideos; }
+    public AdapterVideo(List<Video>listaVideos){this.listaVideos=listaVideos; }
 
     public VideoViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
         View viewItemListaVideo= LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_video, parent, false);
@@ -76,7 +70,7 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.VideoViewHol
         }
     }
 
-    public void atualizarOpcoes(List<DadosVideo> videos){
+    public void atualizarOpcoes(List<Video> videos){
         this.listaVideos.clear();
         this.listaVideos.addAll(videos);
         this.notifyDataSetChanged();

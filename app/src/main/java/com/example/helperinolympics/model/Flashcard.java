@@ -2,14 +2,14 @@ package com.example.helperinolympics.model;
 
 import android.graphics.Bitmap;
 
-public class DadosFlashcard {
+public class Flashcard {
     private String titulo, texto, profQuePostou;
     private int id, idConteudoPertencente;
     private Bitmap imagem;
 
-    public DadosFlashcard(){}
+    public Flashcard(){}
 
-    public DadosFlashcard(String titulo, String texto, String profQuePostou, int id, int idConteudoPertencente, Bitmap imagem) {
+    public Flashcard(String titulo, String texto, String profQuePostou, int id, int idConteudoPertencente, Bitmap imagem) {
         setTitulo(titulo);
         setTexto(texto);
         setProfQuePostou(profQuePostou);

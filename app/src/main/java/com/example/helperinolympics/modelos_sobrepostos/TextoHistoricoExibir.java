@@ -11,12 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosTexto;
+import com.example.helperinolympics.model.Texto;
 
 public class TextoHistoricoExibir extends DialogFragment {
-    DadosTexto texto;
+    Texto texto;
 
-    public TextoHistoricoExibir(DadosTexto texto){
+    public TextoHistoricoExibir(Texto texto){
         this.texto = texto;
     }
 

@@ -3,26 +3,21 @@ package com.example.helperinolympics.telas_iniciais;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterEscolhaOlimpiadas;
 import com.example.helperinolympics.cadastros.CadastroActivity;
 import com.example.helperinolympics.databinding.ActivityTelaEscolhaOlimpiadaBinding;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosOlimpiada;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Olimpiada;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,9 +36,9 @@ import java.util.List;
 
 public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
-    DadosAluno alunoCadastrado;
+    Aluno alunoCadastrado;
     ActivityTelaEscolhaOlimpiadaBinding binding;
-    List<DadosOlimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
+    List<Olimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
     AdapterEscolhaOlimpiadas adapter = new AdapterEscolhaOlimpiadas(listaOlimpiadasOpcoes);
 
     @Override
@@ -63,7 +58,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ArrayList<DadosOlimpiada> listaEscolhidas = new ArrayList<>(adapter.getListaEscolhidas());
+                ArrayList<Olimpiada> listaEscolhidas = new ArrayList<>(adapter.getListaEscolhidas());
 
                 //deve ter pelo menos 1 escolha de olimpíada
                 if(!listaEscolhidas.isEmpty()){
@@ -108,7 +103,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
 
     //PHP E MYSQL
-    class OlimpiadaDownload extends AsyncTask<URL, Void, List<DadosOlimpiada>> {
+    class OlimpiadaDownload extends AsyncTask<URL, Void, List<Olimpiada>> {
 
         @Override
         protected void onPreExecute() {
@@ -116,7 +111,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosOlimpiada> olimpiadas) {
+        protected void onPostExecute(List<Olimpiada> olimpiadas) {
             super.onPostExecute(olimpiadas);
             adapter.atualizarOpcoes(olimpiadas);
             adapter.notifyDataSetChanged();
@@ -124,8 +119,8 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
 
         @Override
-        protected List<DadosOlimpiada> doInBackground(URL... urls) {
-            List<DadosOlimpiada> olimpiadas = new ArrayList<>();
+        protected List<Olimpiada> doInBackground(URL... urls) {
+            List<Olimpiada> olimpiadas = new ArrayList<>();
             Log.d("CONEXAO", "tentando fazer dowload");
             try {
                 URL url = new URL("http://192.168.1.9:8086/phpHio/carregaOlimpiadas.php");
@@ -153,15 +148,15 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
 
         //Setando valores na lista
-        private List<DadosOlimpiada> converterParaList(String jsonString) {
-            List<DadosOlimpiada> olimpiadas = new ArrayList<>();
+        private List<Olimpiada> converterParaList(String jsonString) {
+            List<Olimpiada> olimpiadas = new ArrayList<>();
 
             try{
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("olimpiadas");
                 for (int i = 0; i < jsonArray.length(); i++){
                     JSONObject olimpJSON = jsonArray.getJSONObject(i);
-                    DadosOlimpiada olimp= new DadosOlimpiada();
+                    Olimpiada olimp= new Olimpiada();
                     olimp.setNome(olimpJSON.getString("nome"));
                     olimp.setSigla(olimpJSON.getString("sigla"));
 
@@ -209,16 +204,16 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
         }
     }
 
-    private class CadastrarOlimpiadasSelecionadas extends AsyncTask<List<DadosOlimpiada>, Void, String> {
+    private class CadastrarOlimpiadasSelecionadas extends AsyncTask<List<Olimpiada>, Void, String> {
         @Override
-        protected String doInBackground(List<DadosOlimpiada>... olimpSelecao) {
+        protected String doInBackground(List<Olimpiada>... olimpSelecao) {
             StringBuilder result = new StringBuilder();
             Log.d("CONEXAO", "Tentando cadastro de olimpíadas selecionadas");
 
-            List<DadosOlimpiada> olimpiadasSelecionadas = olimpSelecao[0];
+            List<Olimpiada> olimpiadasSelecionadas = olimpSelecao[0];
 
             try {
-                for(DadosOlimpiada olimp : olimpiadasSelecionadas){
+                for(Olimpiada olimp : olimpiadasSelecionadas){
                     URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraOlimpiadasSelecionadas.php");
                     HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                     conexao.setReadTimeout(1500);

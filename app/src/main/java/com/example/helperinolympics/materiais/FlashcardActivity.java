@@ -8,20 +8,17 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.AdapterFlashcard;
-import com.example.helperinolympics.adapter.AdapterVideo;
 import com.example.helperinolympics.databinding.ActivityFlashcardBinding;
-import com.example.helperinolympics.model.DadosAluno;
-import com.example.helperinolympics.model.DadosConteudo;
-import com.example.helperinolympics.model.DadosFlashcard;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
+import com.example.helperinolympics.model.Flashcard;
 import com.example.helperinolympics.telas_iniciais.InicioOlimpiadaActivity;
 
 import org.json.JSONArray;
@@ -37,12 +34,12 @@ import java.util.List;
 
 public class FlashcardActivity extends AppCompatActivity {
     AdapterFlashcard adapter;
-    List<DadosFlashcard> listaFlashcard= new ArrayList<>();
+    List<Flashcard> listaFlashcard= new ArrayList<>();
 
     ActivityFlashcardBinding binding;
 
-    private DadosAluno alunoCadastrado;
-    private DadosConteudo conteudo;
+    private Aluno alunoCadastrado;
+    private Conteudo conteudo;
     private String siglaOlimpiada;
 
     public void onCreate (Bundle savedInstanceState){
@@ -108,7 +105,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
     }
 
-    private void configurarDetalhesTela(String siglaOlimpiada, DadosConteudo conteudo) {
+    private void configurarDetalhesTela(String siglaOlimpiada, Conteudo conteudo) {
 
         binding.txtTema.setText(conteudo.getTituloConteudo());
 
@@ -168,7 +165,7 @@ public class FlashcardActivity extends AppCompatActivity {
         binding.recyclerviewFlashcard.setAdapter(adapter);
     }
 
-    private class FlashcardsDownload extends AsyncTask<Integer, Void, List<DadosFlashcard>> {
+    private class FlashcardsDownload extends AsyncTask<Integer, Void, List<Flashcard>> {
 
         @Override
         protected void onPreExecute() {
@@ -176,11 +173,11 @@ public class FlashcardActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<DadosFlashcard> doInBackground(Integer... params) {
+        protected List<Flashcard> doInBackground(Integer... params) {
             int idConteudo = params[0];
             Log.d("ID_CONTEUDO_RECEBIDO", "Id conteúdo Recebido: " + idConteudo);
 
-            List<DadosFlashcard> flashs = new ArrayList<>();
+            List<Flashcard> flashs = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.9:8086/phpHio/carregaFlashcardPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
@@ -209,7 +206,7 @@ public class FlashcardActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(List<DadosFlashcard> flashs) {
+        protected void onPostExecute(List<Flashcard> flashs) {
             super.onPostExecute(flashs);
             if (flashs != null) {
                 adapter.atualizarOpcoes(flashs);
@@ -231,14 +228,14 @@ public class FlashcardActivity extends AppCompatActivity {
             return dados.toString();
         }
 
-        private List<DadosFlashcard> converterParaList(String jsonString) {
-            List<DadosFlashcard> flashs = new ArrayList<>();
+        private List<Flashcard> converterParaList(String jsonString) {
+            List<Flashcard> flashs = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("flashcards");
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject flashJSON = jsonArray.getJSONObject(i);
-                    DadosFlashcard flashcard = new DadosFlashcard();
+                    Flashcard flashcard = new Flashcard();
 
                     flashcard.setId(flashJSON.getInt("id"));
 

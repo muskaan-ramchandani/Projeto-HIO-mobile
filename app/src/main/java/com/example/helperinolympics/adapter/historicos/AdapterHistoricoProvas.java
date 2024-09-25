@@ -1,27 +1,23 @@
 package com.example.helperinolympics.adapter.historicos;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.DadosProvasAnteriores;
-import com.example.helperinolympics.telas_de_acesso.AcessoTextoActivity;
+import com.example.helperinolympics.model.ProvasAnteriores;
 
 import java.util.List;
 
 public class AdapterHistoricoProvas extends RecyclerView.Adapter<AdapterHistoricoProvas.ProvasHistoricoViewHolder> {
-    private List<DadosProvasAnteriores> listaProvas;
+    private List<ProvasAnteriores> listaProvas;
 
     // Constructor to initialize the list
-    public AdapterHistoricoProvas(List<DadosProvasAnteriores> listaProvas) {
+    public AdapterHistoricoProvas(List<ProvasAnteriores> listaProvas) {
         this.listaProvas = listaProvas;
     }
 
@@ -35,7 +31,7 @@ public class AdapterHistoricoProvas extends RecyclerView.Adapter<AdapterHistoric
 
 
     public void onBindViewHolder(@NonNull AdapterHistoricoProvas.ProvasHistoricoViewHolder holder, int position) {
-        DadosProvasAnteriores prova = listaProvas.get(position);
+        ProvasAnteriores prova = listaProvas.get(position);
 
 
         String valorAno= String.valueOf(prova.getAnoProva());

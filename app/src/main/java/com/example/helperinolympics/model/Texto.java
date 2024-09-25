@@ -3,13 +3,13 @@ package com.example.helperinolympics.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class DadosTexto  implements Parcelable{
+public class Texto implements Parcelable{
     private String titulo, professorCadastrou, texto;
     private int id, conteudoPertencente;
 
-    public DadosTexto(){}
+    public Texto(){}
 
-    public DadosTexto(int id, String titulo, String professorCadastrou, int conteudoPertencente, String texto) {
+    public Texto(int id, String titulo, String professorCadastrou, int conteudoPertencente, String texto) {
         setId(id);
         setTitulo(titulo);
         setProfessorCadastrou(professorCadastrou);
@@ -57,7 +57,7 @@ public class DadosTexto  implements Parcelable{
         this.texto = texto;
     }
 
-    protected DadosTexto(Parcel in) {
+    protected Texto(Parcel in) {
         id = in.readInt();
         conteudoPertencente = in.readInt();
         titulo = in.readString();
@@ -79,15 +79,15 @@ public class DadosTexto  implements Parcelable{
         return 0;
     }
 
-    public static final Parcelable.Creator<DadosTexto> CREATOR = new Parcelable.Creator<DadosTexto>() {
+    public static final Parcelable.Creator<Texto> CREATOR = new Parcelable.Creator<Texto>() {
         @Override
-        public DadosTexto createFromParcel(Parcel in) {
-            return new DadosTexto(in);
+        public Texto createFromParcel(Parcel in) {
+            return new Texto(in);
         }
 
         @Override
-        public DadosTexto[] newArray(int size) {
-            return new DadosTexto[size];
+        public Texto[] newArray(int size) {
+            return new Texto[size];
         }
     };
 }

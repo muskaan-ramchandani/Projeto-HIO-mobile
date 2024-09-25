@@ -1,9 +1,9 @@
 package com.example.helperinolympics.model.historicos_acesso;
 
-public class DadosHistoricoTexto {
+public class HistoricoFlashcards {
     private int idItem;
 
-    public DadosHistoricoTexto(int idItem) {
+    public HistoricoFlashcards(int idItem) {
         setIdItem(idItem);
     }
 

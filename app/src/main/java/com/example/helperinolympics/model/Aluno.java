@@ -5,13 +5,13 @@ import android.os.Parcelable;
 
 import java.io.File;
 
-public class DadosAluno implements Parcelable {
+public class Aluno implements Parcelable {
     private String nomeCompleto, nomeUsuario, email, senha;
     private File fotoPerfil;
 
-    public DadosAluno(){}
+    public Aluno(){}
 
-    public DadosAluno(String nomeCompleto, String nomeUsuario, String email, String senha){
+    public Aluno(String nomeCompleto, String nomeUsuario, String email, String senha){
         setNomeCompleto(nomeCompleto);
         setNomeUsuario(nomeUsuario);
         setEmail(email);
@@ -58,7 +58,7 @@ public class DadosAluno implements Parcelable {
         this.fotoPerfil = fotoPerfil;
     }
 
-    protected DadosAluno(Parcel in) {
+    protected Aluno(Parcel in) {
         nomeCompleto = in.readString();
         nomeUsuario = in.readString();
         email = in.readString();
@@ -78,15 +78,15 @@ public class DadosAluno implements Parcelable {
         return 0;
     }
 
-    public static final Parcelable.Creator<DadosAluno> CREATOR = new Parcelable.Creator<DadosAluno>() {
+    public static final Parcelable.Creator<Aluno> CREATOR = new Parcelable.Creator<Aluno>() {
         @Override
-        public DadosAluno createFromParcel(Parcel in) {
-            return new DadosAluno(in);
+        public Aluno createFromParcel(Parcel in) {
+            return new Aluno(in);
         }
 
         @Override
-        public DadosAluno[] newArray(int size) {
-            return new DadosAluno[size];
+        public Aluno[] newArray(int size) {
+            return new Aluno[size];
         }
     };
 }
