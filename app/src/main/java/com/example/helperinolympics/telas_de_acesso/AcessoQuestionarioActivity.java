@@ -106,7 +106,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
     }
 
     private void configurarQuestaoASerExibida(Questao questao) {
-        setFragment(new FragmentPerguntaRespostasQuestionario(questao, quest.getId(), questao.getId(), AcessoQuestionarioActivity.this));
+        setFragment(new FragmentPerguntaRespostasQuestionario(questao, quest.getId(), questao.getId(), AcessoQuestionarioActivity.this, alunoCadastrado));
     }
 
     private void setFragment(Fragment fragment) {

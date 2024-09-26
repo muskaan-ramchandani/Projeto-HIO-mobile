@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterAlternativasQuestionario;
 import com.example.helperinolympics.databinding.FragmentQuestionarioBinding;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.questionario.Alternativas;
 import com.example.helperinolympics.model.questionario.Questao;
 import com.example.helperinolympics.model.questionario.Questionario;
@@ -40,15 +41,17 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     private ArrayList<Alternativas> listaAlternativas;
     private FragmentQuestionarioBinding binding;
     private Questao questao;
+    private Aluno alunoCadastrado;
 
     private int idQuestionarioPertencente, idQuestaoPertencente;
     private Context context;
 
-    public FragmentPerguntaRespostasQuestionario(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Context context){
+    public FragmentPerguntaRespostasQuestionario(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Context context, Aluno alunoCadastrado){
         this.questao = questao;
         this.idQuestionarioPertencente = idQuestionarioPertencente;
         this.idQuestaoPertencente= idQuestaoPertencente;
         this.context = context;
+        this.alunoCadastrado = alunoCadastrado;
     }
 
     @Nullable
@@ -85,7 +88,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
 
         new AlternativasDownload().execute(idQuestionarioPertencente, idQuestaoPertencente);
 
-        adapter=new AdapterAlternativasQuestionario(listaAlternativas, context);
+        adapter=new AdapterAlternativasQuestionario(listaAlternativas, context, alunoCadastrado);
         binding.recyclerAlternativas.setAdapter(adapter);
     }
 
