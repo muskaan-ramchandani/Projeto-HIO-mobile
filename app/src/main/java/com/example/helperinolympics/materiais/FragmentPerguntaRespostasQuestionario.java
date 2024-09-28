@@ -33,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FragmentPerguntaRespostasQuestionario  extends Fragment {
@@ -43,15 +44,18 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     private Questao questao;
     private Aluno alunoCadastrado;
 
+    private Date dataAtual;
+
     private int idQuestionarioPertencente, idQuestaoPertencente;
     private Context context;
 
-    public FragmentPerguntaRespostasQuestionario(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Context context, Aluno alunoCadastrado){
+    public FragmentPerguntaRespostasQuestionario(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Context context, Aluno alunoCadastrado, Date dataAtual){
         this.questao = questao;
         this.idQuestionarioPertencente = idQuestionarioPertencente;
         this.idQuestaoPertencente= idQuestaoPertencente;
         this.context = context;
         this.alunoCadastrado = alunoCadastrado;
+        this.dataAtual = dataAtual;
     }
 
     @Nullable
@@ -88,7 +92,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
 
         new AlternativasDownload().execute(idQuestionarioPertencente, idQuestaoPertencente);
 
-        adapter=new AdapterAlternativasQuestionario(listaAlternativas, context, alunoCadastrado);
+        adapter=new AdapterAlternativasQuestionario(listaAlternativas, context, alunoCadastrado, dataAtual);
         binding.recyclerAlternativas.setAdapter(adapter);
     }
 

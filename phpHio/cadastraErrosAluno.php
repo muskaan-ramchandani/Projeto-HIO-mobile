@@ -26,14 +26,19 @@ try {
         $idAlternativaCorreta = $_POST['idAlternativaCorreta'];
         $idQuestionarioPertencente = $_POST['idQuestionarioPertencente'];
         $idQuestaoPertencente = $_POST['idQuestaoPertencente'];
+        $dataErro = $_POST['dataErro'];
+        $emailAluno = $_POST['emailAluno'];
 
-        $sql = "INSERT INTO ErrosAluno (idAlternativaMarcada, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente) 
-                VALUES (:idAlternativaMarcada, :idAlternativaCorreta, :idQuestionarioPertencente, :idQuestaoPertencente)";
+
+        $sql = "INSERT INTO ErrosAluno (idAlternativaMarcada, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente, dataErro, emailAluno) 
+                VALUES (:idAlternativaMarcada, :idAlternativaCorreta, :idQuestionarioPertencente, :idQuestaoPertencente, :dataErro, :emailAluno)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idAlternativaMarcada', $idAlternativaMarcada);
         $stmt->bindParam(':idAlternativaCorreta', $idAlternativaCorreta);
         $stmt->bindParam(':idQuestionarioPertencente', $idQuestionarioPertencente);
         $stmt->bindParam(':idQuestaoPertencente', $idQuestaoPertencente);
+        $stmt->bindParam(':dataErro', $dataErro);
+        $stmt->bindParam(':emailAluno', $emailAluno);
 
         if ($stmt->execute()) {
             echo json_encode(array("status" => "success", "message" => "Registro de acertos cadastrado com sucesso!"));

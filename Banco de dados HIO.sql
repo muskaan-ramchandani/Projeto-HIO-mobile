@@ -154,6 +154,7 @@ DROP TABLE IF EXISTS Questao;
 CREATE TABLE Questao(
 	id INT AUTO_INCREMENT NOT NULL,
 	txtPergunta TEXT NOT NULL,
+    explicacaoResposta TEXT NOT NULL,
     idQuestionarioPertencente INT NOT NULL,
 	FOREIGN KEY(idQuestionarioPertencente) REFERENCES Questionario(id), 
 	PRIMARY KEY(id)
@@ -169,4 +170,66 @@ CREATE TABLE AlternativasQuestao(
 	FOREIGN KEY(idQuestionarioPertencente) REFERENCES Questionario(id), 
 	FOREIGN KEY(idQuestaoPertencente) REFERENCES Questao(id), 
 	PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS AcertosAluno;
+CREATE TABLE AcertosAluno(
+	id INT AUTO_INCREMENT NOT NULL,
+    idAlternativaMarcada INT NOT NULL,
+    idQuestionarioPertencente INT NOT NULL,
+    idQuestaoPertencente INT NOT NULL,
+    dataAcerto DATE NOT NULL,
+	emailAluno VARCHAR(100) NOT NULL,
+	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    FOREIGN KEY(idAlternativaMarcada) REFERENCES AlternativasQuestao(id),
+	FOREIGN KEY(idQuestionarioPertencente) REFERENCES Questionario(id), 
+	FOREIGN KEY(idQuestaoPertencente) REFERENCES Questao(id), 
+	PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS ErrosAluno;
+CREATE TABLE ErrosAluno(
+	id INT AUTO_INCREMENT NOT NULL,
+    idAlternativaMarcada INT NOT NULL,
+    idAlternativaCorreta INT NOT NULL,
+    idQuestionarioPertencente INT NOT NULL,
+    idQuestaoPertencente INT NOT NULL,
+	dataErro DATE NOT NULL,
+	emailAluno VARCHAR(100) NOT NULL,
+	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    FOREIGN KEY(idAlternativaMarcada) REFERENCES AlternativasQuestao(id),
+	FOREIGN KEY(idQuestionarioPertencente) REFERENCES Questionario(id), 
+	FOREIGN KEY(idQuestaoPertencente) REFERENCES Questao(id), 
+	PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS PontuacaoAlunos;
+CREATE TABLE PontuacaoAlunos(
+	id INT AUTO_INCREMENT NOT NULL,
+	emailAluno VARCHAR(100) NOT NULL,
+    pontuacao INT NOT NULL,
+	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+	PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS QntdAcertosSemanais;
+CREATE TABLE QntdAcertosSemanais(
+	id INT AUTO_INCREMENT NOT NULL,
+    emailAluno VARCHAR(100) NOT NULL,
+	qntdAcertosSemana INT DEFAULT 0,
+	dataInicialSemana DATE NOT NULL,
+    dataFinalSemana DATE NOT NULL,
+    FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS QntdErrosSemanais;
+CREATE TABLE QntdErrosSemanais(
+	id INT AUTO_INCREMENT NOT NULL,
+    emailAluno VARCHAR(100) NOT NULL,
+	qntdErrosSemana INT DEFAULT 0,
+	dataInicialSemana DATE NOT NULL,
+    dataFinalSemana DATE NOT NULL,
+    FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    PRIMARY KEY(id)
 );

@@ -1,12 +1,18 @@
 package com.example.helperinolympics.model;
 
+import java.util.Date;
+
 public class Acertos {
     private int id, idAlternativaMarcada, idQuestionarioPertencente, idQuestaoPertencente;
+    private Date dataAcerto;
+    private String emailAluno;
 
-    public Acertos(int idAlternativaMarcada, int idQuestionarioPertencente, int idQuestaoPertencente) {
+    public Acertos(int idAlternativaMarcada, int idQuestionarioPertencente, int idQuestaoPertencente, Date dataAcerto, String emailAluno) {
         setIdAlternativaMarcada(idAlternativaMarcada);
         setIdQuestionarioPertencente(idQuestionarioPertencente);
         setIdQuestaoPertencente(idQuestaoPertencente);
+        setDataAcerto(dataAcerto);
+        setEmailAluno(emailAluno);
     }
 
     public int getId() {
@@ -39,5 +45,21 @@ public class Acertos {
 
     public void setIdQuestaoPertencente(int idQuestaoPertencente) {
         this.idQuestaoPertencente = idQuestaoPertencente;
+    }
+
+    public Date getDataAcerto() {
+        return dataAcerto;
+    }
+
+    public void setDataAcerto(Date dataAcerto) {
+        this.dataAcerto = dataAcerto;
+    }
+
+    public String getEmailAluno() {
+        return emailAluno;
+    }
+
+    public void setEmailAluno(String emailAluno) {
+        this.emailAluno = emailAluno;
     }
 }

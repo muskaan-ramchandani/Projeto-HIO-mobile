@@ -27,17 +27,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<AdapterAlternativasQuestionario.AlternativasQuestionarioViewHolder> {
     private List<Alternativas> listaAlternativas;
     static Context context;
     private Aluno alunoCadastrado;
+    private static Date dataAtual;
 
-    public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas,  Context context, Aluno alunoCadastrado) {
+    public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas,  Context context, Aluno alunoCadastrado, Date dataAtual) {
         this.listaAlternativas = listaAlternativas;
         this.context =context;
         this.alunoCadastrado = alunoCadastrado;
+        this.dataAtual=dataAtual;
     }
 
     @NonNull
@@ -85,7 +88,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                     if(corretaOuErrada){
 
                         //cadastrar acerto
-                        Acertos acerto = new Acertos(id, idQuestionarioPertencente, idQuestaoPertencente);
+                        Acertos acerto = new Acertos(id, idQuestionarioPertencente, idQuestaoPertencente, dataAtual, alunoCadastrado.getEmail());
                         new CadastrarAcertos().execute(acerto);
 
                         //adicionar pontuação
@@ -104,7 +107,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                         }
 
                         //cadastrar erro
-                        Erros erro = new Erros(id, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente);
+                        Erros erro = new Erros(id, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente, dataAtual, alunoCadastrado.getEmail());
                         new CadastrarErros().execute(erro);
 
                         //diminuir pontuacao
@@ -144,7 +147,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
                 String parametros = "idAlternativaMarcada=" + acerto.getIdAlternativaMarcada() +
                         "&idQuestionarioPertencente=" + acerto.getIdQuestionarioPertencente() +
-                        "&idQuestaoPertencente=" + acerto.getIdQuestaoPertencente();
+                        "&idQuestaoPertencente=" + acerto.getIdQuestaoPertencente()+
+                        "&dataAcerto" +acerto.getDataAcerto()+
+                        "&emailAluno" +acerto.getEmailAluno();
 
                 OutputStream os = conexao.getOutputStream();
                 byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
@@ -201,7 +206,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                 String parametros = "idAlternativaMarcada=" + erro.getIdAlternativaMarcada() +
                         "&idAlternativaCorreta="+ erro.getIdAlternativaCorreta()+
                         "&idQuestionarioPertencente=" + erro.getIdQuestionarioPertencente() +
-                        "&idQuestaoPertencente=" + erro.getIdQuestaoPertencente();
+                        "&idQuestaoPertencente=" + erro.getIdQuestaoPertencente()+
+                        "&dataErro"+ erro.getDataErro()+
+                        "&emailAluno" + erro.getEmailAluno();
 
                 OutputStream os = conexao.getOutputStream();
                 byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
