@@ -32,46 +32,46 @@ public class AdapterDadosErros extends RecyclerView.Adapter<AdapterDadosErros.Er
     public void onBindViewHolder(@NonNull AdapterDadosErros.ErrosViewHolder holder, int position) {
 
 
-        String valorOlimpiada = listaDadosErros.get(position).getOlimpiadaQuestaoErrada();
-        Log.d("AdapterDadosErros", "Olimpiada: " + valorOlimpiada);
-        holder.olimpiada.setText(valorOlimpiada);
-
-        String valorAssunto = listaDadosErros.get(position).getAssuntoQuestaoErrada();
-        holder.assunto.setText(valorAssunto);
-
-        String valorTopico = listaDadosErros.get(position).getTopicoDaQuestaoErrada();
-        holder.topico.setText(valorTopico);
-
-        String valorProf = "Por: "+listaDadosErros.get(position).getProfQuestaoErrada();
-        holder.prof.setText(valorProf);
-
-        String valorPergunta = "<b>Pergunta: </b>"+listaDadosErros.get(position).getPerguntaQuestaoErrada();
-        holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
-
-        String valorQuestao = "<b>Alternativa marcada: </b>"+listaDadosErros.get(position).getQuestaoMarcadaErrada();
-        holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
-
-        String valorCorrecao = "<b>Alternativa correta: </b>"+listaDadosErros.get(position).getQuestaoCorrecaoDaErrada();
-        holder.correcao.setText(Html.fromHtml(valorCorrecao, Html.FROM_HTML_MODE_COMPACT));
-
-
-        if (valorOlimpiada.equals("OBA")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
-        } else if (valorOlimpiada.equals("OBF")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
-        } else if (valorOlimpiada.equals("OBI")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
-        } else if (valorOlimpiada.equals("OBMEP")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
-        }else if (valorOlimpiada.equals("ONHB")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
-        } else if (valorOlimpiada.equals("OBQ")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
-        } else if (valorOlimpiada.equals("OBB")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
-        } else if (valorOlimpiada.equals("ONC")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
-        }
+//        String valorOlimpiada = listaDadosErros.get(position).getOlimpiadaQuestaoErrada();
+//        Log.d("AdapterDadosErros", "Olimpiada: " + valorOlimpiada);
+//        holder.olimpiada.setText(valorOlimpiada);
+//
+//        String valorAssunto = listaDadosErros.get(position).getAssuntoQuestaoErrada();
+//        holder.assunto.setText(valorAssunto);
+//
+//        String valorTopico = listaDadosErros.get(position).getTopicoDaQuestaoErrada();
+//        holder.topico.setText(valorTopico);
+//
+//        String valorProf = "Por: "+listaDadosErros.get(position).getProfQuestaoErrada();
+//        holder.prof.setText(valorProf);
+//
+//        String valorPergunta = "<b>Pergunta: </b>"+listaDadosErros.get(position).getPerguntaQuestaoErrada();
+//        holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
+//
+//        String valorQuestao = "<b>Alternativa marcada: </b>"+listaDadosErros.get(position).getQuestaoMarcadaErrada();
+//        holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
+//
+//        String valorCorrecao = "<b>Alternativa correta: </b>"+listaDadosErros.get(position).getQuestaoCorrecaoDaErrada();
+//        holder.correcao.setText(Html.fromHtml(valorCorrecao, Html.FROM_HTML_MODE_COMPACT));
+//
+//
+//        if (valorOlimpiada.equals("OBA")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBF")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBI")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBMEP")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+//        }else if (valorOlimpiada.equals("ONHB")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBQ")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBB")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+//        } else if (valorOlimpiada.equals("ONC")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+//        }
 
     }
 

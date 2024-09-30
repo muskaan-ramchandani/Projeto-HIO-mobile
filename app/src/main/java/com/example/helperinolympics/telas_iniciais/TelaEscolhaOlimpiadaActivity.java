@@ -123,7 +123,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
             List<Olimpiada> olimpiadas = new ArrayList<>();
             Log.d("CONEXAO", "tentando fazer dowload");
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/carregaOlimpiadas.php");
+                URL url = new URL("http://192.168.1.11:8086/phpHio/carregaOlimpiadas.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -214,7 +214,7 @@ public class TelaEscolhaOlimpiadaActivity extends AppCompatActivity {
 
             try {
                 for(Olimpiada olimp : olimpiadasSelecionadas){
-                    URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraOlimpiadasSelecionadas.php");
+                    URL url = new URL("http://192.168.1.11:8086/phpHio/cadastraOlimpiadasSelecionadas.php");
                     HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                     conexao.setReadTimeout(1500);
                     conexao.setConnectTimeout(500);

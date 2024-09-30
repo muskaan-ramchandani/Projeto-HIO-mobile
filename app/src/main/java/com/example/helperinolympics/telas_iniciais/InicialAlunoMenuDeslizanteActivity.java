@@ -161,7 +161,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             Log.d("CONEXAO", "Tentando fazer download");
 
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
+                URL url = new URL("http://192.168.1.11:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

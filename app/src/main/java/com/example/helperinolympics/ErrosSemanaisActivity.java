@@ -56,16 +56,16 @@ public class ErrosSemanaisActivity extends Activity {
         errosAdapter = new AdapterDadosErros(listaErros);
         rVListaErros.setAdapter(errosAdapter);
 
-        //DADOS PARA TESTE
-        Erros dados1 = new Erros("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
-                "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um booleab.", "O determinante de uma matriz quadrada é sempre um número real.");
+//        //DADOS PARA TESTE
+//        Erros dados1 = new Erros("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
+//                "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um booleab.", "O determinante de uma matriz quadrada é sempre um número real.");
+//
+//        listaErros.add(dados1);
+//
+//        Erros dados2 = new Erros("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
+//                "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
-        listaErros.add(dados1);
-
-        Erros dados2 = new Erros("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
-                "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
-
-        listaErros.add(dados2);
+//        listaErros.add(dados2);
         errosAdapter.notifyDataSetChanged();
     }
 

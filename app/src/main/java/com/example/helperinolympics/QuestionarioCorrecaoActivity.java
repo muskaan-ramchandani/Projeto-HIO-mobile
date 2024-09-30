@@ -1,7 +1,9 @@
 package com.example.helperinolympics;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ImageView;
@@ -11,13 +13,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterCorrecao;
 import com.example.helperinolympics.materiais.QuestionarioActivity;
+import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Conteudo;
 import com.example.helperinolympics.model.Correcao;
+import com.example.helperinolympics.model.questionario.Questionario;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class QuestionarioCorrecaoActivity extends Activity {
+    List<Correcao> listaCorrecao = new ArrayList<>();
 
     RecyclerView rVListaCorrecao;
     AdapterCorrecao correcaoAdapter;
@@ -25,10 +41,23 @@ public class QuestionarioCorrecaoActivity extends Activity {
     TextView txtViewNumeroCertas, txtViewQuestoesTotais;
     int qntdTotal, qntdAcertos, metadeValor;
 
+    private Aluno alunoCadastrado;
+    private Conteudo conteudo;
+    private String siglaOlimpiada;
+    private Questionario quest;
+    private Date dataAtual;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionario_correcao);
+
+
+        quest = getIntent().getParcelableExtra("questionario");
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+        conteudo = getIntent().getParcelableExtra("conteudo");
+        siglaOlimpiada = getIntent().getStringExtra("olimpiada");
+        dataAtual = (Date) getIntent().getSerializableExtra("dataAtual");
 
 
         hipoTristeOUFeliz = findViewById(R.id.imgHipoTristeOuFeliz);
@@ -52,6 +81,9 @@ public class QuestionarioCorrecaoActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(QuestionarioCorrecaoActivity.this, QuestionarioActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
+                intent.putExtra("conteudo", conteudo);
+                intent.putExtra("olimpiada", siglaOlimpiada);
                 startActivity(intent);
                 finish();
             }
@@ -65,26 +97,108 @@ public class QuestionarioCorrecaoActivity extends Activity {
         rVListaCorrecao.setLayoutManager(layoutManager);
         rVListaCorrecao.setHasFixedSize(true);
 
-        List<Correcao> listaCorrecao = new ArrayList<>();
         correcaoAdapter = new AdapterCorrecao(listaCorrecao);
         rVListaCorrecao.setAdapter(correcaoAdapter);
 
+        new CarregaCorrecao(alunoCadastrado.getEmail(), dataAtual, quest.getId());
 
-        //DADOS PARA TESTE
-        Correcao dados1 = new Correcao("Para quê serve o uso da estrutura if/else?",
-                "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.",
-                "A estrutura if/else é uma construção de controle de fluxo fundamental em muitas linguagens de programação. Quando um programa chega a um bloco if/else, ele avalia a condição dentro do parêntese após o if. Se a condição for verdadeira, o programa executa o bloco de código imediatamente seguinte ao if. Se a condição for falsa, e houver uma cláusula else, o programa executa o bloco de código imediatamente seguinte ao else.\n" +
-                        "Isso permite que o programa tome decisões dinâmicas e execute diferentes caminhos de código com base nas condições em tempo de execução.");
-
-        listaCorrecao.add(dados1);
-
-        Correcao dados2 = new Correcao("Qual é a finalidade da instrução switch em Java, e como ela difere da instrução if-else?",
-                "A instrução switch é usada para executar diferentes partes de código com base no valor de uma expressão, enquanto if-else é usado apenas para verificar se uma condição é verdadeira ou falsa.",
-                "A instrução switch é usada para executar diferentes partes de código com base no valor de uma expressão específica. Ela permite que um programa execute diferentes blocos de código de acordo com o valor de uma variável, utilizando a estrutura case para definir os diferentes caminhos.\n" +
-                        "\n" +
-                        "A diferença principal entre switch e if-else é que o switch é mais adequado para situações em que você precisa comparar uma única variável contra várias constantes, tornando o código mais legível e organizado. A instrução if-else é mais flexível, pois pode avaliar expressões booleanas complexas, mas pode se tornar menos legível quando há muitas condições a serem verificadas. A resposta B está incorreta porque if-else não está limitado a duas opções; você pode encadear vários else if. A resposta C está incorreta porque switch pode ser usado com tipos de dados int, char, byte, short, String, e enumeradores. A resposta D está incorreta porque a eficiência depende do caso de uso específico e da implementação subjacente da JVM.");
-
-        listaCorrecao.add(dados2);
         correcaoAdapter.notifyDataSetChanged();
     }
+
+    private class CarregaCorrecao extends AsyncTask<Void, Void, Correcao> {
+        String email;
+        Date dataErro;
+        int idQuestionario;
+
+        public CarregaCorrecao(String email, Date dataErro, int idQuestionario){
+            this.email = email;
+            this.dataErro=dataErro;
+            this.idQuestionario=idQuestionario;
+        }
+
+        @Override
+        protected Correcao doInBackground(Void... voids) {
+            Correcao correcao = new Correcao();
+
+
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                String dataErroFormatada = dateFormat.format(dataErro);
+                String urlString = "http://192.168.1.11:8086/phpHio/carregaCorrecao.php?emailAluno=" + URLEncoder.encode(email, "UTF-8") +
+                        "&dataErro=" + URLEncoder.encode(dataErroFormatada, "UTF-8") +
+                        "&idQuestionario=" + URLEncoder.encode(String.valueOf(idQuestionario), "UTF-8");
+
+                URL url = new URL(urlString);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(15000);
+                conexao.setConnectTimeout(5000);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.setDoOutput(false);
+                conexao.connect();
+                Log.d("CONEXAO", "Conexão estabelecida");
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+                    Log.d("DADOS", jsonString);
+
+                    correcao = converterParaCorrecao(jsonString);
+                } else {
+                    Log.d("ERRO_CONEXAO", "Erro ao conectar, código de resposta: " + conexao.getResponseCode());
+                }
+
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return correcao;
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            byte[] buffer = new byte[1024];
+            ByteArrayOutputStream dados = new ByteArrayOutputStream();
+            try {
+                int qtdBytesLido;
+                while ((qtdBytesLido = in.read(buffer)) != -1) {
+                    dados.write(buffer, 0, qtdBytesLido);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return dados.toString();
+        }
+
+        private Correcao converterParaCorrecao(String jsonString) {
+            Correcao correcao = new Correcao();
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+
+                int totalErros = jsonObject.getInt("totalErros");
+
+                qntdTotal= jsonObject.getInt("totalQuestoes");;
+                metadeValor= qntdTotal/2;
+                qntdAcertos=qntdTotal - totalErros;
+
+                List<Correcao> correcoes = new ArrayList<>();
+                JSONArray jsonArray = jsonObject.getJSONArray("questoesComErros");
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject correcaoJSON = jsonArray.getJSONObject(i);
+
+                    correcao.setExplicacao(correcaoJSON.getString("explicacaoResposta"));
+                    correcao.setPergunta(correcaoJSON.getString("txtPergunta"));
+                    correcao.setAlternativaCorreta(correcaoJSON.getString("txtAlternativaCorreta"));
+
+                    Log.d("Correcao", correcao.toString());
+                    correcoes.add(correcao);
+                    listaCorrecao.add(correcao);
+                }
+
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return correcao;
+        }
+    }
+
 }

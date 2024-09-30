@@ -211,25 +211,3 @@ CREATE TABLE PontuacaoAlunos(
 	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
 	PRIMARY KEY(id)
 );
-
-DROP TABLE IF EXISTS QntdAcertosSemanais;
-CREATE TABLE QntdAcertosSemanais(
-	id INT AUTO_INCREMENT NOT NULL,
-    emailAluno VARCHAR(100) NOT NULL,
-	qntdAcertosSemana INT DEFAULT 0,
-	dataInicialSemana DATE NOT NULL,
-    dataFinalSemana DATE NOT NULL,
-    FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
-    PRIMARY KEY(id)
-);
-
-DROP TABLE IF EXISTS QntdErrosSemanais;
-CREATE TABLE QntdErrosSemanais(
-	id INT AUTO_INCREMENT NOT NULL,
-    emailAluno VARCHAR(100) NOT NULL,
-	qntdErrosSemana INT DEFAULT 0,
-	dataInicialSemana DATE NOT NULL,
-    dataFinalSemana DATE NOT NULL,
-    FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
-    PRIMARY KEY(id)
-);

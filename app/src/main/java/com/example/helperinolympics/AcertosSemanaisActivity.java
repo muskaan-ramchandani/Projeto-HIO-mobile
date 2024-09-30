@@ -59,15 +59,15 @@ public class AcertosSemanaisActivity extends Activity {
         rVListaAcertos.setAdapter(acertosAdapter);
 
         //DADOS PARA TESTE
-        Acertos dados1 = new Acertos("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
-                "Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
+//        Acertos dados1 = new Acertos("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
+//                "Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
+//
+//        listaAcertos.add(dados1);
+//
+//        Acertos dados2 = new Acertos("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
+//                "Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
-        listaAcertos.add(dados1);
-
-        Acertos dados2 = new Acertos("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
-                "Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
-
-        listaAcertos.add(dados2);
+//        listaAcertos.add(dados2);
         acertosAdapter.notifyDataSetChanged();
     }
 

@@ -30,41 +30,41 @@ public class AdapterDadosAcertos extends RecyclerView.Adapter<AdapterDadosAcerto
     @Override
     public void onBindViewHolder(@NonNull AdapterDadosAcertos.AcertosViewHolder holder, int position) {
 
-        String valorOlimpiada = listaDadosAcertos.get(position).getOlimpiadaQuestaoCerta();
-        holder.olimpiada.setText(valorOlimpiada);
-
-        String valorAssunto = listaDadosAcertos.get(position).getAssuntoQuestaoCerta();
-        holder.assunto.setText(valorAssunto);
-
-        String valorTopico = listaDadosAcertos.get(position).getTopicoDaQuestaoCerta();
-        holder.topico.setText(valorTopico);
-
-        String valorProf = "Por: "+ listaDadosAcertos.get(position).getProfQuestaoCerta();
-        holder.prof.setText(valorProf);
-
-        String valorPergunta = "<b>Pergunta: </b>" + listaDadosAcertos.get(position).getPerguntaQuestaoCerta();
-        holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
-
-        String valorQuestao = "<b>Alternativa marcada: </b>" + listaDadosAcertos.get(position).getQuestaoMarcadaCerta();
-        holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
-
-        if (valorOlimpiada.equals("OBA")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
-        } else if (valorOlimpiada.equals("OBF")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
-        } else if (valorOlimpiada.equals("OBI")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
-        } else if (valorOlimpiada.equals("OBMEP")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
-        }else if (valorOlimpiada.equals("ONHB")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
-        } else if (valorOlimpiada.equals("OBQ")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
-        } else if (valorOlimpiada.equals("OBB")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
-        } else if (valorOlimpiada.equals("ONC")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
-        }
+//        String valorOlimpiada = listaDadosAcertos.get(position).getOlimpiadaQuestaoCerta();
+//        holder.olimpiada.setText(valorOlimpiada);
+//
+//        String valorAssunto = listaDadosAcertos.get(position).getAssuntoQuestaoCerta();
+//        holder.assunto.setText(valorAssunto);
+//
+//        String valorTopico = listaDadosAcertos.get(position).getTopicoDaQuestaoCerta();
+//        holder.topico.setText(valorTopico);
+//
+//        String valorProf = "Por: "+ listaDadosAcertos.get(position).getProfQuestaoCerta();
+//        holder.prof.setText(valorProf);
+//
+//        String valorPergunta = "<b>Pergunta: </b>" + listaDadosAcertos.get(position).getPerguntaQuestaoCerta();
+//        holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
+//
+//        String valorQuestao = "<b>Alternativa marcada: </b>" + listaDadosAcertos.get(position).getQuestaoMarcadaCerta();
+//        holder.questao.setText(Html.fromHtml(valorQuestao, Html.FROM_HTML_MODE_COMPACT));
+//
+//        if (valorOlimpiada.equals("OBA")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBF")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBI")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBMEP")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+//        }else if (valorOlimpiada.equals("ONHB")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBQ")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
+//        } else if (valorOlimpiada.equals("OBB")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
+//        } else if (valorOlimpiada.equals("ONC")) {
+//            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
+//        }
     }
 
     @Override

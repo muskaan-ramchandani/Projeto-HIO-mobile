@@ -136,7 +136,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             Acertos acerto = acertos[0];
 
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraAcertosAluno.php");
+                URL url = new URL("http://192.168.1.11:8086/phpHio/cadastraAcertosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -194,7 +194,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             Erros erro = erros[0];
 
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/cadastraErrosAluno.php");
+                URL url = new URL("http://192.168.1.11:8086/phpHio/cadastraErrosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -253,7 +253,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             Pontuacao pontuacao = pontuacoes[0];
 
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/alteraPontuacaoAluno.php");
+                URL url = new URL("http://192.168.1.11:8086/phpHio/alteraPontuacaoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

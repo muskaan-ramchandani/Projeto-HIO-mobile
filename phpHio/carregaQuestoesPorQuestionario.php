@@ -16,7 +16,7 @@ try {
 
 $idQuestionarioPertencente = $_GET['idQuestionarioPertencente'] ?? '';
 
-if (empty($idConteudoPertencente)) {
+if (empty($idQuestionarioPertencente)) {
     echo json_encode(["message" => "Não foi possível detectar o id do questionário atual"]);
     exit;
 }
@@ -24,12 +24,13 @@ if (empty($idConteudoPertencente)) {
 /*	CREATE TABLE Questao(
 	id INT AUTO_INCREMENT NOT NULL,
 	txtPergunta TEXT NOT NULL,
-    explicacaoResposta
-    idQuestionarioPertencente INT NOT NULL, */
+    explicacaoResposta TEXT,
+    idQuestionarioPertencente INT NOT NULL
+);*/
 
 $sql = "
 SELECT id, txtPergunta, explicacaoResposta
-FROM Questao qt
+FROM Questao
 WHERE idQuestionarioPertencente = :idQuestionarioPertencente";
 
 $statement = $pdo->prepare($sql);
@@ -37,11 +38,15 @@ $statement->bindParam(':idQuestionarioPertencente', $idQuestionarioPertencente, 
 $statement->execute();
 
 $questoesDoQuestionario = [];
-    while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $questoesDoQuestionario[] = (object) $result;
-    }
+while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
+    $questoesDoQuestionario[] = (object) $result;
+}
 
-echo json_encode(['questoesDoQuestionario' => $questoesDoQuestionario]);
+if (empty($questoesDoQuestionario)) {
+    echo json_encode(["message" => "Nenhuma questão encontrada para o questionário atual"]);
+} else {
+    echo json_encode(['questoesDoQuestionario' => $questoesDoQuestionario]);
+}
 
 $pdo = null;
 ?>
