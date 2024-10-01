@@ -4,7 +4,6 @@ public class Correcao {
     private String pergunta, alternativaCorreta, explicacao;
 
     public Correcao(){}
-
     public Correcao(String pergunta, String alternativaCorreta, String explicacao) {
         setPergunta(pergunta);
         setAlternativaCorreta(alternativaCorreta);

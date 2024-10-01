@@ -18,7 +18,7 @@ $idQuestionarioPertencente = $_GET['idQuestionarioPertencente'] ?? '';
 $idQuestaoPertencente = $_GET['idQuestaoPertencente'] ?? '';
 
 if (empty($idQuestionarioPertencente) || empty($idQuestaoPertencente)) {
-    echo json_encode(["message" => "Está faltando um dos parâmetros"]);
+    echo json_encode(["message" => "Está faltando um dos parâmetros", "idQuestionarioPertencente" => $idQuestionarioPertencente, "idQuestaoPertencente" => $idQuestaoPertencente]);
     exit;
 }
 

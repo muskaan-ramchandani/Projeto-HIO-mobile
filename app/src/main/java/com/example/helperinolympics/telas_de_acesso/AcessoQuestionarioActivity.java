@@ -88,14 +88,6 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
             Log.d("ERRO_ID_QUESTIONARIO", "O id do questionário está nulo");
         }
 
-        //exibindo primeira questao ao ter o acesso de um questionario
-        contNumeroQuestoes = 0;
-        totalQuestoes = listaDeQuestoes.size();
-        configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
-
-        binding.progressBar.setMax(totalQuestoes);
-        atualizarProgresso(contNumeroQuestoes);
-
         binding.btnResponder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -190,6 +182,14 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                     Log.d("DADOS", jsonString);
                     listaDeQuestoes.addAll(converterParaList(jsonString));
                     questoes.addAll(converterParaList(jsonString));
+
+                    //exibindo primeira questao ao ter o acesso de um questionario
+                    contNumeroQuestoes = 0;
+                    totalQuestoes = listaDeQuestoes.size();
+                    configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+
+                    binding.progressBar.setMax(totalQuestoes);
+                    atualizarProgresso(contNumeroQuestoes);
                 }
 
             } catch (Exception e) {
@@ -202,11 +202,21 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         protected void onPostExecute(List<Questao> questoes) {
             super.onPostExecute(questoes);
 
-            if (questoes != null) {
+            if (questoes != null && !questoes.isEmpty()) {
                 listaDeQuestoes.clear();
                 listaDeQuestoes.addAll(questoes);
+
+                totalQuestoes = listaDeQuestoes.size();
+
+                binding.progressBar.setMax(totalQuestoes);
+                atualizarProgresso(contNumeroQuestoes);
+
+                configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+            } else {
+                Log.e("ERRO_QUESTOES", "Nenhuma questão carregada");
             }
         }
+
 
         private String converterParaJSONString(InputStream in) {
             byte[] buffer = new byte[1024];

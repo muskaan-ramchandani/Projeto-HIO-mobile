@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,12 +37,13 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     private Aluno alunoCadastrado;
     private static Date dataAtual;
 
-    public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas,  Context context, Aluno alunoCadastrado, Date dataAtual) {
-        this.listaAlternativas = listaAlternativas;
-        this.context =context;
+    public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas, Context context, Aluno alunoCadastrado, Date dataAtual) {
+        this.listaAlternativas = listaAlternativas != null ? listaAlternativas : new ArrayList<>(); //Verificando se lista é nula
+        this.context = context;
         this.alunoCadastrado = alunoCadastrado;
-        this.dataAtual=dataAtual;
+        this.dataAtual = dataAtual;
     }
+
 
     @NonNull
     @Override
@@ -65,7 +67,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
     @Override
     public int getItemCount() {
-        return listaAlternativas.size();
+        return listaAlternativas != null ? listaAlternativas.size() : 0;
     }
 
     public static class AlternativasQuestionarioViewHolder extends RecyclerView.ViewHolder {
@@ -122,10 +124,12 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
 
 
-    public void atualizarOpcoes(List<Alternativas> alternativas){
-        this.listaAlternativas.clear();
-        this.listaAlternativas.addAll(alternativas);
-        this.notifyDataSetChanged();
+    public void atualizarOpcoes(List<Alternativas> alternativas) {
+        if (this.listaAlternativas != null) {
+            this.listaAlternativas.clear();
+            this.listaAlternativas.addAll(alternativas);
+            this.notifyDataSetChanged();
+        }
     }
 
     private static class CadastrarAcertos extends AsyncTask<Acertos, Void, String> {

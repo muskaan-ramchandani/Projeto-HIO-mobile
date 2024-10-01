@@ -39,7 +39,7 @@ import java.util.List;
 public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     private AdapterAlternativasQuestionario adapter;
 
-    private ArrayList<Alternativas> listaAlternativas;
+    private ArrayList<Alternativas> listaAlternativas = new ArrayList<>();
     private FragmentQuestionarioBinding binding;
     private Questao questao;
     private Aluno alunoCadastrado;
@@ -84,6 +84,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     }
 
 
+
     public void configurarRecyclerAlternativas(){
         LinearLayoutManager layoutManager= new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -95,6 +96,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         adapter=new AdapterAlternativasQuestionario(listaAlternativas, context, alunoCadastrado, dataAtual);
         binding.recyclerAlternativas.setAdapter(adapter);
     }
+
 
     private class AlternativasDownload extends AsyncTask<Integer, Void, List<Alternativas>> {
 
@@ -115,8 +117,8 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
             List<Alternativas> alternativas = new ArrayList<>();
             try {
                 String urlString = "http://192.168.1.11:8086/phpHio/carregaAlternativasPorQuestao.php?"+
-                        "idQuestionarioPertencente=" + URLEncoder.encode(String.valueOf(idQuestionarioPertencente), "UTF-8")+
-                        "idQuestaoPertencente=" + URLEncoder.encode(String.valueOf(idQuestaoPertencente), "UTF-8");
+                        "&idQuestionarioPertencente=" + URLEncoder.encode(String.valueOf(idQuestionarioPertencente), "UTF-8")+
+                        "&idQuestaoPertencente=" + URLEncoder.encode(String.valueOf(idQuestaoPertencente), "UTF-8");
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -132,7 +134,6 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
                     InputStream in = conexao.getInputStream();
                     String jsonString = converterParaJSONString(in);
                     Log.d("DADOS", jsonString);
-                    listaAlternativas.addAll(converterParaList(jsonString));
                     alternativas.addAll(converterParaList(jsonString));
                 }
 
