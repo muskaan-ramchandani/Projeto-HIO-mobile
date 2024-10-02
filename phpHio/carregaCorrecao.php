@@ -14,7 +14,7 @@ try {
     exit;
 }
 
-$emailAluno = $_GET['email'] ?? '';
+$emailAluno = $_GET['emailAluno'] ?? '';
 $dataErro = $_GET['dataErro'] ?? '';
 $idQuestionarioPertencente = $_GET['idQuestionarioPertencente'] ?? '';
 
@@ -24,15 +24,23 @@ if (empty($emailAluno) || empty($dataErro) || empty($idQuestionarioPertencente))
 }
 
 $sql = "
-    SELECT q.txtPergunta, a.textoAlternativa AS alternativaCorreta, q.explicacaoResposta
-    FROM ErrosAluno e
-    JOIN Questao q ON e.idQuestaoPertencente = q.id
-    JOIN AlternativasQuestao a ON e.idAlternativaCorreta = a.id
-    WHERE e.emailAluno = :emailAluno 
-    AND e.dataErro = :dataErro
-    AND e.idQuestionarioPertencente = :idQuestionarioPertencente
-    AND a.corretaOuErrada = 1
+    SELECT 
+        q.txtPergunta, 
+        a.textoAlternativa AS alternativaCorreta, 
+        q.explicacaoResposta
+    FROM 
+        ErrosAluno e
+    JOIN 
+        Questao q ON e.idQuestaoPertencente = q.id
+    JOIN 
+        AlternativasQuestao a ON e.idAlternativaCorreta = a.id
+    WHERE 
+        e.emailAluno = :emailAluno 
+        AND e.dataErro = :dataErro
+        AND e.idQuestionarioPertencente = :idQuestionarioPertencente
+        AND a.corretaOuErrada = 1
 ";
+
 
 $statement = $pdo->prepare($sql);
 $statement->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);

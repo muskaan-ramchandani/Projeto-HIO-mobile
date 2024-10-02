@@ -14,7 +14,7 @@
         android:layout_marginBottom="3dp"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
-        android:background="@drawable/fundo_alternativa"
+        android:background="@drawable/fundo_alternativa_desmarcada"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
         android:gravity="center"

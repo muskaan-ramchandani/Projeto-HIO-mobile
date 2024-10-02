@@ -34,6 +34,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -163,6 +164,9 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
                     String jsonString = converterParaJSONString(in);
                     Log.d("DADOS", jsonString);
                     alternativas.addAll(converterParaList(jsonString));
+
+                    Collections.shuffle(alternativas); //embaralhar alternativas
+                    listaAlternativas.addAll(alternativas);
                 }
 
             } catch (Exception e) {

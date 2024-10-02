@@ -57,7 +57,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
 
     private ArrayList<Questao> listaDeQuestoes = new ArrayList<>();
 
-    private int contNumeroQuestoes, totalQuestoes;
+    private int contNumeroQuestoes = 0, totalQuestoes;
     int qntdErrosCancelados, qntdAcertosCancelados;
 
 
@@ -106,7 +106,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
 
                     }else{
                         //false
-                        Toast.makeText(AcessoQuestionarioActivity.this, "É preciso selecionar uma alternativa para prosseguir!", Toast.LENGTH_SHORT);
+                        Toast.makeText(AcessoQuestionarioActivity.this, "É preciso selecionar uma alternativa para prosseguir!", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -141,11 +141,13 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
     }
 
     public void proximaQuestao() {
+        contNumeroQuestoes++;
+
         if (contNumeroQuestoes < totalQuestoes) {
-            contNumeroQuestoes++;
             atualizarProgresso(contNumeroQuestoes);
             configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
         }else{
+
             Intent intent = new Intent(AcessoQuestionarioActivity.this, QuestionarioCorrecaoActivity.class);
             intent.putExtra("questionario", quest);
             intent.putExtra("alunoCadastrado", alunoCadastrado);
@@ -202,7 +204,6 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                     questoes.addAll(converterParaList(jsonString));
 
                     //exibindo primeira questao ao ter o acesso de um questionario
-                    contNumeroQuestoes = 0;
                     totalQuestoes = listaDeQuestoes.size();
                     configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
 

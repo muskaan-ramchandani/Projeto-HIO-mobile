@@ -11,6 +11,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
@@ -74,7 +75,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
     public static class AlternativasQuestionarioViewHolder extends RecyclerView.ViewHolder {
         Button btnAlternativa;
-        int posicao, contClique=0;
+        int posicao;
 
         public AlternativasQuestionarioViewHolder(@NonNull View itemView, final AdapterAlternativasQuestionario adapter) {
             super(itemView);
@@ -85,17 +86,22 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                 public void onClick(View v) {
                     Log.d("CLIQUE", "Opção foi clicada ");
 
-                    //0 para primeira vez e 1 para segunda
-                    if(contClique == 0){
-                        itemView.setSelected(true);
-                        adapter.setPosicao(posicao);
-                        contClique++;
-                        Log.d("CLIQUE", "Primeiro clique");
-                    }else{
-                        contClique=0;
-                        itemView.setSelected(false);
+                    if(adapter.getPosicaoSelecionada() != posicao) {
+                        // Desmarca a opção anterior
                         adapter.desmarcarSelecao();
-                        Log.d("CLIQUE", "Segundo clique");
+
+                        btnAlternativa.setSelected(true);
+                        btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_marcada);
+                        btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.textoSelecionadoForum));
+                        adapter.setPosicao(posicao); // Atualiza a posição selecionada no adapter
+                        Log.d("CLIQUE", "Botão marcado");
+                    } else {
+                        // Se o botão já estava selecionado, desmarcar
+                        btnAlternativa.setSelected(false);
+                        btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_desmarcada);
+                        btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.cinza));
+                        adapter.desmarcarSelecao();
+                        Log.d("CLIQUE", "Botão desmarcado");
                     }
                 }
             });
@@ -118,9 +124,12 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     }
 
     public void setPosicao(int posicao){
+        int posicaoAnterior = this.posicaoSelecionada;
         this.posicaoSelecionada = posicao;
-        notifyDataSetChanged(); // Atualiza a UI
+        notifyItemChanged(posicaoAnterior); // Atualiza o item anterior
+        notifyItemChanged(posicaoSelecionada); // Atualiza o item selecionado
     }
+
 
 
     public void desmarcarSelecao() {
@@ -129,45 +138,40 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     }
 
     public void responderSelecionado() {
+        Log.d("RESPOSTA", "Posição selecionada: " + posicaoSelecionada);
 
-        if (posicaoSelecionada != -1) {
+        Alternativas alternativaSelecionada = listaAlternativas.get(posicaoSelecionada);
+        boolean corretaOuErrada = alternativaSelecionada.isCorretaOuErrada();
 
-            Alternativas alternativaSelecionada = listaAlternativas.get(posicaoSelecionada);
-            boolean corretaOuErrada = alternativaSelecionada.isCorretaOuErrada();
+        //Estabelecer que, para cada acerto, são +10 pontos para o aluno
+        if(corretaOuErrada){
 
-            //Estabelecer que, para cada acerto, são +10 pontos para o aluno
-            if(corretaOuErrada){
+            //cadastrar acerto
+            Acertos acerto = new Acertos(alternativaSelecionada.getId(), alternativaSelecionada.getIdQuestionarioPertencente(), alternativaSelecionada.getIdQuestaoPertencente(), dataAtual, alunoCadastrado.getEmail());
+            new CadastrarAcertos().execute(acerto);
 
-                //cadastrar acerto
-                Acertos acerto = new Acertos(alternativaSelecionada.getId(), alternativaSelecionada.getIdQuestionarioPertencente(), alternativaSelecionada.getIdQuestaoPertencente(), dataAtual, alunoCadastrado.getEmail());
-                new CadastrarAcertos().execute(acerto);
+            //adicionar pontuação
+            Pontuacao pontuacao = new Pontuacao(10, alunoCadastrado.getEmail());
+            new AtualizarPontuacao().execute(pontuacao);
 
-                //adicionar pontuação
-                Pontuacao pontuacao = new Pontuacao(10, alunoCadastrado.getEmail());
-                new AtualizarPontuacao().execute(pontuacao);
+        }
 
-            }
-
-            //Para cada erro são -2 pontos
-            else{
-                int idAlternativaCorreta = 0;
-                for(int i=0; i<listaAlternativas.size(); i++){
-                    if(listaAlternativas.get(i).isCorretaOuErrada()==true){
-                        idAlternativaCorreta = listaAlternativas.get(i).getId();
-                    }
+        //Para cada erro são -2 pontos
+        else{
+            int idAlternativaCorreta = 0;
+            for(int i=0; i<listaAlternativas.size(); i++){
+                if(listaAlternativas.get(i).isCorretaOuErrada()==true){
+                    idAlternativaCorreta = listaAlternativas.get(i).getId();
                 }
-
-                //cadastrar erro
-                Erros erro = new Erros(alternativaSelecionada.getId(), idAlternativaCorreta, alternativaSelecionada.getIdQuestionarioPertencente(), alternativaSelecionada.getIdQuestaoPertencente(), dataAtual, alunoCadastrado.getEmail());
-                new CadastrarErros().execute(erro);
-
-                //diminuir pontuacao
-                Pontuacao pontuacao = new Pontuacao(-2, alunoCadastrado.getEmail());
-                new AtualizarPontuacao().execute(pontuacao);
             }
 
-        } else {
-            Toast.makeText(context, "Selecione uma alternativa primeiro!", Toast.LENGTH_SHORT).show();
+            //cadastrar erro
+            Erros erro = new Erros(alternativaSelecionada.getId(), idAlternativaCorreta, alternativaSelecionada.getIdQuestionarioPertencente(), alternativaSelecionada.getIdQuestaoPertencente(), dataAtual, alunoCadastrado.getEmail());
+            new CadastrarErros().execute(erro);
+
+            //diminuir pontuacao
+            Pontuacao pontuacao = new Pontuacao(-2, alunoCadastrado.getEmail());
+            new AtualizarPontuacao().execute(pontuacao);
         }
     }
 
