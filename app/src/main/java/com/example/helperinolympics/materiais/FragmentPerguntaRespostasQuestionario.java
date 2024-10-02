@@ -3,6 +3,7 @@ package com.example.helperinolympics.materiais;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,14 +50,32 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     private int idQuestionarioPertencente, idQuestaoPertencente;
     private Context context;
 
-    public FragmentPerguntaRespostasQuestionario(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Context context, Aluno alunoCadastrado, Date dataAtual){
-        this.questao = questao;
-        this.idQuestionarioPertencente = idQuestionarioPertencente;
-        this.idQuestaoPertencente= idQuestaoPertencente;
-        this.context = context;
-        this.alunoCadastrado = alunoCadastrado;
-        this.dataAtual = dataAtual;
+    public static FragmentPerguntaRespostasQuestionario newInstance(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Aluno alunoCadastrado, Date dataAtual) {
+        FragmentPerguntaRespostasQuestionario fragment = new FragmentPerguntaRespostasQuestionario();
+        Bundle args = new Bundle();
+        args.putParcelable("questao", questao);
+        args.putInt("idQuestionarioPertencente", idQuestionarioPertencente);
+        args.putInt("idQuestaoPertencente", idQuestaoPertencente);
+        args.putParcelable("alunoCadastrado", alunoCadastrado);
+        args.putLong("dataAtual", dataAtual.getTime()); // Armazenando como long
+
+        fragment.setArguments(args);
+        return fragment;
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            questao = getArguments().getParcelable("questao");
+            idQuestionarioPertencente = getArguments().getInt("idQuestionarioPertencente");
+            idQuestaoPertencente = getArguments().getInt("idQuestaoPertencente");
+            alunoCadastrado = getArguments().getParcelable("alunoCadastrado");
+            dataAtual = new Date(getArguments().getLong("dataAtual")); // Convertendo de long para Date
+            context = getContext();
+        }
+    }
+
 
     @Nullable
     @Override
@@ -83,8 +102,6 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         binding = null;
     }
 
-
-
     public void configurarRecyclerAlternativas(){
         LinearLayoutManager layoutManager= new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -97,6 +114,17 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         binding.recyclerAlternativas.setAdapter(adapter);
     }
 
+    public boolean verificarSeAlternativaMarcada(){
+        boolean marcadaOuNao =adapter.verificarSeAlternativaMarcada();
+
+        if(marcadaOuNao){
+            //true
+            adapter.responderSelecionado();
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     private class AlternativasDownload extends AsyncTask<Integer, Void, List<Alternativas>> {
 

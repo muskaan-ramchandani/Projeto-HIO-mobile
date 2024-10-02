@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.content.Context;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +39,8 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     static Context context;
     private Aluno alunoCadastrado;
     private static Date dataAtual;
+
+    int posicaoSelecionada = -1;
 
     public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas, Context context, Aluno alunoCadastrado, Date dataAtual) {
         this.listaAlternativas = listaAlternativas != null ? listaAlternativas : new ArrayList<>(); //Verificando se lista é nula
@@ -49,21 +54,18 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     @Override
     public AlternativasQuestionarioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewItemListaAlternativas = LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_alternativas_questionario, parent, false);
-        return new AlternativasQuestionarioViewHolder(viewItemListaAlternativas);
+        return new AlternativasQuestionarioViewHolder(viewItemListaAlternativas, this);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AlternativasQuestionarioViewHolder holder, int position) {
-        holder.listaAlternativas=  listaAlternativas;
-        holder.alunoCadastrado = alunoCadastrado;
         Alternativas alternativa = listaAlternativas.get(position);
+        holder.btnAlternativa.setText(alternativa.getTextoAlternativa());
 
-          holder.textoAlternativa.setText(alternativa.getTextoAlternativa());
-          holder.id = alternativa.getId();
-          holder.idQuestionarioPertencente= alternativa.getIdQuestionarioPertencente();
-          holder.idQuestaoPertencente = alternativa.getIdQuestaoPertencente();
-          holder.corretaOuErrada = alternativa.isCorretaOuErrada();
+        final int posicao = position;
+        holder.posicao=posicao;
     }
+
 
     @Override
     public int getItemCount() {
@@ -71,58 +73,103 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     }
 
     public static class AlternativasQuestionarioViewHolder extends RecyclerView.ViewHolder {
-        TextView textoAlternativa;
-        int id, idQuestionarioPertencente, idQuestaoPertencente;
-        boolean corretaOuErrada;
-        List<Alternativas> listaAlternativas;
-        Aluno alunoCadastrado;
+        Button btnAlternativa;
+        int posicao, contClique=0;
 
-        public AlternativasQuestionarioViewHolder(@NonNull View itemView) {
+        public AlternativasQuestionarioViewHolder(@NonNull View itemView, final AdapterAlternativasQuestionario adapter) {
             super(itemView);
+            btnAlternativa = itemView.findViewById(R.id.btnAlternativa);
 
-            textoAlternativa = itemView.findViewById(R.id.textoAlternativa);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
+            btnAlternativa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.d("CLIQUE", "Opção foi clicada ");
 
-                    //Estabelecer que, para cada acerto, são +10 pontos para o aluno
-                    if(corretaOuErrada){
-
-                        //cadastrar acerto
-                        Acertos acerto = new Acertos(id, idQuestionarioPertencente, idQuestaoPertencente, dataAtual, alunoCadastrado.getEmail());
-                        new CadastrarAcertos().execute(acerto);
-
-                        //adicionar pontuação
-                        Pontuacao pontuacao = new Pontuacao(10, alunoCadastrado.getEmail());
-                        new AtualizarPontuacao().execute(pontuacao);
-
-
-                    }//Para cada erro são -2 pontos
-                    else{
-                        int idAlternativaCorreta = 0;
-
-                        for(int i=0; i<listaAlternativas.size(); i++){
-                            if(listaAlternativas.get(i).isCorretaOuErrada()==true){
-                                idAlternativaCorreta = listaAlternativas.get(i).getId();
-                            }
-                        }
-
-                        //cadastrar erro
-                        Erros erro = new Erros(id, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente, dataAtual, alunoCadastrado.getEmail());
-                        new CadastrarErros().execute(erro);
-
-                        //diminuir pontuacao
-                        Pontuacao pontuacao = new Pontuacao(-2, alunoCadastrado.getEmail());
-                        new AtualizarPontuacao().execute(pontuacao);
-
+                    //0 para primeira vez e 1 para segunda
+                    if(contClique == 0){
+                        itemView.setSelected(true);
+                        adapter.setPosicao(posicao);
+                        contClique++;
+                        Log.d("CLIQUE", "Primeiro clique");
+                    }else{
+                        contClique=0;
+                        itemView.setSelected(false);
+                        adapter.desmarcarSelecao();
+                        Log.d("CLIQUE", "Segundo clique");
                     }
                 }
             });
         }
+
+    }
+
+    public boolean verificarSeAlternativaMarcada(){
+        int posicao = getPosicaoSelecionada();
+
+        if(posicao==-1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public int getPosicaoSelecionada() {
+        return this.posicaoSelecionada;
+    }
+
+    public void setPosicao(int posicao){
+        this.posicaoSelecionada = posicao;
+        notifyDataSetChanged(); // Atualiza a UI
     }
 
 
+    public void desmarcarSelecao() {
+        this.posicaoSelecionada = -1;
+        notifyDataSetChanged();
+    }
+
+    public void responderSelecionado() {
+
+        if (posicaoSelecionada != -1) {
+
+            Alternativas alternativaSelecionada = listaAlternativas.get(posicaoSelecionada);
+            boolean corretaOuErrada = alternativaSelecionada.isCorretaOuErrada();
+
+            //Estabelecer que, para cada acerto, são +10 pontos para o aluno
+            if(corretaOuErrada){
+
+                //cadastrar acerto
+                Acertos acerto = new Acertos(alternativaSelecionada.getId(), alternativaSelecionada.getIdQuestionarioPertencente(), alternativaSelecionada.getIdQuestaoPertencente(), dataAtual, alunoCadastrado.getEmail());
+                new CadastrarAcertos().execute(acerto);
+
+                //adicionar pontuação
+                Pontuacao pontuacao = new Pontuacao(10, alunoCadastrado.getEmail());
+                new AtualizarPontuacao().execute(pontuacao);
+
+            }
+
+            //Para cada erro são -2 pontos
+            else{
+                int idAlternativaCorreta = 0;
+                for(int i=0; i<listaAlternativas.size(); i++){
+                    if(listaAlternativas.get(i).isCorretaOuErrada()==true){
+                        idAlternativaCorreta = listaAlternativas.get(i).getId();
+                    }
+                }
+
+                //cadastrar erro
+                Erros erro = new Erros(alternativaSelecionada.getId(), idAlternativaCorreta, alternativaSelecionada.getIdQuestionarioPertencente(), alternativaSelecionada.getIdQuestaoPertencente(), dataAtual, alunoCadastrado.getEmail());
+                new CadastrarErros().execute(erro);
+
+                //diminuir pontuacao
+                Pontuacao pontuacao = new Pontuacao(-2, alunoCadastrado.getEmail());
+                new AtualizarPontuacao().execute(pontuacao);
+            }
+
+        } else {
+            Toast.makeText(context, "Selecione uma alternativa primeiro!", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     public void atualizarOpcoes(List<Alternativas> alternativas) {
         if (this.listaAlternativas != null) {
@@ -139,6 +186,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             StringBuilder result = new StringBuilder();
             Acertos acerto = acertos[0];
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dataAcertoFormatada = sdf.format(acerto.getDataAcerto());
+
             try {
                 URL url = new URL("http://192.168.1.11:8086/phpHio/cadastraAcertosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -151,9 +201,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
                 String parametros = "idAlternativaMarcada=" + acerto.getIdAlternativaMarcada() +
                         "&idQuestionarioPertencente=" + acerto.getIdQuestionarioPertencente() +
-                        "&idQuestaoPertencente=" + acerto.getIdQuestaoPertencente()+
-                        "&dataAcerto" +acerto.getDataAcerto()+
-                        "&emailAluno" +acerto.getEmailAluno();
+                        "&idQuestaoPertencente=" + acerto.getIdQuestaoPertencente() +
+                        "&dataAcerto=" + URLEncoder.encode(dataAcertoFormatada, "UTF-8") +
+                        "&emailAluno=" + URLEncoder.encode(acerto.getEmailAluno(), "UTF-8");
 
                 OutputStream os = conexao.getOutputStream();
                 byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
@@ -197,6 +247,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             StringBuilder result = new StringBuilder();
             Erros erro = erros[0];
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dataErroFormatada = sdf.format(erro.getDataErro());
+
             try {
                 URL url = new URL("http://192.168.1.11:8086/phpHio/cadastraErrosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -211,8 +264,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                         "&idAlternativaCorreta="+ erro.getIdAlternativaCorreta()+
                         "&idQuestionarioPertencente=" + erro.getIdQuestionarioPertencente() +
                         "&idQuestaoPertencente=" + erro.getIdQuestaoPertencente()+
-                        "&dataErro"+ erro.getDataErro()+
-                        "&emailAluno" + erro.getEmailAluno();
+                        "&dataErro=" + URLEncoder.encode(dataErroFormatada, "UTF-8") +
+                        "&emailAluno=" + URLEncoder.encode(erro.getEmailAluno(), "UTF-8");
+
 
                 OutputStream os = conexao.getOutputStream();
                 byte[] input = parametros.getBytes(StandardCharsets.UTF_8);

@@ -203,6 +203,9 @@ CREATE TABLE ErrosAluno(
 	PRIMARY KEY(id)
 );
 
+#Apenas para apagar a simulação
+delete from PontuacaoAlunos WHERE emailAluno='isassevalho@gmail.com';
+
 DROP TABLE IF EXISTS PontuacaoAlunos;
 CREATE TABLE PontuacaoAlunos(
 	id INT AUTO_INCREMENT NOT NULL,

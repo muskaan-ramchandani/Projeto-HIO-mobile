@@ -18,6 +18,8 @@
         android:text="Desistir"
         android:textColor="#8C52FF"
         android:textSize="10sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTema"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -27,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="63dp"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="45dp"
         android:fontFamily="@font/open_sans_bold"
         android:gravity="center"
@@ -79,7 +81,7 @@
     <LinearLayout
         android:id="@+id/linearPerguntasERespostas"
         android:layout_width="375dp"
-        android:layout_height="480dp"
+        android:layout_height="460dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:orientation="vertical"
@@ -115,7 +117,7 @@
             android:background="@drawable/fundo_botoes_roxos"
             android:fontFamily="@font/open_sans_bold"
             android:text="Responder"
-            android:textSize="19sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 

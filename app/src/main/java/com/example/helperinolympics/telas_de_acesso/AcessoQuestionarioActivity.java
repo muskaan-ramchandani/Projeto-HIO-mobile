@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -91,8 +92,23 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         binding.btnResponder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //passa pra próxima questão, atualiza a barra de progresso
-                proximaQuestao();
+                Log.d("RESPONDER", "Responder foi clicado ");
+
+                FragmentPerguntaRespostasQuestionario fragment = (FragmentPerguntaRespostasQuestionario) getSupportFragmentManager().findFragmentById(R.id.fragmentPerguntasERespostas);
+
+                if (fragment != null) {
+                    boolean alternativaMarcadaOuNao = fragment.verificarSeAlternativaMarcada();
+
+                    if(alternativaMarcadaOuNao){
+                        //true
+                        //passa pra próxima questão, atualiza a barra de progresso
+                        proximaQuestao();
+
+                    }else{
+                        //false
+                        Toast.makeText(AcessoQuestionarioActivity.this, "É preciso selecionar uma alternativa para prosseguir!", Toast.LENGTH_SHORT);
+                    }
+                }
 
             }
         });
@@ -100,6 +116,8 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         binding.btnDesistir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("DESISTIR", "Desistir foi clicado ");
+
                 //apagar acertos e erros, restaurar pontuação
                 //exibir telinha de processamento da informacao
 
@@ -140,7 +158,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
     }
 
     private void configurarQuestaoASerExibida(Questao questao) {
-        setFragment(new FragmentPerguntaRespostasQuestionario(questao, quest.getId(), questao.getId(), AcessoQuestionarioActivity.this, alunoCadastrado, dataAtual));
+        setFragment(FragmentPerguntaRespostasQuestionario.newInstance(questao, quest.getId(), questao.getId(), alunoCadastrado, dataAtual));
     }
 
     private void setFragment(Fragment fragment) {

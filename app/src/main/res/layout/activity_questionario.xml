@@ -26,11 +26,11 @@
         android:layout_width="59dp"
         android:layout_height="64dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="674dp"
+        android:layout_marginBottom="0dp"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/txtNomeOlimp"
-        app:srcCompat="@drawable/imgmacacaindo" />
+        tools:srcCompat="@drawable/imgmacacaindo" />
 
 
     <TextView
@@ -38,14 +38,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginBottom="680dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/open_sans_bold"
-        android:text="OBF"
+        tools:text="OBF"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
 
 
     <LinearLayout
