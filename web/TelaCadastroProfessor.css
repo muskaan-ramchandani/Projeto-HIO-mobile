@@ -1,0 +1,132 @@
+.container {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+.purple-section {
+    background-color: #8c52ff;
+    flex: 1 1 45%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+.title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    width: 100%;
+    font-weight: 700;
+}
+
+
+
+
+.purple-image {
+    max-width: 150%;
+    height: auto;
+    display: block;
+    margin-bottom: 10;
+}
+
+
+.helper-text {
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+
+
+
+.form-container {
+    background-color: #ffffff;
+    flex: 1 1 45%;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+
+/* Estilos para o botão */
+.button.is-primary {
+    background-color: #c6a3ff;
+    border-color: #c6a3ff;
+    color: #ffffff;
+    width: 25%;
+    display: block;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.button.is-primary:hover {
+    background-color: #c6a3ff;
+    border-color: #c6a3ff;
+}
+
+
+.field {
+    margin-bottom: 10px;
+}
+
+
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+
+
+
+.control {
+    margin-top: 5px;
+}
+
+
+/* Mensagem de resposta */
+.hidden {
+    display: none;
+}
+
+
+.success {
+    color: #c6a3ff;
+}
+
+
+.error {
+    color: red;
+}
+
+
+
+
+
+
+

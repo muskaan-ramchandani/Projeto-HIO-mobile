@@ -1,30 +1,29 @@
-<?php 
-header('Content-Type: application/json');
-if (isset($_GET['sigla'])) {
-    $sigla = $_GET['sigla'];
-    $dsn = 'mysql:host=localhost;dbname=hio;charset=utf8';
-    $username = 'root';
-    $password = 'root';
-    try {
-       
-        $pdo = new PDO($dsn, $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        $sql = "SELECT titulo, subtitulo FROM Conteudo WHERE siglaOlimpiadaPertencente = :sigla";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':sigla', $sigla);
-        $stmt->execute();
-       
-        $conteudos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($conteudos) {
-            echo json_encode($conteudos);
-        } else {
-            echo json_encode(['error' => 'Nenhum conteúdo encontrado para esta Olimpíada.']);
-        }
-    } catch (PDOException $e) {
-        echo json_encode(['error' => 'Erro: ' . $e->getMessage()]);
-    }
-} else {
-    echo json_encode(['error' => 'Nenhuma Olimpíada foi selecionada.']);
+<?php
+// dadosConteudoPDO.php
+
+// Configurações de conexão
+$dsn = 'mysql:host=localhost;dbname=hio;charset=utf8mb4';
+$usuario = 'root';
+$senha = 'root';
+
+try {
+    // Conectando ao banco de dados usando PDO
+    $pdo = new PDO($dsn, $usuario, $senha);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Query para buscar os conteúdos
+    $sql = "SELECT titulo, subtitulo, siglaOlimpiadaPertencente FROM Conteudo";
+    $stmt = $pdo->query($sql);
+
+    // Verifica se há resultados e armazena em um array
+    $conteudos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    // Se houver erro, exibe a mensagem
+    echo "Erro na conexão ou na consulta: " . $e->getMessage();
+    $conteudos = [];
 }
+
+// Retorna os conteúdos para serem usados no HTML
+return $conteudos;
 ?>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem Vindo</title>
+    <link rel="stylesheet" href="TelaBemVindo.css">
+    <script>
+      
+        function redirectToTelaCadastroAlunoProfessor() {
+            window.location.href = 'TelaCadastroAlunoProfessor.html';
+        }
+        
+       
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('right-button').addEventListener('click', redirectToTelaCadastroAlunoProfessor);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Container para o texto -->
+        <div class="text-container">
+            <h1 class="welcome">Bem vindo(a)</h1>
+            <h1 class="hio">ao HIO!</h1>
+            <p class="intro-text">
+                Olá mestres e medalhistas! Meu nome é Hipo e sou o mascote do HIO (Helper in Olympics).
+            </p>
+            <p class="intro-text">
+                Caso você não saiba, o site tem como objetivo permitir que professores voluntários ajudem
+                alunos a estudarem para olimpíadas científicas, reunindo materiais para facilitar o estudo.
+            </p>
+        </div>
+
+        <!-- Container para a imagem -->
+        <div class="image-container">
+            <img src="Imagens_Mobile_HIO/hipoMostrandoAlgoDaEsquerda.png" alt="hipo apontando para esquerda">
+        </div>
+    </div>
+
+    <!-- Botão de imagem à esquerda -->
+    <div class="button-image-container-left">
+        <button class="button-image">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Botão voltar esquerda">
+        </button>
+    </div>
+   
+    <!-- Botão de imagem à direita -->
+    <div class="button-image-container-right">
+        <button id="right-button" class="button-image">
+            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Botão voltar direita">
+        </button>
+    </div>
+</body>
+</html>
