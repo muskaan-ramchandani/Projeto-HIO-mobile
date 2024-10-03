@@ -48,9 +48,9 @@
             $stmt->bindParam(':anoDaProva', $anoDaProva);
             $stmt->bindParam(':estado', $estado);
             $stmt->bindParam(':fase', $fase);
-            $stmt->bindParam(':emailProfessor', $profQuePostou);
+            $stmt->bindParam(':profQuePostou', $profQuePostou);
             $stmt->bindParam(':arquivoPdf', $arquivoPdf, PDO::PARAM_LOB);
-            $stmt->bindParam(':sigla', $siglaOlimpiadaPertencente);
+            $stmt->bindParam(':siglaOlimpiadaPertencente', $siglaOlimpiadaPertencente);
 
             if ($stmt->execute()) {
                 echo "<p>Prova cadastrada com sucesso!</p>";
