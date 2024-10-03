@@ -24,7 +24,7 @@
 
     $sigla = $_GET['siglaOlimpiadaPertencente'] ?? '';
 
-    if (empty($siglaOlimpiadaPertencente)) {
+    if (empty($sigla)) {
         echo json_encode(["message" => "Não foi possível detectar a olimpíada selecionada"]);
         exit;
     }
@@ -32,10 +32,10 @@
     $sql = "
     SELECT c.id, c.titulo, c.subtitulo 
     FROM Conteudo c
-    WHERE c.siglaOlimpiadaPertencente = :siglaOlimpiadaPertencente";
+    WHERE c.siglaOlimpiadaPertencente = :sigla";
 
     $statement = $pdo->prepare($sql);
-    $statement->bindParam(':siglaOlimpiadaPertencente', $siglaOlimpiadaPertencente);
+    $statement->bindParam(':sigla', $sigla);
     $statement->execute();
 
     $conteudos = [];

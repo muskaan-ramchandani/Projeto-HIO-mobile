@@ -766,3 +766,50 @@ body {
     width: 100%;
     margin: 20px 0;
 }
+.carousel-container {
+    position: relative;
+    max-width: 600px; /* Largura máxima do carrossel */
+    margin: auto; /* Centraliza o carrossel na página */
+    overflow: hidden; /* Oculta o conteúdo que sai da área do carrossel */
+}
+
+.carousel-item {
+    display: none; /* Oculta todos os itens inicialmente */
+}
+
+.carousel-item.active {
+    display: block; /* Exibe apenas o item ativo */
+}
+
+.button-content {
+    display: block; /* Faz o botão ocupar toda a área */
+    padding: 20px;
+    background-color: #007bff; /* Cor do botão */
+    color: white;
+    text-align: center;
+    text-decoration: none; /* Remove o sublinhado */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin: 10px 0; /* Margem entre os botões */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent; /* Torna o fundo transparente */
+    border: none; /* Remove bordas */
+    cursor: pointer;
+}
+
+#prevButton {
+    left: 10px; /* Posiciona o botão "Anterior" à esquerda */
+}
+
+#nextButton {
+    right: 10px; /* Posiciona o botão "Próximo" à direita */
+}
+
+.carousel-button img {
+    width: 40px; /* Ajusta a largura da imagem do botão */
+    height: auto; /* Mantém a proporção da imagem */
+}

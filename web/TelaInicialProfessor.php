@@ -35,7 +35,7 @@ try {
 
             // Gerar um item do carrossel
             echo '<div class="carousel-item">';
-            echo '<a href="TelaOlimpiadaProfessorHTML.php?sigla=' . $sigla .'&email=' . $emailProfessor . '" class="olympics-button" style="background-color: ' . getCorHexa($cor) . ';">';
+            echo '<a href="TelaOlimpiadaProfessorHTML.php?sigla=' . $sigla .'&email=' . $email . '" class="olympics-button" style="background-color: ' . getCorHexa($cor) . ';">';
             echo '<img src="Imagens_Mobile_HIO/' . $icone . '.png" alt="' . $sigla . '" class="button-icon">';
             echo $nome . ' - ' . $sigla;
             echo '</a>';

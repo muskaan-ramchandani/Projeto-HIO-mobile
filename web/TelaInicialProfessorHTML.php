@@ -17,7 +17,7 @@
         </div>
         <span class="helper-text" id="helperText">Helper in Olympics</span>
         <div class="menu-content" id="menuContent">
-                        <a href="file:///C:/Users/Muskaan%20Ramchandani/Projeto-HIO-mobile/html-css-js-php-%20HIO/TelaPerfilProfessor.html"><img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeSeuPerfil.png" alt="Perfil" class="menu-icon-img"> Seu Perfil</a>
+                        <a href="TelaPerfilProfessorHTML.php"><img src="Imagens_Mobile_HIO/iconeSeuPerfil.png" alt="Perfil" class="menu-icon-img"> Seu Perfil</a>
 
             <a href="#"><img src="Imagens_Mobile_HIO/iconeChats.png" alt="Fórum" class="menu-icon-img"> Fórum</a>
             <a href="#"><img src="Imagens_Mobile_HIO/iconeManual.png" alt="Manual" class="menu-icon-img"> Manual</a>

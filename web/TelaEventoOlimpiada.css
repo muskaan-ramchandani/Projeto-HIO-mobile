@@ -1,0 +1,295 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 1000; /* Garante que a barra fique sobre outros elementos */
+}
+
+
+
+
+.barra .logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+
+
+.barra .logo-container img {
+    height: 80px;
+    margin-right: 10px;
+}
+
+
+
+
+.barra .logo-container .text {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.barra .botao-voltar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
+
+
+
+
+.barra .botao-voltar {
+    height: 40px;
+    cursor: pointer;
+}
+
+
+
+
+.barra .botao-voltar-texto {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/*calendario*/
+.wrapper {
+    max-width: 560px;
+    margin: 100px; /* Remove a centralização */
+    background-color: #ededed;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinha os itens à esquerda */
+}
+
+
+.days-week {
+    display: grid; /* Muda de flex para grid */
+    grid-template-columns: repeat(7, 1fr); /* 7 colunas, uma para cada dia da semana */
+    border-bottom: 1px solid #898989;
+}
+
+
+.days-week span {
+    color: #898989;
+    font-weight: bold;
+    text-align: center; /* Centraliza o texto */
+    padding: 10px 0; /* Adiciona espaçamento vertical */
+    font-size: 1.2em; /* Aumenta o tamanho da fonte */
+}
+
+
+.number-days {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+.number-days span {
+    color: black;
+    display: inline-block;
+    width: 14.2%; /* Para 7 dias da semana */
+    margin-bottom: 8px;
+    text-align: center; /* Centraliza os dias */
+}
+
+
+.mes-anterior {
+    opacity: 0.5;
+}
+
+
+.botao-container {
+    display: flex;
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+    margin-bottom: 10px;
+}
+
+
+.botao-calendario {
+    cursor: pointer;
+    margin-right: 10px;
+    height: 40px;
+    width: auto;
+}
+
+
+.botao-calendario:hover {
+    opacity: 0.8;
+}
+
+
+.eventos {
+    position: fixed;
+    top: 100px; /* Ajusta a posição em relação ao topo */
+    right: 390px; /* Ajusta a distância do lado direito */
+    font-weight: bold;
+    font-size: 30px;
+    color: black; /* Cor do texto */
+    text-align: right; /* Alinha o texto à direita */
+}
+
+
+.botao-adicionar {
+    background-color: #e9e8e8;
+    color: #898989;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px; /* Arredondado */
+    padding: 10px 20px; /* Espaçamento interno */
+    cursor: pointer;
+    margin-left: 10px; /* Espaço entre o texto e o botão */
+    transition: background-color 0.3s; /* Efeito de transição */
+}
+
+
+.botao-adicionar:hover {
+    background-color: #d0d0d0; /* Mudança na cor ao passar o mouse */
+}
+
+
+.botao-adicionar:focus {
+    outline: none; /* Remove contorno ao focar */
+}
+
+
+.retangulo {
+    background-color: #f8f6f6;
+    width: 500px; /* Ajuste conforme necessário */
+    height: 300px; /* Ajuste conforme necessário */
+    overflow-y: auto; /* Permite rolagem vertical */
+    margin-top: 10px; /* Espaçamento acima do retângulo */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #898989; /* Borda opcional */
+    position: fixed; /* Fixa o retângulo à direita */
+    top: 140px; /* Ajuste a distância do topo para ficar abaixo de "Eventos" */
+    right: 190px; /* Distância da direita */
+}
+
+
+/* Estilo para o conteúdo dentro do retângulo */
+.conteudo {
+    margin-bottom: 10px;
+}
+
+
+.linha-separadora {
+    border-top: 1px solid #a6a6a6;
+    margin: 10px 0;
+}
+
+
+.data {
+    font-weight: bold;
+    font-size: 23px;
+}
+
+
+.inscricao,
+.horario,
+.link {
+    font-size: 15px;
+}
+
+
+ /* Estilos do Modal */
+ .modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro com opacidade */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Ajuste a porcentagem conforme necessário (ex: 50%, 40%, 30%) */
+    max-width: 600px; /* Adicione um limite máximo se desejar */
+}
+
+
+ 
+.modal-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #835ad2;
+    text-align: center;
+}
+.label {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    margin-top: 10px;
+}
+.input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Open Sans', sans-serif;
+
+
+}
+.submit-btn {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #8c52ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+
+
+}
+
+
+.cancel-btn {
+    margin-top: 10px; /* Espaçamento acima do botão */
+    padding: 10px;
+    background-color: #8c52ff; /* Cor de fundo do botão */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+
+
+}

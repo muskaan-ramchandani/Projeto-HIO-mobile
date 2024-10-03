@@ -53,7 +53,7 @@ try {
 
 
 <div class="container">
-    <a href="file:///C:/Users/Muskaan%20Ramchandani/Projeto-HIO-mobile/webCodesHIO/TelaEventosOlimpiada.html">
+    <a href="TelaEventoOlimpiadaHTML.php">
         <button class="botao-adicionais">Acessar eventos</button>
     </a>
     <button class="botao-adicionais" onclick="toggleMenu()">Adicionar itens</button>
@@ -149,7 +149,7 @@ try {
 
                 <!-- Professor que Postou -->
                 <div class="form-group">
-                    <input type="hidden" name="emailProfessor" value="<?php echo htmlspecialchars($emailProfessor); ?>">
+                    <input type="hidden" name="profQuePostou" value="<?php echo htmlspecialchars($email); ?>">
                 </div>
 
                 <!-- Upload de Arquivo PDF -->
@@ -189,43 +189,7 @@ try {
     <div class="conteudos-titulo">Conteúdos:</div>
 
 
-
-
-    <!-- Carrossel de Conteúdos -->
-    <div class="carousel-container">
-        <button id="prevContent" class="carousel-button" onclick="prevContentSlide()">
-            <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="button-icon">
-        </button>
-        <div class="carousel" id="contentCarousel">
-            <div class="carousel-inner" id="contentCarouselInner">
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #cb6ce6;">
-                        Mecânica Clássica: Fundamentos da cinemática do ponto material
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #5271ff;">
-                        Dilatação superficial: Conceito e fórmulas
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #ff9900;">
-                        Mecânica Clássica: Fundamentos da cinemática do ponto material
-                    </a>
-                </div>
-                <div class="carousel-item">
-                    <a href="#" class="olympics-button" style="background-color: #18b9cd;">
-                        Dilatação superficial: Conceito e fórmulas
-                    </a>
-                </div>
-            </div>
-        </div>
-        <button id="nextContent" class="carousel-button" onclick="nextContentSlide()">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarEAvancarExercicioDireita.png" alt="Prosseguir" class="button-icon">
-        </button>
-    </div>
-
-
+    <?php include 'carregaConteudos.php'; ?>
 
 
 
@@ -291,7 +255,28 @@ document.getElementById('arquivoPdf').addEventListener('change', function() {
         reader.readAsDataURL(file); // Converte o PDF para uma URL e permite a visualização
     }
 });
+    let index = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
 
+    function mostrarItem() {
+        items.forEach((item, i) => {
+            item.style.display = (i === index) ? 'block' : 'none';
+        });
+    }
+
+    function prevSlide() {
+        index = (index > 0) ? index - 1 : totalItems - 1; // Volta para o último item se estiver no primeiro
+        mostrarItem();
+    }
+
+    function nextSlide() {
+        index = (index < totalItems - 1) ? index + 1 : 0; // Volta para o primeiro item se estiver no último
+        mostrarItem();
+    }
+
+    // Exibe o primeiro item ao carregar
+    mostrarItem();
 </script>
 </body>
 </html>
