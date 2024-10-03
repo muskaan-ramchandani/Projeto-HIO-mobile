@@ -1,0 +1,183 @@
+/* Estilizando o corpo da página */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden; 
+}
+
+/* Container para posicionar as seções */
+.container {
+    display: flex;
+    height: 100vh; 
+    width: 100vw; 
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilizando a seção roxa */
+.square {
+    background-color: #8c52ff;
+    color: white;
+    width: 45vw; 
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    justify-content: flex-start; 
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+/* Estilizando o texto */
+.square h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Contêiner para a imagem */
+.image-container {
+    flex-grow: 1; 
+    width: 100%; 
+    display: flex;
+    align-items: flex-end; 
+    justify-content: center; 
+}
+
+/* Estilizando a imagem */
+.image-container img {
+    width: auto;
+    height: 65vh; 
+    max-height: 100%; 
+    object-fit: cover; 
+}
+
+/* Estilizando a seção de login */
+.login-section {
+    background-color: white;
+    width: 55vw; 
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 20px;
+    box-sizing: border-box; 
+    position: relative;
+}
+
+/* Estilizando o título de login */
+.login-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 20px;
+    position: relative; 
+    top: 15px; 
+}
+
+/* Estilizando o formulário de login */
+#login-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%; 
+    max-width: 600px; 
+    margin-top: 20px; 
+}
+
+/* Estilizando os campos de entrada */
+#login-form input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 27px; 
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+/* Estilizando o botão de entrada */
+#login-form button {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 27px; 
+    padding: 15px; 
+    border: none;
+    border-radius: 5px;
+    background-color: #c6a3ff;
+    color: white;
+    cursor: pointer;
+    width: 100%; 
+    box-sizing: border-box; 
+    font-weight: bold;
+}
+
+/* Estilizando o texto "Esqueceu sua senha?" */
+.forgot-password {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #a6a6a6;
+    margin-top: 20px; 
+    text-align: center;
+    position: relative;
+    padding-bottom: 30px; 
+}
+
+/* Adicionando a linha cinza com "OU" no meio */
+.forgot-password::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #ccc; 
+    position: absolute;
+    top: 50%; 
+    left: 0;
+    z-index: 0; 
+    margin-top: 25px;
+}
+
+.forgot-password::after {
+    content: "OU";
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #a6a6a6;
+    position: absolute;
+    top: 50%; /* Alinha o "OU" no meio da linha */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white; 
+    padding: 0 10px; 
+    z-index: 1; 
+    margin-top: 25px;
+}
+
+/* Adicionando margem ao botão de cadastro */
+.register-button {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 27px; 
+    padding: 15px; 
+    border: none;
+    border-radius: 5px;
+    background-color: #c6a3ff;
+    color: white;
+    cursor: pointer;
+    width: 100%; 
+    box-sizing: border-box; 
+    margin-top: 20px; /* Espaçamento acima do botão */
+    font-weight: bold;
+}
+
+
+.forgot-link {
+    color: #8c52ff; 
+    text-decoration: none; 
+}
+
+.forgot-link:hover {
+    text-decoration: underline; 
+}

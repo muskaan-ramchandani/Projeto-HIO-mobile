@@ -547,7 +547,7 @@ async function addBook() {
     }
 }
 
-// Chame a função carregarOlimpiadaParaLivro quando abrir o modal
+
 function showAddBookModal() {
     carregarOlimpiada();
     document.getElementById('bookModal').style.display = 'block';

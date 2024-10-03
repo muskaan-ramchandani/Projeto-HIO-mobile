@@ -1,0 +1,768 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 1000; /* Garante que a barra fique sobre outros elementos */
+}
+
+
+.barra .logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+.barra .logo-container img {
+    height: 80px;
+    margin-right: 10px;
+}
+
+
+.barra .logo-container .text {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.barra .botao-adicionais {
+    background-color: white;
+    color: #8c52ff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.barra .botao-adicionais:hover {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.barra .botao-voltar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px;
+}
+
+
+.barra .botao-voltar {
+    height: 30px;
+    cursor: pointer;
+}
+
+
+.barra .botao-voltar-texto {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+
+.botao-adicionais {
+    background-color: #8c52ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+/* menu */
+
+
+.container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.botao-adicionais {
+    background-color: #8c52ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.menu {
+    display: none; /* Oculta o menu por padrão */
+    position: absolute;
+    top: 100%; /* Posiciona o menu logo abaixo do botão */
+    right: 0; /* Posiciona o menu à esquerda do botão */
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Garante que o menu fique acima de outros elementos */
+}
+
+
+.menu-item {
+    display: block;
+    color: #8c52ff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 5px 0;
+    padding: 10px;
+    right: 0;
+}
+
+
+.menu-item:hover {
+    background-color: #ededed; /* Cor de destaque ao passar o mouse */
+}
+
+
+/* Estilos para o modal */
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed;
+    z-index: 1; /* Garante que o modal fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* Centraliza o modal */
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px; /* Máximo de largura do modal */
+    position: relative;
+}
+
+
+.modal h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+    color: #835ad2;
+}
+
+
+.modal-body {
+    padding: 20px;
+}
+
+
+.modal-body label {
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+
+.modal-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+
+.btn-primary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-primary:hover {
+    background-color: #8c52ff;
+}
+
+
+.btn-secondary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-secondary:hover {
+    background-color: #8c52ff;
+}
+
+
+#prevContent {
+    left: 0;
+}
+
+
+#nextContent {
+    right: 0;
+}
+
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.close:hover {
+    color: #aaa; /* Cor de destaque ao passar o mouse */
+}
+
+
+
+
+/* Modal para recomendar livro */
+
+
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed;
+    z-index: 1000; /* Garante que o modal fique acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+}
+
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Centraliza o modal verticalmente e horizontalmente */
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.modal h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+    color: #835ad2;
+}
+
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.modal-input {
+    width: 100%; /* Largura completa para os campos */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+
+.file-upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.file-upload input[type="file"] {
+    flex: 1;
+}
+
+
+.file-upload button {
+    background-color: #8c52ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.file-upload button:hover {
+    background-color: #7a47e2; /* Cor de destaque ao passar o mouse */
+}
+
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.btn-primary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-primary:hover {
+    background-color: #7a47e2;
+}
+
+
+.btn-secondary {
+    background-color: #8c52ff;
+    color: white;
+}
+
+
+.btn-secondary:hover {
+    background-color: #7a47e2;
+}
+
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.close:hover {
+    color: #aaa; /* Cor de destaque ao passar o mouse */
+}
+
+
+/* Grupo de botões de rádio */
+.radio-group label {
+    margin-right: 15px;
+}
+
+
+/* Grupo de upload de arquivos */
+#pdf-file-name {
+    display: block;
+    margin-top: 5px;
+}
+
+
+
+
+/*Provas anteriores*/
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-body {
+    margin-bottom: 15px;
+}
+
+
+.modal-footer {
+    text-align: right;
+}
+
+
+
+
+.conteudos-titulo {
+    margin: 80px 10px 10px; /* Margem abaixo da barra */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 10px; /* Margem ao redor do carrossel */
+}
+
+
+.carousel-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px; /* Espaço ao redor dos botões de navegação */
+}
+
+
+.button-icon {
+    width: 60px;
+    height: 60px;
+}
+
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap;
+}
+
+
+.carousel-item {
+    min-width: calc(50% - 10px); /* Exibe dois itens por vez */
+    margin-right: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+
+.carousel-item:last-child {
+    margin-right: 0;
+}
+
+
+.olympics-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px; /* Ajusta o padding */
+    border-radius: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 19px; /* Ajusta o tamanho da fonte */
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    text-align: center;
+    min-width: 200px; /* Ajusta a largura mínima dos botões */
+    height: 100px; /* Ajusta a altura dos botões */
+}
+
+
+.olympics-button:hover {
+    opacity: 0.9;
+}
+
+
+/*Recomendações de livros */
+.recomendacoes-titulo {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    margin: 40px 10px; /* Margem ao redor do texto */
+    text-align: left; /* Centraliza o texto */
+
+
+}
+
+
+.info-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cartões se movam para a linha seguinte se não houver espaço suficiente */
+    gap: 70px; /* Aumentado o espaçamento entre os cartões */
+    padding: 10px; /* Espaçamento interno */
+}
+
+
+.info-card {
+    background-color: #f8f6f6;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+    max-width: 550px;
+    width: 100%; /* Garante que o retângulo use a largura disponível até o máximo */
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura total */
+}
+
+
+.info-card-img {
+    width: 95px;
+    height: auto;
+    margin-right: 10px; /* Ajustado o espaço entre a imagem e o texto */
+}
+
+
+.info-card-content {
+    flex: 1;
+}
+
+
+.info-card-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 4px;
+}
+
+
+.info-card-author,
+.info-card-publisher,
+.info-card-edition,
+.info-card-publication {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px; /* Ajustado o tamanho da fonte das informações adicionais */
+    color: black;
+    margin-bottom: 2px;
+}
+
+
+.info-card-button {
+    background-color: #c6a3ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px; /* Ajustado o padding para um botão menor */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px; /* Mantido o tamanho da fonte do botão */
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin-top: 10px; /* Ajustado o espaço acima do botão */
+}
+
+
+.info-card-button:hover {
+    background-color: #b78cfa;
+}
+
+
+/* Provas anteriores */
+.provas-anteriores-titulo {
+    margin: 80px 10px 10px; /* Margem abaixo da barra */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.provas-card {
+    background-color: #f8f6f6;
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 25px; /* Padding interno dos botões */
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+    align-items: flex-start; /* Alinha os itens ao início */
+    justify-content: flex-start; /* Ajusta o alinhamento para o início */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra do botão */
+    max-width: 350px;
+    width: 100%;
+    box-sizing: border-box; /* Inclui padding e borda na largura e altura total */
+    border: none; /* Remove borda padrão */
+    cursor: pointer; /* Mostra o cursor de pointer para indicar que é clicável */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Adiciona transições suaves */
+    text-align: left;
+    color: black;
+}
+
+
+.provas-card b {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px; /* Tamanho da fonte para o ano */
+    font-weight: bold;
+    color: black;
+    margin-bottom: 5px; /* Espaçamento abaixo do ano */
+}
+
+
+.provas-card p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: black;
+    margin: 2px 0;
+}
+
+
+.provas-card:hover {
+    background-color: #f8f6f6; /* Muda a cor de fundo ao passar o mouse */
+    transform: scale(1.02); /* Levemente aumenta o tamanho do botão */
+}
+
+
+.provas-card:active {
+    background-color: #f8f6f6; /* Muda a cor de fundo ao clicar */
+    transform: scale(0.98); /* Levemente diminui o tamanho do botão */
+}
+
+
+.additional-info {
+    display: flex;
+    align-items: center; /* Corrigido para alinhar ao centro verticalmente */
+    margin-top: 10px; /* Espaçamento acima do círculo roxo */
+}
+
+
+.additional-info img {
+    width: 20px; /* Tamanho do círculo roxo */
+    height: 20px; /* Tamanho do círculo roxo */
+    margin-right: 10px; /* Espaçamento entre o círculo e o texto */
+}
+
+
+.additional-info span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px; /* Tamanho da fonte ao lado do círculo */
+    color: white; /* Cor do texto ao lado do círculo */
+}
+
+
+.spinner-horizontal {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.spinner-item {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.spinner-item h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.spinner-item p {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.content-spinner-container {
+    width: 100%;
+    margin: 20px 0;
+}
