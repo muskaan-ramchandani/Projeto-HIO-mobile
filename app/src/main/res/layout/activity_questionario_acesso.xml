@@ -5,31 +5,41 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     >
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnDesistir"
-        android:layout_width="50dp"
+    <LinearLayout
+        android:id="@+id/linearDesistir"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:drawableTop="@drawable/baseline_outlined_flag_24"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="Desistir"
-        android:textColor="#8C52FF"
-        android:textSize="10sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
+        android:gravity="end|center"
+        android:layout_marginTop="15dp"
+        android:paddingEnd="13dp"
         app:layout_constraintBottom_toTopOf="@+id/txtTema"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/txtTema"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDesistir"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/baseline_outlined_flag_24"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Desistir"
+            android:textColor="#8C52FF"
+            android:textSize="10sp"
+            />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtTema"
         android:layout_width="wrap_content"
-        android:layout_height="63dp"
+        android:layout_height="60dp"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="45dp"
         android:fontFamily="@font/open_sans_bold"
         android:gravity="center"
@@ -37,7 +47,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDesistir"
+        app:layout_constraintTop_toBottomOf="@+id/linearDesistir"
         tools:text="Conceitos fundamentais da Cinemática Escalar" />
 
 

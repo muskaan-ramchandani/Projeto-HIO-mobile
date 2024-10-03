@@ -37,8 +37,8 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingV
         String valorUser = listaRanking.get(position).getUser();
         holder.user.setText(valorUser);
 
-        int valorAcertos = listaRanking.get(position).getQntdAcertos();
-        holder.qntdAcertos.setText(String.valueOf(valorAcertos));
+        int valorPontos = listaRanking.get(position).getQntdPontos();
+        holder.pontos.setText(String.valueOf(valorPontos));
 
     }
 
@@ -46,14 +46,14 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingV
 
     public class RankingViewHolder extends RecyclerView.ViewHolder{
 
-        TextView user, posicao, qntdAcertos;
+        TextView user, posicao, pontos;
         ImageView foto;
         public RankingViewHolder(@NonNull View itemView){
             super(itemView);
             posicao=itemView.findViewById(R.id.txtPosicaoRanking);
             foto=itemView.findViewById(R.id.imgFotoPerfilModeloRanking);
             user=itemView.findViewById(R.id.txtNomeDeUsuarioRanking);
-            qntdAcertos=itemView.findViewById(R.id.txtQuantidadeAcertosRanking);
+            pontos=itemView.findViewById(R.id.txtPontosRanking);
         }
     }
 }

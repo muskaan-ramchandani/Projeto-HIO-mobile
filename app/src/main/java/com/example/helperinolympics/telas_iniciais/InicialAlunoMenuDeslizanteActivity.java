@@ -65,6 +65,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(InicialAlunoMenuDeslizanteActivity.this, RankingActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
@@ -74,6 +75,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, CalendarioActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }

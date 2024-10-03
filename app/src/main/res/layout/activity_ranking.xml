@@ -69,7 +69,7 @@
                         tools:text="User321" />
 
                     <TextView
-                        android:id="@+id/txtQntdAcertosPosicao2"
+                        android:id="@+id/txtQntdPontosPosicao2"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -77,7 +77,7 @@
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:layout_marginTop="3dp"
-                        tools:text="12340 acertos"/>
+                        tools:text="12340 pontos"/>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardFundoLaranjaPodio2"
@@ -131,7 +131,7 @@
                         tools:text="User123" />
 
                     <TextView
-                        android:id="@+id/txtQntdAcertosPosicao1"
+                        android:id="@+id/txtQntdPontosPosicao1"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -139,7 +139,7 @@
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:layout_marginTop="3dp"
-                        tools:text="12400 acertos"/>
+                        tools:text="12400 pontos"/>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardFundoLaranjaPodio1"
@@ -193,7 +193,7 @@
                         tools:text="User213" />
 
                     <TextView
-                        android:id="@+id/txtQntdAcertosPosicao3"
+                        android:id="@+id/txtQntdPontosPosicao3"
                         android:layout_width="130dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -201,7 +201,7 @@
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:layout_marginTop="3dp"
-                        tools:text="12335 acertos"/>
+                        tools:text="12335 pontos"/>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardFundoLaranjaPodio3"

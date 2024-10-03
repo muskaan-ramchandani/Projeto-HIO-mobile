@@ -13,34 +13,38 @@ try {
         $idQuestionario = $_POST['idQuestionario'];
         $emailAluno = $_POST['emailAluno'];
 
-        //Contar acertos do quest cancelado
+        // Contar acertos do quest cancelado
         $sqlAcertos = "SELECT COUNT(*) as qntdAcertos FROM AcertosAluno WHERE idQuestionarioPertencente = :idQuestionario AND dataAcerto = :data AND emailAluno = :emailAluno";
         $stmtAcertos = $conn->prepare($sqlAcertos);
         $stmtAcertos->bindParam(':idQuestionario', $idQuestionario);
         $stmtAcertos->bindParam(':data', $data);
+        $stmtAcertos->bindParam(':emailAluno', $emailAluno); 
         $stmtAcertos->execute();
         $qntdAcertos = $stmtAcertos->fetch(PDO::FETCH_ASSOC)['qntdAcertos'];
 
-        //Contar erros do quest cancelado
+        // Contar erros do quest cancelado
         $sqlErros = "SELECT COUNT(*) as qntdErros FROM ErrosAluno WHERE idQuestionarioPertencente = :idQuestionario AND dataErro = :data AND emailAluno = :emailAluno";
         $stmtErros = $conn->prepare($sqlErros);
         $stmtErros->bindParam(':idQuestionario', $idQuestionario);
         $stmtErros->bindParam(':data', $data);
+        $stmtErros->bindParam(':emailAluno', $emailAluno); 
         $stmtErros->execute();
         $qntdErros = $stmtErros->fetch(PDO::FETCH_ASSOC)['qntdErros'];
 
-        //Apagar acertos  do quest cancelado
+        // Apagar acertos do quest cancelado
         $sqlDeleteAcertos = "DELETE FROM AcertosAluno WHERE idQuestionarioPertencente = :idQuestionario AND dataAcerto = :data AND emailAluno = :emailAluno";
         $stmtDeleteAcertos = $conn->prepare($sqlDeleteAcertos);
         $stmtDeleteAcertos->bindParam(':idQuestionario', $idQuestionario);
         $stmtDeleteAcertos->bindParam(':data', $data);
+        $stmtDeleteAcertos->bindParam(':emailAluno', $emailAluno);
         $stmtDeleteAcertos->execute();
 
-        //Apagar erros  do quest cancelado
+        // Apagar erros do quest cancelado
         $sqlDeleteErros = "DELETE FROM ErrosAluno WHERE idQuestionarioPertencente = :idQuestionario AND dataErro = :data AND emailAluno = :emailAluno";
         $stmtDeleteErros = $conn->prepare($sqlDeleteErros);
         $stmtDeleteErros->bindParam(':idQuestionario', $idQuestionario);
         $stmtDeleteErros->bindParam(':data', $data);
+        $stmtDeleteErros->bindParam(':emailAluno', $emailAluno); 
         $stmtDeleteErros->execute();
 
         echo json_encode(array(

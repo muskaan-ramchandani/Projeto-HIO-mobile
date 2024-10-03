@@ -48,10 +48,10 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
 
     private Date dataAtual;
 
-    private int idQuestionarioPertencente, idQuestaoPertencente;
+    private int idQuestionarioPertencente, idQuestaoPertencente, numeroQuestao;
     private Context context;
 
-    public static FragmentPerguntaRespostasQuestionario newInstance(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Aluno alunoCadastrado, Date dataAtual) {
+    public static FragmentPerguntaRespostasQuestionario newInstance(Questao questao, int idQuestionarioPertencente, int idQuestaoPertencente, Aluno alunoCadastrado, Date dataAtual, int numeroQuestao) {
         FragmentPerguntaRespostasQuestionario fragment = new FragmentPerguntaRespostasQuestionario();
         Bundle args = new Bundle();
         args.putParcelable("questao", questao);
@@ -59,6 +59,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         args.putInt("idQuestaoPertencente", idQuestaoPertencente);
         args.putParcelable("alunoCadastrado", alunoCadastrado);
         args.putLong("dataAtual", dataAtual.getTime()); // Armazenando como long
+        args.putInt("numeroQuestao", numeroQuestao);
 
         fragment.setArguments(args);
         return fragment;
@@ -68,6 +69,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            numeroQuestao = getArguments().getInt("numeroQuestao");
             questao = getArguments().getParcelable("questao");
             idQuestionarioPertencente = getArguments().getInt("idQuestionarioPertencente");
             idQuestaoPertencente = getArguments().getInt("idQuestaoPertencente");
@@ -90,7 +92,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TextView pergunta = binding.txtPerguntaQuestionario;
-        String valorPergunta= "<b>Pergunta " +questao.getId()+"</b><br>"+questao.getTxtPergunta();
+        String valorPergunta= "<b>Pergunta " +numeroQuestao+"</b><br>"+questao.getTxtPergunta();
         pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
 
         configurarRecyclerAlternativas();
