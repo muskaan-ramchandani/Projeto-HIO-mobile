@@ -2,14 +2,15 @@ package com.example.helperinolympics.model;
 
 public class Ranking {
 
-    private int posicao, fotoPerfil, qntdAcertos;
-    private String user;
+    private int posicao, fotoPerfil, qntdPontos;
+    private String user, email;
 
-    public Ranking(int posicao, int fotoPerfil, int qntdAcertos, String user) {
+    public Ranking(int posicao, int fotoPerfil, int qntdPontos, String user,String email) {
         setPosicao(posicao);
         setFotoPerfil(fotoPerfil);
-        setQntdAcertos(qntdAcertos);
+        setQntdPontos(qntdPontos);
         setUser(user);
+        setEmail(email);
     }
 
     public int getPosicao() {
@@ -28,12 +29,12 @@ public class Ranking {
         this.fotoPerfil = fotoPerfil;
     }
 
-    public int getQntdAcertos() {
-        return qntdAcertos;
+    public int getQntdPontos() {
+        return qntdPontos;
     }
 
-    public void setQntdAcertos(int qntdAcertos) {
-        this.qntdAcertos = qntdAcertos;
+    public void setQntdPontos(int qntdPontos) {
+        this.qntdPontos = qntdPontos;
     }
 
     public String getUser() {
@@ -42,5 +43,13 @@ public class Ranking {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -66,11 +66,11 @@
                     tools:text="12330" />
 
                 <TextView
-                    android:id="@+id/txtAcertosRanking"
+                    android:id="@+id/txtPontosRanking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="acertos"
+                    android:text="pontos"
                     android:fontFamily="@font/questrial"
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
