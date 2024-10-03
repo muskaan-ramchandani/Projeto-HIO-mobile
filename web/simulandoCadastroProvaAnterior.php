@@ -26,7 +26,7 @@
         $anoDaProva = $_POST['anoDaProva'];
         $estado = isset($_POST['estado']) ? 1 : 0;
         $fase = $_POST['fase'];
-        $profQuePostou = $_POST['profQuePostou'];
+        $profQuePostou = $_POST['email'];
         $siglaOlimpiadaPertencente = $_POST['sigla'];
 
    

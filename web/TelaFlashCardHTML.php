@@ -75,7 +75,7 @@ try {
         <a href="file:///C:/Users/Muskaan%20Ramchandani/Projeto-HIO-mobile/webCodesHIO/TelaFlashcardSeusRascunhos.html">
             <button class="custom-button">Seus rascunhos</button>
         </a>
-        <a href="AdicionarFlashCardHTML.php?id=<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
+        <a href="simulandoCadastroFlashCard.php?id=<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>">
             <button class="custom-button">Adicionar flashcard</button>
         </a>
     </div>
