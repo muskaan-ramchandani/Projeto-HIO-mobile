@@ -39,14 +39,15 @@
    
     <!-- Novo conteúdo abaixo da barra -->
     <div class="main-content">
-        <h1>Fundamentos da Cinemática do Ponto Material</h1>
-        <div class="button-group">
-            <button class="custom-button">Tudo</button>
-            <button class="custom-button">Suas recomendações</button>
-            <button class="custom-button" onclick="openModal()">Recomendar vídeo</button>
-        </div>
+    <h1>Fundamentos da Cinemática do Ponto Material</h1>
+    <div class="button-group">
+        <button class="custom-button">Tudo</button>
+        <button class="custom-button">Suas recomendações</button>
+        <a href="simulandoCadastroVideo.php">
+            <button class="custom-button">Recomendar vídeo</button>
+        </a>
     </div>
-   
+</div>   
         <div class="info-box-container">
             <!-- Primeira linha de retângulos -->
             <div class="info-box">

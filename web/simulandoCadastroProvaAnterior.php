@@ -21,12 +21,21 @@
     } catch (PDOException $e) {
         die("Erro na conexão com o banco de dados: " . $e->getMessage());
     }
+
+    if (isset($_SESSION['emailProfessor'])) {
+        $emailProfessor = $_SESSION['emailProfessor'];
+    } else if (isset($_GET['emailProfessor'])) {
+        $emailProfessor = $_GET['emailProfessor'];
+    } else {
+        die("Erro: Professor não autenticado.");
+    }
+    
   
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $anoDaProva = $_POST['anoDaProva'];
         $estado = isset($_POST['estado']) ? 1 : 0;
         $fase = $_POST['fase'];
-        $profQuePostou = $_POST['email'];
+        $profQuePostou = $_POST['emailProfessor'];
         $siglaOlimpiadaPertencente = $_POST['sigla'];
 
    

@@ -45,20 +45,29 @@ try {
     </div>
     <div class="button-container">
         <div class="button-item">
+            <a href="simulandoCadastroTexto.php">
             <img src="Imagens_Mobile_HIO/iconeTexto.png" alt="Textos">
             <div class="button-label">Textos</div>
+            </a>
         </div>
         <div class="button-item">
-            <img src="Imagens_Mobile_HIO/iconeVideo.png" alt="Vídeos">
-            <div class="button-label">Vídeos</div>
-        </div>
+    <a href="TelaVideoHTML.php" style="text-decoration: none; color: inherit;">
+        <img src="Imagens_Mobile_HIO/iconeVideo.png" alt="Vídeos">
+        <div class="button-label">Vídeos</div>
+    </a>
+</div>
+
         <div class="button-item">
+            <a href="simulandoCadastroFlashCard.php">
             <img src="Imagens_Mobile_HIO/iconeFlashcard.png" alt="Flashcards">
             <div class="button-label">Flashcards</div>
+            </a>
         </div>
         <div class="button-item">
+            <a href="simulaCadastroQuestionario.php">
             <img src="Imagens_Mobile_HIO/iconeQuestionarios.png" alt="Questionários">
             <div class="button-label">Questionários</div>
+            </a>
         </div>
         <div class="button-item">
             <img src="Imagens_Mobile_HIO/btnVoltarBRANCO.png" alt="Voltar">
