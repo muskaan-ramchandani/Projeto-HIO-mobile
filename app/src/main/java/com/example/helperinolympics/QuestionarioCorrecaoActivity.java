@@ -5,11 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.ImageView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterCorrecao;
 import com.example.helperinolympics.databinding.ActivityQuestionarioCorrecaoBinding;
@@ -38,7 +36,8 @@ public class QuestionarioCorrecaoActivity extends Activity {
     List<Correcao> listaCorrecao = new ArrayList<>();
 
     AdapterCorrecao correcaoAdapter;
-    int qntdTotal, qntdAcertos, metadeValor;
+    int qntdTotal, qntdAcertos;
+    double metadeValor;
 
     private Aluno alunoCadastrado;
     private Conteudo conteudo;
@@ -60,6 +59,17 @@ public class QuestionarioCorrecaoActivity extends Activity {
         dataAtual = (Date) getIntent().getSerializableExtra("dataAtual");
 
         listaCorrecao();
+//
+//        binding.txtNumeroQuestaoCertas.setText(String.valueOf(qntdAcertos));
+//        binding.txtQuestoesTotais.setText("Questões de " + String.valueOf(qntdTotal));
+//
+//        if (qntdAcertos == 0) {
+//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipocomraiva);
+//        } else if (qntdAcertos < metadeValor) {
+//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoemo);
+//        } else if (qntdAcertos > metadeValor) {
+//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoalegredeolhosabertos);
+//        }
 
         binding.btnEntendiCorrecao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,28 +90,29 @@ public class QuestionarioCorrecaoActivity extends Activity {
         binding.recyclerViewListaCorrecao.setLayoutManager(layoutManager);
         binding.recyclerViewListaCorrecao.setHasFixedSize(true);
 
-        correcaoAdapter = new AdapterCorrecao(listaCorrecao);
-        binding.recyclerViewListaCorrecao.setAdapter(correcaoAdapter);
 
         new CarregaCorrecao(alunoCadastrado.getEmail(), dataAtual, quest.getId()).execute();
 
-        correcaoAdapter.notifyDataSetChanged();
+        correcaoAdapter = new AdapterCorrecao(listaCorrecao);
+        Log.d("Activity", "Lista de correções passada para o adapter: " + listaCorrecao.size());
+
+        binding.recyclerViewListaCorrecao.setAdapter(correcaoAdapter);
     }
 
-    private class CarregaCorrecao extends AsyncTask<Void, Void, Correcao> {
+    private class CarregaCorrecao extends AsyncTask<Void, Void, List<Correcao>> {
         String email;
         Date dataErro;
         int idQuestionarioPertencente;
 
-        public CarregaCorrecao(String email, Date dataErro, int idQuestionarioPertencente){
+        public CarregaCorrecao(String email, Date dataErro, int idQuestionarioPertencente) {
             this.email = email;
-            this.dataErro=dataErro;
-            this.idQuestionarioPertencente=idQuestionarioPertencente;
+            this.dataErro = dataErro;
+            this.idQuestionarioPertencente = idQuestionarioPertencente;
         }
 
         @Override
-        protected Correcao doInBackground(Void... voids) {
-            Correcao correcao = new Correcao();
+        protected List<Correcao> doInBackground(Void... voids) {
+            List<Correcao> correcoes = new ArrayList<>();
 
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -125,7 +136,8 @@ public class QuestionarioCorrecaoActivity extends Activity {
                     String jsonString = converterParaJSONString(in);
                     Log.d("DADOS", jsonString);
 
-                    listaCorrecao = converterParaCorrecao(jsonString);
+                    correcoes.addAll(converterParaCorrecao(jsonString));
+                    listaCorrecao.addAll(converterParaCorrecao(jsonString));
                 } else {
                     Log.d("ERRO_CONEXAO", "Erro ao conectar, código de resposta: " + conexao.getResponseCode());
                 }
@@ -133,7 +145,26 @@ public class QuestionarioCorrecaoActivity extends Activity {
             } catch (Exception e) {
                 Log.d("ERRO", e.toString());
             }
-            return correcao;
+            return correcoes;
+        }
+
+        @Override
+        protected void onPostExecute(List<Correcao> correcoes) {
+            metadeValor = (double) qntdTotal / 2;
+            binding.txtNumeroQuestaoCertas.setText(String.valueOf(qntdAcertos));
+            binding.txtQuestoesTotais.setText("Questões de " + String.valueOf(qntdTotal));
+
+            if (qntdAcertos == 0) {
+                binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipocomraiva);
+            } else if (qntdAcertos < metadeValor) {
+                binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoemo);
+            } else {
+                //qntdAcertos > metadeValor
+                binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoalegredeolhosabertos);
+            }
+
+            correcaoAdapter.notifyDataSetChanged();
+
         }
 
         private String converterParaJSONString(InputStream in) {
@@ -151,13 +182,12 @@ public class QuestionarioCorrecaoActivity extends Activity {
         }
 
         private List<Correcao> converterParaCorrecao(String jsonString) {
-            List<Correcao> correcoes = new ArrayList<>(); // Nova lista para armazenar as correções
+            List<Correcao> correcoes = new ArrayList<>();
             try {
                 JSONObject jsonObject = new JSONObject(jsonString);
 
                 int totalErros = jsonObject.getInt("totalErros");
                 qntdTotal = jsonObject.getInt("totalQuestoes");
-                metadeValor = qntdTotal / 2;
                 qntdAcertos = qntdTotal - totalErros;
 
                 JSONArray jsonArray = jsonObject.getJSONArray("questoesComErros");
@@ -179,7 +209,7 @@ public class QuestionarioCorrecaoActivity extends Activity {
             }
             return correcoes;
         }
-
     }
+
 
 }

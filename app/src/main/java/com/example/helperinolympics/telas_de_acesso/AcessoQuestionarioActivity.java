@@ -40,6 +40,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -121,16 +122,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                 //apagar acertos e erros, restaurar pontuação
                 //exibir telinha de processamento da informacao
 
-                new RestauraPontuacaoAcertosErros(dataAtual, quest.getId(), alunoCadastrado.getEmail());
-
-                //Restaura pontuação calculando com: qntdErrosCancelados, qntdAcertosCancelados
-                int pontosAcertosARetirar = -(qntdAcertosCancelados * 10);
-                int pontosErrosAAdicionar = qntdErrosCancelados * 2;
-
-                int pontuacaoARepor =pontosErrosAAdicionar + pontosAcertosARetirar;
-
-                Pontuacao pontuacao = new Pontuacao(pontuacaoARepor, alunoCadastrado.getEmail());
-                new AtualizarPontuacao().execute(pontuacao);
+                new RestauraPontuacaoAcertosErros(dataAtual, quest.getId(), alunoCadastrado.getEmail()).execute();
             }
         });
 
@@ -145,7 +137,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
 
         if (contNumeroQuestoes < totalQuestoes) {
             atualizarProgresso(contNumeroQuestoes);
-            configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+            configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes), contNumeroQuestoes + 1);
         }else{
 
             Intent intent = new Intent(AcessoQuestionarioActivity.this, QuestionarioCorrecaoActivity.class);
@@ -159,8 +151,8 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         }
     }
 
-    private void configurarQuestaoASerExibida(Questao questao) {
-        setFragment(FragmentPerguntaRespostasQuestionario.newInstance(questao, quest.getId(), questao.getId(), alunoCadastrado, dataAtual));
+    private void configurarQuestaoASerExibida(Questao questao, int numeroQuestao) {
+        setFragment(FragmentPerguntaRespostasQuestionario.newInstance(questao, quest.getId(), questao.getId(), alunoCadastrado, dataAtual, numeroQuestao));
     }
 
     private void setFragment(Fragment fragment) {
@@ -205,7 +197,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
 
                     //exibindo primeira questao ao ter o acesso de um questionario
                     totalQuestoes = listaDeQuestoes.size();
-                    configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+                    configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes), contNumeroQuestoes + 1);
 
                     binding.progressBar.setMax(totalQuestoes);
                     atualizarProgresso(contNumeroQuestoes);
@@ -230,7 +222,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                 binding.progressBar.setMax(totalQuestoes);
                 atualizarProgresso(contNumeroQuestoes);
 
-                configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes));
+                configurarQuestaoASerExibida(listaDeQuestoes.get(contNumeroQuestoes), contNumeroQuestoes + 1);
             } else {
                 Log.e("ERRO_QUESTOES", "Nenhuma questão carregada");
             }
@@ -296,6 +288,9 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             StringBuilder result = new StringBuilder();
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String dataErroFormatada = sdf.format(data);
+
             try {
                 URL url = new URL("http://192.168.1.11:8086/phpHio/apagaAcertosErrosAoDesistirDoQuestionario.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -306,7 +301,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                 conexao.setDoOutput(true);
                 conexao.connect();
 
-                String parametros = "&data=" + data +
+                String parametros = "&data=" + URLEncoder.encode(dataErroFormatada, "UTF-8") +
                         "&idQuestionario=" + idQuestionario +
                         "&emailAluno=" + emailAluno;
 
@@ -346,12 +341,14 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                     qntdErrosCancelados = jsonResponse.getInt("qntdErros");
                     qntdAcertosCancelados = jsonResponse.getInt("qntdAcertos");
 
-                    Intent intent = new Intent(AcessoQuestionarioActivity.this, QuestionarioActivity.class);
-                    intent.putExtra("alunoCadastrado", alunoCadastrado);
-                    intent.putExtra("conteudo", conteudo);
-                    intent.putExtra("olimpiada", siglaOlimpiada);
-                    startActivity(intent);
-                    finish();
+                    //Restaura pontuação calculando com: qntdErrosCancelados, qntdAcertosCancelados
+                    int pontosAcertosARetirar = -(qntdAcertosCancelados * 10);
+                    int pontosErrosAAdicionar = qntdErrosCancelados * 2;
+
+                    int pontuacaoARepor =pontosErrosAAdicionar + pontosAcertosARetirar;
+
+                    Pontuacao pontuacao = new Pontuacao(pontuacaoARepor, alunoCadastrado.getEmail());
+                    new AtualizarPontuacao().execute(pontuacao);
 
                 } else {
                     String message = jsonResponse.getString("message");
@@ -361,6 +358,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
     }
 
     private class AtualizarPontuacao extends AsyncTask<Pontuacao, Void, String> {
@@ -408,9 +406,21 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
             if (result != null) {
                 try {
                     JSONObject jsonResponse = new JSONObject(result);
-                    String message = jsonResponse.getString("message");
-                    Log.e("Msg", message);
+                    String status = jsonResponse.getString("status");
+                    Log.e("Msg", status);
 
+                    if (status.equals("success")) {
+                        Intent intent = new Intent(AcessoQuestionarioActivity.this, QuestionarioActivity.class);
+                        intent.putExtra("alunoCadastrado", alunoCadastrado);
+                        intent.putExtra("conteudo", conteudo);
+                        intent.putExtra("olimpiada", siglaOlimpiada);
+                        startActivity(intent);
+                        finish();
+
+                    } else {
+                        String message = jsonResponse.getString("message");
+                        Log.e("Msg", message);
+                    }
                 } catch (Exception e) {
                     Log.e("Erro JSON", e.getMessage());
                 }

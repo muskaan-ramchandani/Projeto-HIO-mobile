@@ -1,6 +1,7 @@
 package com.example.helperinolympics.adapter;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,12 @@ public class AdapterCorrecao extends RecyclerView.Adapter<AdapterCorrecao.Correc
         String valorPergunta ="<b>Pergunta: </b>" + listaQuestoesCorrigidas.get(position).getPergunta();
         holder.pergunta.setText(Html.fromHtml(valorPergunta, Html.FROM_HTML_MODE_COMPACT));
 
-        String valorAlternativaCorreta = "<b>Alternativa correta: </b>" + listaQuestoesCorrigidas.get(position).getAlternativaCorreta();
+        String valorAlternativaCorreta = "<b>Alternativa correta: </b>"  + listaQuestoesCorrigidas.get(position).getAlternativaCorreta();
         holder.alternativaCorreta.setText(Html.fromHtml(valorAlternativaCorreta, Html.FROM_HTML_MODE_COMPACT));
 
         String valorExplicacao = "<b>Explicação: </b>" + listaQuestoesCorrigidas.get(position).getExplicacao();
         holder.explicacao.setText(Html.fromHtml(valorExplicacao, Html.FROM_HTML_MODE_COMPACT));
+
 
     }
 
