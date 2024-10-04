@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.Ranking;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingViewHolder> {
 
-    private List<Ranking> listaRanking;
+    private List<Ranking> listaRanking = new ArrayList<Ranking>();
 
     public AdapterRanking(List<Ranking> listaRanking){
         this.listaRanking = listaRanking;
@@ -28,17 +29,13 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingV
     }
 
     public void onBindViewHolder(@NonNull AdapterRanking.RankingViewHolder holder, int position){
-        int valorPosicao = listaRanking.get(position).getPosicao();
-        holder.posicao.setText(String.valueOf(valorPosicao));
+        Ranking itemLista =  listaRanking.get(position);
 
-        int valorFoto = listaRanking.get(position).getFotoPerfil();
-        holder.foto.setImageResource(valorFoto);
-
-        String valorUser = listaRanking.get(position).getUser();
-        holder.user.setText(valorUser);
-
-        int valorPontos = listaRanking.get(position).getQntdPontos();
-        holder.pontos.setText(String.valueOf(valorPontos));
+        holder.posicao.setText(String.valueOf(itemLista.getPosicao()));
+        holder.foto.setImageBitmap(itemLista.getFotoPerfil());
+        holder.user.setText(itemLista.getUser());
+        holder.qntdPontos.setText(String.valueOf(itemLista.getQntdPontos()));
+        holder.ponto.setText("pontos");
 
     }
 
@@ -46,14 +43,21 @@ public class AdapterRanking extends RecyclerView.Adapter<AdapterRanking.RankingV
 
     public class RankingViewHolder extends RecyclerView.ViewHolder{
 
-        TextView user, posicao, pontos;
+        TextView user, posicao, qntdPontos, ponto;
         ImageView foto;
         public RankingViewHolder(@NonNull View itemView){
             super(itemView);
             posicao=itemView.findViewById(R.id.txtPosicaoRanking);
             foto=itemView.findViewById(R.id.imgFotoPerfilModeloRanking);
             user=itemView.findViewById(R.id.txtNomeDeUsuarioRanking);
-            pontos=itemView.findViewById(R.id.txtPontosRanking);
+            qntdPontos = itemView.findViewById(R.id.txtQuantidadePontosRanking);
+            ponto=itemView.findViewById(R.id.txtPontosRanking);
         }
+    }
+
+    public void atualizarOpcoes(List<Ranking> ranking){
+        this.listaRanking.clear();
+        this.listaRanking.addAll(ranking);
+        this.notifyDataSetChanged();
     }
 }

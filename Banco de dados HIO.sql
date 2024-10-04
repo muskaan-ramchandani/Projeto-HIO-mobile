@@ -205,6 +205,8 @@ CREATE TABLE ErrosAluno(
 
 #Apenas para apagar a simulação
 delete from PontuacaoAlunos WHERE emailAluno='isassevalho@gmail.com';
+delete from AcertosAluno WHERE emailAluno='isassevalho@gmail.com';
+delete from ErrosAluno WHERE emailAluno='isassevalho@gmail.com';
 
 DROP TABLE IF EXISTS PontuacaoAlunos;
 CREATE TABLE PontuacaoAlunos(

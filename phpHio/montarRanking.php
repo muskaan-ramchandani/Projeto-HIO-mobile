@@ -1,6 +1,6 @@
 <?php
-header('Content-Type: application/json');
-header('Character-Encoding: utf-8');
+header('Content-Type: application/json; charset=utf-8');
+header('Character-Encoding: utf-8'); 
 
 $servername = "localhost"; 
 $username = "root";        
@@ -15,14 +15,27 @@ try {
     exit;
 }
 
+$sql= "SELECT 
+    A.fotoPerfil, COALESCE(P.pontuacao, 0) AS pontuacao, A.nomeUsuario, A.email
+    FROM Aluno A
+    LEFT JOIN PontuacaoAlunos P ON A.email = P.emailAluno
+    ORDER BY P.pontuacao DESC;";
 
-$email = $_GET['email'] ?? '';
+$statement = $pdo->prepare($sql);
+$statement->execute();
 
-if (empty($email)) {
-    echo json_encode(["message" => "Não foi possível detectar o email do aluno"]);
-    exit;
+$posicoesRanking = [];
+while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
+    if (isset($result['fotoPerfil']) && !empty($result['fotoPerfil'])) {
+        $result['fotoPerfil'] = base64_encode($result['fotoPerfil']);
+    } else {
+        $result['fotoPerfil'] = null; 
+    }
+    $posicoesRanking[] = (object) $result;
 }
 
-$sql= "SELECT "
+echo json_encode(['posicoesRanking' => $posicoesRanking]);
+
+$pdo = null;
 
 ?>

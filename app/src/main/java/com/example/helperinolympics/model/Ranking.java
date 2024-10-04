@@ -1,11 +1,21 @@
 package com.example.helperinolympics.model;
 
-public class Ranking {
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private int posicao, fotoPerfil, qntdPontos;
+import java.io.ByteArrayOutputStream;
+
+public class Ranking implements Parcelable {
+
+    private int posicao, qntdPontos;
+    private Bitmap fotoPerfil;
     private String user, email;
 
-    public Ranking(int posicao, int fotoPerfil, int qntdPontos, String user,String email) {
+    public Ranking(){}
+
+    public Ranking(int posicao, Bitmap fotoPerfil, int qntdPontos, String user, String email) {
         setPosicao(posicao);
         setFotoPerfil(fotoPerfil);
         setQntdPontos(qntdPontos);
@@ -21,11 +31,11 @@ public class Ranking {
         this.posicao = posicao;
     }
 
-    public int getFotoPerfil() {
+    public Bitmap getFotoPerfil() {
         return fotoPerfil;
     }
 
-    public void setFotoPerfil(int fotoPerfil) {
+    public void setFotoPerfil(Bitmap fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
 
@@ -52,4 +62,52 @@ public class Ranking {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    protected Ranking(Parcel in) {
+        posicao = in.readInt();
+        qntdPontos = in.readInt();
+        user = in.readString();
+        email = in.readString();
+
+        byte[] bitmapBytes = in.createByteArray();
+        if (bitmapBytes != null) {
+            fotoPerfil = BitmapFactory.decodeByteArray(bitmapBytes, 0, bitmapBytes.length);
+        } else {
+            fotoPerfil = null;
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(posicao);
+        dest.writeInt(qntdPontos);
+        dest.writeString(user);
+        dest.writeString(email);
+
+        if (fotoPerfil != null) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            fotoPerfil.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] bitmapBytes = byteArrayOutputStream.toByteArray();
+            dest.writeByteArray(bitmapBytes);
+        } else {
+            dest.writeByteArray(null);
+        }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<Ranking> CREATOR = new Parcelable.Creator<Ranking>() {
+        @Override
+        public Ranking createFromParcel(Parcel in) {
+            return new Ranking(in);
+        }
+
+        @Override
+        public Ranking[] newArray(int size) {
+            return new Ranking[size];
+        }
+    };
 }
