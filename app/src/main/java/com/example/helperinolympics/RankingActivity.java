@@ -102,14 +102,17 @@ public class RankingActivity extends Activity {
 
     public void dadosPodio(){
         if(rankingPodio.size() > 0){
+            binding.fotoPerfilPosicao1.setImageBitmap(rankingPodio.get(0).getFotoPerfil());
             binding.txtUserPosicao1.setText(rankingPodio.get(0).getUser());
             binding.txtQntdPontosPosicao1.setText(String.valueOf(rankingPodio.get(0).getQntdPontos()));
         }
         if(rankingPodio.size() > 1){
+            binding.fotoPerfilPosicao2.setImageBitmap(rankingPodio.get(1).getFotoPerfil());
             binding.txtUserPosicao2.setText(rankingPodio.get(1).getUser());
             binding.txtQntdPontosPosicao2.setText(String.valueOf(rankingPodio.get(1).getQntdPontos()));
         }
         if(rankingPodio.size() > 2){
+            binding.fotoPerfilPosicao3.setImageBitmap(rankingPodio.get(2).getFotoPerfil());
             binding.txtUserPosicao3.setText(rankingPodio.get(2).getUser());
             binding.txtQntdPontosPosicao3.setText(String.valueOf(rankingPodio.get(2).getQntdPontos()));
         }
@@ -202,16 +205,20 @@ public class RankingActivity extends Activity {
                     itemRanking.setUser(rankingJSON.getString("nomeUsuario"));
                     itemRanking.setQntdPontos(rankingJSON.getInt("pontuacao"));
 
-                    String capaBase64 = rankingJSON.optString("fotoPerfil", null);
+                    String capaBase64 = rankingJSON.optString("fotoPerfil");
+                    Bitmap bitmapCapa = decodeBase64ToBitmap(capaBase64);
+                    itemRanking.setFotoPerfil(bitmapCapa);
 
-                    if(capaBase64!=null){
-                        Bitmap bitmapCapa = decodeBase64ToBitmap(capaBase64);
-                        itemRanking.setFotoPerfil(bitmapCapa);
-                    } else {
-                        Drawable drawable = ContextCompat.getDrawable(RankingActivity.this, R.drawable.iconeperfilvazioredonda);
-                        Bitmap bitmap = drawableToBitmap(drawable);
-                        itemRanking.setFotoPerfil(bitmap);
-                    }
+//                    if (capaBase64 != null && !capaBase64.isEmpty()) {
+//
+//                        Bitmap bitmapCapa = decodeBase64ToBitmap(capaBase64);
+//                        itemRanking.setFotoPerfil(bitmapCapa);
+//
+//                    } else {
+//                        Drawable drawable = ContextCompat.getDrawable(RankingActivity.this, R.drawable.iconeperfilvazioredonda);
+//                        Bitmap bitmap = drawableToBitmap(drawable);
+//                        itemRanking.setFotoPerfil(bitmap);
+//                    }
 
                     Log.d("Item ranking", itemRanking.toString());
                     ranking.add(itemRanking);
@@ -224,32 +231,15 @@ public class RankingActivity extends Activity {
         }
     }
 
-    public Bitmap decodeBase64ToBitmap(String base64Str) {
+    public Bitmap decodeBase64ToBitmap(String base64String) {
         try {
-            byte[] decodedString = Base64.decode(base64Str, Base64.DEFAULT);
+            byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            Log.e("IMAGE_DECODING", "Erro ao decodificar a imagem Base64: " + e.getMessage());
             return null;
         }
     }
 
 
-    public static Bitmap drawableToBitmap (Drawable drawable) {
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable)drawable).getBitmap();
-        }
-
-        int width = drawable.getIntrinsicWidth();
-        width = width > 0 ? width : 1;
-        int height = drawable.getIntrinsicHeight();
-        height = height > 0 ? height : 1;
-
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-
-        return bitmap;
-    }
 }

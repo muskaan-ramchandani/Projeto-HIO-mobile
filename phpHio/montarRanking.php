@@ -29,7 +29,9 @@ while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
     if (isset($result['fotoPerfil']) && !empty($result['fotoPerfil'])) {
         $result['fotoPerfil'] = base64_encode($result['fotoPerfil']);
     } else {
-        $result['fotoPerfil'] = null; 
+        // Atribuir a imagem padrão
+        $defaultImagePath = "C:\\HIOMobilePCCT\\Imagens Mobile HIO\\iconePerfilVazioRedonda.png";
+        $result['fotoPerfil'] = base64_encode(file_get_contents($defaultImagePath));
     }
     $posicoesRanking[] = (object) $result;
 }
