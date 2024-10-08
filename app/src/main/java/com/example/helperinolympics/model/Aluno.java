@@ -1,5 +1,6 @@
 package com.example.helperinolympics.model;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,7 +8,7 @@ import java.io.File;
 
 public class Aluno implements Parcelable {
     private String nomeCompleto, nomeUsuario, email, senha;
-    private File fotoPerfil;
+    private Bitmap fotoPerfil;
 
     public Aluno(){}
 
@@ -50,11 +51,11 @@ public class Aluno implements Parcelable {
         this.senha = senha;
     }
 
-    public File getFotoPerfil() {
+    public Bitmap getFotoPerfil() {
         return fotoPerfil;
     }
 
-    public void setFotoPerfil(File fotoPerfil) {
+    public void setFotoPerfil(Bitmap fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
 

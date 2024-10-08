@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.helperinolympics.adapter.AdapterDadosAcertos;
+import com.example.helperinolympics.databinding.ActivityAcertosSemanaisBinding;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.Acertos;
+import com.example.helperinolympics.model.Aluno;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
@@ -26,18 +28,21 @@ import com.github.mikephil.charting.data.BarEntry;
 
 public class AcertosSemanaisActivity extends Activity {
 
-    BarChart barChart;
-    RecyclerView rVListaAcertos;
+    private ActivityAcertosSemanaisBinding binding;
+    private Aluno alunoCadastrado;
     AdapterDadosAcertos acertosAdapter;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acertos_semanais);
+        setContentView(binding.getRoot());
 
-        findViewById(R.id.btnVoltarAoPerfilDosAcertos).setOnClickListener(new View.OnClickListener() {
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+
+        binding.btnVoltarAoPerfilDosAcertos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AcertosSemanaisActivity.this, PerfilAlunoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
@@ -48,31 +53,20 @@ public class AcertosSemanaisActivity extends Activity {
     }
 
     private void configurarRecyclerAcertos() {
-        rVListaAcertos = findViewById(R.id.recyclerViewListaAcertos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rVListaAcertos.setLayoutManager(layoutManager);
-        rVListaAcertos.setHasFixedSize(true);
+        binding.recyclerViewListaAcertos.setLayoutManager(layoutManager);
+        binding.recyclerViewListaAcertos.setHasFixedSize(true);
 
         List<Acertos> listaAcertos = new ArrayList<>();
         acertosAdapter = new AdapterDadosAcertos(listaAcertos);
-        rVListaAcertos.setAdapter(acertosAdapter);
+        binding.recyclerViewListaAcertos.setAdapter(acertosAdapter);
 
-        //DADOS PARA TESTE
-//        Acertos dados1 = new Acertos("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
-//                "Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
-//
-//        listaAcertos.add(dados1);
-//
-//        Acertos dados2 = new Acertos("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
-//                "Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
-//        listaAcertos.add(dados2);
         acertosAdapter.notifyDataSetChanged();
     }
 
     private void configurarBarra(){
-        barChart = findViewById(R.id.graficoBarraAcertosSemanais);
 
         //Entradas de dados
         ArrayList<BarEntry> entradaDados = new ArrayList<>();
@@ -93,7 +87,7 @@ public class AcertosSemanaisActivity extends Activity {
         barDataSet.setValueTextSize(10f);
 
         //Inserindo legenda
-        Legend legend = barChart.getLegend();
+        Legend legend = binding.graficoBarraAcertosSemanais.getLegend();
         legend.setEnabled(true);
         legend.setTextSize(12f);
         legend.setTextColor(Color.BLACK);
@@ -118,8 +112,8 @@ public class AcertosSemanaisActivity extends Activity {
 
         //Adicionando configurações
         BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
-        barChart.animateY(2000);
+        binding.graficoBarraAcertosSemanais.setData(barData);
+        binding.graficoBarraAcertosSemanais.animateY(2000);
     }
 
 

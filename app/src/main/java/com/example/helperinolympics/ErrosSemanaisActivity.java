@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.AdapterDadosErros;
+import com.example.helperinolympics.databinding.ActivityErrosSemanaisBinding;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Erros;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -24,20 +26,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ErrosSemanaisActivity extends Activity {
+    private Aluno alunoCadastrado;
+    private ActivityErrosSemanaisBinding binding;
 
-    BarChart barChart2;
-    RecyclerView rVListaErros;
-
-    AdapterDadosErros errosAdapter;
+    private AdapterDadosErros errosAdapter;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_erros_semanais);
+        binding = ActivityErrosSemanaisBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        findViewById(R.id.btnVoltarAoPerfilDosErros).setOnClickListener(new View.OnClickListener() {
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+
+        binding.btnVoltarAoPerfilDosErros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ErrosSemanaisActivity.this, PerfilAlunoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
@@ -46,32 +51,19 @@ public class ErrosSemanaisActivity extends Activity {
         configurarBarra();
 
         //Lista de erros
-        rVListaErros = findViewById(R.id.recyclerViewListaErros);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rVListaErros.setLayoutManager(layoutManager);
-        rVListaErros.setHasFixedSize(true);
+        binding.recyclerViewListaErros.setLayoutManager(layoutManager);
+        binding.recyclerViewListaErros.setHasFixedSize(true);
 
         List<Erros> listaErros = new ArrayList<>();
         errosAdapter = new AdapterDadosErros(listaErros);
-        rVListaErros.setAdapter(errosAdapter);
+        binding.recyclerViewListaErros.setAdapter(errosAdapter);
 
-//        //DADOS PARA TESTE
-//        Erros dados1 = new Erros("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
-//                "Qual das seguintes afirmações sobre determinantes está correta?", "O determinante de uma matriz quadrada é sempre um booleab.", "O determinante de uma matriz quadrada é sempre um número real.");
-//
-//        listaErros.add(dados1);
-//
-//        Erros dados2 = new Erros("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
-//                "Para quê serve o uso da estrutura if/else?", "Serve para avaliar uma expressão como sendo int ou boolean e, de acordo com o resultado dessa verificação, executar uma ou outra ação.", "Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
-
-//        listaErros.add(dados2);
         errosAdapter.notifyDataSetChanged();
     }
 
     private void configurarBarra(){
-        barChart2 = findViewById(R.id.graficoBarraErrosSemanais);
-
         //Entradas de dados
         ArrayList<BarEntry> entradaDados2 = new ArrayList<>();
         entradaDados2.add(new BarEntry(1f, 6f));
@@ -91,7 +83,7 @@ public class ErrosSemanaisActivity extends Activity {
         barDataSet.setValueTextSize(10f);
 
         //Inserindo legenda
-        Legend legend = barChart2.getLegend();
+        Legend legend = binding.graficoBarraErrosSemanais.getLegend();
         legend.setEnabled(true);
         legend.setTextSize(12f);
         legend.setTextColor(Color.BLACK);
@@ -116,8 +108,8 @@ public class ErrosSemanaisActivity extends Activity {
 
         //Adicionando configurações
         BarData barData = new BarData(barDataSet);
-        barChart2.setData(barData);
-        barChart2.animateY(2000);
+        binding.graficoBarraErrosSemanais.setData(barData);
+        binding.graficoBarraErrosSemanais.animateY(2000);
     }
 
 

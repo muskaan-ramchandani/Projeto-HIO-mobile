@@ -42,7 +42,6 @@
 
     <!--Itens do menu deslizante-->
     <string name="menu_perfil">Seu perfil</string>
-    <string name="menu_favoritos">Favoritos</string>
     <string name="menu_forum">Fórum</string>
     <string name="menu_manual">Manual</string>
     <string name="menu_configuracoes">Configurações</string>

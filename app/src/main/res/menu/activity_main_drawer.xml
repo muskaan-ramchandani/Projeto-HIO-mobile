@@ -10,11 +10,6 @@
             android:title="@string/menu_perfil"
             android:itemTextAppearance="@style/NavigationViewTextStyle"/>
         <item
-            android:id="@+id/nav_favoritos_aluno"
-            android:icon="@drawable/iconefavoritos"
-            android:title="@string/menu_favoritos"
-            android:itemTextAppearance="@style/NavigationViewTextStyle"/>
-        <item
             android:id="@+id/nav_forum"
             android:icon="@drawable/iconechats"
             android:title="@string/menu_forum"
