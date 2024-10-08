@@ -22,12 +22,20 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ErrosSemanaisActivity extends Activity {
     private Aluno alunoCadastrado;
     private ActivityErrosSemanaisBinding binding;
+    private Date dataAtual, dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2,
+            dataInicialSemana3, dataFinalSemana3;
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     private AdapterDadosErros errosAdapter;
 
@@ -48,9 +56,12 @@ public class ErrosSemanaisActivity extends Activity {
             }
         });
 
+        configurarDatas();
         configurarBarra();
+        configurarRecyclerErros();
+    }
 
-        //Lista de erros
+    private void configurarRecyclerErros() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.recyclerViewListaErros.setLayoutManager(layoutManager);
@@ -61,6 +72,32 @@ public class ErrosSemanaisActivity extends Activity {
         binding.recyclerViewListaErros.setAdapter(errosAdapter);
 
         errosAdapter.notifyDataSetChanged();
+    }
+
+    private void configurarDatas() {
+        //CONFIGURANDO DATAS (SEMANA ATUAL, PASSADA E RETRASADA)
+        Calendar calendar = Calendar.getInstance();
+        dataAtual = calendar.getTime();
+
+        // Semana 3 (semana atual)
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        dataInicialSemana3 = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        dataFinalSemana3 = calendar.getTime();
+
+        // Semana 2 (semana passada)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        dataInicialSemana2 = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        dataFinalSemana2 = calendar.getTime();
+
+        // Semana 1 (semana retrasada)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        dataInicialSemana1 = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        dataFinalSemana1 = calendar.getTime();
     }
 
     private void configurarBarra(){
@@ -92,16 +129,17 @@ public class ErrosSemanaisActivity extends Activity {
         legend.setXEntrySpace(25f); // Espaçamento horizontal entre as entradas da legenda
         legend.setYEntrySpace(5f); // Espaçamento vertical entre as entradas da legenda
 
+        //LEGENDAS DO GRÁFICO
         LegendEntry entradaLegenda1 = new LegendEntry();
-        entradaLegenda1.label = "23/06 - 29/06";
+        entradaLegenda1.label = dateFormat.format(dataInicialSemana1) +  dateFormat.format(dataFinalSemana1);
         entradaLegenda1.formColor = corAzul;
 
         LegendEntry entradaLegenda2 = new LegendEntry();
-        entradaLegenda2.label = "30/06 - 06/07";
+        entradaLegenda2.label = dateFormat.format(dataInicialSemana2) +  dateFormat.format(dataFinalSemana2);
         entradaLegenda2.formColor = corRosa;
 
         LegendEntry entradaLegenda3 = new LegendEntry();
-        entradaLegenda3.label = "07/07 - 13/07";
+        entradaLegenda3.label = dateFormat.format(dataInicialSemana3) +  dateFormat.format(dataFinalSemana3);
         entradaLegenda3.formColor = corRoxa;
 
         legend.setCustom(new LegendEntry[]{entradaLegenda1, entradaLegenda2, entradaLegenda3});
@@ -111,6 +149,8 @@ public class ErrosSemanaisActivity extends Activity {
         binding.graficoBarraErrosSemanais.setData(barData);
         binding.graficoBarraErrosSemanais.animateY(2000);
     }
+
+
 
 
 }

@@ -14,78 +14,81 @@ try {
     exit;
 }
 
+// Receber os parâmetros
 $emailAluno = $_GET['emailAluno'] ?? '';
-$dataErro = $_GET['dataErro'] ?? '';
-$idQuestionarioPertencente = $_GET['idQuestionarioPertencente'] ?? '';
+$dataInicialSemana1 = $_GET['dataInicialSemana1'] ?? ''; 
+$dataFinalSemana1 = $_GET['dataFinalSemana1'] ?? '';
+$dataInicialSemana2 = $_GET['dataInicialSemana2'] ?? '';
+$dataFinalSemana2 = $_GET['dataFinalSemana2'] ?? '';
+$dataInicialSemana3 = $_GET['dataInicialSemana3'] ?? ''; 
+$dataFinalSemana3 = $_GET['dataFinalSemana3'] ?? '';
 
-if (empty($emailAluno) || empty($dataErro) || empty($idQuestionarioPertencente)) {
+if (empty($emailAluno) || empty($dataInicialSemana1) || empty($dataFinalSemana1) || empty($dataInicialSemana2) || empty($dataFinalSemana2) || empty($dataInicialSemana3) || empty($dataFinalSemana3)) {
     echo json_encode(["message" => "Não foram enviados todos os parâmetros"]);
     exit;
 }
 
-$sql = "
+// Contar acertos para cada semana
+function contarAcertos($pdo, $emailAluno, $dataInicial, $dataFinal) {
+    $sql = "
+        SELECT COUNT(*) AS totalAcertos
+        FROM AcertosAluno a
+        WHERE a.emailAluno = :emailAluno 
+        AND a.dataAcerto BETWEEN :dataInicial AND :dataFinal
+    ";
+    $statement = $pdo->prepare($sql);
+    $statement->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
+    $statement->bindParam(':dataInicial', $dataInicial, PDO::PARAM_STR);
+    $statement->bindParam(':dataFinal', $dataFinal, PDO::PARAM_STR);
+    $statement->execute();
+    return $statement->fetch(PDO::FETCH_ASSOC)['totalAcertos'];
+}
+
+$totalAcertosSemana1 = contarAcertos($pdo, $emailAluno, $dataInicialSemana1, $dataFinalSemana1);
+$totalAcertosSemana2 = contarAcertos($pdo, $emailAluno, $dataInicialSemana2, $dataFinalSemana2);
+$totalAcertosSemana3 = contarAcertos($pdo, $emailAluno, $dataInicialSemana3, $dataFinalSemana3);
+
+$sqlAcertos = "
     SELECT 
-        q.txtPergunta, 
-        a.textoAlternativa AS alternativaCorreta, 
-        q.explicacaoResposta
+        o.sigla AS siglaOlimpiada,
+        c.titulo AS tituloConteudo,
+        q.titulo AS tituloQuestionario,
+        p.nomeUsuario AS usuarioProfessor,
+        quest.txtPergunta,
+        alt.textoAlternativa AS alternativaMarcada
     FROM 
-        ErrosAluno e
+        AcertosAluno a
     JOIN 
-        Questao q ON e.idQuestaoPertencente = q.id
+        Questao quest ON a.idQuestaoPertencente = quest.id
     JOIN 
-        AlternativasQuestao a ON e.idAlternativaCorreta = a.id
+        AlternativasQuestao alt ON a.idAlternativaMarcada = alt.id
+    JOIN 
+        Questionario q ON quest.idQuestionarioPertencente = q.id
+    JOIN 
+        Conteudo c ON q.idConteudoPertencente = c.id
+    JOIN 
+        Professor p ON q.profQuePostou = p.email
+    JOIN 
+        Olimpiada o ON c.siglaOlimpiadaPertencente = o.sigla
     WHERE 
-        e.emailAluno = :emailAluno 
-        AND e.dataErro = :dataErro
-        AND e.idQuestionarioPertencente = :idQuestionarioPertencente
-        AND a.corretaOuErrada = 1
+        a.emailAluno = :emailAluno
 ";
 
+$statementAcertos = $pdo->prepare($sqlAcertos);
+$statementAcertos->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
+$statementAcertos->execute();
 
-$statement = $pdo->prepare($sql);
-$statement->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
-$statement->bindParam(':dataErro', $dataErro, PDO::PARAM_STR);
-$statement->bindParam(':idQuestionarioPertencente', $idQuestionarioPertencente, PDO::PARAM_INT);
-$statement->execute();
-
-$questoesComErros = [];
-while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
-    $questoesComErros[] = (object) $result;
+$listaAcertos = [];
+while ($result = $statementAcertos->fetch(PDO::FETCH_ASSOC)) {
+    $listaAcertos[] = (object) $result;
 }
 
-$sqlTotalQuestoes = "
-    SELECT COUNT(*) AS totalQuestoes
-    FROM Questao
-    WHERE idQuestionarioPertencente = :idQuestionarioPertencente
-";
-$statementTotalQuestoes = $pdo->prepare($sqlTotalQuestoes);
-$statementTotalQuestoes->bindParam(':idQuestionarioPertencente', $idQuestionarioPertencente, PDO::PARAM_INT);
-$statementTotalQuestoes->execute();
-$totalQuestoes = $statementTotalQuestoes->fetch(PDO::FETCH_ASSOC)['totalQuestoes'];
-
-$sqlTotalErros = "
-    SELECT COUNT(*) AS totalErros
-    FROM ErrosAluno
-    WHERE emailAluno = :emailAluno 
-    AND dataErro = :dataErro
-    AND idQuestionarioPertencente = :idQuestionarioPertencente
-";
-$statementTotalErros = $pdo->prepare($sqlTotalErros);
-$statementTotalErros->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
-$statementTotalErros->bindParam(':dataErro', $dataErro, PDO::PARAM_STR);
-$statementTotalErros->bindParam(':idQuestionarioPertencente', $idQuestionarioPertencente, PDO::PARAM_INT);
-$statementTotalErros->execute();
-$totalErros = $statementTotalErros->fetch(PDO::FETCH_ASSOC)['totalErros'];
-
-if (empty($questoesComErros)) {
-    echo json_encode(["message" => "Nenhuma questão encontrada para os parâmetros fornecidos."]);
-} else {
-    echo json_encode([
-        'questoesComErros' => $questoesComErros,
-        'totalQuestoes' => $totalQuestoes,
-        'totalErros' => $totalErros
-    ]);
-}
+echo json_encode([
+    'totalAcertosSemana1' => $totalAcertosSemana1,
+    'totalAcertosSemana2' => $totalAcertosSemana2,
+    'totalAcertosSemana3' => $totalAcertosSemana3,
+    'listaAcertos' => $listaAcertos
+]);
 
 $pdo = null;
 ?>

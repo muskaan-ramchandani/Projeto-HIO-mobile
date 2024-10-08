@@ -96,6 +96,8 @@ public class PerfilAlunoActivity extends Activity {
 
             binding.linearLayoutGraficoAcertosEErros.removeView(grafico);
             binding.linearLayoutGraficoAcertosEErros.removeView(linearLegendas);
+            binding.btnHistoricoAcertos.setEnabled(true);
+            binding.btnHistoricoErros.setEnabled(true);
 
             LayoutInflater inflater = LayoutInflater.from(this);
             View newItemView = inflater.inflate(R.layout.msg_sem_dados_grafico, binding.linearLayoutGraficoAcertosEErros, false);
@@ -123,7 +125,7 @@ public class PerfilAlunoActivity extends Activity {
         @Override
         protected List<String> doInBackground(Void... voids) {
             try {
-                String urlString = "http://192.168.1.11:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
+                String urlString = "http://192.168.1.6:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
