@@ -17,8 +17,10 @@
         </div>
         <span class="helper-text" id="helperText">Helper in Olympics</span>
         <div class="menu-content" id="menuContent">
-                        <a href="TelaPerfilProfessorHTML.php"><img src="Imagens_Mobile_HIO/iconeSeuPerfil.png" alt="Perfil" class="menu-icon-img"> Seu Perfil</a>
 
+        <a href="TelaPerfilProfessorHTML.php?email=<?php echo isset($_GET['email']) ? htmlspecialchars($_GET['email']) : ''; ?>">
+        <img src="Imagens_Mobile_HIO/iconeSeuPerfil.png" alt="Perfil" class="menu-icon-img"> Seu Perfil
+    </a>
             <a href="#"><img src="Imagens_Mobile_HIO/iconeChats.png" alt="Fórum" class="menu-icon-img"> Fórum</a>
             <a href="#"><img src="Imagens_Mobile_HIO/iconeManual.png" alt="Manual" class="menu-icon-img"> Manual</a>
             <a href="#"><img src="Imagens_Mobile_HIO/iconeConfiguracoes.png" alt="Configurações" class="menu-icon-img"> Configurações</a>

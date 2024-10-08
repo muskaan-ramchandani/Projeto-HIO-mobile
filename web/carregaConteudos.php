@@ -45,22 +45,32 @@ if (count($conteudos) === 0) {
 } else {
     echo '<div class="carousel-container">';
     echo '<button id="prevButton" class="carousel-button" onclick="prevSlide()">Anterior</button>';
-    echo '<div class="carousel">';
-    echo '<div class="carousel-inner" id="carouselInner">';
+    echo '<div class="carousel-content" id="carouselInner">'; // Alterado para "carousel-content"
 
-    // Loop para gerar os itens do carrossel como botões
-    foreach ($conteudos as $index => $conteudo) {
-        $activeClass = ($index === 0) ? 'active' : ''; // O primeiro item é ativo
-        echo '<div class="carousel-item ' . $activeClass . '">';
-        echo '<a href="TelaFlashCardHTML.php?id=' . htmlspecialchars($conteudo['id']) . '&sigla=' . htmlspecialchars($sigla) . '" class="button-content">';
-        echo '<h5>' . htmlspecialchars($conteudo['titulo']) . '</h5>';
-        echo '<p>' . htmlspecialchars($conteudo['subtitulo']) . '</p>';
-        echo '</a>';
+    // Loop para gerar os itens do carrossel, dois por vez
+    for ($i = 0; $i < count($conteudos); $i += 2) {
+        echo '<div class="carousel-item">';
+        
+        // Primeiro conteúdo
+        if (isset($conteudos[$i])) {
+            echo '<a href="TelaFlashCardHTML.php?id=' . htmlspecialchars($conteudos[$i]['id']) . '&sigla=' . htmlspecialchars($sigla) . '" class="button-content">';
+            echo '<h5>' . htmlspecialchars($conteudos[$i]['titulo']) . '</h5>';
+            echo '<p>' . htmlspecialchars($conteudos[$i]['subtitulo']) . '</p>';
+            echo '</a>';
+        }
+
+        // Segundo conteúdo
+        if (isset($conteudos[$i + 1])) {
+            echo '<a href="TelaFlashCardHTML.php?id=' . htmlspecialchars($conteudos[$i + 1]['id']) . '&sigla=' . htmlspecialchars($sigla) . '" class="button-content">';
+            echo '<h5>' . htmlspecialchars($conteudos[$i + 1]['titulo']) . '</h5>';
+            echo '<p>' . htmlspecialchars($conteudos[$i + 1]['subtitulo']) . '</p>';
+            echo '</a>';
+        }
+
         echo '</div>'; // .carousel-item
     }
 
-    echo '</div>'; // .carousel-inner
-    echo '</div>'; // .carousel
+    echo '</div>'; // .carousel-content
     echo '<button id="nextButton" class="carousel-button" onclick="nextSlide()">Próximo</button>';
     echo '</div>'; // .carousel-container
 }

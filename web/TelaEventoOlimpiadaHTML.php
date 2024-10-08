@@ -19,8 +19,8 @@
 
     <!-- Botoes do calendario -->
 <div class="botao-container">
-    <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="botao-calendario" onclick="voltarMes()">
-    <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarEAvancarExercicioDireita.png" alt="Avançar" class="botao-calendario" onclick="avancarMes()">
+    <img src="Imagens_Mobile_HIO/btnVoltarEAvancarExercicioEsquerda.png" alt="Voltar" class="botao-calendario" onclick="voltarMes()">
+    <img src=Imagens_Mobile_HIO/btnVoltarEAvancarExercicioDireita.png" alt="Avançar" class="botao-calendario" onclick="avancarMes()">
 </div>
 
 

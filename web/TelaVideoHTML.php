@@ -1,4 +1,34 @@
-<!DOCTYPE html>
+<?php
+// Conectar ao banco de dados
+$dsn = 'mysql:host=localhost;dbname=hio;charset=utf8';
+$username = 'root';
+$password = 'root';
+
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Capturar a sigla da URL
+    if (isset($_GET['sigla'])) {
+        $sigla = $_GET['sigla'];
+
+        // Buscar os dados da olimpíada correspondente
+        $sql = "SELECT nome, icone, cor FROM Olimpiada WHERE sigla = :sigla";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':sigla', $sigla);
+        $stmt->execute();
+
+        $olimpiada = $stmt->fetch(PDO::FETCH_ASSOC);
+    } else {
+        // Se não houver sigla na URL, redirecionar para a página inicial
+        header('Location: TelaInicialProfessorHTML.php');
+        exit();
+    }
+} catch (PDOException $e) {
+    echo "Erro: " . $e->getMessage();
+}
+?>
+?><!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -8,14 +38,14 @@
     <link rel="stylesheet" href="TelaVideo.css">
 </head>
 <body>
-    <div class="barra">
-        <div class="logo-container">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/imgMacaCaindo.png" alt="Maça caindo">
-            <div class="text">OBF 2024 - Olimpíada Brasileira de Física</div>
-        </div>
+<div class="barra">
+    <div class="logo-container">
+        <img src="Imagens_Mobile_HIO/<?php echo htmlspecialchars($olimpiada['icone']); ?>.png" alt="<?php echo htmlspecialchars($olimpiada['nome']); ?>">
+        <div class="text"><?php echo htmlspecialchars($olimpiada['nome']); ?> - <?php echo htmlspecialchars($sigla); ?></div>
+    </div>
         <div class="button-container">
             <div class="button-item">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeTexto.png" alt="Textos">
+                <img src="Imagens_Mobile_HIO/iconeTexto.png" alt="Textos">
                 <div class="button-label">Textos</div>
             </div>
             <div class="button-item">

@@ -51,14 +51,13 @@ try {
             </a>
         </div>
         <div class="button-item">
-    <a href="TelaVideoHTML.php" style="text-decoration: none; color: inherit;">
-        <img src="Imagens_Mobile_HIO/iconeVideo.png" alt="Vídeos">
-        <div class="button-label">Vídeos</div>
+        <a href="TelaVideoHTML.php?sigla=<?php echo isset($_GET['sigla']) ? htmlspecialchars($_GET['sigla']) : ''; ?>">
+        <img src="Imagens_Mobile_HIO/iconeVideo.png" alt="Vídeos"> <div class="button-label">Vídeos</div> 
     </a>
 </div>
-
+.
         <div class="button-item">
-            <a href="simulandoCadastroFlashCard.php">
+            <a href="TelaFlashCardHTML.php?sigla=<?php echo isset($_GET['sigla']) ? htmlspecialchars($_GET['sigla']) : ''; ?>">
             <img src="Imagens_Mobile_HIO/iconeFlashcard.png" alt="Flashcards">
             <div class="button-label">Flashcards</div>
             </a>
