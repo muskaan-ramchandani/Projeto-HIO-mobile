@@ -18,7 +18,7 @@ public class ApagaPontuacaoReceiver extends BroadcastReceiver {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                URL url = new URL("http://192.168.1.9:8086/phpHio/atualizaPontuacaoAcertosErrosSemana.php");
+                URL url = new URL("http://192.168.1.10:8086/phpHio/atualizaPontuacaoAcertosErrosSemana.php");
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();

@@ -10,7 +10,6 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,15 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
-import com.example.helperinolympics.adapter.AdapterDadosAcertos;
+import com.example.helperinolympics.adapter.AdapterAcertos;
 import com.example.helperinolympics.databinding.ActivityAcertosSemanaisBinding;
+import com.example.helperinolympics.databinding.ActivityErrosSemanaisBinding;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.Acertos;
 import com.example.helperinolympics.model.Aluno;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.BarData;
@@ -44,7 +42,8 @@ public class AcertosSemanaisActivity extends Activity {
 
     private ActivityAcertosSemanaisBinding binding;
     private Aluno alunoCadastrado;
-    AdapterDadosAcertos acertosAdapter;
+    AdapterAcertos acertosAdapter;
+    private ArrayList<Acertos> listaAcertos = new ArrayList<>();
 
     private Date dataAtual, dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2,
             dataInicialSemana3, dataFinalSemana3;
@@ -55,6 +54,7 @@ public class AcertosSemanaisActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        binding = ActivityAcertosSemanaisBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
@@ -81,8 +81,7 @@ public class AcertosSemanaisActivity extends Activity {
         binding.recyclerViewListaAcertos.setLayoutManager(layoutManager);
         binding.recyclerViewListaAcertos.setHasFixedSize(true);
 
-        List<Acertos> listaAcertos = new ArrayList<>();
-        acertosAdapter = new AdapterDadosAcertos(listaAcertos);
+        acertosAdapter = new AdapterAcertos(listaAcertos);
         binding.recyclerViewListaAcertos.setAdapter(acertosAdapter);
 
 
@@ -107,7 +106,6 @@ public class AcertosSemanaisActivity extends Activity {
         int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
         int[] cores = new int[] {corAzul, corRosa, corRoxa};
 
-        // Creating a bar data set
         BarDataSet barDataSet = new BarDataSet(entradaDados, "Gráfico de comparação");
         barDataSet.setColors(cores);
         barDataSet.setValueTextColor(Color.BLACK);
@@ -191,7 +189,7 @@ public class AcertosSemanaisActivity extends Activity {
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://192.168.1.6:8086/phpHio/carregaAcertosAluno.php?emailAluno=" + emailAluno +
+                String urlString = "http://192.168.1.10:8086/phpHio/carregaAcertosAluno.php?emailAluno=" + emailAluno +
                         "&dataInicialSemana1=" + dataInicialSemana1 +
                         "&dataFinalSemana1=" + dataFinalSemana1 +
                         "&dataInicialSemana2=" + dataInicialSemana2 +
@@ -235,11 +233,13 @@ public class AcertosSemanaisActivity extends Activity {
                 Log.d("Acertos", "Semana 2: " + totalAcertosSemana2);
                 Log.d("Acertos", "Semana 3: " + totalAcertosSemana3);
 
-                JSONArray listaAcertos = jsonObject.getJSONArray("listaAcertos");
+                JSONArray listaAcertosJSON = jsonObject.getJSONArray("listaAcertos");
                 ArrayList<Acertos> acertosLista = new ArrayList<>();
 
-                for (int i = 0; i < listaAcertos.length(); i++) {
-                    JSONObject acertoJson = listaAcertos.getJSONObject(i);
+                listaAcertos.clear();
+
+                for (int i = 0; i < listaAcertosJSON.length(); i++) {
+                    JSONObject acertoJson = listaAcertosJSON.getJSONObject(i);
 
                     Acertos acerto = new Acertos();
                     acerto.setSiglaOlimpiada(acertoJson.getString("siglaOlimpiada"));
@@ -250,6 +250,7 @@ public class AcertosSemanaisActivity extends Activity {
                     acerto.setAlternativaMarcada(acertoJson.getString("alternativaMarcada"));
 
                     acertosLista.add(acerto);
+                    listaAcertos.add(acerto);
                 }
 
             } catch (JSONException e) {

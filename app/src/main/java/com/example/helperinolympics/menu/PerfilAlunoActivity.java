@@ -82,7 +82,11 @@ public class PerfilAlunoActivity extends Activity {
     }
 
     private void configuraDadosPerfil(Aluno alunoCadastrado) {
-        binding.fotoperfilAluno.setImageBitmap(alunoCadastrado.getFotoPerfil());
+        if(alunoCadastrado.getFotoPerfil()==null){
+            binding.fotoperfilAluno.setImageResource(R.drawable.iconeperfilsemfoto);
+        }else{
+            binding.fotoperfilAluno.setImageBitmap(alunoCadastrado.getFotoPerfil());
+        }
         binding.txtNomeCompletoAluno.setText(alunoCadastrado.getNomeCompleto());
         binding.txtNomeDeUsuario.setText(alunoCadastrado.getNomeUsuario());
         binding.txtEmail.setText(alunoCadastrado.getEmail());
@@ -125,7 +129,7 @@ public class PerfilAlunoActivity extends Activity {
         @Override
         protected List<String> doInBackground(Void... voids) {
             try {
-                String urlString = "http://192.168.1.6:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
+                String urlString = "http://192.168.1.10:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

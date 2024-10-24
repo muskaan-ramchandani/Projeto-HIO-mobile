@@ -29,39 +29,42 @@ if (empty($emailAluno) || empty($dataInicialSemana1) || empty($dataFinalSemana1)
 }
 
 // Contar acertos para cada semana
-function contarAcertos($pdo, $emailAluno, $dataInicial, $dataFinal) {
+function contarErros($pdo, $emailAluno, $dataInicial, $dataFinal) {
     $sql = "
-        SELECT COUNT(*) AS totalAcertos
-        FROM AcertosAluno a
-        WHERE a.emailAluno = :emailAluno 
-        AND a.dataAcerto BETWEEN :dataInicial AND :dataFinal
+        SELECT COUNT(*) AS totalErros
+        FROM ErrosAluno e
+        WHERE e.emailAluno = :emailAluno 
+        AND e.dataErro BETWEEN :dataInicial AND :dataFinal
     ";
     $statement = $pdo->prepare($sql);
     $statement->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
     $statement->bindParam(':dataInicial', $dataInicial, PDO::PARAM_STR);
     $statement->bindParam(':dataFinal', $dataFinal, PDO::PARAM_STR);
     $statement->execute();
-    return $statement->fetch(PDO::FETCH_ASSOC)['totalAcertos'];
+    return $statement->fetch(PDO::FETCH_ASSOC)['totalErros'];
 }
 
-$totalAcertosSemana1 = contarAcertos($pdo, $emailAluno, $dataInicialSemana1, $dataFinalSemana1);
-$totalAcertosSemana2 = contarAcertos($pdo, $emailAluno, $dataInicialSemana2, $dataFinalSemana2);
-$totalAcertosSemana3 = contarAcertos($pdo, $emailAluno, $dataInicialSemana3, $dataFinalSemana3);
+$totalErrosSemana1 = contarErros($pdo, $emailAluno, $dataInicialSemana1, $dataFinalSemana1);
+$totalErrosSemana2 = contarErros($pdo, $emailAluno, $dataInicialSemana2, $dataFinalSemana2);
+$totalErrosSemana3 = contarErros($pdo, $emailAluno, $dataInicialSemana3, $dataFinalSemana3);
 
-$sqlAcertos = "
+$sqlErros = "
     SELECT 
         o.sigla AS siglaOlimpiada,
         c.titulo AS tituloConteudo,
         q.titulo AS tituloQuestionario,
         p.nomeUsuario AS usuarioProfessor,
         quest.txtPergunta,
-        alt.textoAlternativa AS alternativaMarcada
+        altMarcada.textoAlternativa AS alternativaMarcada,
+        altCorreta.textoAlternativa AS alternativaCorreta
     FROM 
-        AcertosAluno a
+        ErrosAluno e
     JOIN 
-        Questao quest ON a.idQuestaoPertencente = quest.id
+        Questao quest ON e.idQuestaoPertencente = quest.id
     JOIN 
-        AlternativasQuestao alt ON a.idAlternativaMarcada = alt.id
+        AlternativasQuestao altMarcada ON e.idAlternativaMarcada = altMarcada.id
+    JOIN 
+        AlternativasQuestao altCorreta ON e.idAlternativaCorreta = altCorreta.id
     JOIN 
         Questionario q ON quest.idQuestionarioPertencente = q.id
     JOIN 
@@ -71,23 +74,23 @@ $sqlAcertos = "
     JOIN 
         Olimpiada o ON c.siglaOlimpiadaPertencente = o.sigla
     WHERE 
-        a.emailAluno = :emailAluno
+        e.emailAluno = :emailAluno
 ";
 
-$statementAcertos = $pdo->prepare($sqlAcertos);
-$statementAcertos->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
-$statementAcertos->execute();
+$statementErros = $pdo->prepare($sqlErros);
+$statementErros->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
+$statementErros->execute();
 
-$listaAcertos = [];
-while ($result = $statementAcertos->fetch(PDO::FETCH_ASSOC)) {
-    $listaAcertos[] = (object) $result;
+$listaErros = [];
+while ($result = $statementErros->fetch(PDO::FETCH_ASSOC)) {
+    $listaErros[] = (object) $result;
 }
 
 echo json_encode([
-    'totalAcertosSemana1' => $totalAcertosSemana1,
-    'totalAcertosSemana2' => $totalAcertosSemana2,
-    'totalAcertosSemana3' => $totalAcertosSemana3,
-    'listaAcertos' => $listaAcertos
+    'totalErrosSemana1' => $totalErrosSemana1,
+    'totalErrosSemana2' => $totalErrosSemana2,
+    'totalErrosSemana3' => $totalErrosSemana3,
+    'listaErros' => $listaErros
 ]);
 
 $pdo = null;

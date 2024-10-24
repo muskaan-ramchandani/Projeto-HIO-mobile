@@ -176,7 +176,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
 
             List<Questao> questoes = new ArrayList<>();
             try {
-                String urlString = "http://192.168.1.11:8086/phpHio/carregaQuestoesPorQuestionario.php?idQuestionarioPertencente=" +
+                String urlString = "http://192.168.1.10:8086/phpHio/carregaQuestoesPorQuestionario.php?idQuestionarioPertencente=" +
                         URLEncoder.encode(String.valueOf(idQuestionario), "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -292,7 +292,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
             String dataErroFormatada = sdf.format(data);
 
             try {
-                URL url = new URL("http://192.168.1.11:8086/phpHio/apagaAcertosErrosAoDesistirDoQuestionario.php");
+                URL url = new URL("http://192.168.1.10:8086/phpHio/apagaAcertosErrosAoDesistirDoQuestionario.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -369,7 +369,7 @@ public class AcessoQuestionarioActivity extends AppCompatActivity {
             Pontuacao pontuacao = pontuacoes[0];
 
             try {
-                URL url = new URL("http://192.168.1.11:8086/phpHio/alteraPontuacaoAluno.php");
+                URL url = new URL("http://192.168.1.10:8086/phpHio/alteraPontuacaoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
