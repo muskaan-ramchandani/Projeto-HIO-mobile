@@ -66,12 +66,13 @@
     <LinearLayout
         android:id="@+id/linearLayoutGraficoELegendaAcertos"
         android:layout_width="380dp"
-        android:layout_height="230dp"
+        android:layout_height="240dp"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewListaAcertos"
         app:layout_constraintTop_toBottomOf="@id/txtAcertosSemanasAnteriores"
         app:layout_constraintStart_toStartOf="@id/toolbarAcertos"
         app:layout_constraintEnd_toEndOf="@id/toolbarAcertos">
@@ -79,8 +80,7 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graficoBarraAcertosSemanais"
             android:layout_width="370dp"
-            android:layout_height="200dp"
-            android:layout_marginEnd="5dp"/>
+            android:layout_height="200dp" />
 
         <LinearLayout
             android:layout_width="370dp"
@@ -99,7 +99,7 @@
                     android:id="@+id/corLegendaSemana1"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:scaleType="fitCenter"
+                    android:background="@drawable/fundo_btn_olimp_azul"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/fundo_btn_olimp_azul"/>
 
@@ -117,7 +117,7 @@
                     android:id="@+id/corLegendaSemana2"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:scaleType="fitCenter"
+                    android:background="@drawable/fundo_btn_olimp_rosa"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/fundo_btn_olimp_rosa"/>
 
@@ -141,7 +141,7 @@
                     android:id="@+id/corLegendaSemana3"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:scaleType="fitCenter"
+                    android:background="@drawable/card_roxo"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/card_roxo"/>
 
@@ -164,12 +164,11 @@
         android:layout_width="380dp"
         android:layout_height="340dp"
         android:orientation="horizontal"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="310dp"
         android:layout_marginBottom="2dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutGraficoELegendaAcertos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAcertos"
         app:layout_constraintStart_toStartOf="@id/toolbarAcertos"
         app:layout_constraintEnd_toEndOf="@id/toolbarAcertos"/>
 

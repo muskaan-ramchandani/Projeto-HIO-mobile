@@ -109,19 +109,10 @@ public class AcertosSemanaisActivity extends Activity {
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
 
+
         //Largura barra
         XAxis xAxis = binding.graficoBarraAcertosSemanais.getXAxis();
         xAxis.setGranularity(1f);
-
-        // Inserindo legenda
-        Legend legend = binding.graficoBarraAcertosSemanais.getLegend();
-        legend.setEnabled(true);
-        legend.setTextSize(12f);
-        legend.setTextColor(Color.BLACK);
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setFormSize(10f); // Tamanho do ícone na legenda
-        legend.setXEntrySpace(30f); // Aumenta o espaçamento horizontal
-        legend.setYEntrySpace(10f); // Aumenta o espaçamento vertical
 
         // LEGENDAS DO GRÁFICO
         binding.datasLegendaSemana1.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana1), dateFormat.format(dataFinalSemana1)));
@@ -134,6 +125,9 @@ public class AcertosSemanaisActivity extends Activity {
         // Adicionando configurações
         BarData barData = new BarData(barDataSet);
         binding.graficoBarraAcertosSemanais.setData(barData);
+        binding.graficoBarraAcertosSemanais.getDescription().setEnabled(false);
+        binding.graficoBarraAcertosSemanais.getLegend().setEnabled(false);
+        binding.graficoBarraAcertosSemanais.setExtraOffsets(0, 5, 0, 0); // Adiciona um espaço extra no topo
         binding.graficoBarraAcertosSemanais.animateY(2000);
     }
 

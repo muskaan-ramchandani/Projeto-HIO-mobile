@@ -136,16 +136,6 @@ public class ErrosSemanaisActivity extends Activity {
         XAxis xAxis = binding.graficoBarraErrosSemanais.getXAxis();
         xAxis.setGranularity(1f);
 
-        // Inserindo legenda
-        Legend legend = binding.graficoBarraErrosSemanais.getLegend();
-        legend.setEnabled(true);
-        legend.setTextSize(12f);
-        legend.setTextColor(Color.BLACK);
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setFormSize(10f); // Tamanho do ícone na legenda
-        legend.setXEntrySpace(30f); // Aumenta o espaçamento horizontal
-        legend.setYEntrySpace(10f); // Aumenta o espaçamento vertical
-
         // LEGENDAS DO GRÁFICO
         binding.datasLegendaSemana1.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana1), dateFormat.format(dataFinalSemana1)));
 
@@ -156,6 +146,9 @@ public class ErrosSemanaisActivity extends Activity {
         // Adicionando configurações
         BarData barData = new BarData(barDataSet);
         binding.graficoBarraErrosSemanais.setData(barData);
+        binding.graficoBarraErrosSemanais.getDescription().setEnabled(false);
+        binding.graficoBarraErrosSemanais.getLegend().setEnabled(false);
+        binding.graficoBarraErrosSemanais.setExtraOffsets(0, 5, 0, 0); // Adiciona um espaço extra no topo
         binding.graficoBarraErrosSemanais.animateY(2000);
     }
 

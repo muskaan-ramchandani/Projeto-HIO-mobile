@@ -68,12 +68,13 @@
     <LinearLayout
         android:id="@+id/linearLayoutGraficoELegendaErros"
         android:layout_width="380dp"
-        android:layout_height="230dp"
+        android:layout_height="240dp"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewListaErros"
         app:layout_constraintTop_toBottomOf="@id/txtErrosSemanasAnteriores"
         app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
         app:layout_constraintEnd_toEndOf="@id/toolbarErrosSemanais">
@@ -81,8 +82,7 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graficoBarraErrosSemanais"
             android:layout_width="370dp"
-            android:layout_height="200dp"
-            android:layout_marginEnd="5dp"/>
+            android:layout_height="200dp"/>
 
         <LinearLayout
             android:layout_width="370dp"
@@ -101,8 +101,8 @@
                     android:id="@+id/corLegendaSemana1"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:scaleType="fitCenter"
                     android:layout_gravity="center_horizontal"
+                    android:background="@drawable/fundo_btn_olimp_azul"
                     android:src="@drawable/fundo_btn_olimp_azul"/>
 
                 <TextView
@@ -119,8 +119,8 @@
                     android:id="@+id/corLegendaSemana2"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:scaleType="fitCenter"
                     android:layout_gravity="center_horizontal"
+                    android:background="@drawable/fundo_btn_olimp_rosa"
                     android:src="@drawable/fundo_btn_olimp_rosa"/>
 
                 <TextView
@@ -143,7 +143,7 @@
                     android:id="@+id/corLegendaSemana3"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:scaleType="fitCenter"
+                    android:background="@drawable/card_roxo"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/card_roxo"/>
 
@@ -166,11 +166,11 @@
         android:layout_width="380dp"
         android:layout_height="340dp"
         android:orientation="horizontal"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="310dp"
         android:layout_marginBottom="2dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutGraficoELegendaErros"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarErrosSemanais"
         app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
         app:layout_constraintEnd_toEndOf="@id/toolbarErrosSemanais"/>
 
