@@ -124,19 +124,12 @@ public class AcertosSemanaisActivity extends Activity {
         legend.setYEntrySpace(10f); // Aumenta o espaçamento vertical
 
         // LEGENDAS DO GRÁFICO
-        LegendEntry entradaLegenda1 = new LegendEntry();
-        entradaLegenda1.label = dateFormat.format(dataInicialSemana1) + " - " + dateFormat.format(dataFinalSemana1);
-        entradaLegenda1.formColor = corAzul;
+        binding.datasLegendaSemana1.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana1), dateFormat.format(dataFinalSemana1)));
 
-        LegendEntry entradaLegenda2 = new LegendEntry();
-        entradaLegenda2.label = dateFormat.format(dataInicialSemana2) + " - " + dateFormat.format(dataFinalSemana2);
-        entradaLegenda2.formColor = corRosa;
+        binding.datasLegendaSemana2.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana2), dateFormat.format(dataFinalSemana2)));
 
-        LegendEntry entradaLegenda3 = new LegendEntry();
-        entradaLegenda3.label = dateFormat.format(dataInicialSemana3) + " - " + dateFormat.format(dataFinalSemana3);
-        entradaLegenda3.formColor = corRoxa;
+        binding.datasLegendaSemana3.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana3), dateFormat.format(dataFinalSemana3)));
 
-        legend.setCustom(new LegendEntry[]{entradaLegenda1, entradaLegenda2, entradaLegenda3});
 
         // Adicionando configurações
         BarData barData = new BarData(barDataSet);
