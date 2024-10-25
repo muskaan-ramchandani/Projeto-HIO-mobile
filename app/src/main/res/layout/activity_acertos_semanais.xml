@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
@@ -21,31 +22,27 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
         app:layout_constraintTop_toTopOf="@+id/toolbarAcertos"
         app:layout_constraintStart_toStartOf="@+id/toolbarAcertos"
         app:layout_constraintEnd_toEndOf="@+id/toolbarAcertos">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVoltarAoPerfilDosAcertos"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:contentDescription="bntVoltarAoInicio"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/btnvoltarbranco" />
+            android:background="@drawable/btnvoltarbranco"
+            android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/txtAcertos"
+            android:id="@+id/txtAcertosSemanais"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"
-            android:layout_weight="1"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Acertos semanais"
+            android:text="Acertos Semanais"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="24sp"

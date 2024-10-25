@@ -78,7 +78,6 @@ public class PerfilAlunoActivity extends Activity {
 
         //dados gráfico
         new CarregaCorrecao(alunoCadastrado.getEmail()).execute();
-        setData(numeroAcertos, numeroErros);
     }
 
     private void configuraDadosPerfil(Aluno alunoCadastrado) {
@@ -107,12 +106,22 @@ public class PerfilAlunoActivity extends Activity {
             View newItemView = inflater.inflate(R.layout.msg_sem_dados_grafico, binding.linearLayoutGraficoAcertosEErros, false);
 
             binding.linearLayoutGraficoAcertosEErros.addView(newItemView);
+            binding.btnHistoricoAcertos.setEnabled(false); //desativando
+            binding.btnHistoricoAcertos.setAlpha(0.5f); //escurecendo
+            binding.btnHistoricoErros.setEnabled(false); //desativando
+            binding.btnHistoricoErros.setAlpha(0.5f); //escurecendo
         }else{
 
-            binding.graficoPizzaErrosAcertos.addPieSlice(new PieModel("Acertos", numeroAcertos,
+            String valorAcerto = String.valueOf(numeroAcertos);
+            binding.txtLegendaAcertos.setText("Acertos ("+valorAcerto+")");
+
+            String valorErro = String.valueOf(numeroErros);
+            binding.txtLegendaErros.setText("Erros ("+valorErro+")");
+
+            binding.graficoPizzaErrosAcertos.addPieSlice(new PieModel("Acertos", numeroErros,
                     Color.parseColor("#835AD2")));
 
-            binding.graficoPizzaErrosAcertos.addPieSlice(new PieModel("Erros", numeroErros,
+            binding.graficoPizzaErrosAcertos.addPieSlice(new PieModel("Erros", numeroAcertos,
                     Color.parseColor("#CB6CE6")));
 
             binding.graficoPizzaErrosAcertos.startAnimation();
@@ -152,11 +161,7 @@ public class PerfilAlunoActivity extends Activity {
                         numeroAcertos = jsonObject.getInt("totalAcertos");
                         numeroErros = jsonObject.getInt("totalErros");
 
-                        String valorAcerto = String.valueOf(numeroAcertos);
-                        binding.txtLegendaAcertos.setText("Acertos ("+valorAcerto+")");
-
-                        String valorErro = String.valueOf(numeroErros);
-                        binding.txtLegendaAcertos.setText("Erros ("+valorErro+")");
+                        setData(numeroAcertos, numeroErros);
 
                     } catch (Exception e) {
                         Log.d("ERRO", e.toString());

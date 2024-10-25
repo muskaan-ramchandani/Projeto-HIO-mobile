@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.calendario.AdapterDatasCalendario;
 import com.example.helperinolympics.adapter.calendario.AdapterEventos;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Eventos;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
@@ -31,16 +32,20 @@ public class CalendarioActivity extends AppCompatActivity {
     private TextView txtMesEAno;
     private Calendar dataAtual, dataNova;
 
+    private Aluno alunoCadastrado;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendario);
 
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
 
         findViewById(R.id.btnAcessarHanking).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CalendarioActivity.this, RankingActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
@@ -50,10 +55,12 @@ public class CalendarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CalendarioActivity.this, InicialAlunoMenuDeslizanteActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
         });
+
 
         findViewById(R.id.btnVoltarMes).setOnClickListener(new View.OnClickListener() {
             @Override

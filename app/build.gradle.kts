@@ -47,4 +47,6 @@ dependencies {
     implementation(libs.eazegraph)
     implementation(libs.nineoldandroids)
     implementation(libs.mpandroidchart)
+    implementation(libs.circleimageview)
+
 }

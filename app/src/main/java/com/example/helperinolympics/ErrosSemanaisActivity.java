@@ -18,6 +18,8 @@ import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Erros;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -55,6 +57,7 @@ public class ErrosSemanaisActivity extends Activity {
         binding = ActivityErrosSemanaisBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        configurarDatas();
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
         new ErrosSemanaisActivity.CarregaErrosSemanais(alunoCadastrado.getEmail(), dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2, dataInicialSemana3, dataFinalSemana3).execute();
 
@@ -68,9 +71,6 @@ public class ErrosSemanaisActivity extends Activity {
             }
         });
 
-        configurarDatas();
-        configurarBarra();
-        configurarRecyclerErros();
     }
 
     private void configurarRecyclerErros() {
@@ -111,12 +111,14 @@ public class ErrosSemanaisActivity extends Activity {
         dataFinalSemana1 = calendar.getTime();
     }
 
-    private void configurarBarra(){
-        //Entradas de dados
+    private void configurarBarra() {
+        // Entradas de dados
         ArrayList<BarEntry> entradaDados2 = new ArrayList<>();
-        entradaDados2.add(new BarEntry(1f, 6f));
-        entradaDados2.add(new BarEntry(2f, 1f));
-        entradaDados2.add(new BarEntry(3f, 3f));
+
+        // Adicionando os valores reais
+        entradaDados2.add(new BarEntry(1f, totalErrosSemana1));
+        entradaDados2.add(new BarEntry(2f, totalErrosSemana2));
+        entradaDados2.add(new BarEntry(3f, totalErrosSemana3));
 
         // Cores
         int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
@@ -124,38 +126,42 @@ public class ErrosSemanaisActivity extends Activity {
         int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
         int[] cores = new int[] {corAzul, corRosa, corRoxa};
 
-        // Creating a bar data set
+        // Criando um conjunto de dados de barras
         BarDataSet barDataSet = new BarDataSet(entradaDados2, "Gráfico de comparação");
         barDataSet.setColors(cores);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
 
-        //Inserindo legenda
+        //Largura barra
+        XAxis xAxis = binding.graficoBarraErrosSemanais.getXAxis();
+        xAxis.setGranularity(1f);
+
+        // Inserindo legenda
         Legend legend = binding.graficoBarraErrosSemanais.getLegend();
         legend.setEnabled(true);
         legend.setTextSize(12f);
         legend.setTextColor(Color.BLACK);
         legend.setForm(Legend.LegendForm.CIRCLE);
         legend.setFormSize(10f); // Tamanho do ícone na legenda
-        legend.setXEntrySpace(25f); // Espaçamento horizontal entre as entradas da legenda
-        legend.setYEntrySpace(5f); // Espaçamento vertical entre as entradas da legenda
+        legend.setXEntrySpace(30f); // Aumenta o espaçamento horizontal
+        legend.setYEntrySpace(10f); // Aumenta o espaçamento vertical
 
-        //LEGENDAS DO GRÁFICO
+        // LEGENDAS DO GRÁFICO
         LegendEntry entradaLegenda1 = new LegendEntry();
-        entradaLegenda1.label = dateFormat.format(dataInicialSemana1) +  dateFormat.format(dataFinalSemana1);
+        entradaLegenda1.label = dateFormat.format(dataInicialSemana1) + " - " + dateFormat.format(dataFinalSemana1);
         entradaLegenda1.formColor = corAzul;
 
         LegendEntry entradaLegenda2 = new LegendEntry();
-        entradaLegenda2.label = dateFormat.format(dataInicialSemana2) +  dateFormat.format(dataFinalSemana2);
+        entradaLegenda2.label = dateFormat.format(dataInicialSemana2) + " - " + dateFormat.format(dataFinalSemana2);
         entradaLegenda2.formColor = corRosa;
 
         LegendEntry entradaLegenda3 = new LegendEntry();
-        entradaLegenda3.label = dateFormat.format(dataInicialSemana3) +  dateFormat.format(dataFinalSemana3);
+        entradaLegenda3.label = dateFormat.format(dataInicialSemana3) + " - " + dateFormat.format(dataFinalSemana3);
         entradaLegenda3.formColor = corRoxa;
 
         legend.setCustom(new LegendEntry[]{entradaLegenda1, entradaLegenda2, entradaLegenda3});
 
-        //Adicionando configurações
+        // Adicionando configurações
         BarData barData = new BarData(barDataSet);
         binding.graficoBarraErrosSemanais.setData(barData);
         binding.graficoBarraErrosSemanais.animateY(2000);
@@ -167,15 +173,15 @@ public class ErrosSemanaisActivity extends Activity {
         String inicioSemana1, fimSemana1, inicioSemana2, fimSemana2, inicioSemana3, fimSemana3;
 
         public CarregaErrosSemanais(String emailAluno, Date inicioSemana1, Date fimSemana1, Date inicioSemana2, Date fimSemana2, Date inicioSemana3, Date fimSemana3){
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd");
 
             this.emailAluno = emailAluno;
-            this.inicioSemana1= dateFormat.format(inicioSemana1);
-            this.fimSemana1= dateFormat.format(fimSemana1);
-            this.inicioSemana2= dateFormat.format(inicioSemana2);
-            this.fimSemana2= dateFormat.format(fimSemana2);
-            this.inicioSemana3= dateFormat.format(inicioSemana3);
-            this.fimSemana3= dateFormat.format(fimSemana3);
+            this.inicioSemana1= formatoBanco.format(inicioSemana1);
+            this.fimSemana1= formatoBanco.format(fimSemana1);
+            this.inicioSemana2= formatoBanco.format(inicioSemana2);
+            this.fimSemana2= formatoBanco.format(fimSemana2);
+            this.inicioSemana3= formatoBanco.format(inicioSemana3);
+            this.fimSemana3= formatoBanco.format(fimSemana3);
         }
         @Override
         protected String doInBackground(String... strings) {
@@ -184,12 +190,12 @@ public class ErrosSemanaisActivity extends Activity {
 
             try {
                 String urlString = "http://192.168.1.10:8086/phpHio/carregaErrosAluno.php?emailAluno=" + emailAluno +
-                        "&dataInicialSemana1=" + dataInicialSemana1 +
-                        "&dataFinalSemana1=" + dataFinalSemana1 +
-                        "&dataInicialSemana2=" + dataInicialSemana2 +
-                        "&dataFinalSemana2=" + dataFinalSemana2 +
-                        "&dataInicialSemana3=" + dataInicialSemana3 +
-                        "&dataFinalSemana3=" + dataFinalSemana3;
+                        "&dataInicialSemana1=" + inicioSemana1 +
+                        "&dataFinalSemana1=" + fimSemana1 +
+                        "&dataInicialSemana2=" + inicioSemana2 +
+                        "&dataFinalSemana2=" + fimSemana2 +
+                        "&dataInicialSemana3=" + inicioSemana3 +
+                        "&dataFinalSemana3=" + fimSemana3;
 
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -247,6 +253,9 @@ public class ErrosSemanaisActivity extends Activity {
                     errosLista.add(erro);
                     listaErros.add(erro);
                 }
+
+                configurarBarra();
+                configurarRecyclerErros();
 
             } catch (JSONException e) {
                 Log.e("CarregaErrosSemanais", "Erro ao fazer o parse do JSON", e);

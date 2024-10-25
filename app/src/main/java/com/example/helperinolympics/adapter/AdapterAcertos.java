@@ -51,28 +51,35 @@ public class AdapterAcertos extends RecyclerView.Adapter<AdapterAcertos.AcertosV
         if (valorOlimpiada.equals("OBA")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaRosa));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_rosa);
         } else if (valorOlimpiada.equals("OBF")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaAzul));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_azul);
         } else if (valorOlimpiada.equals("OBI")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaLaranja));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_laranja);
         } else if (valorOlimpiada.equals("OBMEP")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaCiano));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_ciano);
         }else if (valorOlimpiada.equals("ONHB")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaRosa));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_rosa);
         } else if (valorOlimpiada.equals("OBQ")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaAzul));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_azul);
         } else if (valorOlimpiada.equals("OBB")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaLaranja));
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_laranja);
         } else if (valorOlimpiada.equals("ONC")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
             holder.olimpiada.setTextColor(holder.itemView.getResources().getColor(R.color.btnOlimpiadaCiano));
-
+            holder.linhaDivisoria.setBackgroundResource(R.drawable.linha_ciano);
         }
     }
 
@@ -90,6 +97,7 @@ public class AdapterAcertos extends RecyclerView.Adapter<AdapterAcertos.AcertosV
         TextView pergunta;
         TextView questao;
         FrameLayout frameBorda;
+        View linhaDivisoria;
 
         public AcertosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +108,7 @@ public class AdapterAcertos extends RecyclerView.Adapter<AdapterAcertos.AcertosV
             pergunta=itemView.findViewById(R.id.txtPerguntaAcertos);
             questao=itemView.findViewById(R.id.txtRespostaAcertos);
             frameBorda=itemView.findViewById(R.id.fundoBordaAcertos);
+            linhaDivisoria = itemView.findViewById(R.id.viewLinhaSeparadora);
         }
     }
 }
