@@ -20,6 +20,7 @@ import com.example.helperinolympics.databinding.ActivityForumBinding;
 import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.menu.forum_fragments.FragmentTudo;
 import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 public class ForumActivity extends AppCompatActivity {
@@ -76,6 +77,14 @@ public class ForumActivity extends AppCompatActivity {
                 binding.linearLayoutBarraPesquisaForum.setVisibility(View.GONE);
                 binding.linearBtnfazerPergunta.setVisibility(View.VISIBLE);
                 setFragment(new FragmentSuasPerguntas());
+            }
+        });
+
+        findViewById(R.id.btnFazerPergunta).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CadastrarPergunta notificationDialogFragment = new CadastrarPergunta(alunoCadastrado);
+                notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
             }
         });
     }

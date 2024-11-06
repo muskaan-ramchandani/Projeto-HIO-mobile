@@ -174,7 +174,7 @@ public class ErrosSemanaisActivity extends Activity {
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://192.168.1.10:8086/phpHio/carregaErrosAluno.php?emailAluno=" + emailAluno +
+                String urlString = "http://192.168.5.213:8086/phpHio/carregaErrosAluno.php?emailAluno=" + emailAluno +
                         "&dataInicialSemana1=" + inicioSemana1 +
                         "&dataFinalSemana1=" + fimSemana1 +
                         "&dataInicialSemana2=" + inicioSemana2 +
