@@ -138,7 +138,7 @@ public class PerfilAlunoActivity extends Activity {
         @Override
         protected List<String> doInBackground(Void... voids) {
             try {
-                String urlString = "http://192.168.5.213:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
+                String urlString = "http://10.0.0.64:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

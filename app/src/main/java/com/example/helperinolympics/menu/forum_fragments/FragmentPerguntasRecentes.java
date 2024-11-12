@@ -45,35 +45,35 @@ public class FragmentPerguntasRecentes  extends Fragment {
         //new InicialAlunoMenuDeslizanteActivity.OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
 
         //DADOS PARA SIMULAÇÃO
-        Date dataPublicacao1 = null;
-        try {
-            dataPublicacao1 = sdf.parse("22/02/2022");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        perguntasF.add(new PerguntasForum(1, R.drawable.iconeperfilvazioredonda, 12, "Equação geral e reduzida",
-                "user466", "Quais seriam os métodos para achar uma equação geral a partir de uma matriz? Existem outras formas de fazer isso? E como chego na reduzida?",
-                "OBMEP", null, dataPublicacao1));
-
-        Date dataPublicacao2 = null;
-        try {
-            dataPublicacao2 = sdf.parse("17/06/2024");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        perguntasF.add(new PerguntasForum(2, R.drawable.iconeperfilvazioredonda, 50, "HTML com JavaScript",
-                "noeminoeme", "Uma questão solicitava a criação de um formulário e o tratamento de eventos de 2 botões utilizando o JavaScript, porém não estou conseguindo conectar o arquivo html ao js. Quais seriam as maneiras de fazer isso? Como posso resolver?",
-                "OBI", null, dataPublicacao2));
-
-        Date dataPublicacao3 = null;
-        try {
-            dataPublicacao3 = sdf.parse("25/12/2023");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        perguntasF.add(new PerguntasForum(3, R.drawable.iconeperfilvazioredonda, 500, "Dúvida",
-                "naosei", "Dúvida",
-                "ONHB", null, dataPublicacao3));
+//        Date dataPublicacao1 = null;
+//        try {
+//            dataPublicacao1 = sdf.parse("22/02/2022");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        perguntasF.add(new PerguntasForum(1, R.drawable.iconeperfilvazioredonda, 12, "Equação geral e reduzida",
+//                "user466", "Quais seriam os métodos para achar uma equação geral a partir de uma matriz? Existem outras formas de fazer isso? E como chego na reduzida?",
+//                "OBMEP", null, dataPublicacao1));
+//
+//        Date dataPublicacao2 = null;
+//        try {
+//            dataPublicacao2 = sdf.parse("17/06/2024");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        perguntasF.add(new PerguntasForum(2, R.drawable.iconeperfilvazioredonda, 50, "HTML com JavaScript",
+//                "noeminoeme", "Uma questão solicitava a criação de um formulário e o tratamento de eventos de 2 botões utilizando o JavaScript, porém não estou conseguindo conectar o arquivo html ao js. Quais seriam as maneiras de fazer isso? Como posso resolver?",
+//                "OBI", null, dataPublicacao2));
+//
+//        Date dataPublicacao3 = null;
+//        try {
+//            dataPublicacao3 = sdf.parse("25/12/2023");
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        perguntasF.add(new PerguntasForum(3, R.drawable.iconeperfilvazioredonda, 500, "Dúvida",
+//                "naosei", "Dúvida",
+//                "ONHB", null, dataPublicacao3));
 
         adapter.notifyDataSetChanged(); //atualizar o recycler
     }

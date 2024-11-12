@@ -203,16 +203,32 @@ CREATE TABLE ErrosAluno(
 	PRIMARY KEY(id)
 );
 
-#Apenas para apagar a simulação
-delete from PontuacaoAlunos WHERE emailAluno='isassevalho@gmail.com';
-delete from AcertosAluno WHERE emailAluno='isassevalho@gmail.com';
-delete from ErrosAluno WHERE emailAluno='isassevalho@gmail.com';
-
 DROP TABLE IF EXISTS PontuacaoAlunos;
 CREATE TABLE PontuacaoAlunos(
 	id INT AUTO_INCREMENT NOT NULL,
 	emailAluno VARCHAR(100) NOT NULL,
     pontuacao INT NOT NULL,
+	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+	PRIMARY KEY(id)
+);
+
+#exemplo
+INSERT INTO AcertosAluno (idAlternativaMarcada, idQuestionarioPertencente, idQuestaoPertencente, dataAcerto, emailAluno)
+VALUES (61, 3, 11, '2024-10-21', 'isassevalho@gmail.com');
+
+-- Insere dados na semana retrasada
+INSERT INTO ErrosAluno (idAlternativaMarcada, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente, dataErro, emailAluno)
+VALUES (22, 21, 1, 5, '2024-10-11', 'isassevalho@gmail.com');
+
+DROP TABLE IF EXISTS PerguntasForum;
+CREATE TABLE PerguntasForum(
+	id INT AUTO_INCREMENT NOT NULL,
+	emailAluno VARCHAR(100) NOT NULL,
+    titulo TEXT NOT NULL,
+    pergunta TEXT NOT NULL,
+	dataPublicacao DATE NOT NULL,
+    siglaOlimpiadaRelacionada VARCHAR(10) NOT NULL,
+	FOREIGN KEY(siglaOlimpiadaRelacionada) REFERENCES Olimpiada(sigla),
 	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
 	PRIMARY KEY(id)
 );

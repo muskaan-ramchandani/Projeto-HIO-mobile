@@ -117,7 +117,7 @@ public class QuestionarioCorrecaoActivity extends Activity {
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String dataErroFormatada = dateFormat.format(dataErro);
-                String urlString = "http://192.168.5.213:8086/phpHio/carregaCorrecao.php?emailAluno=" + URLEncoder.encode(email, "UTF-8") +
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaCorrecao.php?emailAluno=" + URLEncoder.encode(email, "UTF-8") +
                         "&dataErro=" + URLEncoder.encode(dataErroFormatada, "UTF-8") +
                         "&idQuestionarioPertencente=" + URLEncoder.encode(String.valueOf(idQuestionarioPertencente), "UTF-8");
 

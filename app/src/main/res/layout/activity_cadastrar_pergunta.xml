@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="10dp"
-        app:cardElevation="3dp">
+        app:cardElevation="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintAvisoProf"
@@ -66,8 +66,8 @@
                         android:layout_marginTop="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:paddingStart="6dp"
-                        android:paddingEnd="6dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
                         android:inputType="text"/>
 
                     <TextView
@@ -89,9 +89,15 @@
                         android:layout_marginTop="5dp"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:paddingStart="6dp"
-                        android:paddingEnd="6dp"
-                        android:inputType="text"/>
+                        android:paddingStart="15dp"
+                        android:paddingEnd="15dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp"
+                        android:inputType="textMultiLine"
+                        android:gravity="top|start"
+                        android:scrollbars="vertical"
+                        android:maxLines="10"
+                        android:overScrollMode="ifContentScrolls" />
 
                     <TextView
                         android:id="@+id/txtRelacaoComOlimp"
@@ -192,7 +198,6 @@
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"/>
-
                         </GridLayout>
                     </RadioGroup>
 

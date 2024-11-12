@@ -83,7 +83,7 @@ public class ForumActivity extends AppCompatActivity {
         findViewById(R.id.btnFazerPergunta).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CadastrarPergunta notificationDialogFragment = new CadastrarPergunta(alunoCadastrado);
+                CadastrarPergunta notificationDialogFragment = new CadastrarPergunta(alunoCadastrado, ForumActivity.this);
                 notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
             }
         });

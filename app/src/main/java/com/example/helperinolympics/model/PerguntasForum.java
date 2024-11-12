@@ -5,19 +5,15 @@ import java.util.Date;
 
 public class PerguntasForum {
     private int id, fotoPerfil, qntdRespostas;
-    private String titulo, nomeDeUsuario, pergunta, olimpiada;
-    private ArrayList<String> respostasRecebidas;
-    private Date dataPublicacao;
+    private String titulo, nomeDeUsuario, pergunta, olimpiada, dataPublicacao;
 
-    public PerguntasForum(int id, int fotoPerfil, int qntdRespostas, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, ArrayList<String> respostasRecebidas, Date dataPublicacao) {
-        setId(id);
-        setFotoPerfil(fotoPerfil);
+
+    public PerguntasForum(String titulo, String nomeDeUsuario, String pergunta, String olimpiada, String dataPublicacao) {
         setQntdRespostas(qntdRespostas);
         setTitulo(titulo);
         setNomeDeUsuario(nomeDeUsuario);
         setPergunta(pergunta);
         setOlimpiada(olimpiada);
-        setRespostasRecebidas(respostasRecebidas);
         setDataPublicacao(dataPublicacao);
     }
 
@@ -77,19 +73,11 @@ public class PerguntasForum {
         this.olimpiada = olimpiada;
     }
 
-    public ArrayList<String> getRespostasRecebidas() {
-        return respostasRecebidas;
-    }
-
-    public void setRespostasRecebidas(ArrayList<String> respostasRecebidas) {
-        this.respostasRecebidas = respostasRecebidas;
-    }
-
-    public Date getDataPublicacao() {
+    public String getDataPublicacao() {
         return dataPublicacao;
     }
 
-    public void setDataPublicacao(Date dataPublicacao) {
+    public void setDataPublicacao(String dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 }
