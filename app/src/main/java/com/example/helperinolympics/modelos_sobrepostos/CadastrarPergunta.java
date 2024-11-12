@@ -1,7 +1,6 @@
 package com.example.helperinolympics.modelos_sobrepostos;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +28,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,18 +47,47 @@ public class CadastrarPergunta extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_cadastrar_pergunta, container, false);
 
+        RadioButton[] grupoOlimpiadas = {
+                view.findViewById(R.id.radioButtonOBA),
+                view.findViewById(R.id.radioButtonONHB),
+                view.findViewById(R.id.radioButtonOBI),
+                view.findViewById(R.id.radioButtonOBB),
+                view.findViewById(R.id.radioButtonOBF),
+                view.findViewById(R.id.radioButtonOBMEP),
+                view.findViewById(R.id.radioButtonOBQ),
+                view.findViewById(R.id.radioButtonONC)
+        };
+
+        // Listener para garantir seleção única
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadioButton clickedButton = (RadioButton) v;
+
+                // Garantir que apenas o selecionado permaneça marcado
+                for (RadioButton radioButton : grupoOlimpiadas) {
+                    if (radioButton != clickedButton) {
+                        radioButton.setChecked(false);
+                    }
+                }
+            }
+        };
+
+        for (RadioButton rb : grupoOlimpiadas) {
+            rb.setOnClickListener(listener);
+        }
+
         view.findViewById(R.id.btnPublicar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean tudoPreenchido = verificarPreenchimento(view);
+
+                boolean tudoPreenchido = verificarPreenchimento(view, grupoOlimpiadas);
 
                 if(tudoPreenchido){
                     Calendar calendar = Calendar.getInstance();
                     dataAtual = calendar.getTime();
-                    SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd");
-                    String dataFormatada= formatoBanco.format(dataAtual);
 
-                    PerguntasForum perguntaACadastrar = new PerguntasForum(titulo, alunoCadastrado.getEmail(), pergunta, olimpiadaRelacionada, dataFormatada);
+                    PerguntasForum perguntaACadastrar = new PerguntasForum(titulo, alunoCadastrado.getEmail(), pergunta, olimpiadaRelacionada, dataAtual);
 
                     new CadastraPergunta(perguntaACadastrar).execute();
                     dismiss();
@@ -78,24 +107,25 @@ public class CadastrarPergunta extends DialogFragment {
         return view;
     }
 
-    private boolean verificarPreenchimento(View view) {
+    private boolean verificarPreenchimento(View view, RadioButton[] grupoOlimpiadas) {
         EditText txtTitulo = view.findViewById(R.id.editTextTitulo);
         EditText txtPergunta = view.findViewById(R.id.editTextPergunta);
-        RadioGroup radioGroupRelacaoOlimp = view.findViewById(R.id.radioGroupRelacaoOlimp);
 
         titulo = txtTitulo.getText().toString();
         pergunta = txtPergunta.getText().toString();
-        int radioButtonSelecionadoId = radioGroupRelacaoOlimp.getCheckedRadioButtonId();
 
         if (titulo.isEmpty() || pergunta.isEmpty()) {
             return false;
-        }else if (radioButtonSelecionadoId != -1) {
-            RadioButton radioButtonSelecionado = view.findViewById(radioButtonSelecionadoId);
-            olimpiadaRelacionada = radioButtonSelecionado.getText().toString();
-            return true;
-        } else{
-            return false;
+        }else {
+            for (RadioButton radioButton : grupoOlimpiadas) {
+                if (radioButton.isChecked()) {
+                    olimpiadaRelacionada = radioButton.getText().toString();
+                    return true;
+                }
+            }
         }
+
+        return false;
     }
 
     public void onStart() {
@@ -106,14 +136,18 @@ public class CadastrarPergunta extends DialogFragment {
         }
     }
 
-    private class CadastraPergunta extends AsyncTask<Void, Void, Void> {
-        PerguntasForum perguntaForum;
 
-        public CadastraPergunta(PerguntasForum perguntaForum){
+    private class CadastraPergunta extends AsyncTask<Void, Void, String> {
+        PerguntasForum perguntaForum;
+        SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd");
+        String dataFormatada;
+
+        public CadastraPergunta(PerguntasForum perguntaForum) {
             this.perguntaForum = perguntaForum;
         }
+
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
             StringBuilder result = new StringBuilder();
             Log.d("CONEXAO", "Tentando cadastro de pergunta");
 
@@ -128,11 +162,13 @@ public class CadastrarPergunta extends DialogFragment {
                 conexao.connect();
                 Log.d("CONEXAO", "Conexão estabelecida");
 
+                dataFormatada = formatoBanco.format(dataAtual);
 
                 String parametros = "emailAluno=" + perguntaForum.getNomeDeUsuario() +
                         "&titulo=" + perguntaForum.getTitulo() +
                         "&pergunta=" + perguntaForum.getPergunta() +
-                        "&siglaOlimpiadaRelacionada=" + perguntaForum.getOlimpiada();
+                        "&siglaOlimpiadaRelacionada=" + perguntaForum.getOlimpiada()+
+                        "&dataPublicacao=" + dataFormatada;
 
                 OutputStream os = conexao.getOutputStream();
                 byte[] input = parametros.getBytes(StandardCharsets.UTF_8);
@@ -147,14 +183,15 @@ public class CadastrarPergunta extends DialogFragment {
                 reader.close();
 
             } catch (Exception e) {
+                Toast.makeText(contexto, e.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("Erro", e.getMessage());
                 return null;
             }
 
-
-            return null;
+            return result.toString();
         }
 
+        @Override
         protected void onPostExecute(String result) {
             if (result != null) {
                 try {
@@ -164,6 +201,7 @@ public class CadastrarPergunta extends DialogFragment {
                     Toast.makeText(contexto, message, Toast.LENGTH_LONG).show();
 
                     if (jsonResponse.getString("status").equals("success")) {
+                        Toast.makeText(contexto, "Pergunta publicada com sucesso!", Toast.LENGTH_SHORT).show();
                         dismiss();
                     }
 
@@ -173,4 +211,5 @@ public class CadastrarPergunta extends DialogFragment {
             }
         }
     }
+
 }

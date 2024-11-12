@@ -5,10 +5,11 @@ import java.util.Date;
 
 public class PerguntasForum {
     private int id, fotoPerfil, qntdRespostas;
-    private String titulo, nomeDeUsuario, pergunta, olimpiada, dataPublicacao;
+    private String titulo, nomeDeUsuario, pergunta, olimpiada;
+    private Date dataPublicacao;
 
 
-    public PerguntasForum(String titulo, String nomeDeUsuario, String pergunta, String olimpiada, String dataPublicacao) {
+    public PerguntasForum(String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
         setQntdRespostas(qntdRespostas);
         setTitulo(titulo);
         setNomeDeUsuario(nomeDeUsuario);
@@ -73,11 +74,11 @@ public class PerguntasForum {
         this.olimpiada = olimpiada;
     }
 
-    public String getDataPublicacao() {
+    public Date getDataPublicacao() {
         return dataPublicacao;
     }
 
-    public void setDataPublicacao(String dataPublicacao) {
+    public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
 }

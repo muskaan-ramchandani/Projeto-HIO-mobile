@@ -25,15 +25,17 @@ try {
         $titulo = $_POST['titulo'];
         $pergunta = $_POST['pergunta'];
         $siglaOlimpiadaRelacionada = $_POST['siglaOlimpiadaRelacionada'];
+		$dataPublicacao = $_POST['dataPublicacao'];
     
-		$sql = "INSERT INTO PerguntasForum (emailAluno, titulo, pergunta, siglaOlimpiadaRelacionada) 
-        VALUES (:emailAluno, :titulo, :pergunta, :siglaOlimpiadaRelacionada)";
+		$sql = "INSERT INTO PerguntasForum (emailAluno, titulo, pergunta, siglaOlimpiadaRelacionada, dataPublicacao) 
+        VALUES (:emailAluno, :titulo, :pergunta, :siglaOlimpiadaRelacionada, :dataPublicacao)";
 
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(':emailAluno', $emailAluno);
 		$stmt->bindParam(':titulo', $titulo);
         $stmt->bindParam(':pergunta', $pergunta);
 		$stmt->bindParam(':siglaOlimpiadaRelacionada', $siglaOlimpiadaRelacionada);
+		$stmt->bindParam(':dataPublicacao', $dataPublicacao);
 
 		if ($stmt->execute()) {
 			echo json_encode(array("status" => "success", "message" => "Pergunta publicada com sucesso!"));

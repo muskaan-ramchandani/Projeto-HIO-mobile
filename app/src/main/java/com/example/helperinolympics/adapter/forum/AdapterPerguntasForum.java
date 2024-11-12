@@ -36,7 +36,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
         holder.titulo.setText(pergunta.getTitulo());
         holder.nomeDeUsuario.setText(pergunta.getNomeDeUsuario());
 
-        String dataPublicacao = pergunta.getDataPublicacao();
+        Date dataPublicacao = pergunta.getDataPublicacao();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = dateFormat.format(dataPublicacao);
 

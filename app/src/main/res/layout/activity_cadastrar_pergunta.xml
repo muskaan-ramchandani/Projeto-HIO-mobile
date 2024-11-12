@@ -110,105 +110,95 @@
                         android:textStyle="bold"
                         android:layout_marginTop="15dp"/>
 
-                    <RadioGroup
-                        android:id="@+id/radioGroupRelacaoOlimp"
+                    <TableLayout
+                        android:id="@+id/tableLayoutOlimpiadas"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_horizontal">
-
+                        <TableRow>
                             <RadioButton
                                 android:id="@+id/radioButtonOBA"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="OBA"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="OBA"
-                                android:layout_marginEnd="12dp"/>
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="13dp"/>
 
                             <RadioButton
                                 android:id="@+id/radioButtonONHB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="ONHB"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="ONHB"
-                                android:layout_marginEnd="20dp"/>
+                                android:layout_marginEnd="8dp"/>
 
                             <RadioButton
                                 android:id="@+id/radioButtonOBI"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="OBI"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="OBI"
-                                android:layout_marginEnd="17dp"/>
+                                android:layout_marginEnd="8dp"/>
 
                             <RadioButton
                                 android:id="@+id/radioButtonOBB"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="OBB"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:text="OBB" />
-                        </LinearLayout>
+                                android:fontFamily="@font/open_sans" />
+                        </TableRow>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_horizontal">
-
+                        <TableRow>
                             <RadioButton
                                 android:id="@+id/radioButtonOBF"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="OBF"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="OBF"
-                                android:layout_marginEnd="13dp"/>
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginStart="13dp"/>
 
                             <RadioButton
                                 android:id="@+id/radioButtonOBMEP"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="OBMEP"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="OBMEP"
-                                android:layout_marginEnd="12dp"/>
+                                android:layout_marginEnd="8dp"/>
 
                             <RadioButton
                                 android:id="@+id/radioButtonOBQ"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="OBQ"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="OBQ"
-                                android:layout_marginEnd="12dp"/>
+                                android:layout_marginEnd="8dp"/>
 
                             <RadioButton
                                 android:id="@+id/radioButtonONC"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="ONC"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:text="ONC" />
-                        </LinearLayout>
-                    </RadioGroup>
-
+                                android:fontFamily="@font/open_sans" />
+                        </TableRow>
+                    </TableLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnPublicar"
