@@ -1,16 +1,29 @@
 package com.example.helperinolympics.model;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PerguntasForum {
-    private int id, fotoPerfil, qntdRespostas;
+    private int id;
     private String titulo, nomeDeUsuario, pergunta, olimpiada;
     private Date dataPublicacao;
+    private Bitmap fotoPerfil;
 
-
+    //dados para cadastro da pergunta
     public PerguntasForum(String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
-        setQntdRespostas(qntdRespostas);
+        setTitulo(titulo);
+        setNomeDeUsuario(nomeDeUsuario);
+        setPergunta(pergunta);
+        setOlimpiada(olimpiada);
+        setDataPublicacao(dataPublicacao);
+    }
+
+    //dados para montar recycler view retornado do banco
+    public PerguntasForum(int id, Bitmap fotoPerfil, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
+        setId(id);
+        setFotoPerfil(fotoPerfil);
         setTitulo(titulo);
         setNomeDeUsuario(nomeDeUsuario);
         setPergunta(pergunta);
@@ -26,20 +39,12 @@ public class PerguntasForum {
         this.id = id;
     }
 
-    public int getFotoPerfil() {
+    public Bitmap getFotoPerfil() {
         return fotoPerfil;
     }
 
-    public void setFotoPerfil(int fotoPerfil) {
+    public void setFotoPerfil(Bitmap fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
-    }
-
-    public int getQntdRespostas() {
-        return qntdRespostas;
-    }
-
-    public void setQntdRespostas(int qntdRespostas) {
-        this.qntdRespostas = qntdRespostas;
     }
 
     public String getTitulo() {

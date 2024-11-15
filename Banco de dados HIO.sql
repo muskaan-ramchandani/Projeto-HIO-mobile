@@ -232,3 +232,16 @@ CREATE TABLE PerguntasForum(
 	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
 	PRIMARY KEY(id)
 );
+
+
+DROP TABLE IF EXISTS RespostasForum;
+CREATE TABLE RespostasForum(
+	id INT AUTO_INCREMENT NOT NULL,
+	emailProf VARCHAR(100) NOT NULL,
+    resposta TEXT NOT NULL,
+    dataResposta DATE NOT NULL,
+    idPergunta INT NOT NUll,
+	FOREIGN KEY(idPergunta) REFERENCES PerguntasForum(id),
+	FOREIGN KEY(emailProf) REFERENCES Professor(email),
+	PRIMARY KEY(id)
+);
