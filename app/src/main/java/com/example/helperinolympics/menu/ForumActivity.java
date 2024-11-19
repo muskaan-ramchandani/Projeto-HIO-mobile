@@ -135,5 +135,8 @@ public class ForumActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void atualizarDadosPosPublicacao() {
+        setFragment(new FragmentSuasPerguntas());
+    }
 
 }

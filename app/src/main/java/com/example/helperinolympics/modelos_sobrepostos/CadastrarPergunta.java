@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.menu.ForumActivity;
+import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.PerguntasForum;
 
@@ -32,12 +34,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import androidx.fragment.app.FragmentManager;
+
 
 public class CadastrarPergunta extends DialogFragment {
     private Aluno alunoCadastrado;
     private Context contexto;
     private String olimpiadaRelacionada, titulo, pergunta;
     private Date dataAtual;
+    private ForumActivity activity;
 
     public CadastrarPergunta(Aluno aluno, Context contexto){
         this.alunoCadastrado = aluno;
@@ -46,6 +51,8 @@ public class CadastrarPergunta extends DialogFragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_cadastrar_pergunta, container, false);
+
+        activity = (ForumActivity) getActivity();
 
         RadioButton[] grupoOlimpiadas = {
                 view.findViewById(R.id.radioButtonOBA),
@@ -136,7 +143,6 @@ public class CadastrarPergunta extends DialogFragment {
         }
     }
 
-
     private class CadastraPergunta extends AsyncTask<Void, Void, String> {
         PerguntasForum perguntaForum;
         SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd");
@@ -201,7 +207,7 @@ public class CadastrarPergunta extends DialogFragment {
                     Toast.makeText(contexto, message, Toast.LENGTH_LONG).show();
 
                     if (jsonResponse.getString("status").equals("success")) {
-                        Toast.makeText(contexto, "Pergunta publicada com sucesso!", Toast.LENGTH_SHORT).show();
+                        if (activity != null) { activity.atualizarDadosPosPublicacao(); }
                         dismiss();
                     }
 
@@ -211,5 +217,6 @@ public class CadastrarPergunta extends DialogFragment {
             }
         }
     }
+
 
 }

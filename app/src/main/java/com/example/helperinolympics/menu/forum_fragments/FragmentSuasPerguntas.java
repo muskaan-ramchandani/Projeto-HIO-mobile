@@ -22,6 +22,7 @@ import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumSuasPerguntasBinding;
 import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.model.PerguntasForum;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,15 +37,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class FragmentSuasPerguntas extends Fragment  {
+public class FragmentSuasPerguntas extends Fragment{
     private FragmentForumSuasPerguntasBinding binding;
-    private AdapterPerguntasForum adapter;
+    private AdapterPerguntasForum adapterRespondidas;
+    private AdapterPerguntasForum adapterNaoRespondidas;
     private ArrayList<PerguntasForum> perguntasRespondidas = new ArrayList<>();
     private ArrayList<PerguntasForum> perguntasNAORespondidas = new ArrayList<>();
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat apiDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Context contexto;
+
+    String emailAluno = "";
 
     @Nullable
     @Override
@@ -57,7 +61,6 @@ public class FragmentSuasPerguntas extends Fragment  {
 
         //pegando dado do email do usuario
         ForumActivity activity = (ForumActivity) getActivity();
-        String emailAluno = "";
         if (activity != null) {
             emailAluno = activity.alunoCadastrado.getEmail();
         }
@@ -70,23 +73,23 @@ public class FragmentSuasPerguntas extends Fragment  {
     public void configurarRecyclerPerguntasForumRespondidas() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterPerguntasForum(perguntasRespondidas);
+        adapterRespondidas= new AdapterPerguntasForum(perguntasRespondidas);
         binding.recyclerSuasPerguntasRespondidas.setLayoutManager(layoutManager);
         binding.recyclerSuasPerguntasRespondidas.setHasFixedSize(true);
-        binding.recyclerSuasPerguntasRespondidas.setAdapter(adapter);
+        binding.recyclerSuasPerguntasRespondidas.setAdapter(adapterRespondidas);
 
-        adapter.notifyDataSetChanged();
+        adapterRespondidas.notifyDataSetChanged();
     }
 
     public void configurarRecyclerPerguntasForumNaoRespondidas() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterPerguntasForum(perguntasNAORespondidas);
+        adapterNaoRespondidas= new AdapterPerguntasForum(perguntasNAORespondidas);
         binding.recyclerSuasPerguntasSemResposta.setLayoutManager(layoutManager);
         binding.recyclerSuasPerguntasSemResposta.setHasFixedSize(true);
-        binding.recyclerSuasPerguntasSemResposta.setAdapter(adapter);
+        binding.recyclerSuasPerguntasSemResposta.setAdapter(adapterNaoRespondidas);
 
-        adapter.notifyDataSetChanged();
+        adapterNaoRespondidas.notifyDataSetChanged();
     }
 
     private class CarregaSuasPerguntas extends AsyncTask<String, Void, String> {
@@ -225,4 +228,5 @@ public class FragmentSuasPerguntas extends Fragment  {
             return null;
         }
     }
+
 }

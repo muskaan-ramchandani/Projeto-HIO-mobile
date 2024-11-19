@@ -166,18 +166,13 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
                 olimpiadasF.add(new OlimpiadaForum("OBI", "Laranja", perguntasOBI));
                 olimpiadasF.add(new OlimpiadaForum("OBMEP", "Ciano", perguntasOBMEP));
                 olimpiadasF.add(new OlimpiadaForum("ONC", "Ciano", perguntasONC));
-                olimpiadasF.add(new OlimpiadaForum("ONHB", "Laranja", perguntasONHB));
+                olimpiadasF.add(new OlimpiadaForum("ONHB", "Rosa", perguntasONHB));
                 olimpiadasF.add(new OlimpiadaForum("OBQ", "Azul", perguntasOBQ));
-                olimpiadasF.add(new OlimpiadaForum("OBB", "Ciano", perguntasOBB));
+                olimpiadasF.add(new OlimpiadaForum("OBB", "Laranja", perguntasOBB));
 
                 adapter.notifyDataSetChanged();
             }
         }
-
-
-
-
-
 
     }
 }
