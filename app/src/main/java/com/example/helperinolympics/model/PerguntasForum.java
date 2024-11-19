@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class PerguntasForum {
-    private int id;
+    private int id, qntdRespostas;
     private String titulo, nomeDeUsuario, pergunta, olimpiada;
     private Date dataPublicacao;
     private Bitmap fotoPerfil;
@@ -21,9 +21,9 @@ public class PerguntasForum {
     }
 
     //dados para montar recycler view retornado do banco
-    public PerguntasForum(int id, Bitmap fotoPerfil, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
+    public PerguntasForum(int id,int qntdRespostas, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
         setId(id);
-        setFotoPerfil(fotoPerfil);
+        setQntdRespostas(qntdRespostas);
         setTitulo(titulo);
         setNomeDeUsuario(nomeDeUsuario);
         setPergunta(pergunta);
@@ -37,6 +37,14 @@ public class PerguntasForum {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getQntdRespostas() {
+        return qntdRespostas;
+    }
+
+    public void setQntdRespostas(int qntdRespostas) {
+        this.qntdRespostas = qntdRespostas;
     }
 
     public Bitmap getFotoPerfil() {

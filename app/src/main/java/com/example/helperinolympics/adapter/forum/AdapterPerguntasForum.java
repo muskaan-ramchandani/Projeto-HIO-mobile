@@ -1,6 +1,7 @@
 package com.example.helperinolympics.adapter.forum;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,21 +33,32 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
     public void onBindViewHolder(@NonNull AdapterPerguntasForum.PerguntasForumViewHolder holder, int position) {
         PerguntasForum pergunta = listaPerguntasForum.get(position);
 
-        holder.fotoPerfil.setImageResource(pergunta.getFotoPerfil());
+        Bitmap foto = pergunta.getFotoPerfil();
+        if(foto==null){
+            holder.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
+        }else{
+            holder.fotoPerfil.setImageBitmap(foto);
+        }
+
+        holder.id= pergunta.getId();
         holder.titulo.setText(pergunta.getTitulo());
         holder.nomeDeUsuario.setText(pergunta.getNomeDeUsuario());
 
         Date dataPublicacao = pergunta.getDataPublicacao();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = dateFormat.format(dataPublicacao);
+        String dataFormatada = "00/00/0000";
+
+        if (dataPublicacao != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dataFormatada = dateFormat.format(dataPublicacao);
+        }
 
         holder.dataEOlimp.setText(dataFormatada + " • " + pergunta.getOlimpiada());
 
         holder.pergunta.setText(pergunta.getPergunta());
-        int qntdRespostasInt = pergunta.getQntdRespostas();
-        String qntdRespostasString = String.valueOf(qntdRespostasInt);
+        holder.qntdRespostas = pergunta.getQntdRespostas();
+        String qntdRespostasString = String.valueOf(holder.qntdRespostas);
 
-        if(qntdRespostasInt>0){
+        if(holder.qntdRespostas>0){
             holder.respostas.setText(qntdRespostasString + " respostas • Clique aqui para exibir");
         }else{
             holder.respostas.setText("0 respostas • A pergunta não foi respondida");
@@ -58,7 +70,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
     public class PerguntasForumViewHolder extends RecyclerView.ViewHolder{
         ImageView fotoPerfil;
         TextView titulo, nomeDeUsuario, dataEOlimp, pergunta, respostas;
-
+        int id, qntdRespostas;
 
         public PerguntasForumViewHolder(@NonNull View itemView, final Context context){
             super(itemView);
@@ -70,6 +82,11 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
             pergunta=itemView.findViewById(R.id.txtPergunta);
             respostas=itemView.findViewById(R.id.txtQntdRespostas);
 
+            if (qntdRespostas <= 0) {
+                respostas.setEnabled(false);
+            }else{
+                respostas.setEnabled(true);
+            }
             respostas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

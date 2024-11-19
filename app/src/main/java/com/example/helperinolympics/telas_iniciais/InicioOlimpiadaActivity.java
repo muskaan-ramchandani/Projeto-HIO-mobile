@@ -133,7 +133,6 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     }
 
     private void configurarRecyclerLivros() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterLivros= new AdapterLivros(livros, InicioOlimpiadaActivity.this);
