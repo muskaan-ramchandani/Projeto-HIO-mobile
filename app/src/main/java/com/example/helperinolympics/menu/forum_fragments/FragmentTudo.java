@@ -57,6 +57,8 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
             contexto = getActivity();
         }
 
+        new CarregarContagemPerguntasTask().execute();
+
         configurarRecyclerOlimpiadasForum();
         setupFragmentNavigation();
         return binding.getRoot();
@@ -80,21 +82,6 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
         binding.recyclerPerguntasPorOlimpiada.setLayoutManager(layoutManager);
         binding.recyclerPerguntasPorOlimpiada.setHasFixedSize(true);
         binding.recyclerPerguntasPorOlimpiada.setAdapter(adapter);
-
-        new CarregarContagemPerguntasTask().execute();
-
-        //SIMULAÇÃO DE DADOS
-        olimpiadasF.add(new OlimpiadaForum("OBA", "Rosa", perguntasOBA));
-        olimpiadasF.add(new OlimpiadaForum("OBF", "Azul", perguntasOBF));
-        olimpiadasF.add(new OlimpiadaForum("OBI", "Laranja", perguntasOBI));
-        olimpiadasF.add(new OlimpiadaForum("OBMEP", "Ciano", perguntasOBMEP));
-        olimpiadasF.add(new OlimpiadaForum("ONC", "Ciano", perguntasONC));
-        olimpiadasF.add(new OlimpiadaForum("ONHB", "Laranja", perguntasONHB));
-        olimpiadasF.add(new OlimpiadaForum("OBQ", "Azul", perguntasOBQ));
-        olimpiadasF.add(new OlimpiadaForum("OBB", "Ciano", perguntasOBB));
-
-
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -102,14 +89,15 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
         clickCount++;
 
         //Alternando fragmentos com base no número de cliques
-        if (clickCount % 2 == 1) {
+        if (clickCount % 2 == 0) {
+            setChildFragment(new FragmentPerguntasRecentes());
+
+        } else {
             if(olimp.getQntdPerguntasRelacionadas()<=0){
                 Toast.makeText(contexto, "Não existem perguntas relacionadas a esta olimpíada.", Toast.LENGTH_LONG).show();
             }else{
                 setChildFragment(new FragmentPerguntasPorOlimpiada(olimp.getSiglaOlimpiada()));
             }
-        } else {
-            setChildFragment(new FragmentPerguntasRecentes());
         }
     }
 
@@ -126,20 +114,30 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
                 conexao.setReadTimeout(15000);
                 conexao.setConnectTimeout(5000);
 
-                InputStreamReader reader = new InputStreamReader(conexao.getInputStream());
-                StringBuilder resposta = new StringBuilder();
-                int caractere;
-                while ((caractere = reader.read()) != -1) {
-                    resposta.append((char) caractere);
-                }
+                int responseCode = conexao.getResponseCode();
+                Log.d("HTTP", "Response Code: " + responseCode);
 
-                JSONObject jsonObject = new JSONObject(resposta.toString());
-                JSONObject contagemPerguntasJson = jsonObject.getJSONObject("contagemPerguntas");
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader reader = new InputStreamReader(conexao.getInputStream());
+                    StringBuilder resposta = new StringBuilder();
+                    int caractere;
+                    while ((caractere = reader.read()) != -1) {
+                        resposta.append((char) caractere);
+                    }
 
-                for (Iterator<String> iter = contagemPerguntasJson.keys(); iter.hasNext();) {
-                    String sigla = iter.next();
-                    int totalPerguntas = contagemPerguntasJson.getInt(sigla);
-                    contagemPerguntas.put(sigla, totalPerguntas);
+                    String jsonResponse = resposta.toString();
+                    Log.d("JSON Response", jsonResponse);
+
+                    JSONObject jsonObject = new JSONObject(jsonResponse);
+                    JSONObject contagemPerguntasJson = jsonObject.getJSONObject("contagemPerguntas");
+
+                    for (Iterator<String> iter = contagemPerguntasJson.keys(); iter.hasNext();) {
+                        String sigla = iter.next();
+                        int totalPerguntas = contagemPerguntasJson.getInt(sigla);
+                        contagemPerguntas.put(sigla, totalPerguntas);
+                    }
+                } else {
+                    Log.e("HTTP", "Erro no código de resposta: " + responseCode);
                 }
 
             } catch (Exception e) {
@@ -149,9 +147,9 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
             return contagemPerguntas;
         }
 
+
         @Override
         protected void onPostExecute(HashMap<String, Integer> contagemPerguntas) {
-
             if (contagemPerguntas != null && !contagemPerguntas.isEmpty()) {
                 perguntasOBA = contagemPerguntas.getOrDefault("OBA", 0);
                 perguntasOBF = contagemPerguntas.getOrDefault("OBF", 0);
@@ -161,8 +159,24 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
                 perguntasOBQ = contagemPerguntas.getOrDefault("OBQ", 0);
                 perguntasOBB = contagemPerguntas.getOrDefault("OBB", 0);
                 perguntasONC = contagemPerguntas.getOrDefault("ONC", 0);
+
+                olimpiadasF.clear();
+                olimpiadasF.add(new OlimpiadaForum("OBA", "Rosa", perguntasOBA));
+                olimpiadasF.add(new OlimpiadaForum("OBF", "Azul", perguntasOBF));
+                olimpiadasF.add(new OlimpiadaForum("OBI", "Laranja", perguntasOBI));
+                olimpiadasF.add(new OlimpiadaForum("OBMEP", "Ciano", perguntasOBMEP));
+                olimpiadasF.add(new OlimpiadaForum("ONC", "Ciano", perguntasONC));
+                olimpiadasF.add(new OlimpiadaForum("ONHB", "Laranja", perguntasONHB));
+                olimpiadasF.add(new OlimpiadaForum("OBQ", "Azul", perguntasOBQ));
+                olimpiadasF.add(new OlimpiadaForum("OBB", "Ciano", perguntasOBB));
+
+                adapter.notifyDataSetChanged();
             }
         }
+
+
+
+
 
 
     }

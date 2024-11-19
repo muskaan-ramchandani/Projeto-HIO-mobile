@@ -33,10 +33,10 @@ $sql = "
     PerguntasForum.siglaOlimpiadaRelacionada
 FROM 
     PerguntasForum
-WHERE
-    PerguntasForum.siglaOlimpiadaRelacionada = :siglaOlimpiada
 JOIN 
     Aluno ON PerguntasForum.emailAluno = Aluno.email
+WHERE
+    PerguntasForum.siglaOlimpiadaRelacionada = :siglaOlimpiada
     
     ORDER BY PerguntasForum.dataPublicacao DESC;
 ";

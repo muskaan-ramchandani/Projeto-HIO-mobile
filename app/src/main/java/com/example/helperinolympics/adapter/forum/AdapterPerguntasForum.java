@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntasForum.PerguntasForumViewHolder>{ List<PerguntasForum> listaPerguntasForum;
 
@@ -68,7 +70,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
     }
 
     public class PerguntasForumViewHolder extends RecyclerView.ViewHolder{
-        ImageView fotoPerfil;
+        CircleImageView fotoPerfil;
         TextView titulo, nomeDeUsuario, dataEOlimp, pergunta, respostas;
         int id, qntdRespostas;
 

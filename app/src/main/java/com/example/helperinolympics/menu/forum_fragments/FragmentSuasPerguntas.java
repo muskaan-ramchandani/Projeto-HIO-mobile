@@ -97,7 +97,6 @@ public class FragmentSuasPerguntas extends Fragment  {
         }
         @Override
         protected String doInBackground(String... strings) {
-
             StringBuilder result = new StringBuilder();
 
             try {
@@ -115,11 +114,14 @@ public class FragmentSuasPerguntas extends Fragment  {
                         result.append(line);
                     }
                     reader.close();
+                } else {
+                    Log.e("Erro HTTP", "Código de resposta: " + responseCode);
                 }
             } catch (Exception e) {
                 Log.e("CarregaSuasPerguntas", "Erro na requisição HTTP", e);
             }
 
+            Log.d("Resposta da API", result.toString());
             return result.toString();
         }
 

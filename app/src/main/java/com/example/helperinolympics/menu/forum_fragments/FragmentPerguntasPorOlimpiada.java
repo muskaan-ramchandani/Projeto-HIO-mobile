@@ -62,8 +62,6 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
         binding.recyclerPerguntasOlimpiadas.setLayoutManager(layoutManager);
         binding.recyclerPerguntasOlimpiadas.setHasFixedSize(true);
         binding.recyclerPerguntasOlimpiadas.setAdapter(adapter);
-
-        adapter.notifyDataSetChanged(); //atualizar o recycler
     }
 
     private class CarregaPerguntasPorOlimpiada extends AsyncTask<String, Void, String> {
@@ -113,25 +111,32 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
                     String dataPerguntaString = perguntasOlimpiadasJson.getString("dataPublicacao");
                     Date dataPublicacao = converterParaData(dataPerguntaString);
 
-                    PerguntasForum pergunta = new PerguntasForum(perguntasOlimpiadasJson.getInt("id"), perguntasOlimpiadasJson.getInt("totalRespostas"),
-                            perguntasOlimpiadasJson.getString("titulo"), perguntasOlimpiadasJson.getString("nomeUsuario"), perguntasOlimpiadasJson.getString("pergunta"),
-                            perguntasOlimpiadasJson.getString("siglaOlimpiadaRelacionada"), dataPublicacao);
-
+                    PerguntasForum pergunta = new PerguntasForum(
+                            perguntasOlimpiadasJson.getInt("id"),
+                            perguntasOlimpiadasJson.getInt("totalRespostas"),
+                            perguntasOlimpiadasJson.getString("titulo"),
+                            perguntasOlimpiadasJson.getString("nomeUsuario"),
+                            perguntasOlimpiadasJson.getString("pergunta"),
+                            perguntasOlimpiadasJson.getString("siglaOlimpiadaRelacionada"),
+                            dataPublicacao
+                    );
 
                     String fotoBase64 = perguntasOlimpiadasJson.getString("fotoPerfil");
-
-                    if(fotoBase64!=null){
-                        Bitmap bitmapFoto= decodeBase64ToBitmap(fotoBase64);
+                    if (fotoBase64 != null && !fotoBase64.isEmpty()) {
+                        Bitmap bitmapFoto = decodeBase64ToBitmap(fotoBase64);
                         pergunta.setFotoPerfil(bitmapFoto);
                     }
 
                     perguntasF.add(pergunta);
                 }
 
+                adapter.notifyDataSetChanged();
+
             } catch (JSONException e) {
                 Log.e("CarregaPerguntasOlimpiada", "Erro ao fazer o parse do JSON", e);
             }
         }
+
     }
 
     public Bitmap decodeBase64ToBitmap(String base64String) {

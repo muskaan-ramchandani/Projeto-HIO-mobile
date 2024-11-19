@@ -31,20 +31,18 @@ $sql = "
     PerguntasForum.pergunta,
     PerguntasForum.dataPublicacao,
     PerguntasForum.siglaOlimpiadaRelacionada
-FROM 
+    FROM 
     PerguntasForum
-WHERE
-    PerguntasForum.emailAluno = :emailAluno
-JOIN 
+    JOIN 
     Aluno ON PerguntasForum.emailAluno = Aluno.email
-    
+    WHERE
+    PerguntasForum.emailAluno = :emailAluno
     ORDER BY PerguntasForum.dataPublicacao DESC;
 ";
 
 $statement = $pdo->prepare($sql);
 $statement->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
 $statement->execute();
-
 
 $listaPerguntasRespondidas = [];
 $listaPerguntasSemResposta = [];
@@ -72,12 +70,10 @@ while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
     //para retornar olimpiadas com resposta
     if ($totalRespostas > 0) {
         $result['totalRespostas'] = $totalRespostas;
-
         $listaPerguntasRespondidas[] = (object) $result;
-    }else{
+    } else {
         //perguntas sem respostas
         $result['totalRespostas'] = $totalRespostas;
-
         $listaPerguntasSemResposta[] = (object) $result;
     }
 }
