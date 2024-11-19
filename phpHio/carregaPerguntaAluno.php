@@ -27,7 +27,7 @@ FROM
     PerguntasForum
 JOIN 
     Aluno ON PerguntasForum.emailAluno = Aluno.email
-    
+
     ORDER BY PerguntasForum.dataPublicacao DESC;
 ";
 
@@ -57,8 +57,27 @@ while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
     $listaPerguntas[] = (object) $result;
 }
 
+//contando grupos de pergunta por olimpiada
+$sqlContagemPerguntas = "
+    SELECT 
+        siglaOlimpiadaRelacionada, 
+        COUNT(*) AS totalPerguntasPorOlimpiada
+    FROM 
+        PerguntasForum
+    GROUP BY 
+        siglaOlimpiadaRelacionada;
+";
+
+$statementContagem = $pdo->query($sqlContagemPerguntas);
+
+$contagemPerguntasPorOlimpiada = [];
+while ($contagem = $statementContagem->fetch(PDO::FETCH_ASSOC)) {
+    $contagemPerguntasPorOlimpiada[$contagem['siglaOlimpiadaRelacionada']] = $contagem['totalPerguntasPorOlimpiada'];
+}
+
 echo json_encode([
-    'listaPerguntas' => $listaPerguntas
+    'listaPerguntas' => $listaPerguntas,
+    'contagemPerguntasPorOlimpiada' => $contagemPerguntasPorOlimpiada
 ]);
 
 $pdo = null;

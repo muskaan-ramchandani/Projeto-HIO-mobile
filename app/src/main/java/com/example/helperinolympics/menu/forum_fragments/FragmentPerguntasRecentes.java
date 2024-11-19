@@ -24,12 +24,14 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class FragmentPerguntasRecentes  extends Fragment {
@@ -123,7 +125,6 @@ public class FragmentPerguntasRecentes  extends Fragment {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject perguntasJSON = jsonArray.getJSONObject(i);
 
-                    //trazendo e formatando data
                     String dataPerguntaString = perguntasJSON.getString("dataPublicacao");
                     Date dataPublicacao = converterParaData(dataPerguntaString);
 
@@ -132,7 +133,6 @@ public class FragmentPerguntasRecentes  extends Fragment {
                             perguntasJSON.getString("siglaOlimpiadaRelacionada"), dataPublicacao);
 
 
-                    //trazendo a foto de perfil presente no banco
                     String fotoBase64 = perguntasJSON.getString("fotoPerfil");
 
                     if(fotoBase64!=null){
@@ -179,4 +179,6 @@ public class FragmentPerguntasRecentes  extends Fragment {
             return null;
         }
     }
+
+
 }
