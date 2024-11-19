@@ -14,6 +14,14 @@ try {
     exit;
 }
 
+// Receber os parâmetros
+$emailAluno = $_GET['emailAluno'] ?? '';
+
+if (empty($emailAluno)) {
+    echo json_encode(["message" => "Não foram enviados todos os parâmetros"]);
+    exit;
+}
+
 $sql = "
     SELECT 
     PerguntasForum.id,
@@ -25,15 +33,22 @@ $sql = "
     PerguntasForum.siglaOlimpiadaRelacionada
 FROM 
     PerguntasForum
+WHERE
+    PerguntasForum.emailAluno = :emailAluno
 JOIN 
     Aluno ON PerguntasForum.emailAluno = Aluno.email
     
     ORDER BY PerguntasForum.dataPublicacao DESC;
 ";
 
-$statement = $pdo->query($sql);
+$statement = $pdo->prepare($sql);
+$statement->bindParam(':emailAluno', $emailAluno, PDO::PARAM_STR);
+$statement->execute();
 
-$listaPerguntas = [];
+
+$listaPerguntasRespondidas = [];
+$listaPerguntasSemResposta = [];
+
 while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
     $idPergunta = $result['id'];
     
@@ -54,11 +69,22 @@ while ($result = $statement->fetch(PDO::FETCH_ASSOC)) {
         $result['fotoPerfil'] = base64_encode($result['fotoPerfil']);
     }
 
-    $listaPerguntas[] = (object) $result;
+    //para retornar olimpiadas com resposta
+    if ($totalRespostas > 0) {
+        $result['totalRespostas'] = $totalRespostas;
+
+        $listaPerguntasRespondidas[] = (object) $result;
+    }else{
+        //perguntas sem respostas
+        $result['totalRespostas'] = $totalRespostas;
+
+        $listaPerguntasSemResposta[] = (object) $result;
+    }
 }
 
 echo json_encode([
-    'listaPerguntas' => $listaPerguntas
+    'listaPerguntasRespondidas' => $listaPerguntasRespondidas,
+    'listaPerguntasSemResposta' => $listaPerguntasSemResposta
 ]);
 
 $pdo = null;

@@ -1,11 +1,13 @@
 package com.example.helperinolympics.menu.forum_fragments;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +36,8 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
     private ArrayList<OlimpiadaForum> olimpiadasF = new ArrayList<>();
     private int clickCount = 0;
 
+    private Context contexto;
+
     //contagens para olimpiadas
     int perguntasOBA = 0;
     int perguntasOBF = 0;
@@ -48,6 +52,11 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentForumTudoBinding.inflate(inflater, container, false);
+
+        if (getActivity() != null) {
+            contexto = getActivity();
+        }
+
         configurarRecyclerOlimpiadasForum();
         setupFragmentNavigation();
         return binding.getRoot();
@@ -94,8 +103,11 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
 
         //Alternando fragmentos com base no número de cliques
         if (clickCount % 2 == 1) {
-            setChildFragment(new FragmentPerguntasPorOlimpiada(olimp.getSiglaOlimpiada()));
-            //fazer condição para caso pergunta da olimp = 0, nem abre nada
+            if(olimp.getQntdPerguntasRelacionadas()<=0){
+                Toast.makeText(contexto, "Não existem perguntas relacionadas a esta olimpíada.", Toast.LENGTH_LONG).show();
+            }else{
+                setChildFragment(new FragmentPerguntasPorOlimpiada(olimp.getSiglaOlimpiada()));
+            }
         } else {
             setChildFragment(new FragmentPerguntasRecentes());
         }

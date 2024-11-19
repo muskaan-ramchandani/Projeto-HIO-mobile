@@ -233,7 +233,6 @@ CREATE TABLE PerguntasForum(
 	PRIMARY KEY(id)
 );
 
-
 DROP TABLE IF EXISTS RespostasForum;
 CREATE TABLE RespostasForum(
 	id INT AUTO_INCREMENT NOT NULL,

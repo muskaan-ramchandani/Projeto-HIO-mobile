@@ -41,7 +41,7 @@ import java.util.List;
 
 public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;
-    Aluno alunoCadastrado;
+    public Aluno alunoCadastrado;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
