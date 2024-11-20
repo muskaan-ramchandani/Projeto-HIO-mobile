@@ -89,11 +89,11 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
             holder.respostas.setEnabled(false);
         }
 
+        configurarRecyclerRespostas(holder.recyclerRespostas, pergunta.getId());
+
         holder.respostas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                configurarRecyclerRespostas(holder.recyclerRespostas, pergunta.getId());
-
                 if (holder.isExpanded) {
                     collapse(holder.linearExpansivel, holder.recyclerRespostas);
                     holder.respostas.setText(qntdRespostasString + " respostas • Clique aqui para exibir");
@@ -160,6 +160,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
                 view.measure(widthSpec, heightSpec);
 
                 int targetHeight = view.getMeasuredHeight();
+                view.setVisibility(View.VISIBLE);
                 Log.d("Expand", "Target height: " + targetHeight);
 
                 ValueAnimator animator = ValueAnimator.ofInt(0, targetHeight);
