@@ -92,11 +92,13 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
         holder.respostas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                configurarRecyclerRespostas(holder.recyclerRespostas, pergunta.getId());
+
                 if (holder.isExpanded) {
                     collapse(holder.linearExpansivel, holder.recyclerRespostas);
                     holder.respostas.setText(qntdRespostasString + " respostas • Clique aqui para exibir");
                 } else {
-                    expand(holder.linearExpansivel, holder.recyclerRespostas, pergunta.getId());
+                    expand(holder.linearExpansivel, holder.recyclerRespostas);
                     holder.respostas.setText("Respostas para esta pergunta:");
                 }
                 holder.isExpanded = !holder.isExpanded;
@@ -141,26 +143,31 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
     }
 
     //para exibir RESPOSTAS
-    private void expand(View view, RecyclerView recyclerRespostas, int id) {
-        configurarRecyclerRespostas(recyclerRespostas, id);
+    private void expand(View view, RecyclerView recyclerRespostas) {
 
         view.setVisibility(View.VISIBLE);
         recyclerRespostas.setVisibility(View.VISIBLE);
 
-        view.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        int targetHeight = view.getMeasuredHeight();
+        view.post(new Runnable() {
+            @Override
+            public void run() {
+                int widthSpec = View.MeasureSpec.makeMeasureSpec(view.getWidth(), View.MeasureSpec.EXACTLY);
+                int heightSpec = View.MeasureSpec.makeMeasureSpec(view.getHeight(), View.MeasureSpec.EXACTLY);
+                view.measure(widthSpec, heightSpec);
 
-        view.getLayoutParams().height = 0;
-        view.requestLayout();
+                int targetHeight = view.getMeasuredHeight();
+                Log.d("Expand", "Target height: " + targetHeight);
 
-        ValueAnimator animator = ValueAnimator.ofInt(0, targetHeight);
-        animator.addUpdateListener(animation -> {
-            int value = (int) animation.getAnimatedValue();
-            view.getLayoutParams().height = value;
-            view.requestLayout();
+                ValueAnimator animator = ValueAnimator.ofInt(0, targetHeight);
+                animator.addUpdateListener(animation -> {
+                    int value = (int) animation.getAnimatedValue();
+                    view.getLayoutParams().height = value;
+                    view.requestLayout();
+                });
+                animator.setDuration(300);
+                animator.start();
+            }
         });
-        animator.setDuration(300);
-        animator.start();
     }
 
     private void collapse(View view, RecyclerView recyclerRespostas) {
