@@ -20,7 +20,6 @@ import com.example.helperinolympics.adapter.AdapterOlimpiadas;
 import com.example.helperinolympics.databinding.ActivityMenuDeslizanteAlunoBinding;
 import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
-import com.example.helperinolympics.menu.FavoritosAlunoActivity;
 import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.menu.SairActivity;
@@ -100,15 +99,13 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
              int itemID= item.getItemId();
 
              if(itemID == R.id.nav_perfil_aluno){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class));
+                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class);
+                 intent.putExtra("alunoCadastrado", alunoCadastrado);
+                 startActivity(intent);
                  finish();
-                 return true;
-             }else if(itemID == R.id.nav_favoritos_aluno){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, FavoritosAlunoActivity.class));
-                 finish();
+
                  return true;
              }else if(itemID == R.id.nav_forum){
-
                  Intent intentForum = new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class);
                  intentForum.putExtra("alunoCadastrado", alunoCadastrado);
                  startActivity(intentForum);
@@ -118,13 +115,17 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
              }else if(itemID == R.id.nav_manual){
                  startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
                  finish();
+
                  return true;
              }else if(itemID == R.id.nav_configuracoes){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class));
+                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
+                 intent.putExtra("alunoCadastrado", alunoCadastrado);
+                 startActivity(intent);
                  finish();
+
                  return true;
              }else if(itemID == R.id.nav_sair){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, SairActivity.class));
+                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, TelaLoginActivity.class));
                  finish();
                  return true;
              }else{
@@ -163,7 +164,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             Log.d("CONEXAO", "Tentando fazer download");
 
             try {
-                URL url = new URL("http://192.168.1.11:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
+                URL url = new URL("http://10.0.0.64:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

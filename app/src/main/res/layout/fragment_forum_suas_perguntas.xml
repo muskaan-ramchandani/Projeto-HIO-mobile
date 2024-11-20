@@ -16,10 +16,16 @@
         android:text="Perguntas respondidas:"
         android:paddingStart="15dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerSuasPerguntasRespondidas"
+    <LinearLayout
+        android:id="@+id/linearPerguntasRespondidas"
         android:layout_width="match_parent"
-        android:layout_height="220dp" />
+        android:layout_height="220dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSuasPerguntasRespondidas"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/txtSuasPerguntasSemResposta"
@@ -33,11 +39,16 @@
         android:layout_marginTop="10dp"
         android:paddingStart="15dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerSuasPerguntasSemResposta"
+
+    <LinearLayout
+        android:id="@+id/linearPerguntasNAORespondidas"
         android:layout_width="match_parent"
-        android:layout_height="220dp" />
+        android:layout_height="220dp">
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSuasPerguntasSemResposta"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+    </LinearLayout>
 
 </LinearLayout>

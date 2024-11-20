@@ -133,7 +133,6 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
     }
 
     private void configurarRecyclerLivros() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         adapterLivros= new AdapterLivros(livros, InicioOlimpiadaActivity.this);
@@ -177,7 +176,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
             List<Conteudo> conteudos = new ArrayList<>();
             try {
-                String urlString = "http://192.168.1.11:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -267,7 +266,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
             List<Livros> livros = new ArrayList<>();
             try {
-                String urlString = "http://192.168.1.11:8086/phpHio/carregaLivroPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaLivroPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -376,7 +375,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
             List<ProvasAnteriores> provasLista = new ArrayList<>();
             try {
-                String urlString = "http://192.168.1.11:8086/phpHio/carregaProvaPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaProvaPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

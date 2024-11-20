@@ -20,11 +20,12 @@ import com.example.helperinolympics.databinding.ActivityForumBinding;
 import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.menu.forum_fragments.FragmentTudo;
 import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;
-    Aluno alunoCadastrado;
+    public Aluno alunoCadastrado;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +79,14 @@ public class ForumActivity extends AppCompatActivity {
                 setFragment(new FragmentSuasPerguntas());
             }
         });
+
+        findViewById(R.id.btnFazerPergunta).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CadastrarPergunta notificationDialogFragment = new CadastrarPergunta(alunoCadastrado, ForumActivity.this);
+                notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
+            }
+        });
     }
 
     private void atribuirFundoEBotao(View botao, int fundoResId, int corTextoResId) {
@@ -108,6 +117,10 @@ public class ForumActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentForum, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void atualizarDadosPosPublicacao() {
+        setFragment(new FragmentSuasPerguntas());
     }
 
 }

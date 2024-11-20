@@ -177,7 +177,7 @@ public class QuestionarioActivity extends AppCompatActivity {
 
             List<Questionario> questionarios = new ArrayList<>();
             try {
-                String urlString = "http://192.168.1.11:8086/phpHio/carregaQuestionarioPorConteudo.php?idConteudoPertencente=" +
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaQuestionarioPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

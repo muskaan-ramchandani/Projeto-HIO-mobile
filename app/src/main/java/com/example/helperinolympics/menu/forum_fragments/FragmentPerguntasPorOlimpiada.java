@@ -1,6 +1,11 @@
 package com.example.helperinolympics.menu.forum_fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +13,19 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumPerguntasPorOlimpiadaBinding;
-import com.example.helperinolympics.model.PerguntasForum;
+import com.example.helperinolympics.model.forum.PerguntasForum;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +38,9 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
     private ArrayList<PerguntasForum> perguntasF = new ArrayList<>();
     private String siglaOlimpiada;
 
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat apiDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     public FragmentPerguntasPorOlimpiada(String siglaOlimpiada){
         this.siglaOlimpiada = siglaOlimpiada;
 
@@ -33,56 +48,110 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentForumPerguntasPorOlimpiadaBinding.inflate(inflater, container, false);
         binding.txtPerguntasOlimp.setText("Perguntas relacionadas a "+ siglaOlimpiada+":");
+
+        new CarregaPerguntasPorOlimpiada().execute();
         configurarRecyclerPerguntasForum();
         return binding.getRoot();
     }
 
     public void configurarRecyclerPerguntasForum(){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterPerguntasForum(perguntasF);
+        adapter= new AdapterPerguntasForum(perguntasF, getContext());
         binding.recyclerPerguntasOlimpiadas.setLayoutManager(layoutManager);
         binding.recyclerPerguntasOlimpiadas.setHasFixedSize(true);
         binding.recyclerPerguntasOlimpiadas.setAdapter(adapter);
+    }
 
-        //new InicialAlunoMenuDeslizanteActivity.OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
+    private class CarregaPerguntasPorOlimpiada extends AsyncTask<String, Void, String> {
 
-        //DADOS PARA SIMULAÇÃO
-        Date dataPublicacao1 = null;
+        @Override
+        protected String doInBackground(String... strings) {
+
+            StringBuilder result = new StringBuilder();
+
+            try {
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaPerguntasPorOlimpiada.php?siglaOlimpiada=" + siglaOlimpiada;
+
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    reader.close();
+                }
+            } catch (Exception e) {
+                Log.e("CarregaPerguntasOlimpiada", "Erro na requisição HTTP", e);
+            }
+
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String jsonString) {
+            super.onPostExecute(jsonString);
+
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+
+                JSONArray listaPerguntasOlimpiadaJSON = jsonObject.getJSONArray("listaPerguntasOlimpiada");
+
+                perguntasF.clear();
+
+                for (int i = 0; i < listaPerguntasOlimpiadaJSON.length(); i++) {
+                    JSONObject perguntasOlimpiadasJson = listaPerguntasOlimpiadaJSON.getJSONObject(i);
+
+                    String dataPerguntaString = perguntasOlimpiadasJson.getString("dataPublicacao");
+                    Date dataPublicacao = converterParaData(dataPerguntaString);
+
+                    PerguntasForum pergunta = new PerguntasForum(
+                            perguntasOlimpiadasJson.getInt("id"),
+                            perguntasOlimpiadasJson.getInt("totalRespostas"),
+                            perguntasOlimpiadasJson.getString("titulo"),
+                            perguntasOlimpiadasJson.getString("nomeUsuario"),
+                            perguntasOlimpiadasJson.getString("pergunta"),
+                            perguntasOlimpiadasJson.getString("siglaOlimpiadaRelacionada"),
+                            dataPublicacao
+                    );
+
+                    String fotoBase64 = perguntasOlimpiadasJson.getString("fotoPerfil");
+                    if (fotoBase64 != null && !fotoBase64.isEmpty()) {
+                        Bitmap bitmapFoto = decodeBase64ToBitmap(fotoBase64);
+                        pergunta.setFotoPerfil(bitmapFoto);
+                    }
+
+                    perguntasF.add(pergunta);
+                }
+
+                adapter.notifyDataSetChanged();
+
+            } catch (JSONException e) {
+                Log.e("CarregaPerguntasOlimpiada", "Erro ao fazer o parse do JSON", e);
+            }
+        }
+
+    }
+
+    public Bitmap decodeBase64ToBitmap(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
+
+    private Date converterParaData(String dataString) {
         try {
-            dataPublicacao1 = sdf.parse("22/02/2022");
+            Date date = apiDateFormat.parse(dataString);
+            String dataFormatada = dateFormat.format(date);
+            Log.d("DATA_FORMATADA", dataFormatada);
+            return date;
         } catch (ParseException e) {
             e.printStackTrace();
+            return null;
         }
-        perguntasF.add(new PerguntasForum(1, R.drawable.iconeperfilvazioredonda, 12, "Equação geral e reduzida",
-                "user466", "Quais seriam os métodos para achar uma equação geral a partir de uma matriz? Existem outras formas de fazer isso? E como chego na reduzida?",
-                "OBA", null, dataPublicacao1));
-
-        Date dataPublicacao2 = null;
-        try {
-            dataPublicacao2 = sdf.parse("17/06/2024");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        perguntasF.add(new PerguntasForum(2, R.drawable.iconeperfilvazioredonda, 50, "HTML com JavaScript",
-                "noeminoeme", "Uma questão solicitava a criação de um formulário e o tratamento de eventos de 2 botões utilizando o JavaScript, porém não estou conseguindo conectar o arquivo html ao js. Quais seriam as maneiras de fazer isso? Como posso resolver?",
-                "OBA", null, dataPublicacao2));
-
-        Date dataPublicacao3 = null;
-        try {
-            dataPublicacao3 = sdf.parse("25/12/2023");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        perguntasF.add(new PerguntasForum(3, R.drawable.iconeperfilvazioredonda, 500, "Dúvida",
-                "naosei", "Dúvida",
-                "OBA", null, dataPublicacao3));
-
-
-        //FAZER PROCURA POR OLIMPIADA usando siglaOlimpiada
-
-        adapter.notifyDataSetChanged(); //atualizar o recycler
     }
 }

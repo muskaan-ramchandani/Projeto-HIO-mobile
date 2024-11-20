@@ -13,6 +13,7 @@ navigationUi = "2.6.0"
 eazegraph = "1.2.5l"
 nineoldandroids = "2.4.0"
 activity = "1.8.0"
+circleimageview = "2.1.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -29,6 +30,7 @@ eazegraph = { group = "com.github.blackfizz", name = "eazegraph", version = "1.2
 nineoldandroids = { group = "com.nineoldandroids", name = "library", version = "2.4.0" }
 mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version = "v3.1.0" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version = "2.1.0" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

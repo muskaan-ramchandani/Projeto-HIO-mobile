@@ -3,82 +3,99 @@ package com.example.helperinolympics;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
-import com.example.helperinolympics.adapter.AdapterDadosAcertos;
+import com.example.helperinolympics.adapter.AdapterAcertos;
+import com.example.helperinolympics.databinding.ActivityAcertosSemanaisBinding;
+import com.example.helperinolympics.databinding.ActivityErrosSemanaisBinding;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.Acertos;
-import com.github.mikephil.charting.charts.BarChart;
+import com.example.helperinolympics.model.Aluno;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class AcertosSemanaisActivity extends Activity {
 
-    BarChart barChart;
-    RecyclerView rVListaAcertos;
-    AdapterDadosAcertos acertosAdapter;
+    private ActivityAcertosSemanaisBinding binding;
+    private Aluno alunoCadastrado;
+    AdapterAcertos acertosAdapter;
+    private ArrayList<Acertos> listaAcertos = new ArrayList<>();
+
+    private Date dataAtual, dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2,
+            dataInicialSemana3, dataFinalSemana3;
+
+    private int totalAcertosSemana1, totalAcertosSemana2, totalAcertosSemana3;
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acertos_semanais);
+        binding = ActivityAcertosSemanaisBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        findViewById(R.id.btnVoltarAoPerfilDosAcertos).setOnClickListener(new View.OnClickListener() {
+        configurarDatas();
+        alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+        new CarregaAcertosSemanais(alunoCadastrado.getEmail(), dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2, dataInicialSemana3, dataFinalSemana3).execute();
+
+        binding.btnVoltarAoPerfilDosAcertos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AcertosSemanaisActivity.this, PerfilAlunoActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
         });
 
-        configurarBarra();
-        configurarRecyclerAcertos();
     }
 
     private void configurarRecyclerAcertos() {
-        rVListaAcertos = findViewById(R.id.recyclerViewListaAcertos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rVListaAcertos.setLayoutManager(layoutManager);
-        rVListaAcertos.setHasFixedSize(true);
+        binding.recyclerViewListaAcertos.setLayoutManager(layoutManager);
+        binding.recyclerViewListaAcertos.setHasFixedSize(true);
 
-        List<Acertos> listaAcertos = new ArrayList<>();
-        acertosAdapter = new AdapterDadosAcertos(listaAcertos);
-        rVListaAcertos.setAdapter(acertosAdapter);
+        acertosAdapter = new AdapterAcertos(listaAcertos);
+        binding.recyclerViewListaAcertos.setAdapter(acertosAdapter);
 
-        //DADOS PARA TESTE
-//        Acertos dados1 = new Acertos("OBMEP", "Matrizes", "Determinante", "Profº Maria João",
-//                "Qual das seguintes afirmações sobre determinantes está correta?", "Alternativa marcada: O determinante de uma matriz quadrada é sempre um número real.");
-//
-//        listaAcertos.add(dados1);
-//
-//        Acertos dados2 = new Acertos("OBI", "Estruturas condicionais", "If e else", "Profº Maria João",
-//                "Para quê serve o uso da estrutura if/else?", "Alternativa marcada: Serve para avaliar uma expressão como sendo verdadeira ou falsa e, de acordo com o resultado dessa verificação, executar uma ou outra ação.");
 
-//        listaAcertos.add(dados2);
         acertosAdapter.notifyDataSetChanged();
     }
 
-    private void configurarBarra(){
-        barChart = findViewById(R.id.graficoBarraAcertosSemanais);
+    private void configurarBarra() {
+        // Entradas de dados
+        ArrayList<BarEntry> entradaDados2 = new ArrayList<>();
 
-        //Entradas de dados
-        ArrayList<BarEntry> entradaDados = new ArrayList<>();
-        entradaDados.add(new BarEntry(1f, 3f));
-        entradaDados.add(new BarEntry(2f, 4f));
-        entradaDados.add(new BarEntry(3f, 5f));
+        // Adicionando os valores reais
+        entradaDados2.add(new BarEntry(1f, totalAcertosSemana1));
+        entradaDados2.add(new BarEntry(2f, totalAcertosSemana2));
+        entradaDados2.add(new BarEntry(3f, totalAcertosSemana3));
 
         // Cores
         int corAzul = ContextCompat.getColor(this, R.color.btnOlimpiadaAzul);
@@ -86,41 +103,153 @@ public class AcertosSemanaisActivity extends Activity {
         int corRoxa = ContextCompat.getColor(this, R.color.corIcones);
         int[] cores = new int[] {corAzul, corRosa, corRoxa};
 
-        // Creating a bar data set
-        BarDataSet barDataSet = new BarDataSet(entradaDados, "Gráfico de comparação");
+        // Criando um conjunto de dados de barras
+        BarDataSet barDataSet = new BarDataSet(entradaDados2, "Gráfico de comparação");
         barDataSet.setColors(cores);
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(10f);
 
-        //Inserindo legenda
-        Legend legend = barChart.getLegend();
-        legend.setEnabled(true);
-        legend.setTextSize(12f);
-        legend.setTextColor(Color.BLACK);
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setFormSize(10f); // Tamanho do ícone na legenda
-        legend.setXEntrySpace(25f); // Espaçamento horizontal entre as entradas da legenda
-        legend.setYEntrySpace(5f); // Espaçamento vertical entre as entradas da legenda
 
-        LegendEntry entradaLegenda1 = new LegendEntry();
-        entradaLegenda1.label = "23/06 - 29/06";
-        entradaLegenda1.formColor = corAzul;
+        //Largura barra
+        XAxis xAxis = binding.graficoBarraAcertosSemanais.getXAxis();
+        xAxis.setGranularity(1f);
 
-        LegendEntry entradaLegenda2 = new LegendEntry();
-        entradaLegenda2.label = "30/06 - 06/07";
-        entradaLegenda2.formColor = corRosa;
+        // LEGENDAS DO GRÁFICO
+        binding.datasLegendaSemana1.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana1), dateFormat.format(dataFinalSemana1)));
 
-        LegendEntry entradaLegenda3 = new LegendEntry();
-        entradaLegenda3.label = "07/07 - 13/07";
-        entradaLegenda3.formColor = corRoxa;
+        binding.datasLegendaSemana2.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana2), dateFormat.format(dataFinalSemana2)));
 
-        legend.setCustom(new LegendEntry[]{entradaLegenda1, entradaLegenda2, entradaLegenda3});
+        binding.datasLegendaSemana3.setText(String.format("%s - %s", dateFormat.format(dataInicialSemana3), dateFormat.format(dataFinalSemana3)));
 
-        //Adicionando configurações
+
+        // Adicionando configurações
         BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
-        barChart.animateY(2000);
+        binding.graficoBarraAcertosSemanais.setData(barData);
+        binding.graficoBarraAcertosSemanais.getDescription().setEnabled(false);
+        binding.graficoBarraAcertosSemanais.getLegend().setEnabled(false);
+        binding.graficoBarraAcertosSemanais.setExtraOffsets(0, 5, 0, 0); // Adiciona um espaço extra no topo
+        binding.graficoBarraAcertosSemanais.animateY(2000);
     }
 
+
+    private void configurarDatas() {
+        //CONFIGURANDO DATAS (SEMANA ATUAL, PASSADA E RETRASADA)
+        Calendar calendar = Calendar.getInstance();
+        dataAtual = calendar.getTime();
+
+        // Semana 3 (semana atual)
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        dataInicialSemana3 = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        dataFinalSemana3 = calendar.getTime();
+
+        // Semana 2 (semana passada)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        dataInicialSemana2 = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        dataFinalSemana2 = calendar.getTime();
+
+        // Semana 1 (semana retrasada)
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        dataInicialSemana1 = calendar.getTime();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        dataFinalSemana1 = calendar.getTime();
+    }
+
+    private class CarregaAcertosSemanais extends AsyncTask<String, Void, String> {
+        String emailAluno;
+        String inicioSemana1, fimSemana1, inicioSemana2, fimSemana2, inicioSemana3, fimSemana3;
+
+        public CarregaAcertosSemanais(String emailAluno, Date inicioSemana1, Date fimSemana1, Date inicioSemana2, Date fimSemana2, Date inicioSemana3, Date fimSemana3){
+            SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd");
+
+            this.emailAluno = emailAluno;
+            this.inicioSemana1= formatoBanco.format(inicioSemana1);
+            this.fimSemana1= formatoBanco.format(fimSemana1);
+            this.inicioSemana2= formatoBanco.format(inicioSemana2);
+            this.fimSemana2= formatoBanco.format(fimSemana2);
+            this.inicioSemana3= formatoBanco.format(inicioSemana3);
+            this.fimSemana3= formatoBanco.format(fimSemana3);
+        }
+        @Override
+        protected String doInBackground(String... strings) {
+
+            StringBuilder result = new StringBuilder();
+
+            try {
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaAcertosAluno.php?emailAluno=" + emailAluno +
+                        "&dataInicialSemana1=" + inicioSemana1 +
+                        "&dataFinalSemana1=" + fimSemana1 +
+                        "&dataInicialSemana2=" + inicioSemana2 +
+                        "&dataFinalSemana2=" + fimSemana2 +
+                        "&dataInicialSemana3=" + inicioSemana3 +
+                        "&dataFinalSemana3=" + fimSemana3;
+
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    reader.close();
+                }
+            } catch (Exception e) {
+                Log.e("CarregaAcertosSemanais", "Erro na requisição HTTP", e);
+            }
+
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String jsonString) {
+            super.onPostExecute(jsonString);
+
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+
+                // Total de acertos por semana
+                totalAcertosSemana1 = jsonObject.getInt("totalAcertosSemana1");
+                totalAcertosSemana2 = jsonObject.getInt("totalAcertosSemana2");
+                totalAcertosSemana3 = jsonObject.getInt("totalAcertosSemana3");
+
+                Log.d("Acertos", "Semana 1: " + totalAcertosSemana1);
+                Log.d("Acertos", "Semana 2: " + totalAcertosSemana2);
+                Log.d("Acertos", "Semana 3: " + totalAcertosSemana3);
+
+                JSONArray listaAcertosJSON = jsonObject.getJSONArray("listaAcertos");
+                ArrayList<Acertos> acertosLista = new ArrayList<>();
+
+                listaAcertos.clear();
+
+                for (int i = 0; i < listaAcertosJSON.length(); i++) {
+                    JSONObject acertoJson = listaAcertosJSON.getJSONObject(i);
+
+                    Acertos acerto = new Acertos();
+                    acerto.setSiglaOlimpiada(acertoJson.getString("siglaOlimpiada"));
+                    acerto.setTituloConteudo(acertoJson.getString("tituloConteudo"));
+                    acerto.setTituloQuestionario(acertoJson.getString("tituloQuestionario"));
+                    acerto.setUsuarioProfessor(acertoJson.getString("usuarioProfessor"));
+                    acerto.setTxtPergunta(acertoJson.getString("txtPergunta"));
+                    acerto.setAlternativaMarcada(acertoJson.getString("alternativaMarcada"));
+
+                    acertosLista.add(acerto);
+                    listaAcertos.add(acerto);
+                }
+
+                configurarBarra();
+                configurarRecyclerAcertos();
+
+            } catch (JSONException e) {
+                Log.e("CarregaAcertosSemanais", "Erro ao fazer o parse do JSON", e);
+            }
+        }
+    }
 
 }

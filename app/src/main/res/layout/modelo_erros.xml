@@ -47,7 +47,7 @@
                         android:layout_width="330dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_bold"
-                        android:textColor="@color/btnOlimpiadaCiano"
+                        tools:textColor="@color/btnOlimpiadaCiano"
                         android:textSize="22sp"
                         android:textStyle="bold"
                         android:gravity="center"

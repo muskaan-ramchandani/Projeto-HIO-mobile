@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.model.OlimpiadaForum;
+import com.example.helperinolympics.model.forum.OlimpiadaForum;
 
 import java.util.List;
 

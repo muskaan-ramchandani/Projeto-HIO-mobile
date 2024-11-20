@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".ErrosSemanaisActivity">
@@ -23,30 +24,27 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
         app:layout_constraintTop_toTopOf="@+id/toolbarErrosSemanais"
         app:layout_constraintStart_toStartOf="@+id/toolbarErrosSemanais"
         app:layout_constraintEnd_toEndOf="@+id/toolbarErrosSemanais">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnVoltarAoPerfilDosErros"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/btnvoltarbranco" />
+            android:background="@drawable/btnvoltarbranco"
+            android:scaleType="fitCenter"/>
 
         <TextView
-            android:id="@+id/txtErros"
+            android:id="@+id/txtErrosSemanais"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"
-            android:layout_weight="1"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Erros semanais"
+            android:text="Erros Semanais"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="24sp"
@@ -70,12 +68,13 @@
     <LinearLayout
         android:id="@+id/linearLayoutGraficoELegendaErros"
         android:layout_width="380dp"
-        android:layout_height="200dp"
-        android:orientation="horizontal"
+        android:layout_height="240dp"
+        android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintBottom_toTopOf="@id/recyclerViewListaErros"
         app:layout_constraintTop_toBottomOf="@id/txtErrosSemanasAnteriores"
         app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
         app:layout_constraintEnd_toEndOf="@id/toolbarErrosSemanais">
@@ -83,20 +82,95 @@
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/graficoBarraErrosSemanais"
             android:layout_width="370dp"
-            android:layout_height="200dp"
-            android:layout_marginEnd="5dp"/>
+            android:layout_height="200dp"/>
+
+        <LinearLayout
+            android:layout_width="370dp"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp"
+                android:gravity="center_horizontal|center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/corLegendaSemana1"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/fundo_btn_olimp_azul"
+                    android:src="@drawable/fundo_btn_olimp_azul"/>
+
+                <TextView
+                    android:id="@+id/datasLegendaSemana1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="15dp"
+                    tools:text="12/02/2024 - 16/02/2024" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/corLegendaSemana2"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/fundo_btn_olimp_rosa"
+                    android:src="@drawable/fundo_btn_olimp_rosa"/>
+
+                <TextView
+                    android:id="@+id/datasLegendaSemana2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_marginStart="6dp"
+                    tools:text="12/02/2024 - 16/02/2024" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_height="15dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/corLegendaSemana3"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/card_roxo"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/card_roxo"/>
+
+                <TextView
+                    android:id="@+id/datasLegendaSemana3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:layout_marginStart="6dp"
+                    tools:text="12/02/2024 - 16/02/2024" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewListaErros"
         android:layout_width="380dp"
-        android:layout_height="360dp"
+        android:layout_height="340dp"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="310dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutGraficoELegendaErros"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarErrosSemanais"
         app:layout_constraintStart_toStartOf="@id/toolbarErrosSemanais"
         app:layout_constraintEnd_toEndOf="@id/toolbarErrosSemanais"/>
 

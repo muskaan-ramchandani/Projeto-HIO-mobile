@@ -1,23 +1,32 @@
-package com.example.helperinolympics.model;
+package com.example.helperinolympics.model.forum;
 
-import java.util.ArrayList;
+import android.graphics.Bitmap;
+
 import java.util.Date;
 
 public class PerguntasForum {
-    private int id, fotoPerfil, qntdRespostas;
+    private int id, qntdRespostas;
     private String titulo, nomeDeUsuario, pergunta, olimpiada;
-    private ArrayList<String> respostasRecebidas;
     private Date dataPublicacao;
+    private Bitmap fotoPerfil;
 
-    public PerguntasForum(int id, int fotoPerfil, int qntdRespostas, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, ArrayList<String> respostasRecebidas, Date dataPublicacao) {
+    //dados para cadastro da pergunta
+    public PerguntasForum(String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
+        setTitulo(titulo);
+        setNomeDeUsuario(nomeDeUsuario);
+        setPergunta(pergunta);
+        setOlimpiada(olimpiada);
+        setDataPublicacao(dataPublicacao);
+    }
+
+    //dados para montar recycler view retornado do banco
+    public PerguntasForum(int id,int qntdRespostas, String titulo, String nomeDeUsuario, String pergunta, String olimpiada, Date dataPublicacao) {
         setId(id);
-        setFotoPerfil(fotoPerfil);
         setQntdRespostas(qntdRespostas);
         setTitulo(titulo);
         setNomeDeUsuario(nomeDeUsuario);
         setPergunta(pergunta);
         setOlimpiada(olimpiada);
-        setRespostasRecebidas(respostasRecebidas);
         setDataPublicacao(dataPublicacao);
     }
 
@@ -29,20 +38,20 @@ public class PerguntasForum {
         this.id = id;
     }
 
-    public int getFotoPerfil() {
-        return fotoPerfil;
-    }
-
-    public void setFotoPerfil(int fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
-    }
-
     public int getQntdRespostas() {
         return qntdRespostas;
     }
 
     public void setQntdRespostas(int qntdRespostas) {
         this.qntdRespostas = qntdRespostas;
+    }
+
+    public Bitmap getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(Bitmap fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     public String getTitulo() {
@@ -75,14 +84,6 @@ public class PerguntasForum {
 
     public void setOlimpiada(String olimpiada) {
         this.olimpiada = olimpiada;
-    }
-
-    public ArrayList<String> getRespostasRecebidas() {
-        return respostasRecebidas;
-    }
-
-    public void setRespostasRecebidas(ArrayList<String> respostasRecebidas) {
-        this.respostasRecebidas = respostasRecebidas;
     }
 
     public Date getDataPublicacao() {
