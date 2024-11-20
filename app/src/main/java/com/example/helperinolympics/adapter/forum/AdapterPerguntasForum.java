@@ -145,8 +145,12 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
     //para exibir RESPOSTAS
     private void expand(View view, RecyclerView recyclerRespostas) {
 
-        view.setVisibility(View.VISIBLE);
-        recyclerRespostas.setVisibility(View.VISIBLE);
+        if (view.getVisibility() == View.GONE) {
+            view.setVisibility(View.VISIBLE);
+            recyclerRespostas.setVisibility(View.VISIBLE);
+            view.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            view.requestLayout();
+        }
 
         view.post(new Runnable() {
             @Override
