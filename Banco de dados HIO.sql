@@ -244,3 +244,11 @@ CREATE TABLE RespostasForum(
 	FOREIGN KEY(emailProf) REFERENCES Professor(email),
 	PRIMARY KEY(id)
 );
+
+#testes respostas
+Insert into RespostasForum(emailProf, resposta, dataResposta, idPergunta)
+values ('juan@gmail.com', 'Para organizar 6 RadioButtons em 2 linhas de 3 itens cada, mantendo a funcionalidade de selecionar apenas um botão por vez, você pode usar um RadioGroup com o atributo android:orientation="vertical", junto com um contêiner LinearLayout horizontal para cada linha.', '2024-11-20', 4),
+('marydorotty@gmail.com', 'As temperaturas usadas no cálculo de rendimento (eficiência) de um ciclo termodinâmico devem sempre estar em Kelvin, pois a fórmula de rendimento térmico depende de razões absolutas. A escala Kelvin é usada para garantir que a razão entre temperaturas faça sentido físico, pois Kelvin começa no zero absoluto (0 K), onde não há energia térmica.', '2024-11-20', 5),
+('marydorotty@gmail.com', 'Você pode usar um ConstraintLayout, pode organizar os botões em duas linhas de 3 itens, mantendo a funcionalidade de seleção única com o RadioGroup', '2024-11-20', 4),
+('ramchandani@gmail.com', 'Outra abordagem é utilizar um TableLayout, que organiza os botões em uma grade de 2 linhas e 3 colunas. O RadioGroup ainda mantém a funcionalidade de seleção única.', '2024-11-20', 4),
+('ramchandani@gmail.com', 'As temperaturas usadas no cálculo de rendimento devem estar em Kelvin, e isso não é apenas uma convenção, mas uma necessidade física. A escala Celsius não é absoluta e, ao usá-la diretamente na fórmula do rendimento o resultado pode ser incorreto, especialmente se t2 for maior que t1, o que não ocorre com Kelvin, pois ela não permite valores negativos.', '2024-11-20', 5);

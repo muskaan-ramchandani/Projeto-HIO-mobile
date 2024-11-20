@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,15 +19,24 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityForumBinding;
+import com.example.helperinolympics.menu.forum_fragments.FragmentPerguntasPorOlimpiada;
+import com.example.helperinolympics.menu.forum_fragments.FragmentPerguntasRecentes;
 import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.menu.forum_fragments.FragmentTudo;
 import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.forum.PerguntasForum;
 import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;
+    SearchView barraPesquisa;
     public Aluno alunoCadastrado;
+    ArrayList<PerguntasForum> listaOriginalRecentes = new ArrayList<>();
+    ArrayList<PerguntasForum> listaOriginalOlimpiadas = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +98,85 @@ public class ForumActivity extends AppCompatActivity {
                 notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
             }
         });
+
+        barraPesquisa = findViewById(R.id.searchViewPerguntas);
+        barraPesquisa.clearFocus();
+        barraPesquisa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterList(query);
+                barraPesquisa.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+
+        barraPesquisa.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (barraPesquisa.getQuery().toString().isEmpty()) {
+                        Fragment fragmentPai = getSupportFragmentManager().findFragmentById(R.id.fragmentForum);
+                        Fragment fragmentFilho = fragmentPai.getChildFragmentManager().findFragmentById(R.id.fragmentForumPerguntas);
+
+                        if (fragmentFilho instanceof FragmentPerguntasRecentes) {
+                            ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(listaOriginalRecentes);
+                        } else if (fragmentFilho instanceof FragmentPerguntasPorOlimpiada) {
+                            ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(listaOriginalOlimpiadas);
+                        }
+                    }
+                }
+            }
+        });
     }
+
+    private void filterList(String newText) {
+        ArrayList<PerguntasForum> perguntasFiltradas = new ArrayList<>();
+
+        Fragment fragmentPai = getSupportFragmentManager().findFragmentById(R.id.fragmentForum);
+        Fragment fragmentFilho = fragmentPai.getChildFragmentManager().findFragmentById(R.id.fragmentForumPerguntas);
+
+        if (fragmentFilho instanceof FragmentPerguntasRecentes) {
+            Log.d("Fragment", "FragmentPerguntasRecentes está ativo.");
+            List<PerguntasForum> listaAtualRecentes= ((FragmentPerguntasRecentes) fragmentFilho).retornaListaAtual();
+            listaOriginalRecentes.addAll(listaAtualRecentes);
+
+            for(PerguntasForum pergunta : listaAtualRecentes){
+                if(pergunta.getTitulo().toLowerCase().contains(newText.toLowerCase())){
+                    perguntasFiltradas.add(pergunta);
+                }
+            }
+
+            if(perguntasFiltradas.isEmpty()){
+                Toast.makeText(ForumActivity.this, "Não existem perguntas relacionadas ao digitado.", Toast.LENGTH_SHORT).show();
+            }else{
+                ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(perguntasFiltradas);
+            }
+
+        } else if (fragmentFilho instanceof FragmentPerguntasPorOlimpiada) {
+            Log.d("Fragment", "FragmentPerguntasPorOlimpiada está ativo.");
+            List<PerguntasForum> listaAtualOlimpiada= ((FragmentPerguntasPorOlimpiada) fragmentFilho).retornaListaAtual();
+            listaOriginalOlimpiadas.addAll(listaAtualOlimpiada);
+
+            for(PerguntasForum pergunta : listaAtualOlimpiada){
+                if(pergunta.getTitulo().toLowerCase().contains(newText.toLowerCase())){
+                    perguntasFiltradas.add(pergunta);
+                }
+            }
+
+            if(perguntasFiltradas.isEmpty()){
+                Toast.makeText(ForumActivity.this, "Não existem perguntas relacionadas ao digitado.", Toast.LENGTH_SHORT).show();
+            }else{
+                ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(perguntasFiltradas);
+            }
+        }
+    }
+
 
     private void atribuirFundoEBotao(View botao, int fundoResId, int corTextoResId) {
         botao.setBackground(getDrawable(fundoResId));
@@ -102,15 +191,28 @@ public class ForumActivity extends AppCompatActivity {
 
         int searchTextId = getResources().getIdentifier("android:id/search_src_text", null, null);
         EditText textoBarraPesquisa = barraPesquisa.findViewById(searchTextId);
+        if (textoBarraPesquisa != null) {
+            textoBarraPesquisa.setHint("Encontre respostas para sua pergunta");
+            textoBarraPesquisa.setHintTextColor(getResources().getColor(R.color.cinza));
+            textoBarraPesquisa.setTextColor(getResources().getColor(R.color.black));
 
+            Typeface customFont = ResourcesCompat.getFont(this, R.font.open_sans);
+            if (customFont != null) {
+                textoBarraPesquisa.setTypeface(customFont);
+            }
 
-        textoBarraPesquisa.setHintTextColor(getResources().getColor(R.color.cinza));
-        textoBarraPesquisa.setTextColor(getResources().getColor(R.color.black));
+            textoBarraPesquisa.setPadding(50, 0, 0, 0);
+        }
 
-        Typeface customFont = ResourcesCompat.getFont(this, R.font.open_sans);
-        textoBarraPesquisa.setTypeface(customFont);
-        textoBarraPesquisa.setHint("Encontre respostas para sua pergunta");
+        int searchMagIconId = getResources().getIdentifier("android:id/search_mag_icon", null, null);
+        ImageView searchIcon = barraPesquisa.findViewById(searchMagIconId);
+        if (searchIcon != null) {
+            searchIcon.setImageResource(R.drawable.baseline_search_24); //
+        }
+
+        barraPesquisa.setBackground(getResources().getDrawable(R.drawable.fundo_barra_pesquisa));
     }
+
 
     private void setFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();

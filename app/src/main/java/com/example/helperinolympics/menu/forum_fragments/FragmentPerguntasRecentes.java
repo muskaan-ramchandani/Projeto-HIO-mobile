@@ -180,5 +180,13 @@ public class FragmentPerguntasRecentes  extends Fragment {
         }
     }
 
+    public ArrayList<PerguntasForum> retornaListaAtual(){
+        return this.perguntasF;
+    }
+
+    public void alterarListaPorPesquisa(ArrayList<PerguntasForum> listaFiltrada){
+        this.perguntasF = listaFiltrada;
+        adapter.notifyDataSetChanged();
+    }
 
 }
