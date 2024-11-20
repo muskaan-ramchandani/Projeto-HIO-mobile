@@ -1,0 +1,317 @@
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px; /* Adiciona algum espaçamento interno */
+    box-sizing: border-box;
+}
+
+
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+
+
+.logo-container img {
+    height: 60px; /* Ajusta a altura da imagem */
+    margin-right: 10px;
+}
+
+
+
+
+.titulo {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0; /* Remove margem padrão */
+}
+
+
+
+
+.subtitulo {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 5px; /* Ajuste este valor para o espaço desejado */
+}
+
+
+
+
+
+
+
+
+/*Formatação dos botoes de rascunho*/
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin: 55px 0; /* Aumente o espaço acima e abaixo */
+}
+
+
+
+
+.custom-button {
+    background-color: #e9e8e8;
+    color: #898989;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px; /* Arredondamento dos botões */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin: 0 10px; /* Espaçamento entre os botões */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    transition: background-color 0.3s; /* Transição suave de cor */
+
+
+
+
+}
+
+
+
+
+.custom-button:hover {
+    background-color: #5e17eb; /* Cor ao passar o mouse */
+    color: white; /* Muda a cor do texto ao passar o mouse */
+}
+
+
+
+
+
+
+
+
+/*Quadrado com texto e botao de add imagem */
+.quadrado {
+    background-color: white; /* Cor de fundo do quadrado */
+    border: 2px solid #8c52ff; /* Borda roxa */
+    box-shadow: 0 4px 10px rgba(128, 128, 128, 0.5); /* Sombra cinza */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    max-width: 1100px; /* Largura máxima do quadrado */
+    margin: 20px auto; /* Centraliza o quadrado */
+    text-align: center; /* Centraliza o texto */
+}
+
+
+
+
+.titulo-quadrado {
+    color: black; /* Cor do título */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    text-align: left;
+}
+
+
+
+
+.botao-adicionar {
+    background-color: #ededed; /* Cor do botão */
+    color: black; /* Cor do texto do botão */
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold; /* Negrito */
+    font-size: 14px; /* Aumenta o tamanho do texto */
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 15px 20px; /* Aumenta o espaçamento interno */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    margin-top: 10px; /* Espaçamento acima do botão */
+}
+
+
+
+
+
+
+
+
+.botao-adicionar:hover {
+    background-color: #d3d3d3; /* Cor ao passar o mouse */
+}
+
+
+
+
+.input-section {
+    margin: 20px auto; /* Espaçamento ao redor da seção */
+    max-width: 1100px; /* Largura máxima para manter a consistência */
+    text-align: left; /* Alinhamento à esquerda */
+}
+
+
+.input-section .titulo-quadrado {
+    margin: 0; /* Remove margem para alinhamento */
+}
+
+
+.input-titulo {
+    background-color: #ededed; /* Cor de fundo do campo de entrada */
+    border: 1px solid #898989; /* Borda cinza */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno */
+    width: 100%; /* Ocupa toda a largura do quadrado */
+    box-sizing: border-box; /* Inclui borda e padding na largura total */
+    margin-top: 10px; /* Espaçamento acima do campo de entrada */
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    color: #333; /* Cor do texto */
+}
+
+
+.input-titulo::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px; /* Tamanho da fonte do placeholder */
+    color: #888; /* Cor do texto do placeholder */
+    margin-bottom: 30px;
+}
+
+
+
+
+
+
+/*pergunta input*/
+.input-pergunta {
+    background-color: #ededed; /* Cor de fundo do campo de entrada */
+    border: 1px solid #898989; /* Borda cinza */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno */
+    width: 100%; /* Ocupa toda a largura do quadrado */
+    box-sizing: border-box; /* Inclui borda e padding na largura total */
+    margin-top: 10px; /* Espaçamento acima do campo de entrada */
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    color: #333; /* Cor do texto */
+}
+
+
+.input-pergunta::placeholder {
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans para o placeholder */
+    font-size: 18px; /* Tamanho da fonte do placeholder */
+    color: #888; /* Cor do texto do placeholder */
+}
+
+
+
+
+.button-group-pergunta {
+    display: flex; /* Usando flexbox para organizar as colunas */
+    justify-content: space-between; /* Espaça as colunas */
+    margin-top: 30px; /* Espaço acima dos botões */
+}
+
+
+.button-column {
+    display: flex;
+    flex-direction: column; /* Organiza os botões em coluna */
+    align-items: center; /* Centraliza os botões na coluna */
+}
+
+
+.input-alternativa {
+    padding: 10px; /* Espaçamento interno */
+    width: 250px; /* Largura dos campos de entrada */
+    margin: 5px 0; /* Espaçamento entre os campos */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    font-size: 16px; /* Aumenta o tamanho da fonte */
+}
+
+
+.input-alternativa.correta {
+    background-color: #e8fcf2; /* Cor de fundo verde */
+    border: 2px solid #c0e6d9; /* Borda verde escura */
+}
+
+
+.input-alternativa.incorreta {
+    background-color: #fef2f1; /* Cor de fundo vermelha */
+    border: 2px solid #f5c2c1; /* Borda vermelha escura */
+}
+
+
+.add-alternativa-button {
+    background-color: #a952ff; /* Cor do botão */
+    color: white; /* Cor do texto */
+    font-family: 'Open Sans', sans-serif; /* Fonte */
+    font-size: 15px; /* Tamanho da fonte */
+    border: none; /* Remove a borda */
+    border-radius: 25px; /* Bordas arredondadas */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin-top: 20px; /* Espaçamento acima do botão */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    width: 200px; /* Largura do botão */
+    align-self: center; /* Centraliza o botão */
+    transition: background-color 0.3s; /* Transição suave de cor */
+}
+
+
+.linha-roxa {
+    border: 1px solid #8c52ff; /* Borda roxa */
+    margin-top: 20px; /* Espaçamento acima da linha */
+    width: 100%; /* Largura total */
+    max-width: 1100px; /* Largura máxima */
+    align-self: center; /* Centraliza a linha */
+}
+
+
+.action-buttons {
+    display: flex; /* Usando flexbox para alinhar os botões */
+    justify-content: flex-end; /* Alinhando os botões à direita */
+    margin-top: 20px; /* Espaço acima dos botões */
+}
+
+
+.action-button {
+    background-color: #8b52fd; /* Nova cor para os botões */
+    color: white; /* Cor do texto */
+    font-family: 'Open Sans', sans-serif; /* Fonte */
+    font-size: 13px; /* Tamanho da fonte */
+    border: none; /* Remove a borda */
+    border-radius: 25px; /* Bordas arredondadas */
+    padding: 10px 20px; /* Espaçamento interno */
+    margin-left: 10px; /* Espaço entre os botões */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+}
+
+
+.input-explicacao {
+    background-color: #ededed; /* Cor de fundo do campo de entrada */
+    border: 1px solid #898989; /* Borda cinza */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno */
+    width: 100%; /* Ocupa toda a largura do quadrado */
+    box-sizing: border-box; /* Inclui borda e padding na largura total */
+    margin-top: 10px; /* Espaçamento acima do campo de entrada */
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    color: #333; /* Cor do texto */
+}
+
+
+.input-explicacao::placeholder {
+    font-family: 'Open Sans', sans-serif; /* Fonte Open Sans para o placeholder */
+    font-size: 18px; /* Tamanho da fonte do placeholder */
+    color: #888; /* Cor do texto do placeholder */
+}
+
+
+

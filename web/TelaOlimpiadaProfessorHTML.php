@@ -20,7 +20,7 @@ try {
 
         $olimpiada = $stmt->fetch(PDO::FETCH_ASSOC);
     } else {
-        // Se não houver sigla na URL, redirecionar para a página inicial
+     
         header('Location: TelaInicialProfessorHTML.php');
         exit();
     }
@@ -122,8 +122,7 @@ try {
 
 
 
-        <!-- Modal para adicionar prova anterior -->
-        <div id="AddExamForm" class="add-exam-form" style="display: none;">
+<div id="AddExamForm" class="add-exam-form" style="display: none;">
     <form action="simulandoCadastroProvaAnterior.php" method="post" enctype="multipart/form-data">
         <div class="modal-content">
             <span class="close" onclick="hideModal('modalAddExam')">&times;</span>
@@ -142,37 +141,35 @@ try {
                     <input type="number" id="fase" name="fase" class="modal-input" required>
                 </div>
 
-                <!-- Estado (checkbox) -->
+                <!-- Estado -->
                 <div class="form-group">
                     <label for="estado">Estado:</label>
                     <input type="checkbox" id="estado" name="estado">
                 </div>
 
-                <!-- Professor que Postou -->
+                <!-- Email -->
                 <div class="form-group">
-                    <input type="hidden" name="profQuePostou" value="<?php echo htmlspecialchars($profQuePostou); ?>">
+                    <input type="hidden" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
                 </div>
 
-                <!-- Upload de Arquivo PDF -->
+                <!-- Upload do arquivo PDF -->
                 <div class="file-upload">
                     <label for="arquivoPdf">Arquivo PDF:</label>
                     <input type="file" id="arquivoPdf" name="arquivoPdf" accept=".pdf" class="modal-input" required>
                 </div>
 
-                <!-- Visualizador de PDF -->
                 <div id="pdf-viewer" style="display: none;">
                     <button id="viewPdfBtn">Visualizar PDF</button>
                 </div>
 
-                <!-- Olimpíada Pertencente (Select Dropdown) -->
                 <div class="form-group">
-                <input type="hidden" name="sigla" value="<?php echo htmlspecialchars($sigla); ?>">
-            </div>
+                    <input type="hidden" name="sigla" value="<?php echo isset($sigla) ? htmlspecialchars($sigla) : ''; ?>">
+                </div>
 
-            <!-- Botões de ação -->
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Adicionar</button>
-                <button type="button" class="btn btn-secondary" onclick="hideModal('modalAddExam')">Cancelar</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideModal('modalAddExam')">Cancelar</button>
+                </div>
             </div>
         </div>
     </form>
@@ -277,352 +274,7 @@ document.getElementById('arquivoPdf').addEventListener('change', function() {
     }
 
     // Exibe o primeiro item ao carregar
-    mostrarItem(); let currentContentIndex = 0;
-        let currentBooksIndex = 0;
-        let currentExamsIndex = 0;
-
-
-
-
-        // Conteudos
-
-
-
-
-    function prevContentSlide() {
-    const items = document.querySelectorAll('#contentCarouselInner .carousel-item');
-    const totalItems = items.length;
-    const itemsToShow = 2; // Número de itens a serem exibidos por vez
-
-
-
-
-    // Atualiza o índice do conteúdo atual
-    if (currentContentIndex > 0) {
-        currentContentIndex -= itemsToShow;
-    } else {
-        currentContentIndex = Math.max(totalItems - itemsToShow, 0);
-    }
-   
-    // Atualiza a visualização do carrossel
-    updateContentCarousel();
-}
-
-
-
-
-    function nextContentSlide() {
-    const items = document.querySelectorAll('#contentCarouselInner .carousel-item');
-    const totalItems = items.length;
-    const itemsToShow = 2; // Número de itens a serem exibidos por vez
-
-
-
-
-    // Atualiza o índice do conteúdo atual
-    if (currentContentIndex < totalItems - itemsToShow) {
-        currentContentIndex += itemsToShow;
-    } else {
-        currentContentIndex = 0;
-    }
-   
-    // Atualiza a visualização do carrossel
-    updateContentCarousel();
-}
-
-
-
-
-    function updateContentCarousel() {
-    const carouselInner = document.getElementById('contentCarouselInner');
-    const items = document.querySelectorAll('#contentCarouselInner .carousel-item');
-    const itemWidth = items[0].offsetWidth;
-    const gap = 10; // Espaço entre os itens
-    const itemsToShow = 2; // Número de itens a serem exibidos por vez
-
-
-
-
-    // Calcula o deslocamento para a posição correta
-    const offset = -currentContentIndex * (itemWidth + gap);
-
-
-
-
-    // Aplica o deslocamento ao carrossel
-    carouselInner.style.transform = `translateX(${offset}px)`;
-    carouselInner.style.transition = 'transform 0.3s ease'; // Transição suave
-}
-
-
-
-
-
-
-
-
-        //Recomendação de livros
-        function prevBooksSlide() {
-            const items = document.querySelectorAll('#booksCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentBooksIndex > 0) {
-                currentBooksIndex -= 2;
-            } else {
-                currentBooksIndex = Math.max(totalItems - 2, 0);
-            }
-            updateBooksCarousel();
-        }
-
-
-
-
-        function nextBooksSlide() {
-            const items = document.querySelectorAll('#booksCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentBooksIndex < totalItems - 2) {
-                currentBooksIndex += 2;
-            } else {
-                currentBooksIndex = 0;
-            }
-            updateBooksCarousel();
-        }
-
-
-
-
-        function updateBooksCarousel() {
-            const carouselInner = document.getElementById('booksCarouselInner');
-            const itemWidth = document.querySelector('#booksCarousel .carousel-item').offsetWidth;
-            const gap = 10; // Espaço entre os itens
-            const offset = -currentBooksIndex * (itemWidth + gap);
-            carouselInner.style.transform = `translateX(${offset}px)`;
-        }
-
-
-
-
-        //Provas anteriores
-
-
-
-
-        function prevExamsSlide() {
-            const items = document.querySelectorAll('#examsCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentExamsIndex > 0) {
-                currentExamsIndex -= 2;
-            } else {
-                currentExamsIndex = Math.max(totalItems - 2, 0);
-            }
-            updateExamsCarousel();
-        }
-
-
-
-
-        function nextExamsSlide() {
-            const items = document.querySelectorAll('#examsCarousel .carousel-item');
-            const totalItems = items.length;
-            if (currentExamsIndex < totalItems - 2) {
-                currentExamsIndex += 2;
-            } else {
-                currentExamsIndex = 0;
-            }
-            updateExamsCarousel();
-        }
-
-
-
-
-        function updateExamsCarousel() {
-            const carouselInner = document.getElementById('examsCarouselInner');
-            const itemWidth = document.querySelector('#examsCarousel .carousel-item').offsetWidth;
-            const gap = 10; // Espaço entre os itens
-            const offset = -currentExamsIndex * (itemWidth + gap);
-            carouselInner.style.transform = `translateX(${offset}px)`;
-        }
-
-
-
-
-        window.onload = () => {
-            updateContentCarousel(); // Atualiza a posição inicial do carrossel de conteúdos
-            updateBooksCarousel(); // Atualiza a posição inicial do carrossel de livros
-            updateExamsCarousel(); // Atualiza a posição inicial do carrossel de provas
-        };
-
-
-
-
-       
-        //Menu
-    function toggleMenu() {
-            var menu = document.getElementById('menu');
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-        }
-
-
-
-
-    // Função para exibir o modal específico
-    function showModal(modalId) {
-    var modal = document.getElementById(modalId);
-    modal.style.display = 'block';
-}
-
-
-
-
-    // Função para ocultar o modal específico
-    function hideModal(modalId) {
-    var modal = document.getElementById(modalId);
-    modal.style.display = 'none';
-}
-
-
-
-
-    document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', function(event) {
-        event.preventDefault();
-        const action = event.target.textContent.trim();
-
-
-
-
-        if (action === 'Adicionar conteúdo') {
-            showModal('modalAddContent');
-        } else if (action === 'Recomendar Livro') {
-            showModal('bookModal');  
-        } else if (action === 'Adicionar prova anterior') {
-            showModal('modalAddExam');  
-        }
-    });
-});
-
-
-
-
-    // Fecha o modal se o usuário clicar fora do conteúdo
-    window.onclick = function(event) {
-    const modals = document.querySelectorAll('.modal');
-    modals.forEach(modal => {
-        if (event.target === modal) {
-            hideModal(modal.id);
-        }
-    });
-}
-    // Função para mostrar o modal de recomendar livros
-    function showBookModal() {
-    var bookModal = document.getElementById('bookModal');
-    bookModal.style.display = 'block';
-}
-
-
-
-
-    // Função para esconder o modal de recomendar livros
-    function hideBookModal() {
-    var bookModal = document.getElementById('bookModal');
-    bookModal.style.display = 'none';
-}
-
-
-
-
-    // Função para atualizar o nome do arquivo selecionado
-    document.getElementById('cover').addEventListener('change', function() {
-    var fileName = document.getElementById('cover').files[0] ? document.getElementById('cover').files[0].name : 'Nenhum arquivo selecionado';
-    document.getElementById('cover-file-name').textContent = fileName;
-});
-
-
-
-
-// Atualiza o evento de clique para "Recomendar Livro"
-document.querySelectorAll('.menu-item')[1].onclick = showBookModal;
-
-
-
-
-
-
-
-
-// Adicionar prova anterior
-// Função para mostrar o modal
-function showModal(modalId) {
-    var modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'block';
-    }
-}
-
-
-
-
-// Função para esconder o modal
-function hideModal(modalId) {
-    var modal = document.getElementById(modalId);
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
-
-
-
-// Função para adicionar prova anterior
-function addExam() {
-    var year = document.getElementById('examYear').value;
-    var phase = document.getElementById('examPhase').value;
-    var state = document.querySelector('input[name="examState"]:checked').value;
-    var pdfFile = document.getElementById('uploadPdf').files[0];
-   
-    // Lógica para adicionar prova anterior
-    console.log('Adicionar prova anterior:', {year, phase, state, pdfFile});
-    hideModal('modalAddExam');
-}
-// Atualiza o nome do arquivo PDF selecionado e exiba o botão de visualização
-document.getElementById('uploadPdf').addEventListener('change', function() {
-    var fileInput = document.getElementById('uploadPdf');
-    var fileName = fileInput.files[0] ? fileInput.files[0].name : 'Nenhum arquivo selecionado';
-    document.getElementById('pdf-file-name').textContent = fileName;
-
-
-
-
-    // Exibir o botão de visualização se um arquivo foi selecionado
-    var pdfViewer = document.getElementById('pdf-viewer');
-    if (fileInput.files.length > 0) {
-        pdfViewer.style.display = 'block';
-    } else {
-        pdfViewer.style.display = 'none';
-    }
-});
-
-
-
-
-// Adicionar evento de clique para abrir o PDF
-document.getElementById('viewPdfBtn').addEventListener('click', function() {
-    var fileInput = document.getElementById('uploadPdf');
-    if (fileInput.files.length > 0) {
-        var fileUrl = URL.createObjectURL(fileInput.files[0]);
-        window.open(fileUrl, '_blank'); // Abre o PDF em uma nova aba
-    } else {
-        alert('Nenhum arquivo PDF selecionado.');
-    }
-});
-
-
-
-
-// Adicionar evento de clique para o botão de upload de PDF
-document.getElementById('uploadPdfBtn').addEventListener('click', function() {
-    document.getElementById('uploadPdf').click();
-});
-
+    mostrarItem();
 </script>
 </body>
 </html>

@@ -1,0 +1,191 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px; /* Adiciona algum espaçamento interno */
+    box-sizing: border-box;
+}
+
+
+
+
+.barra .logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Faz com que a logo-container ocupe o espaço restante */
+}
+
+
+
+
+.barra .logo-container img {
+    height: 80px; /* Ajusta a altura da imagem */
+    margin-right: 10px; /* Espaço entre a imagem e o texto */
+}
+
+
+
+
+.barra .logo-container .text {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+
+
+.barra .button-container {
+    display: flex;
+    align-items: flex-end; /* Alinha os botões na parte inferior da barra */
+    margin-left: auto; /* Alinha os botões à direita */
+}
+
+
+
+
+.barra .button-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px; /* Espaço entre os botões */
+    position: relative;
+}
+
+
+
+
+.barra .button-item img {
+    height: 50px; /* Ajusta a altura dos botões */
+}
+
+
+
+
+.barra .button-item .button-label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    margin-top: 1px; /* Espaço entre a imagem e o texto */
+    text-align: center;
+}
+
+
+
+
+.barra .button-item img:hover {
+    background-color: #a952ff; /* Cor de fundo quando o mouse passa sobre o botão */
+    border-radius: 7px; /* Adiciona cantos arredondados ao fundo */
+}
+
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+    text-align: center;
+}
+.subtitle {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 10px;
+    text-align: center;
+}
+
+
+.question {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: black;
+    text-align: left;
+    margin-top: 40px; /* Espaço acima da pergunta */
+    margin-left: 30px; /* Espaço à esquerda */
+}
+
+
+.options {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: black;
+    margin-left: 20px; /* Espaço à esquerda */
+    margin-top: 40px; /* Espaço acima das opções */
+}
+
+
+.options label {
+    display: block; /* Coloca cada label em uma nova linha */
+    margin-bottom: 5px; /* Espaço entre os botões de rádio */
+}
+
+
+
+
+.options-container {
+    display: flex; /* Usar flexbox para alinhar as colunas */
+    margin-left: 20px; /* Espaço à esquerda */
+    margin-top: 10px; /* Espaço acima das opções */
+}
+
+
+.options {
+    margin-right: 150px; /* Espaço entre as colunas */
+}
+
+
+.options label {
+    display: block; /* Cada label em uma nova linha */
+    margin-bottom: 5px; /* Espaço entre os botões de rádio */
+}
+
+
+.button-container {
+    display: flex;
+    align-items: center; /* Centraliza os itens verticalmente */
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    margin-top: 30px; /* Espaço acima do botão de resposta */
+}
+
+
+.back-button, .next-button {
+    background: none; /* Remove fundo padrão do botão */
+    border: none; /* Remove borda padrão do botão */
+    padding: 0; /* Remove espaçamento interno */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+}
+
+
+.back-button img, .next-button img {
+    height: 80px; /* Ajusta a altura das imagens */
+}
+
+
+.response-button {
+    background-color: #8c52ff; /* Cor do botão de resposta */
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    border: none; /* Remove a borda padrão */
+    border-radius: 25px; /* Botão arredondado */
+    padding: 10px 500px; /* Aumenta o espaçamento interno do botão */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    min-width: 150px; /* Largura mínima do botão */
+}

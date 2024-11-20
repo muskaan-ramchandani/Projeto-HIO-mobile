@@ -71,13 +71,12 @@ try {
     <div class="main-content">
     <h1>Fundamentos da Cinemática do Ponto Material</h1>
     <div class="button-group">
-        <button class="custom-button">Tudo</button>
-        <button class="custom-button">Suas recomendações</button>
-        <a href="simulandoCadastroVideo.php">
-            <button class="custom-button">Recomendar vídeo</button>
-        </a>
+            <button class="custom-button">Tudo</button>
+            <button class="custom-button">Suas recomendações</button>
+            <button class="custom-button" onclick="openModal()">Recomendar vídeo</button>
+        </div>
     </div>
-</div>   
+  
         <div class="info-box-container">
             <!-- Primeira linha de retângulos -->
             <div class="info-box">
@@ -227,25 +226,33 @@ try {
             </div>
         </div>  
     </div>
-     <!-- Modal para Recomendar Vídeo -->
+<!-- Modal para Recomendar Vídeo -->
 <div class="modal" id="videoModal">
-    <div class="modal-content">
+    <form action="simulandoCadastroVideo.php" method="post" class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h2 style="font-family: 'Open Sans', sans-serif; font-weight: bold; font-size: 20px; color: #835ad2; text-align: center;">Recomendar Vídeo</h2>
-       
+        <h2 style="font-family: 'Open Sans', sans-serif; font-weight: bold; font-size: 20px; color: #835ad2; text-align: center;">
+            Recomendar Vídeo
+        </h2>
+        
+        <!-- Campo para o título do vídeo -->
         <label style="font-weight: bold; font-size: 15px; text-align: left; font-family: 'Open Sans';">Título</label>
-        <input type="text" placeholder="Digite aqui o título do vídeo" class="input-field" style="margin-bottom: 20px;"> <!-- Aumenta a margem inferior -->
-       
-        <label style="font-weight: bold; font-size: 15px; text-align: left; font-family: 'Open Sans';">Link do Vídeo</label>
-        <input type="text" placeholder="Cole aqui o link do vídeo" class="input-field">
+        <input type="text" name="titulo" placeholder="Digite aqui o título do vídeo" class="input-field" style="margin-bottom: 20px;" required>
 
+        <!-- Campo para o link do vídeo -->
+        <label style="font-weight: bold; font-size: 15px; text-align: left; font-family: 'Open Sans';">Link do Vídeo</label>
+        <input type="text" name="link" placeholder="Cole aqui o link do vídeo" class="input-field" required>
+
+        <!-- Campos ocultos para idConteudoPertencente e profQuePostou -->
+        <input type="hidden" name="idConteudoPertencente" value="<?php echo htmlspecialchars($_GET['id'] ?? ''); ?>">
+        <input type="hidden" name="profQuePostou" value="<?php echo htmlspecialchars($_GET['email'] ?? ''); ?>">
 
         <div class="button-group" style="margin-top: 20px;">
-            <button class="modal-button" onclick="addVideo()">Adicionar</button>
-            <button class="modal-button cancel-button" onclick="closeModal()">Cancelar</button>
+            <button type="submit" class="modal-button">Adicionar</button>
+            <button type="button" class="modal-button cancel-button" onclick="closeModal()">Cancelar</button>
         </div>
-    </div>
+    </form>
 </div>
+
 
 
 

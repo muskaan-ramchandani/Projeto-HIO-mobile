@@ -1,69 +1,64 @@
 <?php
-    session_start();
+include('conexao.php'); // Inclua a conexão com o banco de dados
 
-    // Configurações do banco de dados
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $dbname = "hio";
+session_start(); // Inicie a sessão se não estiver iniciada
 
-    try {
-        // Conectando ao banco de dados usando PDO
-        $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die("Erro na conexão com o banco de dados: " . $e->getMessage());
-    }
+// Verifique se o email foi enviado ou está na sessão
+if (isset($_POST['email']) && !empty($_POST['email'])) {
+    $email = $_POST['email'];
+} elseif (isset($_SESSION['email']) && !empty($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+} else {
+    die("Erro: Email não definido.");
+}
 
-    // Verificar e definir o email do professor
-    if (isset($_GET['email'])) {
-        $email = $_GET['email'];
-        $_SESSION['email'] = $email;  // Armazena o email na sessão
-    } elseif (isset($_SESSION['email'])) {
-        $email = $_SESSION['email'];
-    } else {
-        die("Erro: Professor não autenticado.");
-    }
+// Verifique se o ano da prova foi enviado
+if (isset($_POST['anoDaProva']) && !empty($_POST['anoDaProva'])) {
+    $anoDaProva = $_POST['anoDaProva'];
+} else {
+    die("Erro: Ano da Prova não está definido.");
+}
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $anoDaProva = $_POST['anoDaProva'];
-        $estado = isset($_POST['estado']) ? 1 : 0;
-        $fase = $_POST['fase'];
-        $profQuePostou = $_POST['email'];
-        $siglaOlimpiadaPertencente = $_POST['sigla'];
+// Verifique se a fase foi enviada
+if (isset($_POST['fase']) && !empty($_POST['fase'])) {
+    $fase = $_POST['fase'];
+} else {
+    die("Erro: Fase não está definida.");
+}
 
-        // Verifica se o arquivo PDF foi enviado sem erros
-        if (isset($_FILES['arquivoPdf']) && $_FILES['arquivoPdf']['error'] === UPLOAD_ERR_OK) {
-            $arquivoPdf = file_get_contents($_FILES['arquivoPdf']['tmp_name']);
+// Verifique se o estado foi enviado
+$estado = isset($_POST['estado']) ? 1 : 0; // Convertendo checkbox para 1 (checked) ou 0 (unchecked)
 
-            // Inserir os dados no banco de dados
-            $sql = "INSERT INTO ProvaAnterior (anoDaProva, estado, fase, profQuePostou, arquivoPdf, siglaOlimpiadaPertencente) 
-                    VALUES (:anoDaProva, :estado, :fase, :profQuePostou, :arquivoPdf, :siglaOlimpiadaPertencente)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':anoDaProva', $anoDaProva);
-            $stmt->bindParam(':estado', $estado);
-            $stmt->bindParam(':fase', $fase);
-            $stmt->bindParam(':profQuePostou', $profQuePostou);
-            $stmt->bindParam(':arquivoPdf', $arquivoPdf, PDO::PARAM_LOB);
-            $stmt->bindParam(':siglaOlimpiadaPertencente', $siglaOlimpiadaPertencente);
+// Verifique se a sigla foi enviada
+if (isset($_POST['sigla']) && !empty($_POST['sigla'])) {
+    $siglaOlimpiadaPertencente = $_POST['sigla'];
+} else {
+    die("Erro: Sigla não está definida.");
+}
 
-            if ($stmt->execute()) {
-                echo "<p>Prova cadastrada com sucesso!</p>";
-            } else {
-                echo "<p>Erro ao cadastrar prova.</p>";
-            }
-        } else {
-            // Verifica se houve um erro no upload do arquivo PDF
-            $uploadError = $_FILES['arquivoPdf']['error'];
-            if ($uploadError !== UPLOAD_ERR_OK) {
-                echo "<p>Erro ao enviar o arquivo PDF. Código de erro: $uploadError</p>";
-            }
-        }
-    }
+// Processar o arquivo PDF
+if (isset($_FILES['arquivoPdf']) && $_FILES['arquivoPdf']['error'] == 0) {
+    // Ler o conteúdo do arquivo
+    $arquivoPdf = file_get_contents($_FILES['arquivoPdf']['tmp_name']);
+} else {
+    die("Erro: Arquivo PDF não foi enviado corretamente.");
+}
 
-    // Recuperar todas as olimpíadas para o select no formulário
-    $sql = "SELECT nome, sigla FROM Olimpiada";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $olimpiadas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    ?>
+// Inserir no banco de dados
+try {
+    $stmt = $pdo->prepare("INSERT INTO ProvaAnterior (anoDaProva, estado, fase, profQuePostou, arquivoPdf, siglaOlimpiadaPertencente) VALUES (:anoDaProva, :estado, :fase, :profQuePostou, :arquivoPdf, :siglaOlimpiadaPertencente)");
+
+    $stmt->execute([
+        ':anoDaProva' => $anoDaProva,
+        ':estado' => $estado,
+        ':fase' => $fase,
+        ':profQuePostou' => $email,
+        ':arquivoPdf' => $arquivoPdf,
+        ':siglaOlimpiadaPertencente' => $siglaOlimpiadaPertencente
+    ]);
+
+    echo "Prova anterior adicionada com sucesso!";
+} catch (PDOException $e) {
+    die("Erro ao inserir dados: " . $e->getMessage());
+}
+?>
