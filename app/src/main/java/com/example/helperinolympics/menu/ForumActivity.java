@@ -44,8 +44,9 @@ public class ForumActivity extends AppCompatActivity {
         binding = ActivityForumBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        personalizarSearchHint();
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+        barraPesquisa = findViewById(R.id.searchViewPerguntas);
+        personalizarSearchHint();
 
         // Fragment inicial + configurações iniciais
         binding.imgfotoPerfil.setImageResource(R.drawable.iconeperfilvazioredonda);
@@ -99,8 +100,6 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
-        barraPesquisa = findViewById(R.id.searchViewPerguntas);
-        barraPesquisa.clearFocus();
         barraPesquisa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -192,7 +191,6 @@ public class ForumActivity extends AppCompatActivity {
         int searchTextId = getResources().getIdentifier("android:id/search_src_text", null, null);
         EditText textoBarraPesquisa = barraPesquisa.findViewById(searchTextId);
         if (textoBarraPesquisa != null) {
-            textoBarraPesquisa.setHint("Encontre respostas para sua pergunta");
             textoBarraPesquisa.setHintTextColor(getResources().getColor(R.color.cinza));
             textoBarraPesquisa.setTextColor(getResources().getColor(R.color.black));
 
@@ -203,14 +201,6 @@ public class ForumActivity extends AppCompatActivity {
 
             textoBarraPesquisa.setPadding(50, 0, 0, 0);
         }
-
-        int searchMagIconId = getResources().getIdentifier("android:id/search_mag_icon", null, null);
-        ImageView searchIcon = barraPesquisa.findViewById(searchMagIconId);
-        if (searchIcon != null) {
-            searchIcon.setImageResource(R.drawable.baseline_search_24); //
-        }
-
-        barraPesquisa.setBackground(getResources().getDrawable(R.drawable.fundo_barra_pesquisa));
     }
 
 

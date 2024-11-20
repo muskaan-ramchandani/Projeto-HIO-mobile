@@ -65,8 +65,11 @@
             android:id="@+id/searchViewPerguntas"
             android:layout_width="375dp"
             android:layout_height="match_parent"
-            android:queryHint="Encontre respostas para sua pergunta"
-            android:background="@drawable/fundo_barra_pesquisa" />
+            app:queryHint="Encontre respostas para sua pergunta"
+            android:searchIcon="@drawable/baseline_search_24"
+            android:background="@drawable/fundo_barra_pesquisa"
+            android:iconifiedByDefault="false" />
+
     </LinearLayout>
 
     <LinearLayout
