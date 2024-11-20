@@ -1,4 +1,4 @@
-package com.example.helperinolympics.model;
+package com.example.helperinolympics.model.forum;
 
 import java.util.ArrayList;
 

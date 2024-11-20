@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterOlimpiadasForum;
 import com.example.helperinolympics.databinding.FragmentForumTudoBinding;
-import com.example.helperinolympics.model.OlimpiadaForum;
+import com.example.helperinolympics.model.forum.OlimpiadaForum;
 
 import org.json.JSONObject;
 

@@ -1,8 +1,7 @@
-package com.example.helperinolympics.model;
+package com.example.helperinolympics.model.forum;
 
 import android.graphics.Bitmap;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class PerguntasForum {

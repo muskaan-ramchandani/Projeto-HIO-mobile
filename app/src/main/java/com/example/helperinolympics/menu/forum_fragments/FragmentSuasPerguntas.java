@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +20,7 @@ import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumSuasPerguntasBinding;
 import com.example.helperinolympics.menu.ForumActivity;
-import com.example.helperinolympics.model.PerguntasForum;
-import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
+import com.example.helperinolympics.model.forum.PerguntasForum;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +71,7 @@ public class FragmentSuasPerguntas extends Fragment{
     public void configurarRecyclerPerguntasForumRespondidas() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapterRespondidas= new AdapterPerguntasForum(perguntasRespondidas);
+        adapterRespondidas= new AdapterPerguntasForum(perguntasRespondidas, getContext());
         binding.recyclerSuasPerguntasRespondidas.setLayoutManager(layoutManager);
         binding.recyclerSuasPerguntasRespondidas.setHasFixedSize(true);
         binding.recyclerSuasPerguntasRespondidas.setAdapter(adapterRespondidas);
@@ -84,7 +82,7 @@ public class FragmentSuasPerguntas extends Fragment{
     public void configurarRecyclerPerguntasForumNaoRespondidas() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapterNaoRespondidas= new AdapterPerguntasForum(perguntasNAORespondidas);
+        adapterNaoRespondidas= new AdapterPerguntasForum(perguntasNAORespondidas, getContext());
         binding.recyclerSuasPerguntasSemResposta.setLayoutManager(layoutManager);
         binding.recyclerSuasPerguntasSemResposta.setHasFixedSize(true);
         binding.recyclerSuasPerguntasSemResposta.setAdapter(adapterNaoRespondidas);

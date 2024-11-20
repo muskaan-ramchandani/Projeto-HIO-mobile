@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,9 +17,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.menu.ForumActivity;
-import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.model.Aluno;
-import com.example.helperinolympics.model.PerguntasForum;
+import com.example.helperinolympics.model.forum.PerguntasForum;
 
 import org.json.JSONObject;
 
@@ -30,11 +28,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import androidx.fragment.app.FragmentManager;
 
 
 public class CadastrarPergunta extends DialogFragment {

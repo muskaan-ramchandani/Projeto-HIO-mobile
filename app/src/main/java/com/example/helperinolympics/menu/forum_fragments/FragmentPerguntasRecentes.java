@@ -13,10 +13,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumPerguntasRecentesBinding;
-import com.example.helperinolympics.model.PerguntasForum;
+import com.example.helperinolympics.model.forum.PerguntasForum;
 
 
 import org.json.JSONArray;
@@ -24,14 +23,12 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class FragmentPerguntasRecentes  extends Fragment {
@@ -54,7 +51,7 @@ public class FragmentPerguntasRecentes  extends Fragment {
     public void configurarRecyclerPerguntasForum(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterPerguntasForum(perguntasF);
+        adapter= new AdapterPerguntasForum(perguntasF, getContext());
         binding.recyclerPerguntasRecentes.setLayoutManager(layoutManager);
         binding.recyclerPerguntasRecentes.setHasFixedSize(true);
         binding.recyclerPerguntasRecentes.setAdapter(adapter);
@@ -133,12 +130,15 @@ public class FragmentPerguntasRecentes  extends Fragment {
                             perguntasJSON.getString("siglaOlimpiadaRelacionada"), dataPublicacao);
 
 
-                    String fotoBase64 = perguntasJSON.getString("fotoPerfil");
+                    String fotoBase64 = perguntasJSON.optString("fotoPerfil", null);
 
-                    if(fotoBase64!=null){
-                        Bitmap bitmapFoto= decodeBase64ToBitmap(fotoBase64);
+                    if (fotoBase64 != null && !fotoBase64.isEmpty()) {
+                        Bitmap bitmapFoto = decodeBase64ToBitmap(fotoBase64);
                         pergunta.setFotoPerfil(bitmapFoto);
+                    } else {
+                        pergunta.setFotoPerfil(null);
                     }
+
 
                     Log.d("Pergunta", pergunta.toString());
                     perguntas.add(pergunta);
@@ -163,10 +163,10 @@ public class FragmentPerguntasRecentes  extends Fragment {
 
     }
 
-        public Bitmap decodeBase64ToBitmap(String base64String) {
-            byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-            return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        }
+    public Bitmap decodeBase64ToBitmap(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 
     private Date converterParaData(String dataString) {
         try {

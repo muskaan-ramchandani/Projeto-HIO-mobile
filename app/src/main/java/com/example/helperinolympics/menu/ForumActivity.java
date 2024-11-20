@@ -2,7 +2,6 @@ package com.example.helperinolympics.menu;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,23 +20,8 @@ import com.example.helperinolympics.databinding.ActivityForumBinding;
 import com.example.helperinolympics.menu.forum_fragments.FragmentSuasPerguntas;
 import com.example.helperinolympics.menu.forum_fragments.FragmentTudo;
 import com.example.helperinolympics.model.Aluno;
-import com.example.helperinolympics.model.Correcao;
-import com.example.helperinolympics.model.PerguntasForum;
 import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;

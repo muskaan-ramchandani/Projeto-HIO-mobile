@@ -13,10 +13,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterPerguntasForum;
 import com.example.helperinolympics.databinding.FragmentForumPerguntasPorOlimpiadaBinding;
-import com.example.helperinolympics.model.PerguntasForum;
+import com.example.helperinolympics.model.forum.PerguntasForum;
 
 
 import org.json.JSONArray;
@@ -58,7 +57,7 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
     public void configurarRecyclerPerguntasForum(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterPerguntasForum(perguntasF);
+        adapter= new AdapterPerguntasForum(perguntasF, getContext());
         binding.recyclerPerguntasOlimpiadas.setLayoutManager(layoutManager);
         binding.recyclerPerguntasOlimpiadas.setHasFixedSize(true);
         binding.recyclerPerguntasOlimpiadas.setAdapter(adapter);
