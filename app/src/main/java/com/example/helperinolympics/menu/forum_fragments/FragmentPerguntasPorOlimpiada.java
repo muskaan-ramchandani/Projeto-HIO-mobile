@@ -38,6 +38,8 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
     private ArrayList<PerguntasForum> perguntasF = new ArrayList<>();
     private String siglaOlimpiada;
 
+    private static final ArrayList<PerguntasForum> perguntasOriginal = new ArrayList<>();
+
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat apiDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -51,6 +53,7 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
 
         new CarregaPerguntasPorOlimpiada().execute();
         configurarRecyclerPerguntasForum();
+
         return binding.getRoot();
     }
 
@@ -103,6 +106,7 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
                 JSONArray listaPerguntasOlimpiadaJSON = jsonObject.getJSONArray("listaPerguntasOlimpiada");
 
                 perguntasF.clear();
+                perguntasOriginal.clear();
 
                 for (int i = 0; i < listaPerguntasOlimpiadaJSON.length(); i++) {
                     JSONObject perguntasOlimpiadasJson = listaPerguntasOlimpiadaJSON.getJSONObject(i);
@@ -127,6 +131,10 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
                     }
 
                     perguntasF.add(pergunta);
+
+                    if (!perguntaJaExiste(pergunta)) {
+                        perguntasOriginal.add(pergunta);
+                    }
                 }
 
                 adapter.notifyDataSetChanged();
@@ -159,6 +167,10 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
         return this.perguntasF;
     }
 
+    public ArrayList<PerguntasForum> retornaListaOriginal(){
+        return perguntasOriginal;
+    }
+
     public void alterarListaPorPesquisa(ArrayList<PerguntasForum> listaFiltrada){
         Log.d("ALTERAR_LISTA", "Alterando a lista com " + listaFiltrada.size() + " itens.");
 
@@ -166,4 +178,14 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
         this.perguntasF.addAll(listaFiltrada);
         adapter.notifyDataSetChanged();
     }
+
+    public boolean perguntaJaExiste(PerguntasForum pergunta) {
+        for (PerguntasForum p : perguntasOriginal) {
+            if (p.getId() == pergunta.getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

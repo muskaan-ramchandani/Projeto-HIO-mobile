@@ -3,6 +3,7 @@ package com.example.helperinolympics.model.forum;
 import android.graphics.Bitmap;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class PerguntasForum {
     private int id, qntdRespostas;
@@ -92,5 +93,18 @@ public class PerguntasForum {
 
     public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        PerguntasForum that = (PerguntasForum) obj;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

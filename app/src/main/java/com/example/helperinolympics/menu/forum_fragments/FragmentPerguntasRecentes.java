@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 public class FragmentPerguntasRecentes  extends Fragment {
@@ -36,6 +37,8 @@ public class FragmentPerguntasRecentes  extends Fragment {
     private FragmentForumPerguntasRecentesBinding binding;
     private AdapterPerguntasForum adapter;
     private ArrayList<PerguntasForum> perguntasF = new ArrayList<>();
+
+    private static final ArrayList<PerguntasForum> perguntasOriginal = new ArrayList<>();
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat apiDateFormat = new SimpleDateFormat("yyyy-MM-dd");  // Se a data na API for yyyy-MM-dd
@@ -86,6 +89,11 @@ public class FragmentPerguntasRecentes  extends Fragment {
 
                     perguntasLista.addAll(converterParaPergunta(jsonString));
                     perguntasF.addAll(converterParaPergunta(jsonString));
+
+                    synchronized (perguntasOriginal) {
+                        perguntasOriginal.clear();
+                        perguntasOriginal.addAll(new HashSet<>(perguntasLista)); // Remover duplicados
+                    }
                 } else {
                     Log.d("ERRO_CONEXAO", "Erro ao conectar, código de resposta: " + conexao.getResponseCode());
                 }
@@ -154,7 +162,7 @@ public class FragmentPerguntasRecentes  extends Fragment {
         protected void onPostExecute(List<PerguntasForum> perguntasLista) {
             if (!perguntasLista.isEmpty()) {
                 perguntasF.clear();
-                perguntasF.addAll(perguntasLista);
+                perguntasF.addAll(new HashSet<>(perguntasLista));
                 adapter.notifyDataSetChanged();
             } else {
                 Log.d("LISTA_VAZIA", "Nenhuma pergunta carregada");
@@ -182,6 +190,10 @@ public class FragmentPerguntasRecentes  extends Fragment {
 
     public ArrayList<PerguntasForum> retornaListaAtual(){
         return this.perguntasF;
+    }
+
+    public ArrayList<PerguntasForum> retornaListaOriginal(){
+        return perguntasOriginal;
     }
 
     public void alterarListaPorPesquisa(ArrayList<PerguntasForum> listaFiltrada){

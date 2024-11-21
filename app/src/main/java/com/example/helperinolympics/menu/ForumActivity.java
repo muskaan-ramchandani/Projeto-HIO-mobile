@@ -35,12 +35,12 @@ public class ForumActivity extends AppCompatActivity {
     ActivityForumBinding binding;
     SearchView barraPesquisa;
     public Aluno alunoCadastrado;
-    static final ArrayList<PerguntasForum> listaOriginalRecentes = new ArrayList<>();
-    static final  ArrayList<PerguntasForum> listaOriginalOlimpiadas = new ArrayList<>();
-
     //fragments
     Fragment fragmentPai;
     Fragment fragmentFilho;
+
+    ArrayList<PerguntasForum> listaRecentesAtual = new ArrayList<>();
+    ArrayList<PerguntasForum> listaOlimpiadasAtual = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,9 +102,9 @@ public class ForumActivity extends AppCompatActivity {
                     barraPesquisa.clearFocus(); // Remove o foco da barra de pesquisa
 
                     if (fragmentFilho instanceof FragmentPerguntasRecentes) {
-                        ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(listaOriginalRecentes);
+                        ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(((FragmentPerguntasRecentes) fragmentFilho).retornaListaOriginal());
                     } else if (fragmentFilho instanceof FragmentPerguntasPorOlimpiada) {
-                        ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(listaOriginalOlimpiadas);
+                        ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(((FragmentPerguntasPorOlimpiada) fragmentFilho).retornaListaOriginal());
                     }
                 }
 
@@ -138,10 +138,10 @@ public class ForumActivity extends AppCompatActivity {
 
                 if(newText.isEmpty()){
                     if (fragmentFilho instanceof FragmentPerguntasRecentes){
-                        ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(listaOriginalRecentes);
+                        ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(((FragmentPerguntasRecentes) fragmentFilho).retornaListaOriginal());
 
                     }else if (fragmentFilho instanceof FragmentPerguntasPorOlimpiada){
-                        ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(listaOriginalOlimpiadas);
+                        ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(((FragmentPerguntasPorOlimpiada) fragmentFilho).retornaListaOriginal());
 
                     }
                 }else{
@@ -157,9 +157,9 @@ public class ForumActivity extends AppCompatActivity {
                 if (!hasFocus) {
                     if (barraPesquisa.getQuery().toString().isEmpty()) {
                         if (fragmentFilho instanceof FragmentPerguntasRecentes) {
-                            ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(listaOriginalRecentes);
+                            ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(((FragmentPerguntasRecentes) fragmentFilho).retornaListaOriginal());
                         } else if (fragmentFilho instanceof FragmentPerguntasPorOlimpiada) {
-                            ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(listaOriginalOlimpiadas);
+                            ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(((FragmentPerguntasPorOlimpiada) fragmentFilho).retornaListaOriginal());
                         }
                     } else {
                         filterList(barraPesquisa.getQuery().toString());
@@ -174,7 +174,9 @@ public class ForumActivity extends AppCompatActivity {
         ArrayList<PerguntasForum> perguntasFiltradas = new ArrayList<>();
 
         if (fragmentFilho instanceof FragmentPerguntasRecentes) {
-            ArrayList<PerguntasForum> listaRecentesAtual = ((FragmentPerguntasRecentes) fragmentFilho).retornaListaAtual();
+            listaRecentesAtual.clear();
+            listaRecentesAtual.addAll(((FragmentPerguntasRecentes) fragmentFilho).retornaListaOriginal());
+            Log.d("LISTA_ORIGINAIS", "Recentes " + listaRecentesAtual.size());
             Log.d("Fragment", "FragmentPerguntasRecentes está ativo.");
 
             if (listaRecentesAtual != null && !listaRecentesAtual.isEmpty()) {
@@ -192,7 +194,9 @@ public class ForumActivity extends AppCompatActivity {
             }
 
         } else if (fragmentFilho instanceof FragmentPerguntasPorOlimpiada) {
-            ArrayList<PerguntasForum> listaOlimpiadasAtual = ((FragmentPerguntasPorOlimpiada) fragmentFilho).retornaListaAtual();
+            listaOlimpiadasAtual.clear();
+            listaOlimpiadasAtual.addAll(((FragmentPerguntasPorOlimpiada) fragmentFilho).retornaListaOriginal());
+            Log.d("LISTA_ORIGINAIS", "Olimpiadas " + listaOlimpiadasAtual.size());
             Log.d("Fragment", "FragmentPerguntasPorOlimpiada está ativo.");
 
             if (listaOlimpiadasAtual != null && !listaOlimpiadasAtual.isEmpty()) {
@@ -259,7 +263,6 @@ public class ForumActivity extends AppCompatActivity {
 
             fragmentFilho = ((FragmentTudo) fragmentPai).retornaFragmentAtual();
             if (fragmentFilho != null) {
-                configurarListasOriginais(fragmentFilho);
                 Log.d("Fragmento", "Fragmento filho encontrado e inicializado.");
             } else {
                 Log.e("Fragmento", "Fragmento filho não encontrado.");
@@ -268,18 +271,6 @@ public class ForumActivity extends AppCompatActivity {
 
     }
 
-    private void configurarListasOriginais(Fragment fragment) {
-        if (fragment instanceof FragmentPerguntasRecentes) {
-            ArrayList<PerguntasForum> listaR = ((FragmentPerguntasRecentes) fragment).retornaListaAtual();
-            listaOriginalRecentes.addAll(listaR);
-            Log.e("TAMANHO_LISTA_RECENTES", "Tamanho listaR: "+listaR.size());
-
-        } else if (fragment instanceof FragmentPerguntasPorOlimpiada) {
-            ArrayList<PerguntasForum> listaO = ((FragmentPerguntasPorOlimpiada) fragment).retornaListaAtual();
-            listaOriginalOlimpiadas.addAll(listaO);
-            Log.e("TAMANHO_LISTA_OLIMPIADAS", "Tamanho listaO: "+listaO.size());
-        }
-    }
 
     public void atualizarDadosPosPublicacao() {
         setFragment(new FragmentSuasPerguntas());
