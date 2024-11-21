@@ -175,8 +175,10 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
         Log.d("ALTERAR_LISTA", "Alterando a lista com " + listaFiltrada.size() + " itens.");
 
         this.perguntasF.clear();
+        adapter.notifyDataSetChanged();
         this.perguntasF.addAll(listaFiltrada);
         adapter.notifyDataSetChanged();
+        Log.d("ALTERAR_LISTA", "Lista atualizada REALMENTE com " + perguntasF.size() + " itens.");
     }
 
     public boolean perguntaJaExiste(PerguntasForum pergunta) {

@@ -36,8 +36,8 @@ public class ForumActivity extends AppCompatActivity {
     SearchView barraPesquisa;
     public Aluno alunoCadastrado;
     //fragments
-    Fragment fragmentPai;
     Fragment fragmentFilho;
+    Fragment fragmentPai;
 
     ArrayList<PerguntasForum> listaRecentesAtual = new ArrayList<>();
     ArrayList<PerguntasForum> listaOlimpiadasAtual = new ArrayList<>();
@@ -73,7 +73,6 @@ public class ForumActivity extends AppCompatActivity {
             }
         });
 
-        atribuindoFragmentsParaConfigurarPesquisa();
         personalizarSearchHint();
 
         findViewById(R.id.btnTudo).setOnClickListener(new View.OnClickListener() {
@@ -85,8 +84,6 @@ public class ForumActivity extends AppCompatActivity {
                 binding.linearLayoutBarraPesquisaForum.setVisibility(View.VISIBLE);
                 binding.linearBtnfazerPergunta.setVisibility(View.GONE);
                 setFragment(new FragmentTudo());
-
-                atribuindoFragmentsParaConfigurarPesquisa();
             }
         });
 
@@ -171,7 +168,8 @@ public class ForumActivity extends AppCompatActivity {
     }
 
     private void filterList(String newText) {
-        ArrayList<PerguntasForum> perguntasFiltradas = new ArrayList<>();
+        ArrayList<PerguntasForum> perguntasFiltradasRecentes = new ArrayList<>();
+        ArrayList<PerguntasForum> perguntasFiltradasOlimpiadas = new ArrayList<>();
 
         if (fragmentFilho instanceof FragmentPerguntasRecentes) {
             listaRecentesAtual.clear();
@@ -182,14 +180,14 @@ public class ForumActivity extends AppCompatActivity {
             if (listaRecentesAtual != null && !listaRecentesAtual.isEmpty()) {
                 for (PerguntasForum pergunta : listaRecentesAtual) {
                     if (pergunta.getTitulo().toLowerCase().contains(newText.toLowerCase())) {
-                        perguntasFiltradas.add(pergunta);
+                        perguntasFiltradasRecentes.add(pergunta);
                     }
                 }
 
-                if (perguntasFiltradas.isEmpty()) {
+                if (perguntasFiltradasRecentes.isEmpty()) {
                     Toast.makeText(ForumActivity.this, "Não existem perguntas relacionadas ao digitado.", Toast.LENGTH_SHORT).show();
                 } else {
-                    ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(perguntasFiltradas);
+                    ((FragmentPerguntasRecentes) fragmentFilho).alterarListaPorPesquisa(perguntasFiltradasRecentes);
                 }
             }
 
@@ -202,14 +200,14 @@ public class ForumActivity extends AppCompatActivity {
             if (listaOlimpiadasAtual != null && !listaOlimpiadasAtual.isEmpty()) {
                 for (PerguntasForum pergunta : listaOlimpiadasAtual) {
                     if (pergunta.getTitulo().toLowerCase().contains(newText.toLowerCase())) {
-                        perguntasFiltradas.add(pergunta);
+                        perguntasFiltradasOlimpiadas.add(pergunta);
                     }
                 }
 
-                if (perguntasFiltradas.isEmpty()) {
+                if (perguntasFiltradasOlimpiadas.isEmpty()) {
                     Toast.makeText(ForumActivity.this, "Não existem perguntas relacionadas ao digitado.", Toast.LENGTH_SHORT).show();
                 } else {
-                    ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(perguntasFiltradas);
+                    ((FragmentPerguntasPorOlimpiada) fragmentFilho).alterarListaPorPesquisa(perguntasFiltradasOlimpiadas);
                 }
             }
         }
@@ -247,6 +245,8 @@ public class ForumActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentForum, fragment);
         fragmentTransaction.commit();
+
+        binding.getRoot().postDelayed(this::atribuindoFragmentsParaConfigurarPesquisa, 50);
     }
 
     public void atribuindoFragmentsParaConfigurarPesquisa(){
@@ -274,12 +274,6 @@ public class ForumActivity extends AppCompatActivity {
 
     public void atualizarDadosPosPublicacao() {
         setFragment(new FragmentSuasPerguntas());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        atribuindoFragmentsParaConfigurarPesquisa();
     }
 
 }
