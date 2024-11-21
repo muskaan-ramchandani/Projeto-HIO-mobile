@@ -173,6 +173,9 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
                 adapter.notifyDataSetChanged();
             }
         }
+    }
 
+    public Fragment retornaFragmentAtual(){
+        return getChildFragmentManager().findFragmentById(R.id.fragmentForumPerguntas);
     }
 }

@@ -87,14 +87,11 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
-            android:name=".menu.FavoritosAlunoActivity"
-            android:exported="false"
-            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
-
-        <activity
             android:name=".menu.ForumActivity"
             android:exported="false"
-            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
+            android:theme="@style/Theme.HelperInOlympics.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
 
         <activity
             android:name=".menu.ManualActivity"

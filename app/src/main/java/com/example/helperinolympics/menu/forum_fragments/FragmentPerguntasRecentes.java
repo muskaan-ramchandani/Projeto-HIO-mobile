@@ -185,7 +185,10 @@ public class FragmentPerguntasRecentes  extends Fragment {
     }
 
     public void alterarListaPorPesquisa(ArrayList<PerguntasForum> listaFiltrada){
-        this.perguntasF = listaFiltrada;
+        Log.d("ALTERAR_LISTA", "Alterando a lista com " + listaFiltrada.size() + " itens.");
+
+        this.perguntasF.clear();
+        this.perguntasF.addAll(listaFiltrada);
         adapter.notifyDataSetChanged();
     }
 
