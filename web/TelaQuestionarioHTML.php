@@ -1,33 +1,3 @@
-<?php
-// Conectar ao banco de dados
-$dsn = 'mysql:host=localhost;dbname=hio;charset=utf8';
-$username = 'root';
-$password = 'root';
-
-try {
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Capturar a sigla da URL
-    if (isset($_GET['sigla'])) {
-        $sigla = $_GET['sigla'];
-
-        // Buscar os dados da olimpíada correspondente
-        $sql = "SELECT nome, icone, cor FROM Olimpiada WHERE sigla = :sigla";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':sigla', $sigla);
-        $stmt->execute();
-
-        $olimpiada = $stmt->fetch(PDO::FETCH_ASSOC);
-    } else {
-        // Se não houver sigla na URL, redirecionar para a página inicial
-        header('Location: TelaInicialProfessorHTML.php');
-        exit();
-    }
-} catch (PDOException $e) {
-    echo "Erro: " . $e->getMessage();
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -35,72 +5,61 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Helper in Olympics</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
-    <link rel="stylesheet" href="TelaFlashcard.css"> <!-- Link para o CSS -->
-</head>
- <?php
+    <link rel="stylesheet" href="TelaQuestionario.css"> <!-- Link para o CSS -->
+    <?php
 $id = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
+$sigla = isset($_GET['sigla']) ? htmlspecialchars($_GET['sigla']) : '';
 
 ?>
 
+</head>
 <body>
-<div class="barra">
-    <div class="logo-container">
-        <img src="Imagens_Mobile_HIO/<?php echo htmlspecialchars($olimpiada['icone']); ?>.png" alt="<?php echo htmlspecialchars($olimpiada['nome']); ?>">
-        <div class="text"><?php echo htmlspecialchars($olimpiada['nome']); ?> - <?php echo htmlspecialchars($sigla); ?></div>
-    </div>
-    <div class="button-container">
-        <div class="button-item">
-            <a href="simulandoCadastroTexto.php">
-            <img src="Imagens_Mobile_HIO/iconeTexto.png" alt="Textos">
-            <div class="button-label">Textos</div>
-            </a>
+    <div class="barra">
+        <div class="logo-container">
+            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/imgMacaCaindo.png" alt="Maça caindo">
+            <div class="text">OBF 2024 - Olimpíada Brasileira de Física</div>
         </div>
-        <div class="button-item">
-        <a href="TelaVideoHTML.php?sigla=<?php echo $sigla; ?>&id=<?php echo $id; ?>&email=<?php echo $email; ?>">
-        <img src="Imagens_Mobile_HIO/iconeVideo.png" alt="Vídeos"> <div class="button-label">Vídeos</div> 
-    </a>
-</div>
-.
-        <div class="button-item">
-            <a href="TelaFlashCardHTML.php?sigla=<?php echo isset($_GET['sigla']) ? htmlspecialchars($_GET['sigla']) : ''; ?>">
-            <img src="Imagens_Mobile_HIO/iconeFlashcard.png" alt="Flashcards">
-            <div class="button-label">Flashcards</div>
-            </a>
-        </div>
-        <div class="button-item">
-        <a href="TelaQuestionarioHTML.php?id=<?php echo $id; ?>&email=<?php echo $email; ?>">
-            <img src="Imagens_Mobile_HIO/iconeQuestionarios.png" alt="Questionários">
-            <div class="button-label">Questionários</div>
-            </a>
-        </div>
-        <div class="button-item">
-            <img src="Imagens_Mobile_HIO/btnVoltarBRANCO.png" alt="Voltar">
-            <div class="button-label">Voltar</div>
+        <div class="button-container">
+            <div class="button-item">
+                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeTexto.png" alt="Textos">
+                <div class="button-label">Textos</div>
+            </div>
+            <div class="button-item">
+                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeVideo.png" alt="Videos">
+                <div class="button-label">Vídeos</div>
+            </div>
+            <div class="button-item">
+                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeFlashcard.png" alt="Flashcards">
+                <div class="button-label">Flashcards</div>
+            </div>
+            <div class="button-item">
+                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeQuestionarios.png" alt="Questionários">
+                <div class="button-label">Questionários</div>
+            </div>
+            <div class="button-item">
+                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarBRANCO.png" alt="Voltar">
+                <div class="button-label">Voltar</div>
+            </div>
         </div>
     </div>
-</div>
-<?php include 'processaConteudo.php'; ?>
-<div class="main-content">
-    <h1><?php echo isset($titulo) ? $titulo : 'Título não encontrado'; ?></h1>
-    <div class="button-group">
-        <button class="custom-button">Tudo</button>
-        <button class="custom-button">Seus flashcards</button>
-        <a href="TelaFlashcardSeusRascunhosHTML.php">
-            <button class="custom-button">Seus rascunhos</button>
-        </a>
-       
-<a href="TelaAdicionarFlashCardHTML.php?id=<?php echo $id; ?>&email=<?php echo $email; ?>">
-    <button class="custom-button">Adicionar flashcard</button>
-</a>
-
+   
+    <!-- Novo conteúdo abaixo da barra -->
+    <div class="main-content">
+        <h1>Fundamentos da Cinemática do Ponto Material</h1>
+        <div class="button-group">
+            <button class="custom-button">Tudo</button>
+            <button class="custom-button">Seus questionários</button>
+            <a href="file:///C:/Users/Muskaan%20Ramchandani/Projeto-HIO-mobile/webCodesHIO/TelaQuestionarioRascunhos.html">
+                <button class="custom-button">Seus rascunhos</button>
+            </a>
+            <a href="TelaAdicionarQuestionarioHTML.php?sigla=<?php echo $sigla; ?>&id=<?php echo $id; ?>&email=<?php echo $email; ?>">
+                <button class="custom-button">Adicionar questionário</button>
+            </a>
+        </div>
     </div>
-</div>
-
-
-
-
-
+   
+   
 
 
         <div class="info-box-container">
@@ -117,10 +76,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
             <div class="info-box">
                 <p class="title">Ponto material</p>
                 <div class="info-box-content">
@@ -129,10 +84,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                     <button class="info-button" onclick="openModal('modal2')">Acessar</button>
                 </div>
             </div>
-
-
-
-
 
 
 
@@ -146,10 +97,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                 </div>
             </div>
         </div>
-
-
-
-
 
 
 
@@ -168,10 +115,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
             <div class="info-box">
                 <p class="title">Movimento Uniformemente Variado (MUV)</p>
                 <div class="info-box-content">
@@ -180,10 +123,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                     <button class="info-button" onclick="openModal('modal5')">Acessar</button>
                 </div>
             </div>
-
-
-
-
 
 
 
@@ -197,10 +136,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                 </div>
             </div>
         </div>
-
-
-
-
 
 
 
@@ -219,10 +154,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
             <div class="info-box">
                 <p class="title">Gravitação Universal</p>
                 <div class="info-box-content">
@@ -231,10 +162,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                     <button class="info-button" onclick="openModal('modal8')">Acessar</button>
                 </div>
             </div>
-
-
-
-
 
 
 
@@ -248,10 +175,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                 </div>
             </div>
         </div>
-
-
-
-
 
 
 
@@ -270,10 +193,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
             <div class="info-box">
                 <p class="title">Cinemática: conceitos e fórmulas</p>
                 <div class="info-box-content">
@@ -282,10 +201,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
                     <button class="info-button" onclick="openModal('modal11')">Acessar</button>
                 </div>
             </div>
-
-
-
-
 
 
 
@@ -304,10 +219,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
     <!-- Modais -->
     <div id="modal1" class="modal">
         <div class="modal-content">
@@ -315,10 +226,6 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
             <p>Conteúdo do modal 1</p>
         </div>
     </div>
-
-
-
-
 
 
 
@@ -333,20 +240,12 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
     <div id="modal3" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal3')">&times;</span>
             <p>Conteúdo do modal 3</p>
         </div>
     </div>
-
-
-
-
 
 
 
@@ -361,20 +260,12 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
     <div id="modal5" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal5')">&times;</span>
             <p>Conteúdo do modal 5</p>
         </div>
     </div>
-
-
-
-
 
 
 
@@ -389,20 +280,12 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
     <div id="modal7" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal7')">&times;</span>
             <p>Conteúdo do modal 7</p>
         </div>
     </div>
-
-
-
-
 
 
 
@@ -417,20 +300,12 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
     <div id="modal9" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal9')">&times;</span>
             <p>Conteúdo do modal 9</p>
         </div>
     </div>
-
-
-
-
 
 
 
@@ -445,20 +320,12 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
     <div id="modal11" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modal11')">&times;</span>
             <p>Conteúdo do modal 11</p>
         </div>
     </div>
-
-
-
-
 
 
 
@@ -473,13 +340,10 @@ $email = isset($_GET['email']) ? htmlspecialchars($_GET['email']) : '';
 
 
 
-
-
-
-
-    <script src="TelaFlashcard.js"></script>
+    <script src="TelaQuestionario.js"></script>
 </body>
 </html>
+
 
 
 

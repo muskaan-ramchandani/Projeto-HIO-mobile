@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Parte do quadrado roxo -->
+     
         <div class="square">
             <h1>Helper in Olympics</h1>
             <div class="image-container">
@@ -16,10 +16,10 @@
             </div>
         </div>
         
-        <!-- Parte branca da tela -->
+      
         <div class="login-section">
             <h1 class="login-title">Entrar</h1>
-            <form id="login-form" method="post" action="verificar_login.php">
+            <form id="login-form" method="post" action="/web/verificar_login.php">
                 <input type="text" id="username-email" name="email" placeholder="Email" required>
                 <input type="password" id="password" name="password" placeholder="Senha" required>
                 <button type="submit"><b>Entrar</b></button>

@@ -20,7 +20,7 @@ try {
 
         $olimpiada = $stmt->fetch(PDO::FETCH_ASSOC);
     } else {
-        // Se não houver sigla na URL, redirecionar para a página inicial
+     
         header('Location: TelaInicialProfessorHTML.php');
         exit();
     }
@@ -121,8 +121,8 @@ try {
 
 
 
-        <!-- Modal para adicionar prova anterior -->
-        <div id="AddExamForm" class="add-exam-form" style="display: none;">
+
+<div id="AddExamForm" class="add-exam-form" style="display: none;">
     <form action="simulandoCadastroProvaAnterior.php" method="post" enctype="multipart/form-data">
         <div class="modal-content">
             <span class="close" onclick="hideModal('modalAddExam')">&times;</span>
@@ -141,37 +141,35 @@ try {
                     <input type="number" id="fase" name="fase" class="modal-input" required>
                 </div>
 
-                <!-- Estado (checkbox) -->
+                <!-- Estado -->
                 <div class="form-group">
                     <label for="estado">Estado:</label>
                     <input type="checkbox" id="estado" name="estado">
                 </div>
 
-                <!-- Professor que Postou -->
+                <!-- Email -->
                 <div class="form-group">
-                    <input type="hidden" name="profQuePostou" value="<?php echo htmlspecialchars($email); ?>">
+                    <input type="hidden" name="email" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>">
                 </div>
 
-                <!-- Upload de Arquivo PDF -->
+                <!-- Upload do arquivo PDF -->
                 <div class="file-upload">
                     <label for="arquivoPdf">Arquivo PDF:</label>
                     <input type="file" id="arquivoPdf" name="arquivoPdf" accept=".pdf" class="modal-input" required>
                 </div>
 
-                <!-- Visualizador de PDF -->
                 <div id="pdf-viewer" style="display: none;">
                     <button id="viewPdfBtn">Visualizar PDF</button>
                 </div>
 
-                <!-- Olimpíada Pertencente (Select Dropdown) -->
                 <div class="form-group">
-                <input type="hidden" name="sigla" value="<?php echo htmlspecialchars($sigla); ?>">
-            </div>
+                    <input type="hidden" name="sigla" value="<?php echo isset($sigla) ? htmlspecialchars($sigla) : ''; ?>">
+                </div>
 
-            <!-- Botões de ação -->
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Adicionar</button>
-                <button type="button" class="btn btn-secondary" onclick="hideModal('modalAddExam')">Cancelar</button>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideModal('modalAddExam')">Cancelar</button>
+                </div>
             </div>
         </div>
     </form>

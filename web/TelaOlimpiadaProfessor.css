@@ -1,3 +1,5 @@
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -812,4 +814,61 @@ body {
 .carousel-button img {
     width: 40px; /* Ajusta a largura da imagem do botão */
     height: auto; /* Mantém a proporção da imagem */
+}
+/* Container do carrossel */
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Contêiner dos itens do carrossel */
+.carousel-content {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+/* Cada item dentro do carrossel */
+.carousel-item {
+    flex: 1 0 100%; /* Apenas um item por vez, ocupando 100% da largura */
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.carousel-item:hover {
+    transform: scale(1.05);
+}
+
+/* Botões de navegação */
+.carousel-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.carousel-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .carousel-item {
+        flex: 1 0 100%; /* Itens ocupando 100% da largura em telas pequenas */
+    }
 }
