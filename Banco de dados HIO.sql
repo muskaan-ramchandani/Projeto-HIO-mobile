@@ -212,14 +212,6 @@ CREATE TABLE PontuacaoAlunos(
 	PRIMARY KEY(id)
 );
 
-#exemplo
-INSERT INTO AcertosAluno (idAlternativaMarcada, idQuestionarioPertencente, idQuestaoPertencente, dataAcerto, emailAluno)
-VALUES (61, 3, 11, '2024-10-21', 'isassevalho@gmail.com');
-
--- Insere dados na semana retrasada
-INSERT INTO ErrosAluno (idAlternativaMarcada, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente, dataErro, emailAluno)
-VALUES (22, 21, 1, 5, '2024-10-11', 'isassevalho@gmail.com');
-
 DROP TABLE IF EXISTS PerguntasForum;
 CREATE TABLE PerguntasForum(
 	id INT AUTO_INCREMENT NOT NULL,
@@ -245,6 +237,19 @@ CREATE TABLE RespostasForum(
 	PRIMARY KEY(id)
 );
 
+DROP TABLE IF EXISTS Eventos;
+CREATE TABLE Eventos(
+	id INT AUTO_INCREMENT NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    dataOcorrencia DATE NOT NULL,
+    horarioComeco TIME NOT NULL,
+    horarioFim TIME NOT NULL,
+    link TEXT, 
+    siglaOlimpiadaPertencente VARCHAR(10) NOT NULL,
+	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
+	PRIMARY KEY(id)
+);
+
 #testes respostas
 Insert into RespostasForum(emailProf, resposta, dataResposta, idPergunta)
 values ('juan@gmail.com', 'Para organizar 6 RadioButtons em 2 linhas de 3 itens cada, mantendo a funcionalidade de selecionar apenas um botão por vez, você pode usar um RadioGroup com o atributo android:orientation="vertical", junto com um contêiner LinearLayout horizontal para cada linha.', '2024-11-20', 4),
@@ -252,3 +257,9 @@ values ('juan@gmail.com', 'Para organizar 6 RadioButtons em 2 linhas de 3 itens 
 ('marydorotty@gmail.com', 'Você pode usar um ConstraintLayout, pode organizar os botões em duas linhas de 3 itens, mantendo a funcionalidade de seleção única com o RadioGroup', '2024-11-20', 4),
 ('ramchandani@gmail.com', 'Outra abordagem é utilizar um TableLayout, que organiza os botões em uma grade de 2 linhas e 3 colunas. O RadioGroup ainda mantém a funcionalidade de seleção única.', '2024-11-20', 4),
 ('ramchandani@gmail.com', 'As temperaturas usadas no cálculo de rendimento devem estar em Kelvin, e isso não é apenas uma convenção, mas uma necessidade física. A escala Celsius não é absoluta e, ao usá-la diretamente na fórmula do rendimento o resultado pode ser incorreto, especialmente se t2 for maior que t1, o que não ocorre com Kelvin, pois ela não permite valores negativos.', '2024-11-20', 5);
+
+INSERT INTO AcertosAluno (idAlternativaMarcada, idQuestionarioPertencente, idQuestaoPertencente, dataAcerto, emailAluno)
+VALUES (61, 3, 11, '2024-10-21', 'isassevalho@gmail.com');
+
+INSERT INTO ErrosAluno (idAlternativaMarcada, idAlternativaCorreta, idQuestionarioPertencente, idQuestaoPertencente, dataErro, emailAluno)
+VALUES (22, 21, 1, 5, '2024-10-11', 'isassevalho@gmail.com');
