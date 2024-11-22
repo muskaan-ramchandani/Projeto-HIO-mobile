@@ -84,16 +84,16 @@ public class AdapterDatasCalendario extends RecyclerView.Adapter<AdapterDatasCal
                         holder.data.setBackgroundResource(R.drawable.fundo_arredondado_ciano);
                         break;
                     default:
-                        holder.data.setBackgroundResource(0); // Nenhuma cor definida
+                        holder.data.setBackgroundResource(0);
                 }
                 holder.data.setTextColor(Color.parseColor("#FFFFFFFF"));
                 break;
             }
         }
 
-        // Verifica se a data é a data atual
+        // Verifica se a data é a data atual e se não encontrou evento
         if (!eventoEncontrado) {
-            if (diaDoMes == diaAtual) {
+            if (diaDoMes == diaAtual && mesAtual == dataAtual.get(Calendar.MONTH) && anoAtual == dataAtual.get(Calendar.YEAR)) {
                 holder.data.setBackgroundResource(R.drawable.fundo_arredondado_roxo_btn_selecionado);
                 holder.data.setTextColor(Color.parseColor("#FFFFFFFF"));
             } else {
@@ -108,6 +108,7 @@ public class AdapterDatasCalendario extends RecyclerView.Adapter<AdapterDatasCal
         this.diasDoMes = novosDiasDoMes;
         notifyDataSetChanged();
     }
+
 
     @Override
     public int getItemCount() {
