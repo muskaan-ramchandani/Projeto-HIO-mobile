@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.Eventos;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterEventos extends RecyclerView.Adapter<AdapterEventos.EventosViewHolder>{
@@ -29,50 +31,39 @@ public class AdapterEventos extends RecyclerView.Adapter<AdapterEventos.EventosV
 
     @Override
     public void onBindViewHolder(@NonNull AdapterEventos.EventosViewHolder holder, int position) {
-        String valorOlimpiada = listaDadosEventos.get(position).getOlimpiadaRelacionada();
-        holder.olimpiada.setText(valorOlimpiada);
+        holder.olimpiada.setText(listaDadosEventos.get(position).getOlimpiadaRelacionada());
 
-        String valorData = String.valueOf(listaDadosEventos.get(position).getData());
-        holder.data.setText(valorData);
+        Date dataEvento = listaDadosEventos.get(position).getDataOcorrencia();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd 'de' MMMM, yyyy");
+        String dataFormatada = dateFormat.format(dataEvento);
+        holder.data.setText(dataFormatada);
 
-        String valorTipo = listaDadosEventos.get(position).getTipoEvento();
-        holder.tipo.setText(valorTipo);
+        holder.tipo.setText(listaDadosEventos.get(position).getTipo());
 
-        String valorHorario = "<b>Horário: </b>" + listaDadosEventos.get(position).getHorario();
+        String valorHorario = "<b>Horário: </b>" + listaDadosEventos.get(position).getHorarioComeco() + " - " + listaDadosEventos.get(position).getHorarioFim();
         holder.horario.setText(Html.fromHtml(valorHorario, Html.FROM_HTML_MODE_COMPACT));
 
-        String valorLink = "<b>Link: </b>" + listaDadosEventos.get(position).getLink();
-        holder.link.setText(Html.fromHtml(valorLink, Html.FROM_HTML_MODE_COMPACT));
+        if(!listaDadosEventos.get(position).getLink().isEmpty()){
+            String valorLink = "<b>Link: </b>" + listaDadosEventos.get(position).getLink();
+            holder.link.setText(Html.fromHtml(valorLink, Html.FROM_HTML_MODE_COMPACT));
+        }else{
+            holder.link.setVisibility(View.GONE);
+        }
 
-        if (valorOlimpiada.equals("OBA")) {
+
+        if (listaDadosEventos.get(position).getCor().equals("Rosa")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
             holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
 
-        } else if (valorOlimpiada.equals("OBF")) {
+        } else if (listaDadosEventos.get(position).getCor().equals("Azul")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
             holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
 
-        } else if (valorOlimpiada.equals("OBI")) {
+        } else if (listaDadosEventos.get(position).getCor().equals("Laranja")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
             holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
 
-        } else if (valorOlimpiada.equals("OBMEP")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
-            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
-
-        }else if (valorOlimpiada.equals("ONHB")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_rosa_acertos_erros);
-            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
-
-        } else if (valorOlimpiada.equals("OBQ")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_azul_acertos_erros);
-            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_azul);
-
-        } else if (valorOlimpiada.equals("OBB")) {
-            holder.frameBorda.setBackgroundResource(R.drawable.card_laranja_acertos_erros);
-            holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_laranja);
-
-        } else if (valorOlimpiada.equals("ONC")) {
+        } else if (listaDadosEventos.get(position).getCor().equals("Ciano")) {
             holder.frameBorda.setBackgroundResource(R.drawable.card_ciano_acertos_erros);
             holder.olimpiada.setBackgroundResource(R.drawable.fundo_btn_olimp_ciano);
 
