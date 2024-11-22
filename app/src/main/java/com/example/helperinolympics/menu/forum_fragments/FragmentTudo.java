@@ -1,5 +1,6 @@
 package com.example.helperinolympics.menu.forum_fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.adapter.forum.AdapterOlimpiadasForum;
 import com.example.helperinolympics.databinding.FragmentForumTudoBinding;
+import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.model.forum.OlimpiadaForum;
 
 import org.json.JSONObject;
@@ -73,6 +75,8 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentForumPerguntas, fragment);
         fragmentTransaction.commit();
+
+        binding.getRoot().postDelayed(this::configurandoParaPesquisar, 50);
     }
 
     public void configurarRecyclerOlimpiadasForum() {
@@ -100,6 +104,17 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
             }
         }
     }
+
+    private void configurandoParaPesquisar() {
+        Activity activity = getActivity();
+
+        if (activity != null && activity instanceof ForumActivity) {
+            ((ForumActivity) activity).atribuindoFragmentsParaConfigurarPesquisa();
+        } else {
+            Log.d("ERRO_PESQUISA", "ForumActivity não foi detectado ou é nulo");
+        }
+    }
+
 
     public class CarregarContagemPerguntasTask extends AsyncTask<Void, Void, HashMap<String, Integer>> {
 
@@ -173,6 +188,9 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
                 adapter.notifyDataSetChanged();
             }
         }
+    }
 
+    public Fragment retornaFragmentAtual(){
+        return getChildFragmentManager().findFragmentById(R.id.fragmentForumPerguntas);
     }
 }

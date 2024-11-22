@@ -1,7 +1,10 @@
 package com.example.helperinolympics;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,11 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.adapter.calendario.AdapterDatasCalendario;
 import com.example.helperinolympics.adapter.calendario.AdapterEventos;
+import com.example.helperinolympics.databinding.ActivityCalendarioBinding;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Eventos;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,20 +39,34 @@ import java.util.List;
 import java.util.Locale;
 
 public class CalendarioActivity extends AppCompatActivity {
-    private RecyclerView rvListaEventos, rvCalendario;
+    private ActivityCalendarioBinding binding;
     private AdapterDatasCalendario adapterCalendario;
     private AdapterEventos adapter;
     private TextView txtMesEAno;
-    private Calendar dataAtual, dataNova;
+    private Calendar dataAtual;
 
     private Aluno alunoCadastrado;
+    private ArrayList<String> diasDoMes;
+
+    private List<Eventos> listaEventos = new ArrayList<>();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat apiDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendario);
+        binding = ActivityCalendarioBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
+        dataAtual = Calendar.getInstance();
+        new CarregaEventos(alunoCadastrado.getEmail(), dataAtual).execute();
+
+        diasDoMes = vetorDiasNoMes(dataAtual);
+
+        configurarCalendario();
+        configurarRecyclerEventos();
 
         findViewById(R.id.btnAcessarHanking).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,29 +102,19 @@ public class CalendarioActivity extends AppCompatActivity {
                 avancarMes();
             }
         });
-
-
-        configurarCalendario();
-        configurarRecyclerEventos();
     }
 
     private void configurarCalendario(){
-
-        rvCalendario = findViewById(R.id.recyclerViewCalendario);
         txtMesEAno = findViewById(R.id.txtMesAno);
 
-        dataAtual = Calendar.getInstance();
         txtMesEAno.setText(mesAnoAtravesData(dataAtual));
 
-        ArrayList<String> diasDoMes = vetorDiasNoMes(dataAtual);
-
-        rvCalendario = findViewById(R.id.recyclerViewCalendario);
         LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
-        rvCalendario.setLayoutManager(layoutManager);
-        rvCalendario.setHasFixedSize(true);
+        binding.recyclerViewCalendario.setLayoutManager(layoutManager);
+        binding.recyclerViewCalendario.setHasFixedSize(true);
 
-        adapterCalendario = new AdapterDatasCalendario(diasDoMes, dataAtual);
-        rvCalendario.setAdapter(adapterCalendario);
+        adapterCalendario = new AdapterDatasCalendario(diasDoMes, dataAtual, listaEventos);
+        binding.recyclerViewCalendario.setAdapter(adapterCalendario);
         adapterCalendario.notifyDataSetChanged();
     }
 
@@ -137,73 +154,142 @@ public class CalendarioActivity extends AppCompatActivity {
     public void voltarMes() {
         dataAtual.add(Calendar.MONTH, -1);
         atualizarCalendario(); // Atualiza o calendário
+        adapterCalendario.notifyDataSetChanged();
     }
 
     public void avancarMes() {
         dataAtual.add(Calendar.MONTH, 1);
         atualizarCalendario(); // Atualiza o calendário
+        adapterCalendario.notifyDataSetChanged();
     }
 
     private void atualizarCalendario() {
         txtMesEAno.setText(mesAnoAtravesData(dataAtual));
         ArrayList<String> diasDoMes = vetorDiasNoMes(dataAtual);
         if (adapterCalendario != null) {
-            adapterCalendario.atualizarDatas(diasDoMes);
+            adapterCalendario.atualizarDatas(diasDoMes, listaEventos);
+            adapterCalendario.notifyDataSetChanged();
         }
     }
 
     private void configurarRecyclerEventos() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        rvListaEventos = findViewById(R.id.recyclerViewEventosCalendario);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rvListaEventos.setLayoutManager(layoutManager);
-        rvListaEventos.setHasFixedSize(true);
+        binding.recyclerViewEventosCalendario.setLayoutManager(layoutManager);
+        binding.recyclerViewEventosCalendario.setHasFixedSize(true);
 
-        List<Eventos> listaEventos = new ArrayList<>();
         adapter = new AdapterEventos(listaEventos);
-        rvListaEventos.setAdapter(adapter);
-
-        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        // Converte o Calendar para uma String formatada
-        String formattedDate = sdf.format(calendar.getTime());*/
-
-        //DADOS PARA TESTE
-        Date data1 = null;
-        try {
-            // Converta a String para Date
-            data1 = sdf.parse("08/08/2024");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Eventos dados1 = new Eventos(1, data1, "OBA", "Inscrição",
-                "09h às 19h", "https://link_para_inscricao");
-        listaEventos.add(dados1);
-
-        Date data2 = null;
-        try {
-            // Converta a String para Date
-            data2 = sdf.parse("15/08/2024");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Eventos dados2 = new Eventos(2, data2, "OBMEP", "Prova Fase 2",
-                "06h às 12h", "https://link_para_prova");
-        listaEventos.add(dados2);
-
-        Date data3 = null;
-        try {
-            // Converta a String para Date
-            data3 = sdf.parse("30/08/2024");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Eventos dados3 = new Eventos(3, data3, "OBI", "Prova Fase 1",
-                "00h01 às 23h59", "https://link_para_prova_OBI");
-        listaEventos.add(dados3);
-
+        binding.recyclerViewEventosCalendario.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
+
+    private class CarregaEventos extends AsyncTask<String, Void, String> {
+        String emailAluno;
+        Calendar dataAConverter;
+
+        public CarregaEventos(String emailAluno, Calendar dataAConverter){
+            this.emailAluno = emailAluno;
+            this.dataAConverter = dataAConverter;
+        }
+        @Override
+        protected String doInBackground(String... strings) {
+            StringBuilder result = new StringBuilder();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dataFormatada = dateFormat.format(dataAConverter.getTime());
+
+            try {
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaEventosOlimpiadasAluno.php?emailAluno=" + emailAluno +
+                        "&dataAtual=" + dataFormatada;
+
+                URL url = new URL(urlString);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                int responseCode = connection.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
+                    reader.close();
+                } else {
+                    Log.e("Erro HTTP", "Código de resposta: " + responseCode);
+                }
+            } catch (Exception e) {
+                Log.e("CarregaEventos", "Erro na requisição HTTP", e);
+            }
+
+            Log.d("Resposta da API", result.toString());
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String jsonString) {
+            super.onPostExecute(jsonString);
+
+            try {
+                JSONObject jsonObject = new JSONObject(jsonString);
+                JSONArray eventosJSON = jsonObject.getJSONArray("eventos");
+
+                listaEventos.clear();
+                adapter.notifyDataSetChanged();
+                adapterCalendario.notifyDataSetChanged();
+
+                if(eventosJSON.length()!=0){
+                    for (int i = 0; i < eventosJSON.length(); i++) {
+                        JSONObject eventoItemJson = eventosJSON.getJSONObject(i);
+
+                        // Converter dataOcorrencia
+                        String data = eventoItemJson.getString("dataOcorrencia");
+                        Date dataOcorrencia = converterParaData(data);
+
+                        // Converter para Time
+                        String horarioInicial = eventoItemJson.getString("horarioComeco");
+                        String horarioFinal = eventoItemJson.getString("horarioFim");
+
+                        Time horarioComeco = Time.valueOf(horarioInicial);
+                        Time horarioFim = Time.valueOf(horarioFinal);
+
+                        Eventos evento = new Eventos(eventoItemJson.getInt("id"), dataOcorrencia,
+                                horarioComeco, horarioFim, eventoItemJson.getString("siglaOlimpiadaPertencente"),
+                                eventoItemJson.getString("tipo"), eventoItemJson.getString("link"),
+                                eventoItemJson.getString("cor"));
+
+
+                        listaEventos.add(evento);
+                    }
+                    adapter.notifyDataSetChanged();
+                    adapterCalendario.notifyDataSetChanged();
+
+                }else{
+
+                    binding.linearRecycler.removeView(binding.scrollDoRecycler);
+                    binding.linearRecycler.removeView(binding.recyclerViewEventosCalendario);
+
+                    LayoutInflater inflater = LayoutInflater.from(CalendarioActivity.this);
+                    View newItemView = inflater.inflate(R.layout.msg_sem_eventos, binding.linearRecycler, false);
+
+                    binding.linearRecycler.addView(newItemView);
+                }
+
+            } catch (JSONException e) {
+                Log.e("CarregaCalendario", "Erro ao fazer o parse do JSON", e);
+            }
+        }
+    }
+
+    private Date converterParaData(String dataString) {
+        try {
+            Date date = apiDateFormat.parse(dataString);
+            String dataFormatada = dateFormat.format(date);
+            Log.d("DATA_FORMATADA", dataFormatada);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

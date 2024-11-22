@@ -212,11 +212,24 @@
             android:layout_marginTop="10dp"
             android:paddingStart="15dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewEventosCalendario"
+        <LinearLayout
+            android:id="@+id/linearRecycler"
+            android:layout_width="360dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="10dp">
+
+            <ScrollView
+                android:id="@+id/scrollDoRecycler"
                 android:layout_width="360dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewEventosCalendario"
+                    android:layout_width="360dp"
+                    android:layout_height="wrap_content" />
+
+            </ScrollView>
+        </LinearLayout>
 
         </LinearLayout>
 
