@@ -32,8 +32,6 @@ import java.net.URL;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -48,6 +46,7 @@ public class CalendarioActivity extends AppCompatActivity {
     private Calendar dataAtual;
 
     private Aluno alunoCadastrado;
+    private ArrayList<String> diasDoMes;
 
     private List<Eventos> listaEventos = new ArrayList<>();
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -62,8 +61,12 @@ public class CalendarioActivity extends AppCompatActivity {
 
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
         dataAtual = Calendar.getInstance();
-
         new CarregaEventos(alunoCadastrado.getEmail(), dataAtual).execute();
+
+        diasDoMes = vetorDiasNoMes(dataAtual);
+
+        configurarCalendario();
+        configurarRecyclerEventos();
 
         findViewById(R.id.btnAcessarHanking).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,18 +102,12 @@ public class CalendarioActivity extends AppCompatActivity {
                 avancarMes();
             }
         });
-
-
-        configurarCalendario();
-        configurarRecyclerEventos();
     }
 
     private void configurarCalendario(){
         txtMesEAno = findViewById(R.id.txtMesAno);
 
         txtMesEAno.setText(mesAnoAtravesData(dataAtual));
-
-        ArrayList<String> diasDoMes = vetorDiasNoMes(dataAtual);
 
         LinearLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
         binding.recyclerViewCalendario.setLayoutManager(layoutManager);
@@ -157,18 +154,21 @@ public class CalendarioActivity extends AppCompatActivity {
     public void voltarMes() {
         dataAtual.add(Calendar.MONTH, -1);
         atualizarCalendario(); // Atualiza o calendário
+        adapterCalendario.notifyDataSetChanged();
     }
 
     public void avancarMes() {
         dataAtual.add(Calendar.MONTH, 1);
         atualizarCalendario(); // Atualiza o calendário
+        adapterCalendario.notifyDataSetChanged();
     }
 
     private void atualizarCalendario() {
         txtMesEAno.setText(mesAnoAtravesData(dataAtual));
         ArrayList<String> diasDoMes = vetorDiasNoMes(dataAtual);
         if (adapterCalendario != null) {
-            adapterCalendario.atualizarDatas(diasDoMes);
+            adapterCalendario.atualizarDatas(diasDoMes, listaEventos);
+            adapterCalendario.notifyDataSetChanged();
         }
     }
 
@@ -233,6 +233,8 @@ public class CalendarioActivity extends AppCompatActivity {
                 JSONArray eventosJSON = jsonObject.getJSONArray("eventos");
 
                 listaEventos.clear();
+                adapter.notifyDataSetChanged();
+                adapterCalendario.notifyDataSetChanged();
 
                 if(eventosJSON.length()!=0){
                     for (int i = 0; i < eventosJSON.length(); i++) {
@@ -257,6 +259,8 @@ public class CalendarioActivity extends AppCompatActivity {
 
                         listaEventos.add(evento);
                     }
+                    adapter.notifyDataSetChanged();
+                    adapterCalendario.notifyDataSetChanged();
 
                 }else{
 
@@ -268,10 +272,9 @@ public class CalendarioActivity extends AppCompatActivity {
 
                     binding.linearRecycler.addView(newItemView);
                 }
-                adapter.notifyDataSetChanged();
 
             } catch (JSONException e) {
-                Log.e("CarregaSuasPerguntas", "Erro ao fazer o parse do JSON", e);
+                Log.e("CarregaCalendario", "Erro ao fazer o parse do JSON", e);
             }
         }
     }
@@ -287,5 +290,6 @@ public class CalendarioActivity extends AppCompatActivity {
             return null;
         }
     }
+
 
 }

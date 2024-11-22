@@ -215,7 +215,8 @@
         <LinearLayout
             android:id="@+id/linearRecycler"
             android:layout_width="360dp"
-            android:layout_height="250dp">
+            android:layout_height="250dp"
+            android:layout_marginTop="10dp">
 
             <ScrollView
                 android:id="@+id/scrollDoRecycler"
@@ -225,8 +226,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewEventosCalendario"
                     android:layout_width="360dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp" />
+                    android:layout_height="wrap_content" />
 
             </ScrollView>
         </LinearLayout>
