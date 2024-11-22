@@ -95,32 +95,28 @@ if (isset($_GET['email'])) {
 
 
    <!-- Modal para alterar dados -->
-<div class="modal" id="modalAlterarDados">
-    <div class="modal-content">
-        <h2 class="modal-title">Alterar dados</h2>
-        <div class="image-container">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconePerfilVazioRedonda.png" alt="Imagem no modal" class="modal-image">
-            <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnEditarFoto.png" alt="Imagem sobreposta" class="overlay-image">
+   <div class="modal" id="modalAlterarDados">
+    <form action="alterarDados.php" method="POST">
+        <div class="modal-content">
+            <h2 class="modal-title">Alterar dados</h2>
+            <div class="image-container">
+                <img src="Imagens/iconePerfilVazioRedonda.png" alt="Imagem no modal" class="modal-image">
+                <img src="Imagens/btnEditarFoto.png" alt="Imagem sobreposta" class="overlay-image">
+            </div>
+
+            <label class="modal-label">Nome completo:</label>
+            <input type="text" name="nomeCompleto" class="modal-input" placeholder="Digite seu nome completo" required>
+
+            <label class="modal-label">Nome de usuário:</label>
+            <input type="text" name="nomeUsuario" class="modal-input" placeholder="Digite seu nome de usuário" required>
+
+            <label class="modal-label">Email:</label>
+            <input type="email" name="email" class="modal-input" placeholder="Digite seu email" value="<?php echo $email; ?>" readonly>
+
+
+            <button type="submit" class="modal-button">Salvar</button>
         </div>
-
-
-        <label class="modal-label">Nome completo:</label>
-        <input type="text" class="modal-input" placeholder="Digite seu nome completo">
-
-
-        <label class="modal-label">Nome de usuário:</label>
-        <input type="text" class="modal-input" placeholder="Digite seu nome de usuário">
-
-
-        <label class="modal-label">Email:</label>
-        <input type="email" class="modal-input" placeholder="Digite seu email">
-
-
-        <div class="button-group">
-            <button class="modal-button alterar" onclick="abrirModalConfirmacao()">Alterar dados</button>
-            <button class="modal-button cancelar" onclick="closeModal('modalAlterarDados')">Cancelar</button>    
-        </div>
-    </div>
+    </form>
 </div>
 
 
@@ -374,17 +370,14 @@ if (isset($_GET['email'])) {
 
 
 
+<!-- DELETAR CONTA -->
+<button class="action-button" onclick="abrirModalDeletarConta()">
+    <img src="path/to/imagem4.png" class="button-icon">
+    <strong>Deletar conta</strong>
+</button>
 
-    <!-- DELETAR CONTA-->
-    <button class="action-button" onclick="abrirModalDeletarConta()">
-        <img src="path/to/imagem4.png" class="button-icon">
-        <strong>Deletar conta</strong>
-    </button>
-</div>
-</div>
-</div>
-    <!-- Modal para deletar conta -->
-  <div class="modal" id="modalDeletarConta">
+<!-- Modal para deletar conta -->
+<div class="modal" id="modalDeletarConta">
     <div class="modal-content-deletar">
         <h2 class="modal-titleDeletar">Foi enviado um código de verificação para seu email para permitir a ação de deletar sua conta</h2>
         <input type="text" class="modal-inputDeletar" placeholder="Digite o código de verificação" id="codigoVerificacao">
@@ -393,7 +386,8 @@ if (isset($_GET['email'])) {
         <button class="modal-buttonDeletar" onclick="closeModal('modalDeletarConta')">Cancelar</button>
     </div>
 </div>
-    <!-- Modal de confirmação para deletar conta -->
+
+<!-- Modal de confirmação para deletar conta -->
 <div class="modal" id="modalConfirmacaoDeletar">
     <div class="modal-content-deletar">
         <h2 class="modal-titleDeletar">Tem certeza que quer deletar sua conta? Esta ação é irreversível.</h2>

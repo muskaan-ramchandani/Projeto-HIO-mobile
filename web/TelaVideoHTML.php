@@ -49,19 +49,19 @@ try {
                 <div class="button-label">Textos</div>
             </div>
             <div class="button-item">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeVideo.png" alt="Videos">
+                <img src="Imagens_Mobile_HIO/iconeVideo.png" alt="Videos">
                 <div class="button-label">Vídeos</div>
             </div>
             <div class="button-item">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeFlashcard.png" alt="Flashcards">
+                <img src="Imagens_Mobile_HIO/iconeFlashcard.png" alt="Flashcards">
                 <div class="button-label">Flashcards</div>
             </div>
             <div class="button-item">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/iconeQuestionarios.png" alt="Questionários">
+                <img src="Imagens_Mobile_HIO/iconeQuestionarios.png" alt="Questionários">
                 <div class="button-label">Questionários</div>
             </div>
             <div class="button-item">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/btnVoltarBRANCO.png" alt="Voltar">
+                <img src="Imagens_Mobile_HIO/btnVoltarBRANCO.png" alt="Voltar">
                 <div class="button-label">Voltar</div>
             </div>
         </div>
@@ -221,7 +221,7 @@ try {
             <p class="title">Entenda o que é velocidade</p>
             <img src="https://i.ytimg.com/vi/LkMFn9XvK_g/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDDiGePV_gUvU2R6sYmUs_s9fbDMg" alt="Nova Imagem 1" class="info-image">
             <div class="info-box-content">
-                <img src="C:/Users/Muskaan Ramchandani/Projeto-HIO-mobile/Imagens Mobile HIO/circuloRoxo.png" alt="Imagem do Professor" class="prof-image">
+                <img src="Imagens Mobile HIO/circuloRoxo.png" alt="Imagem do Professor" class="prof-image">
                 <div class="info-text">bruninhoMars</div>
             </div>
         </div>  
