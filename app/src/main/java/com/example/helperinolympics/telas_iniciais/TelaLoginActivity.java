@@ -1,14 +1,18 @@
 package com.example.helperinolympics.telas_iniciais;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityLoginBinding;
 import com.example.helperinolympics.model.Aluno;
 
@@ -223,6 +227,16 @@ public class TelaLoginActivity extends AppCompatActivity {
                     aluno.setNomeUsuario(alunoJSON.getString("nomeUsuario"));
                     aluno.setEmail(alunoJSON.getString("email"));
                     aluno.setSenha(alunoJSON.getString("senha"));
+
+                    String perfilBase64 = alunoJSON.getString("fotoPerfil");
+                    Bitmap bitmapFotoPerfil = decodeBase64ToBitmap(perfilBase64);
+
+                    if(bitmapFotoPerfil==null){
+                        aluno.setFotoPerfil(null);
+                    }else{
+                        aluno.setFotoPerfil(bitmapFotoPerfil);
+                    }
+
                 } else {
                     Log.d("ERRO", jsonObject.getString("message"));
                 }
@@ -234,4 +248,8 @@ public class TelaLoginActivity extends AppCompatActivity {
     }
 
 
+    public Bitmap decodeBase64ToBitmap(String base64String) {
+        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+    }
 }

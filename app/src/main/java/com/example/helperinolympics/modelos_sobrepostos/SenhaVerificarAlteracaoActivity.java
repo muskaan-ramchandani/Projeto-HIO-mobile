@@ -10,8 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.Aluno;
 
 public class SenhaVerificarAlteracaoActivity extends DialogFragment {
+    public SenhaVerificarAlteracaoActivity(Aluno alunoCadastrado) {
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_senha_verificar_alteracao, container, false);
 

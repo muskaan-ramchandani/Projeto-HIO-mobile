@@ -21,14 +21,18 @@ if (empty($email)) {
     exit;
 }
 
-$sql = "SELECT nomeCompleto, nomeUsuario, email, senha FROM Aluno WHERE email = :email";
+$sql = "SELECT nomeCompleto, nomeUsuario, email, senha, fotoPerfil FROM Aluno WHERE email = :email";
 $statement = $pdo->prepare($sql);
 $statement->bindParam(':email', $email);
 $statement->execute();
 
 $aluno = $statement->fetch(PDO::FETCH_ASSOC);
 
+
 if ($aluno) {
+    if (isset($aluno['fotoPerfil'])) {
+        $aluno['fotoPerfil'] = base64_encode($aluno['fotoPerfil']);
+    }
     echo json_encode(["status" => "success", "aluno" => $aluno]);
 } else {
     echo json_encode(["status" => "error", "message" => "Aluno não encontrado no banco de dados"]);

@@ -5,6 +5,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".menu.ConfiguracoesActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -96,16 +97,16 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgFotoPerfilConfiguracoes"
                     android:layout_width="114dp"
                     android:layout_height="123dp"
                     android:layout_marginEnd="13dp"
                     android:layout_marginStart="10dp"
                     android:background="@android:color/transparent"
-                    android:contentDescription="Foto de perfil do usuário"
+                    android:layout_gravity="center_horizontal"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/iconeperfilvazioredonda" />
+                    tools:src="@drawable/iconeperfilvazioredonda" />
 
                 <LinearLayout
                     android:id="@+id/linearDadosConfiguracoes"
