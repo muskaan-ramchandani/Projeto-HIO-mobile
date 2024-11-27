@@ -40,15 +40,14 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
 
     private Aluno alunoCadastrado;
     private Bitmap novaFotoPerfil;
-    private String novoNomeCompleto, novoNomeUsuario, novoEmail;
+    private String novoNomeCompleto, novoNomeUsuario;
     private Context contexto;
 
-    public ConfirmaSenhaAlterarDadosActivity(Aluno alunoCadastrado, Bitmap novaFotoPerfil, String novoNomeCompleto, String novoNomeUsuario, String novoEmail, Context contexto){
+    public ConfirmaSenhaAlterarDadosActivity(Aluno alunoCadastrado, Bitmap novaFotoPerfil, String novoNomeCompleto, String novoNomeUsuario, Context contexto){
         this.alunoCadastrado = alunoCadastrado;
         this.novaFotoPerfil = novaFotoPerfil;
         this.novoNomeCompleto = novoNomeCompleto;
         this.novoNomeUsuario = novoNomeUsuario;
-        this.novoEmail = novoEmail;
         this.contexto = contexto;
     }
 
@@ -85,10 +84,6 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     if(!(novoNomeUsuario==null)){
                         Log.d("USER", "NÃO É VAZIO");
                         new AlterarNomeUsuario(novoNomeUsuario, alunoCadastrado.getEmail()).execute();
-                    }
-                    if(!(novoEmail==null)){
-                        Log.d("EMAIL", "NÃO É VAZIO");
-                        new AlterarEmail(alunoCadastrado.getEmail(), novoEmail).execute();
                     }
 
                     Toast.makeText(contexto, "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();

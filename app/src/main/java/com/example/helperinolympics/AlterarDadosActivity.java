@@ -25,7 +25,7 @@ public class AlterarDadosActivity extends AppCompatActivity {
 
     private boolean fotoAlterada;
     private Bitmap novaFotoPerfil;
-    private String novoNomeCompleto, novoNomeUsuario, novoEmail;
+    private String novoNomeCompleto, novoNomeUsuario;
 
     Bitmap foto;
 
@@ -73,7 +73,7 @@ public class AlterarDadosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(binding.editTextNomeCompleto.getText().toString().isEmpty()&&binding.editTextNomeUsuario.getText().toString().isEmpty()
-                        &&binding.editTextEmail.getText().toString().isEmpty()&& !fotoAlterada){
+                        && !fotoAlterada){
                     Toast.makeText(AlterarDadosActivity.this, "Nenhuma informação nova foi inserida para que ocorra a alteração", Toast.LENGTH_LONG).show();
 
                 }else{
@@ -86,11 +86,8 @@ public class AlterarDadosActivity extends AppCompatActivity {
                     if(!binding.editTextNomeUsuario.getText().toString().isEmpty()){
                         novoNomeUsuario = binding.editTextNomeUsuario.getText().toString();
                     }
-                    if(!binding.editTextEmail.getText().toString().isEmpty()){
-                        novoEmail = binding.editTextEmail.getText().toString();
-                    }
 
-                    showNotificationConfirmarAlterarDados(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, novoEmail, AlterarDadosActivity.this);
+                    showNotificationConfirmarAlterarDados(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, AlterarDadosActivity.this);
                 }
             }
         });
@@ -118,8 +115,8 @@ public class AlterarDadosActivity extends AppCompatActivity {
         }
     }
 
-    public void showNotificationConfirmarAlterarDados(Aluno alunoCadastrado, Bitmap novaFotoPerfil, String novoNomeCompleto, String novoNomeUsuario, String novoEmail, Context contexto){
-        ConfirmaSenhaAlterarDadosActivity notificationDialogFragment = new ConfirmaSenhaAlterarDadosActivity(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, novoEmail, contexto);
+    public void showNotificationConfirmarAlterarDados(Aluno alunoCadastrado, Bitmap novaFotoPerfil, String novoNomeCompleto, String novoNomeUsuario, Context contexto){
+        ConfirmaSenhaAlterarDadosActivity notificationDialogFragment = new ConfirmaSenhaAlterarDadosActivity(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, contexto);
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 }

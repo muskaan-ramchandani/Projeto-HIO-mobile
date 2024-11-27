@@ -20,6 +20,16 @@ INSERT INTO Olimpiada VALUES
     ('Olimpíada Brasileira de Química', 'OBQ', 'imgtubodeensaio', 'Azul'),
     ('Olimpíada Brasileira de Biologia', 'OBB', 'imgdna', 'Laranja'),
     ('Olimpíada Nacional de Ciências', 'ONC', 'imgatomo', 'Ciano');
+    
+INSERT INTO Olimpiada VALUES
+    ('Olimpíada de Língua Portuguesa', 'OLP', '	imgescrita', 'Rosa'),
+    ('Mostra Brasileira de Foguetes', 'MOBFOG', 'imgfoguete', 'Azul'),
+    ('Olimpíada Brasileira de Robótica', 'OBR', 'imgrobo', 'Laranja'),
+    ('Olimpíada Brasileira de Saúde e Meio Ambiente', 'OBSMA', 'imgarvore', 'Ciano'),
+    ('Olimpíada Canguru de Matemática', 'OCM', 'imgcanguru', 'Rosa'),
+    ('Olimpíada Brasileira de Raciocínio Lógico', 'OBRL', 'imgcerebro', 'Azul'),
+    ('Olimpíada Brasileira de Geografia', 'OBG', 'imgglobo', 'Laranja'),
+    ('Olimpíada Brasileira de Línguas Estrangeiras', 'OBLE', 'imglinguasestrangeiras', 'Ciano');
 
 DROP TABLE IF EXISTS Aluno;
 CREATE TABLE Aluno(
