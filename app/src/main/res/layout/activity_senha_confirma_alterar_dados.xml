@@ -1,70 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal|center_vertical"
+    android:background="@android:color/transparent">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="280dp"
-        android:layout_height="300dp"
-        android:background="@color/white">
+        android:id="@+id/cardFundoRecadoProf"
+        android:layout_height="235dp"
+        android:layout_width="350dp"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintAvisoProf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnFecharConfirmarSenha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|end"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/baseline_close_24_black" />
+
+                <TextView
+                    android:id="@+id/txtDigiteSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/questrial"
+                    android:gravity="center"
+                    android:text="Digite sua senha para confirmar a alteração de dados"
+                    android:textColor="@color/roxoPrincipal"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="15dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp">
+
+                    <EditText
+                        android:id="@+id/editTextVerificarSenha"
+                        android:layout_width="320dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edittext_modelo_2"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:paddingStart="25dp"
+                        android:paddingEnd="25dp"
+                        android:hint="Digite sua senha"
+                        android:textColorHint="#858585"
+                        android:inputType="textPassword" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnConfirmar"
+                        android:layout_width="250dp"
+                        android:layout_height="30dp"
+                        android:text="Confirmar"
+                        android:textColor="@color/white"
+                        android:textAllCaps="false"
+                        android:textSize="15sp"
+                        android:background="@drawable/fundo_botoes_roxos"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:layout_marginTop="25dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/white"
-            android:orientation="vertical">
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageButton
-                android:id="@+id/btnFecharConfirmarSenha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:layout_marginStart="125dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/baseline_close_24_black" />
-
-            <TextView
-                android:id="@+id/txtConfirmaAcaoComSenha"
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Digite sua senha para confirmar a ação"
-                android:textColor="@color/black"
-                android:textSize="22sp"
-                android:gravity="center"
-                android:layout_marginTop="15dp"/>
-
-            <EditText
-                android:id="@+id/editTextSenhaNova"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edittext_personalizado_1"
-                android:hint="Digite sua senha"
-                android:textColorHint="#858585"
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginTop="30dp"
-                android:gravity="center" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnConfirmarSenhaAlteracaoDados"
-                android:layout_width="210dp"
-                android:layout_height="40dp"
-                android:text="Confirmar"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/fundo_botoes_comuns_lilas"
-                android:fontFamily="@font/open_sans_bold"
-                android:layout_marginTop="30dp" />
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
+
+
 </LinearLayout>
