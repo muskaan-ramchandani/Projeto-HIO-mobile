@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -91,10 +92,10 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     }
 
                     Toast.makeText(contexto, "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(contexto, ConfiguracoesActivity.class);
-                    intent.putExtra("alunoCadastrado", alunoCadastrado);
-                    startActivity(intent);
-                    dismiss();
+                    new Handler().postDelayed(() -> {
+                        Intent intent = new Intent(contexto, ConfiguracoesActivity.class);
+                        intent.putExtra("alunoCadastrado", alunoCadastrado);
+                        startActivity(intent); dismiss(); }, 1015);
 
                 }else{
                     Toast.makeText(contexto, "Senha incorreta, tente novamente se quiser alterar seus dados", Toast.LENGTH_SHORT).show();
@@ -174,8 +175,8 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     Toast.makeText(contexto.getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                     if (jsonResponse.getString("status").equals("success")) {
-                        Log.d("SUCESSO_NOME_COMPLETO", "Nome completo AGR é:" + nomeCompleto);
                         alunoCadastrado.setNomeCompleto(nomeCompleto);
+                        Log.d("SUCESSO_NOME_COMPLETO", "Nome completo AGR é:" + nomeCompleto);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -247,8 +248,8 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     Toast.makeText(contexto.getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                     if (jsonResponse.getString("status").equals("success")) {
-                        Log.d("SUCESSO_NOME_USUARIO", "Nome user AGR é:" + nomeUsuario);
                         alunoCadastrado.setNomeUsuario(nomeUsuario);
+                        Log.d("SUCESSO_NOME_USUARIO", "Nome user AGR é:" + nomeUsuario);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -319,8 +320,8 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     Toast.makeText(contexto.getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                     if (jsonResponse.getString("status").equals("success")) {
-                        Log.d("SUCESSO_EMAIL", "Email AGR é:" + novoEmail);
                         alunoCadastrado.setEmail(novoEmail);
+                        Log.d("SUCESSO_EMAIL", "Email AGR é:" + novoEmail);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -354,8 +355,9 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                 conexao.setConnectTimeout(15000);
                 conexao.setDoInput(true);
                 conexao.setDoOutput(true);
+
                 String parametros = "email=" + URLEncoder.encode(email, "UTF-8") +
-                        "&fotoBase64=" + URLEncoder.encode(imagemBinario, "UTF-8");
+                        "&fotoPerfil=" + URLEncoder.encode(imagemBinario, "UTF-8");
 
                 OutputStream os = conexao.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
@@ -375,6 +377,8 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     }
                     result = sb.toString();
                     in.close();
+                } else {
+                    Log.e("HTTP_ERROR", "Código de resposta: " + responseCode);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -393,8 +397,8 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
                     Toast.makeText(contexto.getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                     if (jsonResponse.getString("status").equals("success")) {
-                        Log.d("SUCESSO_FOTO", "Foto de perfil alterada com sucesso.");
                         alunoCadastrado.setFotoPerfil(fotoBitmap);
+                        Log.d("SUCESSO_FOTO", "Foto de perfil alterada com sucesso.");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -411,6 +415,4 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             return Base64.encodeToString(byteArray, Base64.DEFAULT);
         }
     }
-
-
 }

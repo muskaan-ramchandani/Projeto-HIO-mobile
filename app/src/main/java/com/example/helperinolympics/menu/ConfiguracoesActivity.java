@@ -2,6 +2,7 @@ package com.example.helperinolympics.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -79,10 +80,17 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     }
 
     private void inserirDadosUsuario() {
-        if(alunoCadastrado.getFotoPerfil()==null){
+        if (alunoCadastrado.getFotoPerfil() == null) {
+            Log.d("FOTO_PERFIL", "Foto de perfil é null, usando imagem padrão.");
             binding.imgFotoPerfilConfiguracoes.setImageResource(R.drawable.iconeperfilsemfoto);
-        }else{
-            binding.imgFotoPerfilConfiguracoes.setImageBitmap(alunoCadastrado.getFotoPerfil());
+        } else {
+            if (alunoCadastrado.getFotoPerfil().getByteCount() == 0) {
+                Log.d("FOTO_PERFIL", "Foto de perfil é vazia, usando imagem padrão.");
+                binding.imgFotoPerfilConfiguracoes.setImageResource(R.drawable.iconeperfilsemfoto);
+            } else {
+                Log.d("FOTO_PERFIL", "Foto de perfil recebida, definindo Bitmap.");
+                binding.imgFotoPerfilConfiguracoes.setImageBitmap(alunoCadastrado.getFotoPerfil());
+            }
         }
 
         binding.txtNomeCompletoConfiguracoes.setText(alunoCadastrado.getNomeCompleto());

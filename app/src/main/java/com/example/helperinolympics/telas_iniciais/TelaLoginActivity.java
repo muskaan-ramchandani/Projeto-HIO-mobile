@@ -230,12 +230,8 @@ public class TelaLoginActivity extends AppCompatActivity {
 
                     String perfilBase64 = alunoJSON.getString("fotoPerfil");
                     Bitmap bitmapFotoPerfil = decodeBase64ToBitmap(perfilBase64);
+                    aluno.setFotoPerfil(bitmapFotoPerfil);
 
-                    if(bitmapFotoPerfil==null){
-                        aluno.setFotoPerfil(null);
-                    }else{
-                        aluno.setFotoPerfil(bitmapFotoPerfil);
-                    }
 
                 } else {
                     Log.d("ERRO", jsonObject.getString("message"));

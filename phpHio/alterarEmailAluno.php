@@ -1,27 +1,29 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+
 $servername = "localhost"; 
 $username = "root";        
 $password = "root";            
 $dbname = "hio";     
 
-
-try{
+try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if (isset($_POST['email'])&&isset($_POST['novoEmail'])) {
+    if (isset($_POST['email']) && isset($_POST['novoEmail'])) {
+        $email = $_POST['email'];
+        $novoEmail = $_POST['novoEmail'];
 
-    $email = $_POST['email'];
-    $novoEmail = $_POST['novoEmail'];
+        $pdo->beginTransaction();
 
-    $pdo->beginTransaction();
-
-    $sqlAluno = 'UPDATE Aluno SET email = :novoEmail WHERE email = :email';
+        // Atualizar o email na tabela Aluno
+        $sqlAluno = 'UPDATE Aluno SET email = :novoEmail WHERE email = :email';
         $stmtAluno = $pdo->prepare($sqlAluno);
         $stmtAluno->bindParam(':novoEmail', $novoEmail);
         $stmtAluno->bindParam(':email', $email);
         $stmtAluno->execute();
 
+        // Atualizar o email em todas as tabelas relacionadas
         $tabelasRelacionadas = [
             'OlimpiadasSelecionadas',
             'AcertosAluno',

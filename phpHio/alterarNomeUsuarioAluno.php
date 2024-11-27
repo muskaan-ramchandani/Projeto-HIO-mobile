@@ -7,7 +7,7 @@ $dbname = "hio";
 
 $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
 
-if (sset($_POST['nomeUsuario']) && isset($_POST['email'])) {
+if (isset($_POST['nomeUsuario']) && isset($_POST['email'])) {
 
     $nomeUsuario = $_POST['nomeUsuario'];
     $email = $_POST['email'];

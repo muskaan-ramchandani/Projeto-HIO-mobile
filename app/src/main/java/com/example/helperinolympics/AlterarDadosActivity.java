@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,11 +38,19 @@ public class AlterarDadosActivity extends AppCompatActivity {
         this.fotoAlterada = false;
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
 
-        if(alunoCadastrado.getFotoPerfil()==null){
+        if (alunoCadastrado.getFotoPerfil() == null) {
+            Log.d("FOTO_PERFIL", "Foto de perfil é null, usando imagem padrão.");
             binding.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
-        }else{
-            binding.fotoPerfil.setImageBitmap(alunoCadastrado.getFotoPerfil());
+        } else {
+            if (alunoCadastrado.getFotoPerfil().getByteCount() == 0) {
+                Log.d("FOTO_PERFIL", "Foto de perfil é vazia, usando imagem padrão.");
+                binding.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
+            } else {
+                Log.d("FOTO_PERFIL", "Foto de perfil recebida, definindo Bitmap.");
+                binding.fotoPerfil.setImageBitmap(alunoCadastrado.getFotoPerfil());
+            }
         }
+
 
         binding.btnVoltarAsConfiguracoes.setOnClickListener(new View.OnClickListener() {
             @Override
