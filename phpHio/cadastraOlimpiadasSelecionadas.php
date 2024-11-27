@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost"; 
-$username = "root";        
-$password = "root";            
-$dbname = "hio";     
+$servername = "sql207.infinityfree.com";
+$username = "if0_37755624";
+$password = "1k31AyGMaqyz7";
+$dbname = "if0_37755624_hio";    
 
 //sigla VARCHAR(10) NOT NULL,
 //emailAluno VARCHAR(100) NOT NULL,
