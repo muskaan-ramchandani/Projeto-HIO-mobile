@@ -3,6 +3,7 @@ package com.example.helperinolympics.telas_iniciais;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,7 +47,6 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
     List<Olimpiada> olimpiadas = new ArrayList<>();
     AdapterOlimpiadas adapter;
     Aluno alunoCadastrado;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

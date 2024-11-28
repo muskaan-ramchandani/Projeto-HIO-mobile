@@ -228,11 +228,6 @@ public class TelaLoginActivity extends AppCompatActivity {
                     aluno.setEmail(alunoJSON.getString("email"));
                     aluno.setSenha(alunoJSON.getString("senha"));
 
-                    String perfilBase64 = alunoJSON.getString("fotoPerfil");
-                    Bitmap bitmapFotoPerfil = decodeBase64ToBitmap(perfilBase64);
-                    aluno.setFotoPerfil(bitmapFotoPerfil);
-
-
                 } else {
                     Log.d("ERRO", jsonObject.getString("message"));
                 }
@@ -241,11 +236,5 @@ public class TelaLoginActivity extends AppCompatActivity {
             }
             return aluno;
         }
-    }
-
-
-    public Bitmap decodeBase64ToBitmap(String base64String) {
-        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

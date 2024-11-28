@@ -55,7 +55,6 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
         View view = inflater.inflate(R.layout.activity_senha_confirma_alterar_dados, container, false);
 
 
-        // Configurar o botão de fechar
         view.findViewById(R.id.btnFecharConfirmarSenha).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

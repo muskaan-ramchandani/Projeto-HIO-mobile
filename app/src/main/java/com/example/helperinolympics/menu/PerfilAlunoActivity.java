@@ -2,15 +2,16 @@ package com.example.helperinolympics.menu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.helperinolympics.AcertosSemanaisActivity;
 import com.example.helperinolympics.ErrosSemanaisActivity;
@@ -44,13 +45,16 @@ public class PerfilAlunoActivity extends Activity {
 
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
 
+        PerfilAlunoActivity.FotoAlunoTask fotoAlunoTask = new PerfilAlunoActivity.FotoAlunoTask();
+        fotoAlunoTask.execute(alunoCadastrado.getEmail());
+
         binding.btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PerfilAlunoActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
-                finish(); //fechar activity
+                finish();
             }
         });
 
@@ -74,17 +78,17 @@ public class PerfilAlunoActivity extends Activity {
             }
         });
 
-        configuraDadosPerfil(alunoCadastrado);
-
         //dados gráfico
         new CarregaCorrecao(alunoCadastrado.getEmail()).execute();
     }
 
-    private void configuraDadosPerfil(Aluno alunoCadastrado) {
-        if(alunoCadastrado.getFotoPerfil()==null){
+    private void configuraDadosPerfil(Aluno alunoCadastrado, Bitmap fotoBitmap) {
+        if (fotoBitmap == null) {
+            Log.d("FOTO_PERFIL", "Foto de perfil é null, usando imagem padrão.");
             binding.fotoperfilAluno.setImageResource(R.drawable.iconeperfilsemfoto);
-        }else{
-            binding.fotoperfilAluno.setImageBitmap(alunoCadastrado.getFotoPerfil());
+        }  else {
+            Log.d("FOTO_PERFIL", "Foto de perfil recebida, definindo Bitmap.");
+            binding.fotoperfilAluno.setImageBitmap(fotoBitmap);
         }
         binding.txtNomeCompletoAluno.setText(alunoCadastrado.getNomeCompleto());
         binding.txtNomeDeUsuario.setText(alunoCadastrado.getNomeUsuario());
@@ -189,6 +193,82 @@ public class PerfilAlunoActivity extends Activity {
                 Log.d("ERRO", e.toString());
             }
             return dados.toString();
+        }
+
+    }
+
+    public class FotoAlunoTask extends AsyncTask<String, Void, Bitmap> {
+
+        private Bitmap fotoBitmap;
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            String email = params[0];
+            Bitmap resultBitmap = null;
+
+            try {
+                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(15000);
+                conexao.setConnectTimeout(15000);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.connect();
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+
+                    if (jsonString != null && !jsonString.isEmpty()) {
+                        JSONObject jsonObject = new JSONObject(jsonString);
+                        String status = jsonObject.getString("status");
+
+                        if (status.equals("success")) {
+                            String fotoBase64 = jsonObject.getString("fotoPerfil");
+                            resultBitmap = decodeBase64ToBitmap(fotoBase64);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", "Erro ao buscar a foto: " + e.getMessage());
+            }
+            return resultBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            fotoBitmap = result;
+
+            if (fotoBitmap != null) {
+                Log.d("INFO", "Foto recebida com sucesso.");
+                configuraDadosPerfil(alunoCadastrado, fotoBitmap);
+            } else {
+                Log.d("ERRO", "Não foi possível carregar a foto.");
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            StringBuilder stringBuilder = new StringBuilder();
+            try {
+                int charRead;
+                while ((charRead = in.read()) != -1) {
+                    stringBuilder.append((char) charRead);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return stringBuilder.toString();
+        }
+
+        private Bitmap decodeBase64ToBitmap(String base64String) {
+            try {
+                byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            } catch (Exception e) {
+                Log.d("ERRO", "Erro ao decodificar Base64 para Bitmap: " + e.getMessage());
+                return null;
+            }
         }
 
     }
