@@ -29,10 +29,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -48,5 +48,6 @@ dependencies {
     implementation(libs.nineoldandroids)
     implementation(libs.mpandroidchart)
     implementation(libs.circleimageview)
-
+    implementation(libs.jakarta.mail)
+    implementation(libs.jakarta.activation)
 }

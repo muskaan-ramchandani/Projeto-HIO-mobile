@@ -24,7 +24,8 @@
                 android:layout_height="60dp"
                 android:text="Alterar senha"
                 android:background="@color/roxoPrincipal"
-                android:fontFamily="@font/open_sans_bold"
+                android:fontFamily="@font/questrial"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="25sp"
@@ -43,69 +44,63 @@
                 app:srcCompat="@drawable/baseline_close_24" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center_horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtALterarSenhaTela">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtAvisoEnviadoCodigo"
-                    android:layout_width="210dp"
+                    android:id="@+id/txtDigiteCodigo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/questrial"
+                    android:gravity="center"
                     android:text="Foi enviado um código de verificação para seu email"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:gravity="center" />
+                    android:textColor="@color/roxoPrincipal"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="15dp"/>
 
                 <EditText
-                    android:id="@+id/editTextCodigoVerificacao"
-                    android:layout_width="230dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/edittext_personalizado_1"
+                    android:id="@+id/editTextVerificarCodigo"
+                    android:layout_width="275dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_modelo_2"
+                    android:layout_marginTop="25dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
                     android:hint="Digite aqui o código"
                     android:textColorHint="#858585"
-                    android:fontFamily="@font/open_sans"
-                    android:textColor="@color/black"
-                    android:ems="6"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:layout_marginTop="30dp" />
+                    android:inputType="textPassword" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnVerificarCodigo"
-                    android:layout_width="210dp"
-                    android:layout_height="40dp"
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
                     android:text="Verificar"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:background="@drawable/fundo_botoes_comuns_lilas"
+                    android:textSize="15sp"
+                    android:background="@drawable/fundo_botoes_roxos"
                     android:fontFamily="@font/open_sans_bold"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnEnviarNovamenteCodigo"
-                    android:layout_width="210dp"
-                    android:layout_height="40dp"
+                    android:id="@+id/btnEnviarOutro"
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
                     android:text="Enviar novamente"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:background="@drawable/fundo_botoes_comuns_lilas"
+                    android:textSize="15sp"
+                    android:background="@drawable/fundo_botoes_roxos"
                     android:fontFamily="@font/open_sans_bold"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp" />
+                    android:layout_marginTop="15dp"
+                    android:layout_gravity="center_horizontal"/>
+
             </LinearLayout>
 
 

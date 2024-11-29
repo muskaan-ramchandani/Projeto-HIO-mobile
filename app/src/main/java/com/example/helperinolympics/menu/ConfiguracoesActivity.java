@@ -104,12 +104,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
     }
 
     private void showNotificationAlteraSenha(Aluno alunoCadastrado) {
-        SenhaVerificarAlteracaoActivity notificationDialogFragment = new SenhaVerificarAlteracaoActivity(alunoCadastrado);
+        SenhaVerificarAlteracaoActivity notificationDialogFragment = new SenhaVerificarAlteracaoActivity(alunoCadastrado, ConfiguracoesActivity.this);
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 
     private void showNotificationDeletarConta(Aluno alunoCadastrado) {
-        SenhaVerificarDeletarActivity notificationDialogFragment = new SenhaVerificarDeletarActivity(alunoCadastrado);
+        SenhaVerificarDeletarActivity notificationDialogFragment = new SenhaVerificarDeletarActivity(alunoCadastrado, ConfiguracoesActivity.this);
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
 

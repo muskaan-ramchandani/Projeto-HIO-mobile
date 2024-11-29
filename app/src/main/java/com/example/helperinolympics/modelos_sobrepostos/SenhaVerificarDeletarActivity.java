@@ -1,5 +1,6 @@
 package com.example.helperinolympics.modelos_sobrepostos;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.example.helperinolympics.model.Aluno;
 
 public class SenhaVerificarDeletarActivity extends DialogFragment {
 
-    public SenhaVerificarDeletarActivity(Aluno alunoCadastrado) {
+    public SenhaVerificarDeletarActivity(Aluno alunoCadastrado, Context contexto) {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

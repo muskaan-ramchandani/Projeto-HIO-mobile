@@ -1,74 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="300dp"
+    android:layout_height="400dp"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="280dp"
-        android:layout_height="300dp"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
         android:background="@color/white">
 
-
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:background="@color/white"
-            android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:background="@color/white">
 
             <TextView
-                android:id="@+id/txtInformeNovaSenha"
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Informe sua nova senha"
-                android:textColor="@color/roxoPrincipal"
-                android:textSize="22sp"
+                android:id="@+id/txtALterarSenhaTela"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Alterar senha"
+                android:background="@color/roxoPrincipal"
+                android:fontFamily="@font/questrial"
+                android:textStyle="bold"
                 android:gravity="center"
-                android:layout_marginTop="15dp"/>
-
-            <EditText
-                android:id="@+id/editTextSenhaNova"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:background="@drawable/edittext_personalizado_1"
-                android:hint="Digite sua nova senha"
-                android:textColorHint="#858585"
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginTop="30dp"
-                android:gravity="center" />
-
-            <EditText
-                android:id="@+id/editTextConfirmeSenhaNova"
-                android:layout_width="230dp"
-                android:layout_height="50dp"
-                android:textColorHint="#858585"
-                android:background="@drawable/edittext_personalizado_1"
-                android:hint="Confirme sua nova senha"
-                android:fontFamily="@font/open_sans"
-                android:textColor="@color/black"
-                android:inputType="textPassword"
-                android:layout_marginTop="20dp"
-                android:gravity="center" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnAlterarSenha"
-                android:layout_width="210dp"
-                android:layout_height="40dp"
-                android:text="Verificar"
                 android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/fundo_botoes_comuns_lilas"
-                android:fontFamily="@font/open_sans_bold"
-                android:layout_marginTop="30dp" />
-        </LinearLayout>
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageButton
+                android:id="@+id/btnFecharAlterarSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txtALterarSenhaTela"
+                app:srcCompat="@drawable/baseline_close_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtInsiraSenha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/questrial"
+                    android:gravity="center"
+                    android:text="Informe sua nova senha"
+                    android:textColor="@color/roxoPrincipal"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="15dp"/>
+
+                <EditText
+                    android:id="@+id/editTextNovaSenha"
+                    android:layout_width="275dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_modelo_2"
+                    android:layout_marginTop="25dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:hint="Nova senha"
+                    android:textColorHint="#858585"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    android:id="@+id/editTextConfirmaNovaSenha"
+                    android:layout_width="275dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_modelo_2"
+                    android:layout_marginTop="25dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:paddingStart="25dp"
+                    android:paddingEnd="25dp"
+                    android:hint="Confirma nova senha"
+                    android:textColorHint="#858585"
+                    android:inputType="textPassword" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAlterar"
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:text="Alterar"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="15sp"
+                    android:background="@drawable/fundo_botoes_roxos"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </LinearLayout>
