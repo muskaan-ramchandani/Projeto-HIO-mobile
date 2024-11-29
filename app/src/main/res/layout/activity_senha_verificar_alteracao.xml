@@ -78,7 +78,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnVerificarCodigo"
                     android:layout_width="250dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:text="Verificar"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
@@ -91,7 +91,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnEnviarOutro"
                     android:layout_width="250dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:text="Enviar novamente"
                     android:textColor="@color/white"
                     android:textAllCaps="false"

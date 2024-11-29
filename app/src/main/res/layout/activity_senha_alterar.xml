@@ -92,7 +92,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnAlterar"
                     android:layout_width="250dp"
-                    android:layout_height="30dp"
+                    android:layout_height="35dp"
                     android:text="Alterar"
                     android:textColor="@color/white"
                     android:textAllCaps="false"

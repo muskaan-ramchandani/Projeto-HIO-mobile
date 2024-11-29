@@ -1,6 +1,7 @@
 package com.example.helperinolympics.modelos_sobrepostos;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.helperinolympics.verificacao.EmailSender;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.verificacao.RandomCodeGenerator;
 import com.example.helperinolympics.model.Aluno;
 
-import javax.mail.MessagingException;
 
 public class SenhaVerificarAlteracaoActivity extends DialogFragment {
 
@@ -73,19 +72,14 @@ public class SenhaVerificarAlteracaoActivity extends DialogFragment {
     }
 
     private void enviarCodigoPorEmail() {
-        String userEmail = alunoCadastrado.getEmail();
-        String subject = "Código de Verificação";
-        String body = "Seu código de verificação é: " + codigoVerificacaoAleatorio;
-        new Thread(() -> {
-            try {
-                EmailSender.sendEmail(userEmail, subject, body);
-                Toast.makeText(contexto, "Email enviado com sucesso", Toast.LENGTH_SHORT).show();
-            } catch (MessagingException e) {
-                Toast.makeText(contexto, "Erro ao enviar email", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-        }).start();
 
+        Intent intent = new Intent(Intent.ACTION_);
+        intent.setType("message/rfc822");
+        intent.putExtra(Intent.EXTRA_EMAIL, alunoCadastrado.getEmail());
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Assunto");
+        intent.putExtra(Intent.EXTRA_TEXT, "A seguir está o seu código de verificação para alterar senha no app HIO: " + codigoVerificacaoAleatorio);
+        intent.setPackage("com.google.android.gm"); // Gmail
+        startActivity(intent);
     }
 
 
