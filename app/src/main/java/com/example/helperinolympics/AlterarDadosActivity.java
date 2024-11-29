@@ -126,7 +126,7 @@ public class AlterarDadosActivity extends AppCompatActivity {
             Bitmap resultBitmap = null;
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
+                URL url = new URL("http://10.100.51.3:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(15000);
                 conexao.setConnectTimeout(15000);
@@ -165,6 +165,7 @@ public class AlterarDadosActivity extends AppCompatActivity {
 
             } else {
                 Log.d("ERRO", "Não foi possível carregar a foto.");
+                binding.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
             }
         }
 

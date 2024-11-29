@@ -85,7 +85,7 @@ public class TelaLoginActivity extends AppCompatActivity {
             Log.d("CONEXAO", "Tentando fazer login");
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/validaLoginAluno.php?email=" + email + "&senha=" + senha);
+                URL url = new URL("http://10.100.51.3:8086/phpHio/validaLoginAluno.php?email=" + email + "&senha=" + senha);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -158,7 +158,7 @@ public class TelaLoginActivity extends AppCompatActivity {
             Log.d("CONEXAO", "Tentando retornar dados do aluno");
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaAlunoPorEmail.php?email=" + email);
+                URL url = new URL("http://10.100.51.3:8086/phpHio/retornaAlunoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

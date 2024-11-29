@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,14 +15,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
-import com.example.helperinolympics.verificacao.RandomCodeGenerator;
 import com.example.helperinolympics.model.Aluno;
 
 
 public class SenhaVerificarAlteracaoActivity extends DialogFragment {
 
     private Aluno alunoCadastrado;
-    private String codigoVerificacaoAleatorio;
     private Context contexto;
 
     public SenhaVerificarAlteracaoActivity(Aluno alunoCadastrado, Context contexto) {
@@ -30,46 +29,51 @@ public class SenhaVerificarAlteracaoActivity extends DialogFragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_senha_verificar_alteracao, container, false);
-        codigoVerificacaoAleatorio = RandomCodeGenerator.generateRandomCode();
-
-        enviarCodigoPorEmail();
+        View view = inflater.inflate(R.layout.activity_confirmar_senha_para_permissao, container, false);
+        TextView txt = view.findViewById(R.id.txtDigiteSenha);
+        txt.setText("Digite sua senha atual para  que você possa ter permissão para alterá-la");
 
         // Configurar o botão de fechar
-        view.findViewById(R.id.btnFecharAlterarSenha).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btnFecharConfirmarSenha).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
 
-        view.findViewById(R.id.btnVerificarCodigo).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btnConfirmar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                EditText edit = view.findViewById(R.id.editTextVerificarCodigo);
+                EditText edit = view.findViewById(R.id.editTextVerificarSenha);
+                String digitado = edit.getText().toString();
+                String senhaAluno = alunoCadastrado.getSenha();
 
-                if(edit.getText().toString().equals(codigoVerificacaoAleatorio)){
+                if(digitado.equals(senhaAluno)){
                     SenhaAlterarActivity alterarSenha = new SenhaAlterarActivity(contexto, alunoCadastrado);
                     alterarSenha.show(getParentFragmentManager(), "alterar senha");
                     dismiss();
                 }else{
-                    Toast.makeText(contexto, "O que foi digitado não condiz com o código de verificção enviado. Tente novamente.", Toast.LENGTH_LONG);
+                    Toast.makeText(contexto, "O que foi digitado não condiz com a senha. Tente novamente.", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
-
-        view.findViewById(R.id.btnEnviarOutro).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String novoCodigo = RandomCodeGenerator.generateRandomCode();
-                codigoVerificacaoAleatorio = novoCodigo;
-                enviarCodigoPorEmail();
             }
         });
 
         return view;
     }
+
+    public void onStart() {
+        super.onStart();
+        if (getDialog() != null) {
+            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+    }
+
+
+    //CODIGO DE VERIFICAÇÃO DE EMAIL QUE FALHOU
+    /*
+    String codigoVerificacaoAleatorio = RandomCodeGenerator.generateRandomCode();
 
     private void enviarCodigoPorEmail() {
 
@@ -83,11 +87,26 @@ public class SenhaVerificarAlteracaoActivity extends DialogFragment {
     }
 
 
-    public void onStart() {
-        super.onStart();
-        if (getDialog() != null) {
-            getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    package com.example.helperinolympics.verificacao;
+
+import java.util.Random;
+
+public class RandomCodeGenerator {
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final int CODE_LENGTH = 8;
+
+    public static String generateRandomCode() {
+        Random random = new Random();
+        StringBuilder code = new StringBuilder(CODE_LENGTH);
+
+        for (int i = 0; i < CODE_LENGTH; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            code.append(CHARACTERS.charAt(index));
         }
+        return code.toString();
     }
+}
+
+
+    */
 }

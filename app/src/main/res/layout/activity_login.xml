@@ -130,7 +130,7 @@
         android:layout_marginEnd="110dp"
         android:background="@drawable/fundo_botoes_comuns_lilas"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Finalizar"
+        android:text="Logar"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"

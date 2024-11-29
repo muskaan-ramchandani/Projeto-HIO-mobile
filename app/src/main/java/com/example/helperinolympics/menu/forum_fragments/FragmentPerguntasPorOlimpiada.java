@@ -74,7 +74,7 @@ public class FragmentPerguntasPorOlimpiada  extends Fragment {
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaPerguntasPorOlimpiada.php?siglaOlimpiada=" + siglaOlimpiada;
+                String urlString = "http://10.100.51.3:8086/phpHio/carregaPerguntasPorOlimpiada.php?siglaOlimpiada=" + siglaOlimpiada;
 
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

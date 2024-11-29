@@ -154,7 +154,7 @@ public class CadastrarPergunta extends DialogFragment {
             Log.d("CONEXAO", "Tentando cadastro de pergunta");
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraPerguntaAluno.php");
+                URL url = new URL("http://10.100.51.3:8086/phpHio/cadastraPerguntaAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

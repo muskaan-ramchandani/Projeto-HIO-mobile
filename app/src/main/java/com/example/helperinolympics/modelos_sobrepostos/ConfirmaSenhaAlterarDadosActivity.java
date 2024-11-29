@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,6 @@ import androidx.fragment.app.DialogFragment;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.model.Aluno;
-import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,8 +52,10 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_senha_confirma_alterar_dados, container, false);
+        View view = inflater.inflate(R.layout.activity_confirmar_senha_para_permissao, container, false);
 
+        TextView txt = view.findViewById(R.id.txtDigiteSenha);
+        txt.setText("Digite sua senha para confirmar a alteração de dados");
 
         view.findViewById(R.id.btnFecharConfirmarSenha).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +68,14 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             @Override
             public void onClick(View v) {
                 EditText senha = view.findViewById(R.id.editTextVerificarSenha);
+                String digitado = senha.getText().toString();
+                String senhaAluno = alunoCadastrado.getSenha();
 
-                if(senha.getText().toString().isEmpty()){
+
+                if(digitado.isEmpty()){
                     Toast.makeText(contexto, "É preciso inserir a senha", Toast.LENGTH_SHORT).show();
 
-                }else if(alunoCadastrado.getSenha().equals(senha.getText().toString())){
+                }else if(digitado.equals(senhaAluno)){
 
                     if(!(novaFotoPerfil==null)){
                         Log.d("FOTO", "NÃO É VAZIA");
@@ -87,9 +92,16 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
 
                     Toast.makeText(contexto, "Dados alterados com sucesso!", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(() -> {
-                        Intent intent = new Intent(contexto, ConfiguracoesActivity.class);
-                        intent.putExtra("alunoCadastrado", alunoCadastrado);
-                        startActivity(intent); dismiss(); }, 1015);
+                        if (isAdded() && getContext() != null) {
+                            Intent intent = new Intent(contexto, ConfiguracoesActivity.class);
+                            intent.putExtra("alunoCadastrado", alunoCadastrado);
+                            startActivity(intent);
+                            dismiss();
+                        } else {
+                            Log.e("FragmentError", "Fragment não está mais anexado. Operação ignorada.");
+                        }
+                    }, 1015);
+
 
                 }else{
                     Toast.makeText(contexto, "Senha incorreta, tente novamente se quiser alterar seus dados", Toast.LENGTH_SHORT).show();
@@ -122,7 +134,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarNomeCompletoAluno.php");
+                URL url = new URL("http://10.100.51.3:8086/phpHio/alterarNomeCompletoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -195,7 +207,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarNomeUsuarioAluno.php");
+                URL url = new URL("http://10.100.51.3:8086/phpHio/alterarNomeUsuarioAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -268,7 +280,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarEmailAluno.php");
+                URL url = new URL("http://10.100.51.3:8086/phpHio/alterarEmailAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -342,7 +354,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
         protected String doInBackground(Void... voids) {
             String result = null;
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarFotoAluno.php");
+                URL url = new URL("http://10.100.51.3:8086/phpHio/alterarFotoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);

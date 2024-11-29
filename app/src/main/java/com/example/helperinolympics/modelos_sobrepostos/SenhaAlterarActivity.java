@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.model.Aluno;
 
 import org.json.JSONException;
@@ -52,7 +53,7 @@ public class SenhaAlterarActivity extends DialogFragment {
                     new AlterarSenha(senha.getText().toString(), alunoCadastrado.getEmail()).execute();
 
                 }else{
-                    Toast.makeText(contexto, "Confirma senha está diferente de senha. Tente novamente.", Toast.LENGTH_SHORT);
+                    Toast.makeText(contexto, "Confirma senha está diferente de senha. Tente novamente.", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -83,7 +84,7 @@ public class SenhaAlterarActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarSenha.php");
+                URL url = new URL("http://10.100.51.3:8086/phpHio/alterarSenha.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -131,6 +132,15 @@ public class SenhaAlterarActivity extends DialogFragment {
 
                     if (jsonResponse.getString("status").equals("success")) {
                         Log.d("SUCESSO_Senha", "Senha AGR é:" + senha);
+
+                        if (getActivity() != null) {
+                            ConfiguracoesActivity activity = (ConfiguracoesActivity) getActivity();
+
+                            activity.alterarSenha(senha);
+                        } else {
+                            Log.e("DialogFragment", "A activity associada ao fragmento é null");
+                        }
+
                         dismiss();
                     }
                 } catch (JSONException e) {

@@ -19,6 +19,7 @@ import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarDeletarActivity;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
+import com.example.helperinolympics.telas_iniciais.TelaLoginActivity;
 
 import org.json.JSONObject;
 
@@ -123,7 +124,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             Bitmap resultBitmap = null;
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
+                URL url = new URL("http://10.100.51.3:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(15000);
                 conexao.setConnectTimeout(15000);
@@ -161,6 +162,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                 inserirDadosUsuario(fotoBitmap);
             } else {
                 Log.d("ERRO", "Não foi possível carregar a foto.");
+                inserirDadosUsuario(fotoBitmap);
             }
         }
 
@@ -188,4 +190,14 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         }
 
     }
+
+    public void alterarSenha(String senhaNova){
+        this.alunoCadastrado.setSenha(senhaNova);
+    }
+
+    public void voltarAoLogin(){
+        Intent intent = new Intent(ConfiguracoesActivity.this, TelaLoginActivity.class);
+        startActivity(intent);
+    }
+
 }
