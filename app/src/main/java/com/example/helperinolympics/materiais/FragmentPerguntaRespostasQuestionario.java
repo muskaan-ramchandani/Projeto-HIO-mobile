@@ -147,7 +147,7 @@ public class FragmentPerguntaRespostasQuestionario  extends Fragment {
 
             List<Alternativas> alternativas = new ArrayList<>();
             try {
-                String urlString = "http://10.100.51.3:8086/phpHio/carregaAlternativasPorQuestao.php?"+
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaAlternativasPorQuestao.php?"+
                         "&idQuestionarioPertencente=" + URLEncoder.encode(String.valueOf(idQuestionarioPertencente), "UTF-8")+
                         "&idQuestaoPertencente=" + URLEncoder.encode(String.valueOf(idQuestaoPertencente), "UTF-8");
 

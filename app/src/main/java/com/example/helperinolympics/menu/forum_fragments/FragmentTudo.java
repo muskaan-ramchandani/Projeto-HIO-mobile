@@ -122,7 +122,7 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
         protected HashMap<String, Integer> doInBackground(Void... voids) {
             HashMap<String, Integer> contagemPerguntas = new HashMap<>();
             try {
-                String urlString = "http://10.100.51.3:8086/phpHio/contaPerguntasPorOlimpiada.php";
+                String urlString = "http://10.0.0.64:8086/phpHio/contaPerguntasPorOlimpiada.php";
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("GET");

@@ -194,7 +194,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             String dataAcertoFormatada = sdf.format(acerto.getDataAcerto());
 
             try {
-                URL url = new URL("http://10.100.51.3:8086/phpHio/cadastraAcertosAluno.php");
+                URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraAcertosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -255,7 +255,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             String dataErroFormatada = sdf.format(erro.getDataErro());
 
             try {
-                URL url = new URL("http://10.100.51.3:8086/phpHio/cadastraErrosAluno.php");
+                URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraErrosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -315,7 +315,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             Pontuacao pontuacao = pontuacoes[0];
 
             try {
-                URL url = new URL("http://10.100.51.3:8086/phpHio/alteraPontuacaoAluno.php");
+                URL url = new URL("http://10.0.0.64:8086/phpHio/alteraPontuacaoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

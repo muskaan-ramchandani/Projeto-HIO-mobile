@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,7 @@ import com.example.helperinolympics.HistoricoDeAcessos;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.databinding.ActivityConfiguracoesBinding;
 import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.modelos_sobrepostos.ConfirmaApagarContaActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarAlteracaoActivity;
 import com.example.helperinolympics.modelos_sobrepostos.SenhaVerificarDeletarActivity;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
@@ -27,7 +29,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ConfiguracoesActivity extends AppCompatActivity {
+public class ConfiguracoesActivity extends AppCompatActivity implements ConfirmaApagarContaActivity.OnDialogActionListener {
 
     private ActivityConfiguracoesBinding binding;
     private Aluno alunoCadastrado;
@@ -124,7 +126,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
             Bitmap resultBitmap = null;
 
             try {
-                URL url = new URL("http://10.100.51.3:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
+                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(15000);
                 conexao.setConnectTimeout(15000);
@@ -195,9 +197,12 @@ public class ConfiguracoesActivity extends AppCompatActivity {
         this.alunoCadastrado.setSenha(senhaNova);
     }
 
-    public void voltarAoLogin(){
-        Intent intent = new Intent(ConfiguracoesActivity.this, TelaLoginActivity.class);
+    @Override
+    public void onDialogAction() {
+        Log.d("DELETAR_PT_DOIS", "Fechando config");
+        Intent intent = new Intent(this, TelaLoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }

@@ -177,7 +177,7 @@ public class TextoActivity extends AppCompatActivity {
 
             List<Texto> textos = new ArrayList<>();
             try {
-                String urlString = "http://10.100.51.3:8086/phpHio/carregaTextoPorConteudo.php?idConteudoPertencente=" +
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaTextoPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

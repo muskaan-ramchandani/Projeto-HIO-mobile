@@ -91,7 +91,7 @@ public class ConfirmaApagarContaActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.100.51.3:8086/phpHio/deletarConta.php");
+                URL url = new URL("http://10.0.0.64:8086/phpHio/deletarConta.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -140,25 +140,29 @@ public class ConfirmaApagarContaActivity extends DialogFragment {
 
                     if ("success".equals(jsonResponse.getString("status"))) {
                         Log.d("SUCESSO_DELETAR", "Conta " + alunoCadastrado.getEmail() + " deletada com sucesso");
-                        dismiss();
+                        onActionButtonClick();
                     }
                 } catch (JSONException e) {
                     Log.e("JSON_ERROR", "Erro ao processar JSON: " + e.getMessage());
-                    dismiss();
-
-                    ConfiguracoesActivity activity = (ConfiguracoesActivity) getActivity();
-                    if (activity != null) {
-                        activity.voltarAoLogin();
-                        Toast.makeText(contexto, "Sua conta foi deletada", Toast.LENGTH_LONG).show();
-                    } else {
-                        Log.e("JSON_ERROR", "Activity is null");
-                    }
                 }
             } else {
                 Toast.makeText(contexto, "Erro ao conectar ao servidor.", Toast.LENGTH_LONG).show();
                 dismiss();
             }
         }
+    }
 
+    public interface OnDialogActionListener {
+        void onDialogAction();
+    }
+
+    public void fecharDialog() {
+        dismiss();
+    }
+
+    public void onActionButtonClick() {
+        OnDialogActionListener listener = (OnDialogActionListener) getActivity();
+        listener.onDialogAction();
+        fecharDialog();
     }
 }

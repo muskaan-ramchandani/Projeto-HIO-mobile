@@ -101,7 +101,7 @@ public class FragmentSuasPerguntas extends Fragment{
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://10.100.51.3:8086/phpHio/carregaSuasPerguntas.php?emailAluno=" + emailAluno;
+                String urlString = "http://10.0.0.64:8086/phpHio/carregaSuasPerguntas.php?emailAluno=" + emailAluno;
 
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

@@ -142,7 +142,7 @@ public class PerfilAlunoActivity extends Activity {
         @Override
         protected List<String> doInBackground(Void... voids) {
             try {
-                String urlString = "http://10.100.51.3:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
+                String urlString = "http://10.0.0.64:8086/phpHio/retornaQntdAcertosErrosAluno.php?emailAluno=" + URLEncoder.encode(email, "UTF-8");
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -207,7 +207,7 @@ public class PerfilAlunoActivity extends Activity {
             Bitmap resultBitmap = null;
 
             try {
-                URL url = new URL("http://10.100.51.3:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
+                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(15000);
                 conexao.setConnectTimeout(15000);
