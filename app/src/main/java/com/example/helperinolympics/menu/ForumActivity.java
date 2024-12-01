@@ -1,8 +1,12 @@
 package com.example.helperinolympics.menu;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -28,6 +32,11 @@ import com.example.helperinolympics.model.forum.PerguntasForum;
 import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +61,10 @@ public class ForumActivity extends AppCompatActivity {
         barraPesquisa = findViewById(R.id.searchViewPerguntas);
         barraPesquisa.clearFocus();
 
+        FotoAlunoTask fotoAlunoTask = new FotoAlunoTask();
+        fotoAlunoTask.execute(alunoCadastrado.getEmail());
+
         // Fragment inicial + configurações iniciais
-        binding.imgfotoPerfil.setImageResource(R.drawable.iconeperfilvazioredonda);
         atribuirFundoEBotao(binding.btnTudo, R.drawable.fundo_botao_forum_selecionado, R.color.textoSelecionadoForum);
         atribuirFundoEBotao(binding.btnSuasPerguntas, R.drawable.fundo_botao_forum_nao_selecionado, R.color.cinza);
 
@@ -274,6 +285,84 @@ public class ForumActivity extends AppCompatActivity {
 
     public void atualizarDadosPosPublicacao() {
         setFragment(new FragmentSuasPerguntas());
+    }
+
+    public class FotoAlunoTask extends AsyncTask<String, Void, Bitmap> {
+
+        private Bitmap fotoBitmap;
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            String email = params[0];
+            Bitmap resultBitmap = null;
+
+            try {
+                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaFotoPorEmail.php?email=" + email);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(15000);
+                conexao.setConnectTimeout(15000);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.connect();
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+
+                    if (jsonString != null && !jsonString.isEmpty()) {
+                        JSONObject jsonObject = new JSONObject(jsonString);
+                        String status = jsonObject.getString("status");
+
+                        if (status.equals("success")) {
+                            String fotoBase64 = jsonObject.getString("fotoPerfil");
+                            resultBitmap = decodeBase64ToBitmap(fotoBase64);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", "Erro ao buscar a foto: " + e.getMessage());
+            }
+            return resultBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            fotoBitmap = result;
+
+            if (fotoBitmap != null) {
+                Log.d("INFO", "Foto recebida com sucesso.");
+                binding.imgfotoPerfil.setImageBitmap(fotoBitmap);
+
+            } else {
+                Log.d("ERRO", "Não foi possível carregar a foto.");
+                binding.imgfotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            StringBuilder stringBuilder = new StringBuilder();
+            try {
+                int charRead;
+                while ((charRead = in.read()) != -1) {
+                    stringBuilder.append((char) charRead);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return stringBuilder.toString();
+        }
+
+        private Bitmap decodeBase64ToBitmap(String base64String) {
+            try {
+                byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            } catch (Exception e) {
+                Log.d("ERRO", "Erro ao decodificar Base64 para Bitmap: " + e.getMessage());
+                return null;
+            }
+        }
+
     }
 
 }

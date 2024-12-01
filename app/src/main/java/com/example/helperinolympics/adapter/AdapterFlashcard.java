@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.helperinolympics.CadastraHistoricoAsynTask;
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Flashcard;

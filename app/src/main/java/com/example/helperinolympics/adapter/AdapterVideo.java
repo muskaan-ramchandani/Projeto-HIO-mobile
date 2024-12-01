@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.helperinolympics.CadastraHistoricoAsynTask;
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Video;

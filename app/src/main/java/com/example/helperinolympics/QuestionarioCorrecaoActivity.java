@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.adapter.AdapterCorrecao;
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.databinding.ActivityQuestionarioCorrecaoBinding;
 import com.example.helperinolympics.materiais.QuestionarioActivity;
 import com.example.helperinolympics.model.Aluno;

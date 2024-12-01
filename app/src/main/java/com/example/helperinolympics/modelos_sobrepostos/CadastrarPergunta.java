@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +42,9 @@ public class CadastrarPergunta extends DialogFragment {
     private String olimpiadaRelacionada, titulo, pergunta;
     private Date dataAtual;
     private ForumActivity activity;
+    private Spinner spinnerOpcoesOlimpiada;
+
+    private boolean spinnerSelecionado = false;
 
     public CadastrarPergunta(Aluno aluno, Context contexto){
         this.alunoCadastrado = aluno;
@@ -49,42 +55,15 @@ public class CadastrarPergunta extends DialogFragment {
         View view = inflater.inflate(R.layout.activity_cadastrar_pergunta, container, false);
 
         activity = (ForumActivity) getActivity();
+        spinnerOpcoesOlimpiada = view.findViewById(R.id.spinnerRelacaoComOlimp);
 
-        RadioButton[] grupoOlimpiadas = {
-                view.findViewById(R.id.radioButtonOBA),
-                view.findViewById(R.id.radioButtonONHB),
-                view.findViewById(R.id.radioButtonOBI),
-                view.findViewById(R.id.radioButtonOBB),
-                view.findViewById(R.id.radioButtonOBF),
-                view.findViewById(R.id.radioButtonOBMEP),
-                view.findViewById(R.id.radioButtonOBQ),
-                view.findViewById(R.id.radioButtonONC)
-        };
-
-        // Listener para garantir seleção única
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RadioButton clickedButton = (RadioButton) v;
-
-                // Garantir que apenas o selecionado permaneça marcado
-                for (RadioButton radioButton : grupoOlimpiadas) {
-                    if (radioButton != clickedButton) {
-                        radioButton.setChecked(false);
-                    }
-                }
-            }
-        };
-
-        for (RadioButton rb : grupoOlimpiadas) {
-            rb.setOnClickListener(listener);
-        }
+        configuraSpinner(spinnerOpcoesOlimpiada);
 
         view.findViewById(R.id.btnPublicar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                boolean tudoPreenchido = verificarPreenchimento(view, grupoOlimpiadas);
+                boolean tudoPreenchido = verificarPreenchimento(view, spinnerSelecionado);
 
                 if(tudoPreenchido){
                     Calendar calendar = Calendar.getInstance();
@@ -110,25 +89,44 @@ public class CadastrarPergunta extends DialogFragment {
         return view;
     }
 
-    private boolean verificarPreenchimento(View view, RadioButton[] grupoOlimpiadas) {
+    private void configuraSpinner(Spinner spinnerOpcoesOlimpiada) {
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(contexto, R.array.opcoes_Olimpiadas, R.layout.modelo_spinner_opcoes);
+
+        adapter.setDropDownViewResource(R.layout.modelo_spinner_opcoes);
+        spinnerOpcoesOlimpiada.setAdapter(adapter);
+
+        // Capturar a opção selecionada
+        spinnerOpcoesOlimpiada.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).toString().equals("Escolha a olimpíada")){
+                    spinnerSelecionado = false;
+                }else{
+                    olimpiadaRelacionada = parent.getItemAtPosition(position).toString();
+                    spinnerSelecionado = true;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                spinnerSelecionado = false;
+            }
+        });
+    }
+
+    private boolean verificarPreenchimento(View view, boolean spinnerSelecionado) {
         EditText txtTitulo = view.findViewById(R.id.editTextTitulo);
         EditText txtPergunta = view.findViewById(R.id.editTextPergunta);
 
         titulo = txtTitulo.getText().toString();
         pergunta = txtPergunta.getText().toString();
 
-        if (titulo.isEmpty() || pergunta.isEmpty()) {
+        if (titulo.isEmpty() || pergunta.isEmpty() || !spinnerSelecionado) {
             return false;
-        }else {
-            for (RadioButton radioButton : grupoOlimpiadas) {
-                if (radioButton.isChecked()) {
-                    olimpiadaRelacionada = radioButton.getText().toString();
-                    return true;
-                }
-            }
+        }else{
+            return true;
         }
-
-        return false;
     }
 
     public void onStart() {

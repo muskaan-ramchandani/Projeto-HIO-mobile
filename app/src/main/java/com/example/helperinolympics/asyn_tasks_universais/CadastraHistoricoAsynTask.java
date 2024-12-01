@@ -1,4 +1,4 @@
-package com.example.helperinolympics;
+package com.example.helperinolympics.asyn_tasks_universais;
 
 import android.os.AsyncTask;
 import android.util.Log;

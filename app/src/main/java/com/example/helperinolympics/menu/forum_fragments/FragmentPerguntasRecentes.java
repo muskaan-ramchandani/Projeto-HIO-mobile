@@ -28,6 +28,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -163,6 +164,7 @@ public class FragmentPerguntasRecentes  extends Fragment {
             if (!perguntasLista.isEmpty()) {
                 perguntasF.clear();
                 perguntasF.addAll(new HashSet<>(perguntasLista));
+                Collections.sort(perguntasF, (p1, p2) -> p2.getDataPublicacao().compareTo(p1.getDataPublicacao()));
                 adapter.notifyDataSetChanged();
             } else {
                 Log.d("LISTA_VAZIA", "Nenhuma pergunta carregada");

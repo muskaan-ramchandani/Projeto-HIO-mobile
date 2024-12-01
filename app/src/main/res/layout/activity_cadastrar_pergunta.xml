@@ -110,95 +110,18 @@
                         android:textStyle="bold"
                         android:layout_marginTop="15dp"/>
 
-                    <TableLayout
-                        android:id="@+id/tableLayoutOlimpiadas"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TableRow>
-                            <RadioButton
-                                android:id="@+id/radioButtonOBA"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OBA"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="13dp"/>
-
-                            <RadioButton
-                                android:id="@+id/radioButtonONHB"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ONHB"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_marginEnd="8dp"/>
-
-                            <RadioButton
-                                android:id="@+id/radioButtonOBI"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OBI"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_marginEnd="8dp"/>
-
-                            <RadioButton
-                                android:id="@+id/radioButtonOBB"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OBB"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans" />
-                        </TableRow>
-
-                        <TableRow>
-                            <RadioButton
-                                android:id="@+id/radioButtonOBF"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OBF"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="13dp"/>
-
-                            <RadioButton
-                                android:id="@+id/radioButtonOBMEP"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OBMEP"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_marginEnd="8dp"/>
-
-                            <RadioButton
-                                android:id="@+id/radioButtonOBQ"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="OBQ"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_marginEnd="8dp"/>
-
-                            <RadioButton
-                                android:id="@+id/radioButtonONC"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ONC"
-                                android:textColor="@color/black"
-                                android:textSize="14sp"
-                                android:fontFamily="@font/open_sans" />
-                        </TableRow>
-                    </TableLayout>
+                    <Spinner
+                        android:id="@+id/spinnerRelacaoComOlimp"
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:popupBackground="@color/white"
+                        android:dropDownHeight="200dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:dropDownVerticalOffset="4dp"
+                        android:dropDownHorizontalOffset="8dp"
+                        android:dropDownWidth="match_parent"
+                        android:spinnerMode="dropdown"/>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnPublicar"
@@ -210,7 +133,7 @@
                         android:textSize="15sp"
                         android:background="@drawable/fundo_botoes_roxos"
                         android:fontFamily="@font/open_sans_bold"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="30dp"
                         android:layout_gravity="center_horizontal"/>
 
                     <androidx.appcompat.widget.AppCompatButton
