@@ -260,6 +260,52 @@ CREATE TABLE Eventos(
 	PRIMARY KEY(id)
 );
 
+DROP TABLE IF EXISTS HistoricoAcessoAluno;
+CREATE TABLE HistoricoAcessoAluno(
+	id INT AUTO_INCREMENT NOT NULL,
+    emailAluno VARCHAR(100) NOT NULL,
+    tipoMaterial VARCHAR(25) NOT NULL,
+    idMaterial INT NOT NULL,
+	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    PRIMARY KEY(id)
+);
+
+#DELIMITAR QUANTIDADE DE REGISTROS NO ACESSO
+DELIMITER $$
+CREATE TRIGGER LimitarHistoricoAcesso
+BEFORE INSERT ON HistoricoAcessoAluno
+FOR EACH ROW
+BEGIN
+    -- Conta o número de registros existentes para o mesmo aluno e tipo de material
+    DECLARE quantidade INT;
+    SELECT COUNT(*) INTO quantidade
+    FROM HistoricoAcessoAluno
+    WHERE emailAluno = NEW.emailAluno
+      AND tipoMaterial = NEW.tipoMaterial;
+
+    -- Se a quantidade já for 10, exclua o registro mais antigo
+    IF quantidade >= 10 THEN
+        DELETE FROM HistoricoAcessoAluno
+        WHERE emailAluno = NEW.emailAluno
+          AND tipoMaterial = NEW.tipoMaterial
+        ORDER BY id ASC
+        LIMIT 1;
+    END IF;
+END$$
+DELIMITER ;
+
+
+DROP TABLE IF EXISTS HistoricoCadastroProfessor;
+CREATE TABLE HistoricoCadastroProfessor(
+	id INT AUTO_INCREMENT NOT NULL,
+    emailProf VARCHAR(100) NOT NULL,
+    tipoMaterial VARCHAR(25) NOT NULL,
+    idMaterial INT NOT NULL,
+	FOREIGN KEY(emailProf) REFERENCES Professor(email),
+    PRIMARY KEY(id)
+);
+
+
 #testes respostas
 Insert into RespostasForum(emailProf, resposta, dataResposta, idPergunta)
 values ('juan@gmail.com', 'Para organizar 6 RadioButtons em 2 linhas de 3 itens cada, mantendo a funcionalidade de selecionar apenas um botão por vez, você pode usar um RadioGroup com o atributo android:orientation="vertical", junto com um contêiner LinearLayout horizontal para cada linha.', '2024-11-20', 4),

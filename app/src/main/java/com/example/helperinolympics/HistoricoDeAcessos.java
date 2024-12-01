@@ -145,12 +145,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
         }
 
         private void processarResultados(Map<String, JSONArray> resultados) {
-            ArrayList<ProvasAnteriores> provas = new ArrayList<>();
-            ArrayList<Texto> textos = new ArrayList<>();
-            ArrayList<Video> videos = new ArrayList<>();
-            ArrayList<Flashcard> flashcards = new ArrayList<>();
-            ArrayList<Questionario> questionarios = new ArrayList<>();
-
             for (Map.Entry<String, JSONArray> entry : resultados.entrySet()) {
                 String tipo = entry.getKey();
                 JSONArray dados = entry.getValue();
@@ -177,17 +171,24 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                     }
                                 }
 
+                                boolean respondidaOuNao=false;
+                                if(item.getInt("estado")==0){
+                                    respondidaOuNao = false;
+                                }else{
+                                    respondidaOuNao= true;
+                                }
                                 ProvasAnteriores prova = new ProvasAnteriores(
                                         item.getInt("id"),
                                         item.getInt("anoDaProva"),
                                         item.getInt("fase"),
-                                        item.getBoolean("estado"),
+                                        respondidaOuNao,
                                         item.getString("profQuePostou"),
                                         item.getString("siglaOlimpiadaPertencente"),
                                         arquivoPdfBytes
                                 );
 
-                                provas.add(prova);
+                                listaProvasHistorico.add(prova);
+                                adapterProvas.notifyDataSetChanged();
                                 break;
                             case "textos":
                                 Texto texto = new Texto(
@@ -198,7 +199,8 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                         item.getString("texto")
                                 );
 
-                                textos.add(texto);
+                                listaTxtHistorico.add(texto);
+                                adapterTxt.notifyDataSetChanged();
                                 break;
                             case "videos":
                                 String videoBase64 = item.optString("capa", null);
@@ -222,7 +224,8 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                         videoBitmap
                                 );
 
-                                videos.add(video);
+                                listaVideoHistorico.add(video);
+                                adapterVideo.notifyDataSetChanged();
                                 break;
                             case "flashcards":
                                 String imagemBase64 = item.optString("imagem", null);
@@ -246,7 +249,8 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                         imagemBitmap
                                 );
 
-                                flashcards.add(flashcard);
+                                listaFlashcardHistorico.add(flashcard);
+                                adapterFlash.notifyDataSetChanged();
                                 break;
                             case "questionarios":
                                 Questionario questionario = new Questionario(
@@ -255,7 +259,8 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                         item.getString("profQuePostou"),
                                         item.getInt("idConteudoPertencente")
                                 );
-                                questionarios.add(questionario);
+                                listaQuestHistorico.add(questionario);
+                                adapterQuest.notifyDataSetChanged();
                                 break;
                         }
                     } catch (Exception e) {
@@ -265,10 +270,9 @@ public class HistoricoDeAcessos extends AppCompatActivity {
             }
 
 
-
-
-            Log.d("RESULTADOS", "Provas: " + provas.size());
-            if(provas.isEmpty()){
+            Log.d("RESULTADOS", "Provas: " + listaProvasHistorico.size());
+            int tamP = listaProvasHistorico.size();
+            if(tamP==0){
                 binding.linearHistoricoProvas.removeView(binding.recyclerViewHistoricoProvas);
                 LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
                 View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoProvas, false);
@@ -279,8 +283,9 @@ public class HistoricoDeAcessos extends AppCompatActivity {
             }
 
 
-            Log.d("RESULTADOS", "Textos: " + textos.size());
-            if(textos.isEmpty()){
+            Log.d("RESULTADOS", "Textos: " + listaTxtHistorico.size());
+            int tamT = listaTxtHistorico.size();
+            if(tamT==0){
                 binding.linearHistoricoTextos.removeView(binding.recyclerViewHistoricoTexto);
                 LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
                 View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoTextos, false);
@@ -291,8 +296,9 @@ public class HistoricoDeAcessos extends AppCompatActivity {
             }
 
 
-            Log.d("RESULTADOS", "Vídeos: " + videos.size());
-            if(videos.isEmpty()){
+            Log.d("RESULTADOS", "Vídeos: " + listaVideoHistorico.size());
+            int tamV = listaVideoHistorico.size();
+            if(tamV==0){
                 binding.linearHistoricoVideos.removeView(binding.recyclerViewHistoricoVideo);
                 LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
                 View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoVideos, false);
@@ -303,8 +309,9 @@ public class HistoricoDeAcessos extends AppCompatActivity {
             }
 
 
-            Log.d("RESULTADOS", "Flashcards: " + flashcards.size());
-            if(flashcards.isEmpty()){
+            Log.d("RESULTADOS", "Flashcards: " + listaFlashcardHistorico.size());
+            int tamF = listaFlashcardHistorico.size();
+            if(tamF==0){
                 binding.linearHistoricoFlashcards.removeView(binding.recyclerViewHistoricoFlashcards);
                 LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
                 View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoFlashcards, false);
@@ -314,9 +321,9 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                 configurarRecyclerHistoricoFlashcards();
             }
 
-
-            Log.d("RESULTADOS", "Questionários: " + questionarios.size());
-            if(questionarios.isEmpty()){
+            Log.d("RESULTADOS", "Questionários: " + listaQuestHistorico.size());
+            int tamQ = listaQuestHistorico.size();
+            if(tamQ==0){
                 binding.linearHistoricoQuestionarios.removeView(binding.recyclerViewHistoricoQuestionario);
                 LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
                 View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoQuestionarios, false);
@@ -328,7 +335,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
 
         }
     }
-
 
     private void configurarRecyclerHistoricoFlashcards() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);

@@ -34,14 +34,14 @@ public class QuestionarioHistoricoExibir extends DialogFragment {
     private List<Questao> listaDeQuestoes = new ArrayList<>();
     private int qntdQuestoes, numeroAtual=1;
 
-    public QuestionarioHistoricoExibir(Questionario questionario){
+    public QuestionarioHistoricoExibir(Questionario questionario, ArrayList<Questao> listaDeQuestoes){
         this.questionario = questionario;
+        this.listaDeQuestoes.addAll(listaDeQuestoes);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.questionario_historico, container, false);
 
-        new QuestoesDownload().execute(questionario.getId());
         qntdQuestoes = listaDeQuestoes.size();
 
         TextView titulo = view.findViewById(R.id.txtTituloQuestHistorico);
@@ -64,11 +64,11 @@ public class QuestionarioHistoricoExibir extends DialogFragment {
         view.findViewById(R.id.imgButtonVoltarQuestao).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numeroAtual>=1){
+                if (numeroAtual > 1) {
                     numeroAtual--;
-                    String perguntaFormatada = "<b>Pergunta </b>"+ "<b>"+ numeroAtual +": </b>" + listaDeQuestoes.get(numeroAtual-1).getTxtPergunta();
+                    String perguntaFormatada = "<b>Pergunta </b>" + "<b>" + numeroAtual + ": </b>" + listaDeQuestoes.get(numeroAtual - 1).getTxtPergunta();
                     pergunta.setText(Html.fromHtml(perguntaFormatada, Html.FROM_HTML_MODE_COMPACT));
-                }else{
+                } else {
                     Toast.makeText(getContext(), "Não é possível voltar mais, pois esta é a primeira pergunta!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -77,15 +77,16 @@ public class QuestionarioHistoricoExibir extends DialogFragment {
         view.findViewById(R.id.imgButtonAvancarDireita).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if(numeroAtual<=qntdQuestoes){
-                        numeroAtual++;
-                        String perguntaFormatada = "<b>Pergunta </b>"+ "<b>"+ numeroAtual +": </b>" + listaDeQuestoes.get(numeroAtual-1).getTxtPergunta();
-                        pergunta.setText(Html.fromHtml(perguntaFormatada, Html.FROM_HTML_MODE_COMPACT));
-                    }else{
-                        Toast.makeText(getContext(), "Não é possível avançar mais, pois esta é a última pergunta!", Toast.LENGTH_SHORT).show();
-                    }
+                if (numeroAtual < qntdQuestoes) {
+                    numeroAtual++;
+                    String perguntaFormatada = "<b>Pergunta </b>" + "<b>" + numeroAtual + ": </b>" + listaDeQuestoes.get(numeroAtual - 1).getTxtPergunta();
+                    pergunta.setText(Html.fromHtml(perguntaFormatada, Html.FROM_HTML_MODE_COMPACT));
+                } else {
+                    Toast.makeText(getContext(), "Não é possível avançar mais, pois esta é a última pergunta!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
 
         return view;
     }
@@ -95,98 +96,6 @@ public class QuestionarioHistoricoExibir extends DialogFragment {
         if (getDialog() != null) {
             getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        }
-    }
-
-    private class QuestoesDownload extends AsyncTask<Integer, Void, List<Questao>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected List<Questao> doInBackground(Integer... params) {
-            int idQuestionario = params[0];
-            Log.d("ID_QUESTIONARIO_RECEBIDO", "Id questionário Recebido: " + idQuestionario);
-
-            List<Questao> questoes = new ArrayList<>();
-            try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaQuestoesPorQuestionario.php?idQuestionarioPertencente=" +
-                        URLEncoder.encode(String.valueOf(idQuestionario), "UTF-8");
-                URL url = new URL(urlString);
-                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-                conexao.setReadTimeout(1500);
-                conexao.setConnectTimeout(500);
-                conexao.setRequestMethod("GET");
-                conexao.setDoInput(true);
-                conexao.setDoOutput(false);
-                conexao.connect();
-                Log.d("CONEXAO", "Conexão estabelecida");
-
-                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                    InputStream in = conexao.getInputStream();
-                    String jsonString = converterParaJSONString(in);
-                    Log.d("DADOS", jsonString);
-                    listaDeQuestoes.addAll(converterParaList(jsonString));
-                    questoes.addAll(converterParaList(jsonString));
-                }
-
-            } catch (Exception e) {
-                Log.d("ERRO", e.toString());
-            }
-            return questoes;
-        }
-
-        @Override
-        protected void onPostExecute(List<Questao> questoes) {
-            super.onPostExecute(questoes);
-
-            if (questoes != null && !questoes.isEmpty()) {
-                listaDeQuestoes.clear();
-                listaDeQuestoes.addAll(questoes);
-
-            } else {
-                Log.e("ERRO_QUESTOES", "Nenhuma questão carregada");
-            }
-        }
-
-
-        private String converterParaJSONString(InputStream in) {
-            byte[] buffer = new byte[1024];
-            ByteArrayOutputStream dados = new ByteArrayOutputStream();
-            try {
-                int qtdBytesLido;
-                while ((qtdBytesLido = in.read(buffer)) != -1) {
-                    dados.write(buffer, 0, qtdBytesLido);
-                }
-            } catch (Exception e) {
-                Log.d("ERRO", e.toString());
-            }
-            return dados.toString();
-        }
-
-        private List<Questao> converterParaList(String jsonString) {
-            List<Questao> questoes = new ArrayList<>();
-            try {
-                JSONObject jsonObject = new JSONObject(jsonString);
-                JSONArray jsonArray = jsonObject.getJSONArray("questoesDoQuestionario");
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject questaoJSON = jsonArray.getJSONObject(i);
-                    Questao questao = new Questao();
-
-                    questao.setId(questaoJSON.getInt("id"));
-                    questao.setTxtPergunta(questaoJSON.getString("txtPergunta"));
-                    questao.setIdQuestionarioPertencente(questionario.getId());
-                    questao.setExplicacaoResposta(questaoJSON.getString("explicacaoResposta"));
-
-                    Log.d("Questão  ", questao.toString());
-                    questoes.add(questao);
-                }
-            } catch (Exception e) {
-                Log.d("ERRO", e.toString());
-            }
-            return questoes;
         }
     }
 }

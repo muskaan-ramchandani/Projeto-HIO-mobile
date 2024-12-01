@@ -66,6 +66,8 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         String valorProf= prova.getUserProf();
         holder.prof.setText(valorProf);
 
+        holder.olimp = prova.getSiglaOlimpiadaPertencente();
+
         holder.pdfBytes= prova.getArquivoPdfBytes();
     }
 
@@ -74,6 +76,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         TextView ano, estado, fase, prof;
         byte[] pdfBytes;
         int id;
+        String olimp;
 
         public ProvasAnterioresViewHolder(@NonNull View itemView, final Context context) {
             super(itemView);
@@ -87,7 +90,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
                 @Override
                 public void onClick(View v) {
                     if (pdfBytes != null && pdfBytes.length > 0) {
-                        salvarPdfNoDispositivo(pdfBytes, context);
+                        salvarPdfNoDispositivo(pdfBytes, context, olimp, ano.getText().toString(), fase.getText().toString());
                         new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "ProvaAnterior", String.valueOf(id));
                     } else {
                         Toast.makeText(context, "PDF não disponível.", Toast.LENGTH_SHORT).show();
@@ -101,7 +104,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         return listaProvasAnteriores.size();
     }
 
-    public void salvarPdfNoDispositivo(byte[] pdfBytes, Context context) {
+    public void salvarPdfNoDispositivo(byte[] pdfBytes, Context context, String olimp, String ano, String fase) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -109,16 +112,16 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
                         new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         REQUEST_WRITE_PERMISSION);
             } else {
-                salvarPdf(pdfBytes, context);
+                salvarPdf(pdfBytes, context, olimp, ano, fase);
             }
         } else {
-            salvarPdf(pdfBytes, context);
+            salvarPdf(pdfBytes, context, olimp, ano, fase);
         }
     }
 
-    private void salvarPdf(byte[] pdfBytes, Context context) {
+    private void salvarPdf(byte[] pdfBytes, Context context, String olimp, String ano, String fase) {
         try {
-            File file = new File(context.getExternalFilesDir(null), "prova_olimpiada.pdf");
+            File file = new File(context.getExternalFilesDir(null), "prova"+ano+"_olimpiada"+olimp+"_fase"+fase+".pdf");
 
             // Escrevendo bytes
             FileOutputStream fos = new FileOutputStream(file);
