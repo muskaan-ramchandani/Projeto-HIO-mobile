@@ -71,6 +71,7 @@ public class HistoricoDeAcessos extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HistoricoDeAcessos.this, ConfiguracoesActivity.class);
+                intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
             }
@@ -188,7 +189,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                 );
 
                                 listaProvasHistorico.add(prova);
-                                adapterProvas.notifyDataSetChanged();
                                 break;
                             case "textos":
                                 Texto texto = new Texto(
@@ -200,7 +200,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                 );
 
                                 listaTxtHistorico.add(texto);
-                                adapterTxt.notifyDataSetChanged();
                                 break;
                             case "videos":
                                 String videoBase64 = item.optString("capa", null);
@@ -225,7 +224,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                 );
 
                                 listaVideoHistorico.add(video);
-                                adapterVideo.notifyDataSetChanged();
                                 break;
                             case "flashcards":
                                 String imagemBase64 = item.optString("imagem", null);
@@ -250,7 +248,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                 );
 
                                 listaFlashcardHistorico.add(flashcard);
-                                adapterFlash.notifyDataSetChanged();
                                 break;
                             case "questionarios":
                                 Questionario questionario = new Questionario(
@@ -260,7 +257,6 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                                         item.getInt("idConteudoPertencente")
                                 );
                                 listaQuestHistorico.add(questionario);
-                                adapterQuest.notifyDataSetChanged();
                                 break;
                         }
                     } catch (Exception e) {
@@ -272,64 +268,64 @@ public class HistoricoDeAcessos extends AppCompatActivity {
 
             Log.d("RESULTADOS", "Provas: " + listaProvasHistorico.size());
             int tamP = listaProvasHistorico.size();
-            if(tamP==0){
-                binding.linearHistoricoProvas.removeView(binding.recyclerViewHistoricoProvas);
-                LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
-                View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoProvas, false);
-
-                binding.linearHistoricoProvas.addView(newItemView);
+            if(listaProvasHistorico == null || tamP==0){
+                binding.linearHistoricoProvas.setVisibility(View.GONE);
+                binding.linearSEMHistoricoProvas.setVisibility(View.VISIBLE);
             }else{
+                binding.linearHistoricoProvas.setVisibility(View.VISIBLE);
+                binding.linearSEMHistoricoProvas.setVisibility(View.GONE);
                 configurarRecyclerHistoricoProvas();
             }
 
 
             Log.d("RESULTADOS", "Textos: " + listaTxtHistorico.size());
             int tamT = listaTxtHistorico.size();
-            if(tamT==0){
-                binding.linearHistoricoTextos.removeView(binding.recyclerViewHistoricoTexto);
-                LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
-                View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoTextos, false);
-
-                binding.linearHistoricoTextos.addView(newItemView);
+            if(listaTxtHistorico == null || tamT==0){
+                binding.linearHistoricoTextos.setVisibility(View.GONE);
+                binding.linearSEMHistoricoTexto.setVisibility(View.VISIBLE);
             }else{
+                binding.linearHistoricoTextos.setVisibility(View.VISIBLE);
+                binding.linearSEMHistoricoTexto.setVisibility(View.GONE);
                 configurarRecyclerHistoricoTxt();
             }
 
 
             Log.d("RESULTADOS", "Vídeos: " + listaVideoHistorico.size());
             int tamV = listaVideoHistorico.size();
-            if(tamV==0){
-                binding.linearHistoricoVideos.removeView(binding.recyclerViewHistoricoVideo);
-                LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
-                View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoVideos, false);
-
-                binding.linearHistoricoVideos.addView(newItemView);
+            if(listaVideoHistorico == null || tamV==0){
+                binding.linearHistoricoVideos.setVisibility(View.GONE);
+                binding.linearSEMHistoricoVideos.setVisibility(View.VISIBLE);
             }else{
+                binding.linearHistoricoVideos.setVisibility(View.VISIBLE);
+                binding.linearSEMHistoricoVideos.setVisibility(View.GONE);
                 configurarRecyclerHistoricoVideos();
             }
 
 
             Log.d("RESULTADOS", "Flashcards: " + listaFlashcardHistorico.size());
             int tamF = listaFlashcardHistorico.size();
-            if(tamF==0){
-                binding.linearHistoricoFlashcards.removeView(binding.recyclerViewHistoricoFlashcards);
-                LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
-                View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoFlashcards, false);
+            if(listaFlashcardHistorico == null || tamF==0){
+                binding.linearHistoricoFlashcards.setVisibility(View.GONE);
+                binding.linearSEMHistoricoFlashcards.setVisibility(View.VISIBLE);
 
-                binding.linearHistoricoFlashcards.addView(newItemView);
+                Log.d("VISIBILIDADE", "Visibilidade hist flash: "+binding.linearHistoricoFlashcards.getVisibility());
+                Log.d("VISIBILIDADE", "Visibilidade MSG SEM flash: "+binding.linearSEMHistoricoFlashcards.getVisibility());
+
             }else{
+                binding.linearHistoricoFlashcards.setVisibility(View.VISIBLE);
+                binding.linearSEMHistoricoFlashcards.setVisibility(View.GONE);
+
                 configurarRecyclerHistoricoFlashcards();
             }
 
             Log.d("RESULTADOS", "Questionários: " + listaQuestHistorico.size());
             int tamQ = listaQuestHistorico.size();
-            if(tamQ==0){
-                binding.linearHistoricoQuestionarios.removeView(binding.recyclerViewHistoricoQuestionario);
-                LayoutInflater inflater = LayoutInflater.from(HistoricoDeAcessos.this);
-                View newItemView = inflater.inflate(R.layout.msg_sem_historico, binding.linearHistoricoQuestionarios, false);
-
-                binding.linearHistoricoQuestionarios.addView(newItemView);
+            if(listaQuestHistorico == null || tamQ==0){
+                binding.linearHistoricoQuestionarios.setVisibility(View.GONE);
+                binding.linearSEMHistoricoQuestionario.setVisibility(View.VISIBLE);
             }else{
+                binding.linearHistoricoQuestionarios.setVisibility(View.VISIBLE);
+                binding.linearSEMHistoricoQuestionario.setVisibility(View.GONE);
                 configurarRecyclerHistoricoQuest();
             }
 

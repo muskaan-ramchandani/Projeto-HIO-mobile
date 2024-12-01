@@ -94,6 +94,27 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoFlashcards"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:visibility="gone"
+                android:gravity="center_horizontal|center_vertical">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoFlashcards"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum flashcard!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/txtProvasHistorico"
                 android:layout_width="wrap_content"
@@ -117,6 +138,27 @@
                     android:id="@+id/recyclerViewHistoricoProvas"
                     android:layout_width="375dp"
                     android:layout_height="130dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoProvas"
+                android:layout_width="375dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoProvas"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhuma prova!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -146,6 +188,27 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoQuestionario"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoQuestionario"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum questionário!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/txtTextosHistorico"
                 android:layout_width="wrap_content"
@@ -172,6 +235,27 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoTexto"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoTexto"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum texto!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/txtVideoHistorico"
                 android:layout_width="wrap_content"
@@ -195,6 +279,27 @@
                     android:id="@+id/recyclerViewHistoricoVideo"
                     android:layout_width="390dp"
                     android:layout_height="240dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoVideos"
+                android:layout_width="375dp"
+                android:layout_height="240dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoVideos"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum vídeo!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
