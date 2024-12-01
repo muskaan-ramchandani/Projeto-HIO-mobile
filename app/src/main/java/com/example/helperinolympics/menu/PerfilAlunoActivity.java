@@ -50,7 +50,16 @@ public class PerfilAlunoActivity extends Activity {
         PerfilAlunoActivity.FotoAlunoTask fotoAlunoTask = new PerfilAlunoActivity.FotoAlunoTask();
         fotoAlunoTask.execute(alunoCadastrado.getEmail());
 
-        new CarregaCorrecao(alunoCadastrado.getEmail()).execute();
+        new CarregaCorrecao(alunoCadastrado.getEmail(), new CarregaCorrecaoCallback() {
+            @Override public void onCorrecaoCarregada(int numeroAcertos, int numeroErros) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setData(numeroAcertos, numeroErros);
+                    }
+                });
+            }
+        }).execute();
 
         binding.btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +70,6 @@ public class PerfilAlunoActivity extends Activity {
                 finish();
             }
         });
-
-        setData(numeroA, numeroE);
 
         binding.btnHistoricoAcertos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +90,8 @@ public class PerfilAlunoActivity extends Activity {
                 finish(); //fechar activity
             }
         });
+
+        //setData(numeroA, numeroE);
 
     }
 
@@ -176,9 +185,12 @@ public class PerfilAlunoActivity extends Activity {
 
     private class CarregaCorrecao extends AsyncTask<Void, Void, List<String>> {
         String email;
+        private CarregaCorrecaoCallback callback;
 
-        public CarregaCorrecao(String email) {
+        public CarregaCorrecao(String email, CarregaCorrecaoCallback callback) {
             this.email = email;
+            this.callback = callback;
+
         }
 
         @Override
@@ -205,6 +217,8 @@ public class PerfilAlunoActivity extends Activity {
                         JSONObject jsonObject = new JSONObject(jsonString);
                         numeroA = jsonObject.getInt("totalAcertos");
                         numeroE = jsonObject.getInt("totalErros");
+
+                        callback.onCorrecaoCarregada(numeroA, numeroE);
 
                     } catch (Exception e) {
                         Log.d("ERRO", e.toString());
@@ -311,6 +325,17 @@ public class PerfilAlunoActivity extends Activity {
                 return null;
             }
         }
-
     }
+
+    public interface CarregaCorrecaoCallback {
+        void onCorrecaoCarregada(int numeroAcertos, int numeroErros);
+    }
+
+    public void onCorrecaoCarregada(final int numeroAcertos, final int numeroErros) {
+        runOnUiThread(new Runnable() {
+        @Override public void run() {
+            setData(numeroAcertos, numeroErros);
+        } });
+    }
+
 }
