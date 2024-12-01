@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="375dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center_horizontal|center_vertical">
+
+    <TextView
+        android:id="@+id/textViewSemHistorico"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_bold"
+        tools:text="Você não acessou nenhum item deste tipo!"
+        android:textAlignment="center"
+        android:textColor="#F44336"
+        android:textSize="16sp" />
+
+</LinearLayout>

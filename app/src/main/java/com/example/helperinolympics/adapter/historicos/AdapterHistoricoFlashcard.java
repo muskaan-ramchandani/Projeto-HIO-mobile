@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.Flashcard;
+import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 
 import java.util.List;
 
@@ -35,10 +36,10 @@ public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHisto
 
     public void onBindViewHolder(@NonNull AdapterHistoricoFlashcard.FlashcardHistoricoViewHolder holder, int position) {
         Flashcard flashcard = listaFlashcard.get(position);
-
+        holder.flash = flashcard;
 
         holder.conteudo.setText(flashcard.getTitulo());
-//        holder.userProf.setText(flashcard.getProfessorCadastrou());
+        holder.userProf.setText(flashcard.getProfQuePostou());
     }
 
 
@@ -50,6 +51,7 @@ public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHisto
 
     public class FlashcardHistoricoViewHolder extends RecyclerView.ViewHolder {
         TextView conteudo, userProf;
+        Flashcard flash;
 
         public FlashcardHistoricoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,8 +61,8 @@ public class AdapterHistoricoFlashcard extends RecyclerView.Adapter<AdapterHisto
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    FlashcardModelo notificationDialogFragment = new FlashcardModelo();
-//                    notificationDialogFragment.show(fragmentManager, "notificationDialog");
+                        FlashcardModelo notificationDialogFragment = new FlashcardModelo(flash);
+                        notificationDialogFragment.show(fragmentManager, "notificationDialog");
                 }
             });
 
