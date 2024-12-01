@@ -158,7 +158,7 @@ public class VideoActivity extends AppCompatActivity {
             Log.d("ERRO_ID_CONTEUDO", "O id do conteúdo está nulo");
         }
 
-        adapter=new AdapterVideo(listaVideo);
+        adapter=new AdapterVideo(listaVideo, alunoCadastrado);
         binding.recyclerviewVideo.setAdapter(adapter);
     }
 

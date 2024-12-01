@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Flashcard;
 import com.example.helperinolympics.modelos_sobrepostos.FlashcardModelo;
 
@@ -18,14 +20,14 @@ import java.util.List;
 public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.FlashcardViewHolder> {
     private List<Flashcard> listaFlashcard;
     private FragmentManager fragmentManager;
+    private Aluno alunoCadastrado;
 
-    // Constructor to initialize the list
-    public AdapterFlashcard(List<Flashcard> listaFlashcard, FragmentManager fragmentManager) {
+    public AdapterFlashcard(List<Flashcard> listaFlashcard, FragmentManager fragmentManager, Aluno alunoCadastrado) {
         this.listaFlashcard = listaFlashcard;
         this.fragmentManager = fragmentManager;
+        this.alunoCadastrado = alunoCadastrado;
     }
 
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
     public FlashcardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -70,6 +72,7 @@ public class AdapterFlashcard extends RecyclerView.Adapter<AdapterFlashcard.Flas
                 @Override
                 public void onClick(View v) {
                     FlashcardModelo notificationDialogFragment = new FlashcardModelo(flashcard);
+                    new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "Flashcard", String.valueOf(id));
                     notificationDialogFragment.show(fragmentManager, "notificationDialog");
                 }
             });

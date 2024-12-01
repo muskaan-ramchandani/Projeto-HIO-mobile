@@ -161,7 +161,7 @@ public class FlashcardActivity extends AppCompatActivity {
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        adapter=new AdapterFlashcard(listaFlashcard, fragmentManager);
+        adapter=new AdapterFlashcard(listaFlashcard, fragmentManager, alunoCadastrado);
         binding.recyclerviewFlashcard.setAdapter(adapter);
     }
 

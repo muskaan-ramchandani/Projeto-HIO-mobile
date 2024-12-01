@@ -59,17 +59,8 @@ public class QuestionarioCorrecaoActivity extends Activity {
         dataAtual = (Date) getIntent().getSerializableExtra("dataAtual");
 
         listaCorrecao();
-//
-//        binding.txtNumeroQuestaoCertas.setText(String.valueOf(qntdAcertos));
-//        binding.txtQuestoesTotais.setText("Questões de " + String.valueOf(qntdTotal));
-//
-//        if (qntdAcertos == 0) {
-//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipocomraiva);
-//        } else if (qntdAcertos < metadeValor) {
-//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoemo);
-//        } else if (qntdAcertos > metadeValor) {
-//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoalegredeolhosabertos);
-//        }
+
+        new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "Questionario", String.valueOf(quest.getId()));
 
         binding.btnEntendiCorrecao.setOnClickListener(new View.OnClickListener() {
             @Override

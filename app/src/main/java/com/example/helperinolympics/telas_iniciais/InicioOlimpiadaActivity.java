@@ -150,7 +150,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
     private void configurarRecyclerProvas() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        adapterProvasAnteriores= new AdapterProvasAnteriores(provas);
+        adapterProvasAnteriores= new AdapterProvasAnteriores(provas, alunoCadastrado);
         binding.recyclerViewProvasAnteriores.setLayoutManager(layoutManager);
         binding.recyclerViewProvasAnteriores.setHasFixedSize(true);
         binding.recyclerViewProvasAnteriores.setAdapter(adapterProvasAnteriores);

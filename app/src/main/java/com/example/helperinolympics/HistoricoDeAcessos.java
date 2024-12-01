@@ -371,7 +371,7 @@ public class HistoricoDeAcessos extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         binding.recyclerViewHistoricoProvas.setLayoutManager(layoutManager);
         binding.recyclerViewHistoricoProvas.setHasFixedSize(true);
-        adapterProvas=new AdapterProvasAnteriores(listaProvasHistorico);
+        adapterProvas=new AdapterProvasAnteriores(listaProvasHistorico, alunoCadastrado);
         binding.recyclerViewHistoricoProvas.setAdapter(adapterProvas);
 
         adapterProvas.notifyDataSetChanged();
@@ -382,7 +382,7 @@ public class HistoricoDeAcessos extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         binding.recyclerViewHistoricoVideo.setLayoutManager(layoutManager);
         binding.recyclerViewHistoricoVideo.setHasFixedSize(true);
-        adapterVideo=new AdapterVideo(listaVideoHistorico);
+        adapterVideo=new AdapterVideo(listaVideoHistorico, alunoCadastrado);
         binding.recyclerViewHistoricoVideo.setAdapter(adapterVideo);
 
         adapterVideo.notifyDataSetChanged();
