@@ -42,7 +42,6 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
     private static Date dataAtual;
 
     int posicaoSelecionada = -1;
-    private boolean alternativaSelecionada = false;
 
     public AdapterAlternativasQuestionario(List<Alternativas> listaAlternativas, Context context, Aluno alunoCadastrado, Date dataAtual) {
         this.listaAlternativas = listaAlternativas != null ? listaAlternativas : new ArrayList<>(); //Verificando se lista é nula
@@ -74,7 +73,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
         return listaAlternativas != null ? listaAlternativas.size() : 0;
     }
 
-    public class AlternativasQuestionarioViewHolder extends RecyclerView.ViewHolder {
+    public static class AlternativasQuestionarioViewHolder extends RecyclerView.ViewHolder {
         Button btnAlternativa;
         int posicao;
 
@@ -85,23 +84,22 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             btnAlternativa.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!alternativaSelecionada) {
-                        if (adapter.getPosicaoSelecionada() != posicao) {
-                            adapter.desmarcarSelecao();
-                            btnAlternativa.setSelected(true);
-                            btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_marcada);
-                            btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.textoSelecionadoForum));
-                            adapter.setPosicao(posicao);
-                            alternativaSelecionada = true;
-                        }
+                    Log.d("CLIQUE", "Opção foi clicada ");
+                    if(adapter.getPosicaoSelecionada() != posicao) {
+                        // Desmarca a opção anterior
+                        adapter.desmarcarSelecao();
+                        btnAlternativa.setSelected(true);
+                        btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_marcada);
+                        btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.textoSelecionadoForum));
+                        adapter.setPosicao(posicao); // Atualiza a posição selecionada no adapter
+                        Log.d("CLIQUE", "Botão marcado");
                     } else {
-                        if (adapter.getPosicaoSelecionada() == posicao) {
-                            btnAlternativa.setSelected(false);
-                            btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_desmarcada);
-                            btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.cinza));
-                            adapter.desmarcarSelecao();
-                            alternativaSelecionada = false;
-                        }
+                        // Se o botão já estava selecionado, desmarcar
+                        btnAlternativa.setSelected(false);
+                        btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_desmarcada);
+                        btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.cinza));
+                        adapter.desmarcarSelecao();
+                        Log.d("CLIQUE", "Botão desmarcado");
                     }
                 }
             });
@@ -132,7 +130,6 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
 
     public void desmarcarSelecao() {
         this.posicaoSelecionada = -1;
-        this.alternativaSelecionada = false;
         notifyDataSetChanged();
     }
 

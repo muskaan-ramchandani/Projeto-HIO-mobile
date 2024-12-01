@@ -51,11 +51,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/fotoPerfilPosicao2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        tools:srcCompat="@drawable/iconeperfilvazioredonda" />
+                        tools:src="@drawable/iconeperfilvazioredonda" />
 
                     <TextView
                         android:id="@+id/txtUserPosicao2"
@@ -113,11 +113,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/fotoPerfilPosicao1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        tools:srcCompat="@drawable/iconeperfilvazioredonda" />
+                        tools:src="@drawable/iconeperfilvazioredonda" />
 
                     <TextView
                         android:id="@+id/txtUserPosicao1"
@@ -175,11 +175,11 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/fotoPerfilPosicao3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        tools:srcCompat="@drawable/iconeperfilvazioredonda" />
+                        tools:src="@drawable/iconeperfilvazioredonda" />
 
                     <TextView
                         android:id="@+id/txtUserPosicao3"

@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.example.helperinolympics.AcertosSemanaisActivity;
 import com.example.helperinolympics.ErrosSemanaisActivity;
 import com.example.helperinolympics.model.Aluno;
@@ -29,14 +31,14 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Calendar;
 import java.util.List;
 
 public class PerfilAlunoActivity extends Activity {
 
     private Aluno alunoCadastrado;
     private ActivityPerfilAlunoBinding binding;
-    private Integer numeroAcertos;
-    private Integer numeroErros;
+    private int numeroA, numeroE;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -48,6 +50,8 @@ public class PerfilAlunoActivity extends Activity {
         PerfilAlunoActivity.FotoAlunoTask fotoAlunoTask = new PerfilAlunoActivity.FotoAlunoTask();
         fotoAlunoTask.execute(alunoCadastrado.getEmail());
 
+        new CarregaCorrecao(alunoCadastrado.getEmail()).execute();
+
         binding.btnIniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +61,8 @@ public class PerfilAlunoActivity extends Activity {
                 finish();
             }
         });
+
+        setData(numeroA, numeroE);
 
         binding.btnHistoricoAcertos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +84,6 @@ public class PerfilAlunoActivity extends Activity {
             }
         });
 
-        //dados gráfico
-        new CarregaCorrecao(alunoCadastrado.getEmail()).execute();
     }
 
     private void configuraDadosPerfil(Aluno alunoCadastrado, Bitmap fotoBitmap) {
@@ -95,26 +99,64 @@ public class PerfilAlunoActivity extends Activity {
         binding.txtEmail.setText(alunoCadastrado.getEmail());
     }
 
-    private void setData(Integer numeroAcertos, Integer numeroErros){
-        //fazer um if para verificar se há dados para comparar
-        if((numeroAcertos==null)&&(numeroErros==null)){
-            PieChart grafico = findViewById(R.id.graficoPizzaErrosAcertos);
-            LinearLayout linearLegendas = findViewById(R.id.linearLayoutLegendaGrafico);
+    private void setData(int numeroAcertos, int numeroErros){
+        Log.d("VALORES", "Qntd acertos: "+numeroAcertos+ "   Qntd Erros: "+numeroErros);
 
-            binding.linearLayoutGraficoAcertosEErros.removeView(grafico);
-            binding.linearLayoutGraficoAcertosEErros.removeView(linearLegendas);
-            binding.btnHistoricoAcertos.setEnabled(true);
-            binding.btnHistoricoErros.setEnabled(true);
+        if(numeroAcertos==0 && numeroErros==0){
+            Log.d("SET_DATA", "Entrou no bloco if - Nenhum dado para exibir no gráfico");
+
+            PieChart grafico = findViewById(R.id.graficoPizzaErrosAcertos);
+
+            // Verificar se os views não são null antes de remover
+            if (grafico != null) {
+                binding.linearLayoutGraficoAcertosEErros.removeView(grafico);
+            }
+
+            LinearLayout linearLegendas = findViewById(R.id.linearLayoutLegendaGrafico);
+            if (linearLegendas != null) {
+                binding.linearLayoutGraficoAcertosEErros.removeView(linearLegendas);
+            }
+
+            // Adicionar logs para cada remoção
+            View txtLegendaAcertos = findViewById(R.id.txtLegendaAcertos);
+            if (txtLegendaAcertos != null) {
+                binding.linearLayoutGraficoAcertosEErros.removeView(txtLegendaAcertos);
+                Log.d("SET_DATA", "Removido: txtLegendaAcertos");
+            }
+
+            View viewLegendaAcertos = findViewById(R.id.viewLegendaAcertos);
+            if (viewLegendaAcertos != null) {
+                binding.linearLayoutGraficoAcertosEErros.removeView(viewLegendaAcertos);
+                Log.d("SET_DATA", "Removido: viewLegendaAcertos");
+            }
+
+            View txtLegendaErros = findViewById(R.id.txtLegendaErros);
+            if (txtLegendaErros != null) {
+                binding.linearLayoutGraficoAcertosEErros.removeView(txtLegendaErros);
+                Log.d("SET_DATA", "Removido: txtLegendaErros");
+            }
+
+            View viewLegendaErros = findViewById(R.id.viewLegendaErros);
+            if (viewLegendaErros != null) {
+                binding.linearLayoutGraficoAcertosEErros.removeView(viewLegendaErros);
+                Log.d("SET_DATA", "Removido: viewLegendaErros");
+            }
 
             LayoutInflater inflater = LayoutInflater.from(this);
             View newItemView = inflater.inflate(R.layout.msg_sem_dados_grafico, binding.linearLayoutGraficoAcertosEErros, false);
 
             binding.linearLayoutGraficoAcertosEErros.addView(newItemView);
-            binding.btnHistoricoAcertos.setEnabled(false); //desativando
-            binding.btnHistoricoAcertos.setAlpha(0.5f); //escurecendo
-            binding.btnHistoricoErros.setEnabled(false); //desativando
-            binding.btnHistoricoErros.setAlpha(0.5f); //escurecendo
+            binding.btnHistoricoAcertos.setEnabled(false); // desativando
+            binding.btnHistoricoAcertos.setAlpha(0.5f); // escurecendo
+            binding.btnHistoricoErros.setEnabled(false); // desativando
+            binding.btnHistoricoErros.setAlpha(0.5f); // escurecendo
+
+            Log.d("SET_DATA", "Views atualizados para o caso sem dados");
+
         }else{
+            Log.d("SET_DATA", "Entrou no bloco else - Dados disponíveis");
+            binding.btnHistoricoAcertos.setEnabled(true);
+            binding.btnHistoricoErros.setEnabled(true);
 
             String valorAcerto = String.valueOf(numeroAcertos);
             binding.txtLegendaAcertos.setText("Acertos ("+valorAcerto+")");
@@ -161,11 +203,8 @@ public class PerfilAlunoActivity extends Activity {
 
                     try {
                         JSONObject jsonObject = new JSONObject(jsonString);
-
-                        numeroAcertos = jsonObject.getInt("totalAcertos");
-                        numeroErros = jsonObject.getInt("totalErros");
-
-                        setData(numeroAcertos, numeroErros);
+                        numeroA = jsonObject.getInt("totalAcertos");
+                        numeroE = jsonObject.getInt("totalErros");
 
                     } catch (Exception e) {
                         Log.d("ERRO", e.toString());
@@ -196,6 +235,7 @@ public class PerfilAlunoActivity extends Activity {
         }
 
     }
+
 
     public class FotoAlunoTask extends AsyncTask<String, Void, Bitmap> {
 
