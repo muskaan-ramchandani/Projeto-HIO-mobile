@@ -25,6 +25,7 @@ import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Olimpiada;
 import com.example.helperinolympics.modelos_sobrepostos.CadastrarNovasOlimpiadas;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -58,6 +59,8 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         drawerLayout = binding.drawerLayout;
         navView = binding.navView;
 
+        configurarRecyclerOlimpiadas();
+
         //Função dos botoes inferiores
         binding.btnAcessarRanking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,86 +92,76 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             }
         });
 
-     navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-         @Override
-         public boolean onNavigationItemSelected(MenuItem item) {
-             // Fecha o drawer quando um item é selecionado
-             drawerLayout.closeDrawers();
-
-             int itemID= item.getItemId();
-
-             if(itemID == R.id.nav_perfil_aluno){
-                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class);
-                 intent.putExtra("alunoCadastrado", alunoCadastrado);
-                 startActivity(intent);
-                 finish();
-
-                 return true;
-             }else if(itemID == R.id.nav_forum){
-                 Intent intentForum = new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class);
-                 intentForum.putExtra("alunoCadastrado", alunoCadastrado);
-                 startActivity(intentForum);
-                 finish();
-
-                 return true;
-             }else if(itemID == R.id.nav_manual){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
-                 finish();
-
-                 return true;
-             }else if(itemID == R.id.nav_configuracoes){
-                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
-                 intent.putExtra("alunoCadastrado", alunoCadastrado);
-                 startActivity(intent);
-                 finish();
-
-                 return true;
-             }else if(itemID == R.id.nav_sair){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, TelaLoginActivity.class));
-                 finish();
-                 return true;
-             }else{
-                 return false;
-             }
-         }
-     });
-
-     //extras
-        binding.adicionarOlimpiada.setOnClickListener(new View.OnClickListener() {
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                CadastrarNovasOlimpiadas notificationDialogFragment = new CadastrarNovasOlimpiadas(alunoCadastrado, new CadastrarNovasOlimpiadas.OnDialogDismissListener() {
-                    @Override
-                    public void onDialogDismissed() {
-                        configurarRecyclerOlimpiadas(); // Atualizar a lista
-                    }
-                });
-                notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
+            public boolean onNavigationItemSelected(MenuItem item) {
+                // Fecha o drawer quando um item é selecionado
+                drawerLayout.closeDrawers();
+
+                int itemID= item.getItemId();
+
+                if(itemID == R.id.nav_perfil_aluno){
+                    Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoCadastrado);
+                    startActivity(intent);
+                    finish();
+
+                    return true;
+                }else if(itemID == R.id.nav_forum){
+                    Intent intentForum = new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class);
+                    intentForum.putExtra("alunoCadastrado", alunoCadastrado);
+                    startActivity(intentForum);
+                    finish();
+
+                    return true;
+                }else if(itemID == R.id.nav_manual){
+                    startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
+                    finish();
+
+                    return true;
+                }else if(itemID == R.id.nav_configuracoes){
+                    Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoCadastrado);
+                    startActivity(intent);
+                    finish();
+
+                    return true;
+                }else if(itemID == R.id.nav_sair){
+                    startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, TelaLoginActivity.class));
+                    finish();
+                    return true;
+                }else{
+                    return false;
+                }
             }
         });
 
-        configurarRecyclerOlimpiadas();
+        //extras
+        binding.adicionarOlimpiada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CadastrarNovasOlimpiadas notificationDialogFragment = new CadastrarNovasOlimpiadas(alunoCadastrado, InicialAlunoMenuDeslizanteActivity.this);
+                notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
+            }
+        });
+    }
+
+    public void configurarRecyclerOlimpiadas() {
+        adapter = new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.recyclerViewTelaInicialOlimpiadas.setLayoutManager(layoutManager);
+        binding.recyclerViewTelaInicialOlimpiadas.setHasFixedSize(true);
+        binding.recyclerViewTelaInicialOlimpiadas.setAdapter(adapter);
+
+        new OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        configurarRecyclerOlimpiadas();
+
     }
-
-    public void configurarRecyclerOlimpiadas() {
-        if (adapter == null) {
-            adapter = new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            binding.recyclerViewTelaInicialOlimpiadas.setLayoutManager(layoutManager);
-            binding.recyclerViewTelaInicialOlimpiadas.setHasFixedSize(true);
-            binding.recyclerViewTelaInicialOlimpiadas.setAdapter(adapter);
-        }
-
-        new OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
-    }
-
 
     private class OlimpiadasSelecionadasDownload extends AsyncTask<String, Void, List<Olimpiada>> {
 
@@ -260,5 +253,9 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         }
     }
 
+    public void atualizaRecyclerPosAdicionar(ArrayList<Olimpiada> listaEscolhidas){
+        olimpiadas.addAll(listaEscolhidas);
+        configurarRecyclerOlimpiadas();
+    }
 
 }

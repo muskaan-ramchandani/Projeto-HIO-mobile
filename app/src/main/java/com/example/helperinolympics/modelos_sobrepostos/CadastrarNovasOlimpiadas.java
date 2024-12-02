@@ -39,48 +39,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CadastrarNovasOlimpiadas  extends DialogFragment {
+public class CadastrarNovasOlimpiadas extends DialogFragment {
     private Aluno alunoCadastrado;
     private Context contexto;
     private RecyclerView recyclerViewEscolhaMaisOlimpiadas;
     private List<Olimpiada> listaOlimpiadasOpcoes = new ArrayList<>();
     private AdapterEscolhaOlimpiadas adapter = new AdapterEscolhaOlimpiadas(listaOlimpiadasOpcoes);
 
-    public CadastrarNovasOlimpiadas(Aluno alunoCadastrado, Context contexto){
+    public CadastrarNovasOlimpiadas(Aluno alunoCadastrado, Context contexto) {
         this.alunoCadastrado = alunoCadastrado;
         this.contexto = contexto;
     }
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_adiciona_mais_olimpiadas, container, false);
 
         this.recyclerViewEscolhaMaisOlimpiadas = view.findViewById(R.id.recyclerViewEscolhaMaisOlimpiadas);
 
-        view.findViewById(R.id.btnFecharAdicionarMaisOlimpiadas).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        view.findViewById(R.id.btnFecharAdicionarMaisOlimpiadas).setOnClickListener(v -> dismiss());
 
-        view.findViewById(R.id.btnFinalizarEscolha).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ArrayList<Olimpiada> listaEscolhidas = new ArrayList<>(adapter.getListaEscolhidas());
-
-                //deve ter pelo menos 1 escolha de olimpíada
-                if(!listaEscolhidas.isEmpty()){
-                    new CadastrarOlimpiadasSelecionadas().execute(listaEscolhidas);
-                }else{
-                    Toast.makeText(contexto, "Você deve escolher pelo menos uma olimpíada para prosseguir.", Toast.LENGTH_LONG);
-                }
+        view.findViewById(R.id.btnFinalizarEscolha).setOnClickListener(v -> {
+            ArrayList<Olimpiada> listaEscolhidas = new ArrayList<>(adapter.getListaEscolhidas());
+            if (!listaEscolhidas.isEmpty()) {
+                new CadastrarOlimpiadasSelecionadas().execute(listaEscolhidas);
+            } else {
+                Toast.makeText(contexto, "Você deve escolher pelo menos uma olimpíada para prosseguir.", Toast.LENGTH_LONG).show();
             }
         });
 
         return view;
     }
 
+    @Override
     public void onStart() {
         super.onStart();
         if (getDialog() != null) {
@@ -105,16 +96,10 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
         OlimpiadaNaoSelecionadaDownload olimpDownload = new OlimpiadaNaoSelecionadaDownload();
         olimpDownload.execute(alunoCadastrado.getEmail());
 
-        adapter.notifyDataSetChanged(); //atualizar o recycler
+        adapter.notifyDataSetChanged(); // Atualizar o recycler
     }
 
     private class OlimpiadaNaoSelecionadaDownload extends AsyncTask<String, Void, List<Olimpiada>> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
         @Override
         protected void onPostExecute(List<Olimpiada> olimpiadas) {
             super.onPostExecute(olimpiadas);
@@ -125,7 +110,6 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
         @Override
         protected List<Olimpiada> doInBackground(String... params) {
             List<Olimpiada> olimpiadas = new ArrayList<>();
-            Log.d("CONEXAO", "Tentando fazer download");
             try {
                 String emailAluno = params[0];
                 URL url = new URL("http://10.0.0.64:8086/phpHio/carregaOlimpiadasParaAdicionar.php?email=" + emailAluno);
@@ -136,11 +120,9 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
                 conexao.setDoInput(true);
                 conexao.setDoOutput(false);
                 conexao.connect();
-                Log.d("CONEXAO", "Conexão estabelecida");
                 if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     InputStream in = conexao.getInputStream();
                     String jsonString = converterParaJSONString(in);
-                    Log.d("DADOS", jsonString);
                     olimpiadas.addAll(converterParaList(jsonString));
                 }
             } catch (Exception e) {
@@ -159,15 +141,12 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
                     Olimpiada olimp = new Olimpiada();
                     olimp.setNome(olimpJSON.getString("nome"));
                     olimp.setSigla(olimpJSON.getString("sigla"));
-
                     String nomeDrawable = olimpJSON.getString("icone");
                     Resources resources = contexto.getResources();
                     int drawableId = resources.getIdentifier(nomeDrawable, "drawable", contexto.getPackageName());
                     olimp.setIconeOlimp(drawableId != 0 ? drawableId : R.drawable.baseline_disabled_by_default_24);
-
                     olimp.setCor(olimpJSON.getString("cor"));
                     olimpiadas.add(olimp);
-                    Log.d("Olimpiada", olimpiadas.toString());
                 }
             } catch (Exception e) {
                 Log.d("ERRO", e.toString());
@@ -194,12 +173,10 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
         @Override
         protected String doInBackground(List<Olimpiada>... olimpSelecao) {
             StringBuilder result = new StringBuilder();
-            Log.d("CONEXAO", "Tentando cadastro de olimpíadas selecionadas");
-
             List<Olimpiada> olimpiadasSelecionadas = olimpSelecao[0];
 
             try {
-                for(Olimpiada olimp : olimpiadasSelecionadas){
+                for (Olimpiada olimp : olimpiadasSelecionadas) {
                     URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraOlimpiadasSelecionadas.php");
                     HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                     conexao.setReadTimeout(1500);
@@ -208,7 +185,6 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
                     conexao.setDoInput(true);
                     conexao.setDoOutput(true);
                     conexao.connect();
-                    Log.d("CONEXAO", "Conexão estabelecida");
 
                     String parametros = "sigla=" + olimp.getSigla() +
                             "&emailAluno=" + alunoCadastrado.getEmail();
@@ -225,13 +201,10 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
                     }
                     reader.close();
                 }
-
             } catch (Exception e) {
                 Log.e("Erro", e.getMessage());
                 return null;
             }
-
-
             return result.toString();
         }
 
@@ -241,19 +214,23 @@ public class CadastrarNovasOlimpiadas  extends DialogFragment {
                 try {
                     JSONObject jsonResponse = new JSONObject(result);
                     String message = jsonResponse.getString("message");
-
                     Toast.makeText(contexto, message, Toast.LENGTH_LONG).show();
-
                     if (jsonResponse.getString("status").equals("success")) {
+
+                        InicialAlunoMenuDeslizanteActivity activity = (InicialAlunoMenuDeslizanteActivity) getActivity();
+                        ArrayList<Olimpiada> listaOlimpiadasNovas = new ArrayList<>();
+                        listaOlimpiadasNovas.addAll(adapter.getListaEscolhidas());
+
+                        activity.atualizaRecyclerPosAdicionar(listaOlimpiadasNovas);
+
                         dismiss();
                         Toast.makeText(contexto, "Novas olimpíadas cadastradas com sucesso!", Toast.LENGTH_LONG).show();
                     }
-
                 } catch (Exception e) {
                     Log.e("Erro JSON", e.getMessage());
                 }
             }
         }
     }
-
 }
+
