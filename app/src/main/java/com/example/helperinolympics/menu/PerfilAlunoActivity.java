@@ -13,10 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.appcompat.widget.AppCompatButton;
-
-import com.example.helperinolympics.AcertosSemanaisActivity;
-import com.example.helperinolympics.ErrosSemanaisActivity;
+import com.example.helperinolympics.AcertosActivity;
+import com.example.helperinolympics.ErrosActivity;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.telas_iniciais.InicialAlunoMenuDeslizanteActivity;
 import com.example.helperinolympics.R;
@@ -31,7 +29,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Calendar;
 import java.util.List;
 
 public class PerfilAlunoActivity extends Activity {
@@ -74,7 +71,7 @@ public class PerfilAlunoActivity extends Activity {
         binding.btnHistoricoAcertos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PerfilAlunoActivity.this, AcertosSemanaisActivity.class);
+                Intent intent = new Intent(PerfilAlunoActivity.this, AcertosActivity.class);
                 intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish(); //fechar activity
@@ -84,7 +81,7 @@ public class PerfilAlunoActivity extends Activity {
         binding.btnHistoricoErros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PerfilAlunoActivity.this, ErrosSemanaisActivity.class);
+                Intent intent = new Intent(PerfilAlunoActivity.this, ErrosActivity.class);
                 intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish(); //fechar activity

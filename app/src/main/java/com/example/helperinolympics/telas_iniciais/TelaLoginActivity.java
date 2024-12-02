@@ -85,12 +85,14 @@ public class TelaLoginActivity extends AppCompatActivity {
             Log.d("CONEXAO", "Tentando fazer login");
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/validaLoginAluno.php?email=" + email + "&senha=" + senha);
+                URL url = new URL("https://hio.ct.ws/phpHio/validaLoginAluno.php?email=" + email + "&senha=" + senha);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-                conexao.setReadTimeout(1500);
-                conexao.setConnectTimeout(500);
+                conexao.setReadTimeout(3000);
+                conexao.setConnectTimeout(3000);
                 conexao.setRequestMethod("GET");
                 conexao.setDoInput(true);
+                conexao.setRequestProperty("User-Agent", "AndroidApp");
+                conexao.setRequestProperty("Accept", "application/json");
                 conexao.connect();
                 Log.d("CONEXAO", "Conexão estabelecida");
 
@@ -158,13 +160,15 @@ public class TelaLoginActivity extends AppCompatActivity {
             Log.d("CONEXAO", "Tentando retornar dados do aluno");
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaAlunoPorEmail.php?email=" + email);
+                URL url = new URL("https://hio.ct.ws/phpHio/retornaAlunoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
                 conexao.setRequestMethod("GET");
                 conexao.setDoInput(true);
                 conexao.setDoOutput(false);
+                conexao.setRequestProperty("User-Agent", "AndroidApp");
+                conexao.setRequestProperty("Accept", "application/json");
                 conexao.connect();
                 Log.d("CONEXAO", "Conexão estabelecida");
 

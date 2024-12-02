@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoricoDeAcessos"
+    android:fitsSystemWindows="true"
     android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar

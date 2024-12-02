@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".cadastros.CadastroActivity">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <ImageButton
         android:id="@+id/btnVoltarAEscolhaAlunoProf"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
         android:scaleType="fitCenter"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/btnvoltar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_gravity="start"/>
 
     <TextView
         android:id="@+id/txtCadastreSe"
@@ -30,28 +30,18 @@
         android:textSize="38sp"
         android:textColor="#49688D"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.069" />
+        android:layout_marginTop="20dp"/>
 
     <LinearLayout
         android:id="@+id/linearDados"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="340dp"
         android:orientation="vertical"
-        android:layout_marginStart="6dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCadastreSe">
+        android:layout_marginTop="25dp">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:layout_marginBottom="6dp"
             android:gravity="center_vertical|center_horizontal"
@@ -61,24 +51,26 @@
                 android:id="@+id/imageViewNome"
                 android:layout_width="65dp"
                 android:layout_height="57dp"
+                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/iconenome" />
 
             <EditText
                 android:id="@+id/editTextNomeCompleto"
-                android:layout_width="223dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:inputType="text"
                 android:hint="Nome completo"
                 android:textColorHint="#858585"
-                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:background="@drawable/edittext_personalizado_1"
-                android:paddingStart="15dp" />
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_marginEnd="10dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal"
@@ -88,26 +80,28 @@
                 android:id="@+id/imageViewUser"
                 android:layout_width="65dp"
                 android:layout_height="57dp"
+                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/iconeuser" />
 
             <EditText
                 android:id="@+id/editTextNomeUsuario"
                 android:hint="Nome de usuário"
                 android:textColorHint="#858585"
-                android:layout_width="223dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:ems="10"
-                android:layout_marginStart="10dp"
                 android:inputType="text"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:background="@drawable/edittext_personalizado_1"
-                android:paddingStart="15dp" />
+                android:layout_marginEnd="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:background="@drawable/edittext_personalizado_1" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal"
@@ -117,24 +111,26 @@
                 android:id="@+id/imageViewEmail"
                 android:layout_width="65dp"
                 android:layout_height="57dp"
+                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/iconeemail" />
 
             <EditText
                 android:id="@+id/editTextEmail"
-                android:layout_width="223dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:hint="Email"
                 android:textColorHint="#858585"
-                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:background="@drawable/edittext_personalizado_1"
-                android:paddingStart="15dp" /></LinearLayout>
+                android:layout_marginEnd="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:background="@drawable/edittext_personalizado_1" /></LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal"
@@ -144,24 +140,26 @@
                 android:id="@+id/imageViewSenha"
                 android:layout_width="65dp"
                 android:layout_height="57dp"
+                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/iconesenha" />
 
             <EditText
                 android:id="@+id/editTextSenha"
-                android:layout_width="223dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="textPassword"
                 android:hint="Senha"
                 android:textColorHint="#858585"
-                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:background="@drawable/edittext_personalizado_1"
-                android:paddingStart="15dp" /></LinearLayout>
+                android:layout_marginEnd="10dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:background="@drawable/edittext_personalizado_1" /></LinearLayout>
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="62dp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal"
@@ -171,11 +169,12 @@
                 android:id="@+id/imageViewConfirma"
                 android:layout_width="65dp"
                 android:layout_height="57dp"
+                android:layout_marginStart="10dp"
                 app:srcCompat="@drawable/iconeconfirmasenha" />
 
             <EditText
                 android:id="@+id/editTextConfirmarSenha"
-                android:layout_width="223dp"
+                android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="textPassword"
@@ -183,50 +182,31 @@
                 android:textColorHint="#858585"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/edittext_personalizado_1"
-                android:paddingStart="15dp" /></LinearLayout>
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp" /></LinearLayout>
     </LinearLayout>
-
-
-    <ImageView
-        android:id="@+id/imgHipoCadastreSe"
-        android:layout_width="186dp"
-        android:layout_height="175dp"
-        android:scaleType="fitCenter"
-        android:layout_marginTop="555dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/hipocommedalhas" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="191dp"
-        android:layout_height="194dp"
-        android:layout_marginStart="296dp"
-        android:layout_marginBottom="624dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/mancharoxa" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnFinalizarCadastro"
-        android:layout_width="151dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="50dp"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/fundo_botoes_roxos"
         android:fontFamily="@font/open_sans_bold"
-        android:text="Finalizar"
+        android:text="Finalizar cadastro"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearDados" />
+        android:textSize="18sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imgHipoCadastreSe"
+        android:layout_width="106dp"
+        android:layout_height="185dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="start"
+        app:srcCompat="@drawable/hipocommedalhas" />
+
+
+</LinearLayout>

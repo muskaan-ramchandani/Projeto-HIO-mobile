@@ -11,9 +11,10 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="false"
         android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_app_round"
@@ -147,7 +148,7 @@
 
         <!--Telas sem pasta para classificar-->
         <activity
-            android:name=".AcertosSemanaisActivity"
+            android:name=".AcertosActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
@@ -162,7 +163,7 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
-            android:name=".ErrosSemanaisActivity"
+            android:name=".ErrosActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
