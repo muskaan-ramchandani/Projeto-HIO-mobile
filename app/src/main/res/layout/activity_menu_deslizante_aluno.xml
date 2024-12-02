@@ -67,6 +67,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/adicionarOlimpiada"
+            android:layout_width="160dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="84dp"
+            android:layout_marginStart="45dp"
+            android:background="@drawable/fundo_botoes_roxos"
+            android:fontFamily="@font/questrial"
+            android:text="Adicionar olimpíada"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/txtMinhasOlimp"/>
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarBotoesInferiores"
             android:layout_width="match_parent"

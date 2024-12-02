@@ -3,7 +3,6 @@ package com.example.helperinolympics.telas_iniciais;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,9 +22,9 @@ import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
-import com.example.helperinolympics.menu.SairActivity;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Olimpiada;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarNovasOlimpiadas;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -134,21 +133,42 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
          }
      });
 
+     //extras
+        binding.adicionarOlimpiada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CadastrarNovasOlimpiadas notificationDialogFragment = new CadastrarNovasOlimpiadas(alunoCadastrado, new CadastrarNovasOlimpiadas.OnDialogDismissListener() {
+                    @Override
+                    public void onDialogDismissed() {
+                        configurarRecyclerOlimpiadas(); // Atualizar a lista
+                    }
+                });
+                notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
+            }
+        });
+
         configurarRecyclerOlimpiadas();
     }
 
-    public void configurarRecyclerOlimpiadas(){
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
-        binding.recyclerViewTelaInicialOlimpiadas.setLayoutManager(layoutManager);
-        binding.recyclerViewTelaInicialOlimpiadas.setHasFixedSize(true);
-        binding.recyclerViewTelaInicialOlimpiadas.setAdapter(adapter);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        configurarRecyclerOlimpiadas();
+    }
+
+    public void configurarRecyclerOlimpiadas() {
+        if (adapter == null) {
+            adapter = new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            binding.recyclerViewTelaInicialOlimpiadas.setLayoutManager(layoutManager);
+            binding.recyclerViewTelaInicialOlimpiadas.setHasFixedSize(true);
+            binding.recyclerViewTelaInicialOlimpiadas.setAdapter(adapter);
+        }
 
         new OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
-
-        adapter.notifyDataSetChanged(); //atualizar o recycler
     }
+
 
     private class OlimpiadasSelecionadasDownload extends AsyncTask<String, Void, List<Olimpiada>> {
 
@@ -188,10 +208,9 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         }
 
         @Override
-        protected void onPostExecute(List<Olimpiada> olimpiadas) {
-            super.onPostExecute(olimpiadas);
-            adapter.atualizarOpcoes(olimpiadas);
-            adapter.notifyDataSetChanged();
+        protected void onPostExecute(List<Olimpiada> novasOlimpiadas) {
+            super.onPostExecute(novasOlimpiadas);
+            adapter.atualizarOpcoes(novasOlimpiadas);
         }
 
         private String converterParaJSONString(InputStream in) {

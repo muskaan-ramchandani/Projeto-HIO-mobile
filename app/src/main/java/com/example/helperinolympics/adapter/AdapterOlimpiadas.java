@@ -97,6 +97,7 @@ public class AdapterOlimpiadas extends RecyclerView.Adapter<AdapterOlimpiadas.Ol
     public void atualizarOpcoes(List<Olimpiada> olimpiadas){
         this.listaOlimpiadas.clear();
         this.listaOlimpiadas.addAll(olimpiadas);
-        this.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
+
 }
