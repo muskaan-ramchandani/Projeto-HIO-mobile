@@ -14,6 +14,7 @@ eazegraph = "1.2.5l"
 nineoldandroids = "2.4.0"
 activity = "1.8.0"
 circleimageview = "2.1.0"
+jsoup= "1.14.3"
 
 
 [libraries]
@@ -32,6 +33,8 @@ nineoldandroids = { group = "com.nineoldandroids", name = "library", version = "
 mpandroidchart = { group = "com.github.PhilJay", name = "MPAndroidChart", version = "v3.1.0" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version = "2.1.0" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
