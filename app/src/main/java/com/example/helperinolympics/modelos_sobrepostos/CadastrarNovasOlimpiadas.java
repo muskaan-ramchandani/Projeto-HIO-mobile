@@ -112,7 +112,7 @@ public class CadastrarNovasOlimpiadas extends DialogFragment {
             List<Olimpiada> olimpiadas = new ArrayList<>();
             try {
                 String emailAluno = params[0];
-                URL url = new URL("http://10.0.0.64:8086/phpHio/carregaOlimpiadasParaAdicionar.php?email=" + emailAluno);
+                URL url = new URL("https://hio.lat/carregaOlimpiadasParaAdicionar.php?email=" + emailAluno);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -177,7 +177,7 @@ public class CadastrarNovasOlimpiadas extends DialogFragment {
 
             try {
                 for (Olimpiada olimp : olimpiadasSelecionadas) {
-                    URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraOlimpiadasSelecionadas.php");
+                    URL url = new URL("https://hio.lat/cadastraOlimpiadasSelecionadas.php");
                     HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                     conexao.setReadTimeout(1500);
                     conexao.setConnectTimeout(500);

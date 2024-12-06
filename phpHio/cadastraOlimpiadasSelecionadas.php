@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost"; 
-$username = "root";        
-$password = "root";            
-$dbname = "hio";       
+$username = "u740411060_user";        
+$password = "OWYzZ?o2";            
+$dbname = "u740411060_hio";     
 
 //sigla VARCHAR(10) NOT NULL,
 //emailAluno VARCHAR(100) NOT NULL,

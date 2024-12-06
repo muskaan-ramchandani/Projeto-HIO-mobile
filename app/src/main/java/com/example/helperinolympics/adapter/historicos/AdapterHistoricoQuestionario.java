@@ -95,7 +95,7 @@ public class AdapterHistoricoQuestionario extends RecyclerView.Adapter<AdapterHi
 
             List<Questao> questoes = new ArrayList<>();
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaQuestoesPorQuestionario.php?idQuestionarioPertencente=" +
+                String urlString = "https://hio.lat/carregaQuestoesPorQuestionario.php?idQuestionarioPertencente=" +
                         URLEncoder.encode(String.valueOf(idQuestionario), "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

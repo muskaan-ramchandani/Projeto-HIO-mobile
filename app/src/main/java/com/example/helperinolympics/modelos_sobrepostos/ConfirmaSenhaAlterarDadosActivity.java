@@ -134,7 +134,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarNomeCompletoAluno.php");
+                URL url = new URL("https://hio.lat/alterarNomeCompletoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -207,7 +207,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarNomeUsuarioAluno.php");
+                URL url = new URL("https://hio.lat/alterarNomeUsuarioAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -280,7 +280,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarEmailAluno.php");
+                URL url = new URL("https://hio.lat/alterarEmailAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);
@@ -354,7 +354,7 @@ public class ConfirmaSenhaAlterarDadosActivity extends DialogFragment {
         protected String doInBackground(Void... voids) {
             String result = null;
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarFotoAluno.php");
+                URL url = new URL("https://hio.lat/alterarFotoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);

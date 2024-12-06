@@ -175,7 +175,7 @@ public class AcertosActivity extends Activity {
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaAcertosAluno.php?emailAluno=" + emailAluno +
+                String urlString = "https://hio.lat/carregaAcertosAluno.php?emailAluno=" + emailAluno +
                         "&dataInicialSemana1=" + inicioSemana1 +
                         "&dataFinalSemana1=" + fimSemana1 +
                         "&dataInicialSemana2=" + inicioSemana2 +

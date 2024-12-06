@@ -89,7 +89,7 @@ public class HistoricoDeAcessos extends AppCompatActivity {
             resultados = new HashMap<>();
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/carregaHistoricoAcessosAluno.php?emailAluno=" + emailAluno);
+                URL url = new URL("https://hio.lat/carregaHistoricoAcessosAluno.php?emailAluno=" + emailAluno);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(15000);
                 conexao.setConnectTimeout(15000);

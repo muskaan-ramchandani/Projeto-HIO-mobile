@@ -218,7 +218,7 @@ public class AdapterPerguntasForum extends RecyclerView.Adapter<AdapterPerguntas
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaRespostasDaPergunta.php?idPergunta=" + idPergunta;
+                String urlString = "https://hio.lat/carregaRespostasDaPergunta.php?idPergunta=" + idPergunta;
 
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

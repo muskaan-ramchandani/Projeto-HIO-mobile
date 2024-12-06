@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class CadastraHistoricoAsynTask  extends AsyncTask<String, Void, String> {
-    private static final String URL_PHP = "http://10.0.0.64:8086/phpHio/cadastraHistoricoAcesso.php";
+    private static final String URL_PHP = "https://hio.lat/cadastraHistoricoAcesso.php";
 
     @Override
     protected String doInBackground(String... params) {

@@ -71,7 +71,7 @@ public class FragmentPerguntasRecentes  extends Fragment {
             List<PerguntasForum> perguntasLista = new ArrayList<>();
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaPerguntaAluno.php";
+                String urlString = "https://hio.lat/carregaPerguntaAluno.php";
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

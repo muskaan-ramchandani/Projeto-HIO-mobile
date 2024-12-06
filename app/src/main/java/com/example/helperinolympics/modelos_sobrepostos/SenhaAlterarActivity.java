@@ -84,7 +84,7 @@ public class SenhaAlterarActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alterarSenha.php");
+                URL url = new URL("https://hio.lat/alterarSenha.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);

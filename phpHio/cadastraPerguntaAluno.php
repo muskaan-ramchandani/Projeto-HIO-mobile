@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost"; 
-$username = "root";        
-$password = "root";            
-$dbname = "hio";       
+$username = "u740411060_user";        
+$password = "OWYzZ?o2";            
+$dbname = "u740411060_hio";      
 
 /*CREATE TABLE PerguntasForum(
 	id INT AUTO_INCREMENT NOT NULL,

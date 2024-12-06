@@ -91,7 +91,7 @@ public class ConfirmaApagarContaActivity extends DialogFragment {
             String result = null;
             try {
                 // URL do arquivo PHP
-                URL url = new URL("http://10.0.0.64:8086/phpHio/deletarConta.php");
+                URL url = new URL("https://hio.lat/deletarConta.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("POST");
                 conexao.setReadTimeout(15000);

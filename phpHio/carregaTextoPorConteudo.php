@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 header('Character-Encoding: utf-8');
 
 $servername = "localhost"; 
-$username = "root";        
-$password = "root";            
-$dbname = "hio";        
+$username = "u740411060_user";        
+$password = "OWYzZ?o2";            
+$dbname = "u740411060_hio";       
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);

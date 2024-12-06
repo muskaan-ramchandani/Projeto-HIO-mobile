@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "hio";
+$servername = "localhost"; 
+$username = "u740411060_user";        
+$password = "OWYzZ?o2";            
+$dbname = "u740411060_hio";
 
 try {
     // Conexão com o banco de dados

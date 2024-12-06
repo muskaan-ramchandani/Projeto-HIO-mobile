@@ -198,7 +198,7 @@ public class CalendarioActivity extends AppCompatActivity {
             String dataFormatada = dateFormat.format(dataAConverter.getTime());
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaEventosOlimpiadasAluno.php?emailAluno=" + emailAluno +
+                String urlString = "https://hio.lat/carregaEventosOlimpiadasAluno.php?emailAluno=" + emailAluno +
                         "&dataAtual=" + dataFormatada;
 
                 URL url = new URL(urlString);

@@ -176,7 +176,7 @@ public class VideoActivity extends AppCompatActivity {
 
             List<Video> videos = new ArrayList<>();
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaVideoPorConteudo.php?idConteudoPertencente=" +
+                String urlString = "https://hio.lat/carregaVideoPorConteudo.php?idConteudoPertencente=" +
                         URLEncoder.encode(String.valueOf(idConteudo), "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
