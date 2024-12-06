@@ -79,13 +79,15 @@ public class TelaLoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String email = params[0];
+            String emailParametro = params[0];
             String senha = params[1];
             String result = null;
             Log.d("CONEXAO", "Tentando fazer login");
 
+            email = emailParametro;
             try {
-                URL url = new URL("https://hio.ct.ws/phpHio/validaLoginAluno.php?email=" + email + "&senha=" + senha);
+                //https://hio.lat/index.php
+                URL url = new URL("https://hio.lat/validaLoginAluno.php?email=" + emailParametro + "&senha=" + senha);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(3000);
                 conexao.setConnectTimeout(3000);
@@ -169,12 +171,12 @@ public class TelaLoginActivity extends AppCompatActivity {
         @Override
         protected Aluno doInBackground(String... params) {
             String email = params[0];
-            Log.d("CONEXAO", "Tentando retornar dados do aluno");
+            Log.d("CONEXAO", "Tentando retornar dados do aluno "+email);
 
-            //https://hio.ct.ws/phpHio/validaLoginAluno.php?email=isassevalho@gmail.com&senha=2512
 
             try {
-                URL url = new URL("https://hio.ct.ws/phpHio/retornaAlunoPorEmail.php?email=" + email);
+                //https://hio.lat/retornaAlunoPorEmail.php?email=isassevalho@gmail.com
+                URL url = new URL("https://hio.lat/retornaAlunoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(3000);
                 conexao.setConnectTimeout(3000);
