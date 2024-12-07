@@ -20,6 +20,16 @@ INSERT INTO Olimpiada VALUES
     ('Olimpíada Brasileira de Química', 'OBQ', 'imgtubodeensaio', 'Azul'),
     ('Olimpíada Brasileira de Biologia', 'OBB', 'imgdna', 'Laranja'),
     ('Olimpíada Nacional de Ciências', 'ONC', 'imgatomo', 'Ciano');
+    
+INSERT INTO Olimpiada VALUES
+    ('Olimpíada de Língua Portuguesa', 'OLP', '	imgescrita', 'Rosa'),
+    ('Mostra Brasileira de Foguetes', 'MOBFOG', 'imgfoguete', 'Azul'),
+    ('Olimpíada Brasileira de Robótica', 'OBR', 'imgrobo', 'Laranja'),
+    ('Olimpíada Brasileira de Saúde e Meio Ambiente', 'OBSMA', 'imgarvore', 'Ciano'),
+    ('Olimpíada Canguru de Matemática', 'OCM', 'imgcanguru', 'Rosa'),
+    ('Olimpíada Brasileira de Raciocínio Lógico', 'OBRL', 'imgcerebro', 'Azul'),
+    ('Olimpíada Brasileira de Geografia', 'OBG', 'imgglobo', 'Laranja'),
+    ('Olimpíada Brasileira de Línguas Estrangeiras', 'OBLE', 'imglinguasestrangeiras', 'Ciano');
 
 DROP TABLE IF EXISTS Aluno;
 CREATE TABLE Aluno(
@@ -249,6 +259,52 @@ CREATE TABLE Eventos(
 	FOREIGN KEY(siglaOlimpiadaPertencente) REFERENCES Olimpiada(sigla),
 	PRIMARY KEY(id)
 );
+
+DROP TABLE IF EXISTS HistoricoAcessoAluno;
+CREATE TABLE HistoricoAcessoAluno(
+	id INT AUTO_INCREMENT NOT NULL,
+    emailAluno VARCHAR(100) NOT NULL,
+    tipoMaterial VARCHAR(25) NOT NULL,
+    idMaterial INT NOT NULL,
+	FOREIGN KEY(emailAluno) REFERENCES Aluno(email),
+    PRIMARY KEY(id)
+);
+
+#DELIMITAR QUANTIDADE DE REGISTROS NO ACESSO
+DELIMITER $$
+CREATE TRIGGER LimitarHistoricoAcesso
+BEFORE INSERT ON HistoricoAcessoAluno
+FOR EACH ROW
+BEGIN
+    -- Conta o número de registros existentes para o mesmo aluno e tipo de material
+    DECLARE quantidade INT;
+    SELECT COUNT(*) INTO quantidade
+    FROM HistoricoAcessoAluno
+    WHERE emailAluno = NEW.emailAluno
+      AND tipoMaterial = NEW.tipoMaterial;
+
+    -- Se a quantidade já for 10, exclua o registro mais antigo
+    IF quantidade >= 10 THEN
+        DELETE FROM HistoricoAcessoAluno
+        WHERE emailAluno = NEW.emailAluno
+          AND tipoMaterial = NEW.tipoMaterial
+        ORDER BY id ASC
+        LIMIT 1;
+    END IF;
+END$$
+DELIMITER ;
+
+
+DROP TABLE IF EXISTS HistoricoCadastroProfessor;
+CREATE TABLE HistoricoCadastroProfessor(
+	id INT AUTO_INCREMENT NOT NULL,
+    emailProf VARCHAR(100) NOT NULL,
+    tipoMaterial VARCHAR(25) NOT NULL,
+    idMaterial INT NOT NULL,
+	FOREIGN KEY(emailProf) REFERENCES Professor(email),
+    PRIMARY KEY(id)
+);
+
 
 #testes respostas
 Insert into RespostasForum(emailProf, resposta, dataResposta, idPergunta)

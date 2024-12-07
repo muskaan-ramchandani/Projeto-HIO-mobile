@@ -6,10 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.adapter.AdapterCorrecao;
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.databinding.ActivityQuestionarioCorrecaoBinding;
 import com.example.helperinolympics.materiais.QuestionarioActivity;
 import com.example.helperinolympics.model.Aluno;
@@ -59,17 +59,8 @@ public class QuestionarioCorrecaoActivity extends Activity {
         dataAtual = (Date) getIntent().getSerializableExtra("dataAtual");
 
         listaCorrecao();
-//
-//        binding.txtNumeroQuestaoCertas.setText(String.valueOf(qntdAcertos));
-//        binding.txtQuestoesTotais.setText("Questões de " + String.valueOf(qntdTotal));
-//
-//        if (qntdAcertos == 0) {
-//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipocomraiva);
-//        } else if (qntdAcertos < metadeValor) {
-//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoemo);
-//        } else if (qntdAcertos > metadeValor) {
-//            binding.imgHipoTristeOuFeliz.setImageResource(R.drawable.hipoalegredeolhosabertos);
-//        }
+
+        new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "Questionario", String.valueOf(quest.getId()));
 
         binding.btnEntendiCorrecao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +108,7 @@ public class QuestionarioCorrecaoActivity extends Activity {
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 String dataErroFormatada = dateFormat.format(dataErro);
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaCorrecao.php?emailAluno=" + URLEncoder.encode(email, "UTF-8") +
+                String urlString = "https://hio.lat/carregaCorrecao.php?emailAluno=" + URLEncoder.encode(email, "UTF-8") +
                         "&dataErro=" + URLEncoder.encode(dataErroFormatada, "UTF-8") +
                         "&idQuestionarioPertencente=" + URLEncoder.encode(String.valueOf(idQuestionarioPertencente), "UTF-8");
 

@@ -37,12 +37,12 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/txtAcertosSemanais"
+            android:id="@+id/txtAcertos"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Acertos Semanais"
+            android:text="Seus Acertos"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="24sp"

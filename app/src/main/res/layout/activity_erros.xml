@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    tools:context=".ErrosSemanaisActivity">
+    tools:context=".ErrosActivity">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -39,12 +39,12 @@
             android:scaleType="fitCenter"/>
 
         <TextView
-            android:id="@+id/txtErrosSemanais"
+            android:id="@+id/txtErros"
             android:layout_width="284dp"
             android:layout_height="41dp"
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/open_sans_bold"
-            android:text="Erros Semanais"
+            android:text="Seus Erros"
             android:textColor="@color/white"
             android:gravity="center"
             android:textSize="24sp"

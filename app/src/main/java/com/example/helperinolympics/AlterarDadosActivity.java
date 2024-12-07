@@ -3,8 +3,11 @@ package com.example.helperinolympics;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -16,7 +19,12 @@ import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.modelos_sobrepostos.ConfirmaSenhaAlterarDadosActivity;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class AlterarDadosActivity extends AppCompatActivity {
 
@@ -25,8 +33,7 @@ public class AlterarDadosActivity extends AppCompatActivity {
 
     private boolean fotoAlterada;
     private Bitmap novaFotoPerfil;
-    private String novoNomeCompleto, novoNomeUsuario, novoEmail;
-
+    private String novoNomeCompleto, novoNomeUsuario;
     Bitmap foto;
 
     @Override
@@ -38,19 +45,8 @@ public class AlterarDadosActivity extends AppCompatActivity {
         this.fotoAlterada = false;
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
 
-        if (alunoCadastrado.getFotoPerfil() == null) {
-            Log.d("FOTO_PERFIL", "Foto de perfil é null, usando imagem padrão.");
-            binding.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
-        } else {
-            if (alunoCadastrado.getFotoPerfil().getByteCount() == 0) {
-                Log.d("FOTO_PERFIL", "Foto de perfil é vazia, usando imagem padrão.");
-                binding.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
-            } else {
-                Log.d("FOTO_PERFIL", "Foto de perfil recebida, definindo Bitmap.");
-                binding.fotoPerfil.setImageBitmap(alunoCadastrado.getFotoPerfil());
-            }
-        }
-
+        FotoAlunoTask fotoAlunoTask = new FotoAlunoTask();
+        fotoAlunoTask.execute(alunoCadastrado.getEmail());
 
         binding.btnVoltarAsConfiguracoes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +69,7 @@ public class AlterarDadosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(binding.editTextNomeCompleto.getText().toString().isEmpty()&&binding.editTextNomeUsuario.getText().toString().isEmpty()
-                        &&binding.editTextEmail.getText().toString().isEmpty()&& !fotoAlterada){
+                        && !fotoAlterada){
                     Toast.makeText(AlterarDadosActivity.this, "Nenhuma informação nova foi inserida para que ocorra a alteração", Toast.LENGTH_LONG).show();
 
                 }else{
@@ -86,11 +82,8 @@ public class AlterarDadosActivity extends AppCompatActivity {
                     if(!binding.editTextNomeUsuario.getText().toString().isEmpty()){
                         novoNomeUsuario = binding.editTextNomeUsuario.getText().toString();
                     }
-                    if(!binding.editTextEmail.getText().toString().isEmpty()){
-                        novoEmail = binding.editTextEmail.getText().toString();
-                    }
 
-                    showNotificationConfirmarAlterarDados(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, novoEmail, AlterarDadosActivity.this);
+                    showNotificationConfirmarAlterarDados(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, AlterarDadosActivity.this);
                 }
             }
         });
@@ -118,8 +111,87 @@ public class AlterarDadosActivity extends AppCompatActivity {
         }
     }
 
-    public void showNotificationConfirmarAlterarDados(Aluno alunoCadastrado, Bitmap novaFotoPerfil, String novoNomeCompleto, String novoNomeUsuario, String novoEmail, Context contexto){
-        ConfirmaSenhaAlterarDadosActivity notificationDialogFragment = new ConfirmaSenhaAlterarDadosActivity(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, novoEmail, contexto);
+    public void showNotificationConfirmarAlterarDados(Aluno alunoCadastrado, Bitmap novaFotoPerfil, String novoNomeCompleto, String novoNomeUsuario, Context contexto){
+        ConfirmaSenhaAlterarDadosActivity notificationDialogFragment = new ConfirmaSenhaAlterarDadosActivity(alunoCadastrado, novaFotoPerfil, novoNomeCompleto, novoNomeUsuario, contexto);
         notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
     }
+
+    public class FotoAlunoTask extends AsyncTask<String, Void, Bitmap> {
+
+        private Bitmap fotoBitmap;
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            String email = params[0];
+            Bitmap resultBitmap = null;
+
+            try {
+                URL url = new URL("https://hio.lat/retornaFotoPorEmail.php?email=" + email);
+                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+                conexao.setReadTimeout(15000);
+                conexao.setConnectTimeout(15000);
+                conexao.setRequestMethod("GET");
+                conexao.setDoInput(true);
+                conexao.connect();
+
+                if (conexao.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStream in = conexao.getInputStream();
+                    String jsonString = converterParaJSONString(in);
+
+                    if (jsonString != null && !jsonString.isEmpty()) {
+                        JSONObject jsonObject = new JSONObject(jsonString);
+                        String status = jsonObject.getString("status");
+
+                        if (status.equals("success")) {
+                            String fotoBase64 = jsonObject.getString("fotoPerfil");
+                            resultBitmap = decodeBase64ToBitmap(fotoBase64);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", "Erro ao buscar a foto: " + e.getMessage());
+            }
+            return resultBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            fotoBitmap = result;
+
+            if (fotoBitmap != null) {
+                Log.d("INFO", "Foto recebida com sucesso.");
+                binding.fotoPerfil.setImageBitmap(fotoBitmap);
+
+            } else {
+                Log.d("ERRO", "Não foi possível carregar a foto.");
+                binding.fotoPerfil.setImageResource(R.drawable.iconeperfilsemfoto);
+            }
+        }
+
+        private String converterParaJSONString(InputStream in) {
+            StringBuilder stringBuilder = new StringBuilder();
+            try {
+                int charRead;
+                while ((charRead = in.read()) != -1) {
+                    stringBuilder.append((char) charRead);
+                }
+            } catch (Exception e) {
+                Log.d("ERRO", e.toString());
+            }
+            return stringBuilder.toString();
+        }
+
+        private Bitmap decodeBase64ToBitmap(String base64String) {
+            try {
+                byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+                return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            } catch (Exception e) {
+                Log.d("ERRO", "Erro ao decodificar Base64 para Bitmap: " + e.getMessage());
+                return null;
+            }
+        }
+
+    }
+
 }

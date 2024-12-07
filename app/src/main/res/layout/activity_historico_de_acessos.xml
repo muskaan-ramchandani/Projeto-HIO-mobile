@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HistoricoDeAcessos"
+    android:fitsSystemWindows="true"
     android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
@@ -79,13 +80,41 @@
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistoricoFlashcards"
-                android:layout_width="390dp"
+            <LinearLayout
+                android:id="@+id/linearHistoricoFlashcards"
+                android:layout_width="375dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
-                />
+                android:gravity="center_horizontal|center_vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHistoricoFlashcards"
+                    android:layout_width="375dp"
+                    android:layout_height="120dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoFlashcards"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:visibility="gone"
+                android:gravity="center_horizontal|center_vertical">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoFlashcards"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum flashcard!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtProvasHistorico"
@@ -98,12 +127,41 @@
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistoricoProvas"
-                android:layout_width="390dp"
+            <LinearLayout
+                android:id="@+id/linearHistoricoProvas"
+                android:layout_width="375dp"
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp" />
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHistoricoProvas"
+                    android:layout_width="375dp"
+                    android:layout_height="130dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoProvas"
+                android:layout_width="375dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoProvas"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhuma prova!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtQuestionarioHistorico"
@@ -116,12 +174,41 @@
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistoricoQuestionario"
-                android:layout_width="390dp"
+            <LinearLayout
+                android:id="@+id/linearHistoricoQuestionarios"
+                android:layout_width="375dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp" />
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHistoricoQuestionario"
+                    android:layout_width="390dp"
+                    android:layout_height="120dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoQuestionario"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoQuestionario"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum questionário!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtTextosHistorico"
@@ -134,13 +221,41 @@
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistoricoTexto"
-                android:layout_width="390dp"
+            <LinearLayout
+                android:id="@+id/linearHistoricoTextos"
+                android:layout_width="375dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHistoricoTexto"
+                    android:layout_width="390dp"
+                    android:layout_height="120dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoTexto"
+                android:layout_width="375dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoTexto"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum texto!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/txtVideoHistorico"
@@ -153,12 +268,41 @@
                 android:textColor="@color/black"
                 android:textSize="21sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewHistoricoVideo"
-                android:layout_width="390dp"
+            <LinearLayout
+                android:id="@+id/linearHistoricoVideos"
+                android:layout_width="375dp"
                 android:layout_height="240dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp" />
+                android:gravity="center_horizontal|center_vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewHistoricoVideo"
+                    android:layout_width="390dp"
+                    android:layout_height="240dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSEMHistoricoVideos"
+                android:layout_width="375dp"
+                android:layout_height="240dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textViewSemHistoricoVideos"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Você não acessou nenhum vídeo!"
+                    android:textAlignment="center"
+                    android:textColor="#F44336"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

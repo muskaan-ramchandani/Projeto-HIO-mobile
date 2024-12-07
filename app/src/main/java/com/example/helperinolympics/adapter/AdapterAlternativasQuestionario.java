@@ -85,11 +85,9 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
                 @Override
                 public void onClick(View v) {
                     Log.d("CLIQUE", "Opção foi clicada ");
-
                     if(adapter.getPosicaoSelecionada() != posicao) {
                         // Desmarca a opção anterior
                         adapter.desmarcarSelecao();
-
                         btnAlternativa.setSelected(true);
                         btnAlternativa.setBackgroundResource(R.drawable.fundo_alternativa_marcada);
                         btnAlternativa.setTextColor(ContextCompat.getColor(context, R.color.textoSelecionadoForum));
@@ -129,8 +127,6 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
         notifyItemChanged(posicaoAnterior); // Atualiza o item anterior
         notifyItemChanged(posicaoSelecionada); // Atualiza o item selecionado
     }
-
-
 
     public void desmarcarSelecao() {
         this.posicaoSelecionada = -1;
@@ -194,7 +190,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             String dataAcertoFormatada = sdf.format(acerto.getDataAcerto());
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraAcertosAluno.php");
+                URL url = new URL("https://hio.lat/cadastraAcertosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -255,7 +251,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             String dataErroFormatada = sdf.format(erro.getDataErro());
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/cadastraErrosAluno.php");
+                URL url = new URL("https://hio.lat/cadastraErrosAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -315,7 +311,7 @@ public class AdapterAlternativasQuestionario extends RecyclerView.Adapter<Adapte
             Pontuacao pontuacao = pontuacoes[0];
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/alteraPontuacaoAluno.php");
+                URL url = new URL("https://hio.lat/alteraPontuacaoAluno.php");
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);

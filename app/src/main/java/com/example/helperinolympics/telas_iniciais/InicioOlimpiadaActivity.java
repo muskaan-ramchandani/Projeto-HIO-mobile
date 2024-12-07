@@ -150,7 +150,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
     private void configurarRecyclerProvas() {
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        adapterProvasAnteriores= new AdapterProvasAnteriores(provas);
+        adapterProvasAnteriores= new AdapterProvasAnteriores(provas, alunoCadastrado);
         binding.recyclerViewProvasAnteriores.setLayoutManager(layoutManager);
         binding.recyclerViewProvasAnteriores.setHasFixedSize(true);
         binding.recyclerViewProvasAnteriores.setAdapter(adapterProvasAnteriores);
@@ -176,7 +176,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
             List<Conteudo> conteudos = new ArrayList<>();
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                String urlString = "https://hio.lat/carregaConteudosPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -266,7 +266,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
             List<Livros> livros = new ArrayList<>();
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaLivroPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                String urlString = "https://hio.lat/carregaLivroPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -375,7 +375,7 @@ public class InicioOlimpiadaActivity extends AppCompatActivity {
 
             List<ProvasAnteriores> provasLista = new ArrayList<>();
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaProvaPorOlimpiada.php?siglaOlimpiadaPertencente=" +
+                String urlString = "https://hio.lat/carregaProvaPorOlimpiada.php?siglaOlimpiadaPertencente=" +
                         URLEncoder.encode(siglaOlimpiada, "UTF-8");
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();

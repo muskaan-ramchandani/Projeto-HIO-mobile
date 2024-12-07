@@ -79,18 +79,22 @@ public class TelaLoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            email = params[0];
-            senha = params[1];
+            String emailParametro = params[0];
+            String senha = params[1];
             String result = null;
             Log.d("CONEXAO", "Tentando fazer login");
 
+            email = emailParametro;
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/validaLoginAluno.php?email=" + email + "&senha=" + senha);
+                //https://hio.lat/index.php
+                URL url = new URL("https://hio.lat/validaLoginAluno.php?email=" + emailParametro + "&senha=" + senha);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-                conexao.setReadTimeout(1500);
-                conexao.setConnectTimeout(500);
+                conexao.setReadTimeout(3000);
+                conexao.setConnectTimeout(3000);
                 conexao.setRequestMethod("GET");
                 conexao.setDoInput(true);
+                conexao.setRequestProperty("User-Agent", "AndroidApp");
+                conexao.setRequestProperty("Accept", "application/json");
                 conexao.connect();
                 Log.d("CONEXAO", "Conexão estabelecida");
 
@@ -109,9 +113,18 @@ public class TelaLoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+
             if (result == null || result.isEmpty()) {
                 Log.d("ERRO", "A resposta do servidor é nula ou vazia");
                 Toast.makeText(TelaLoginActivity.this, "Erro ao conectar com o servidor", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            // Verificar se a resposta é HTML
+            if (result.startsWith("<html>") || result.startsWith("<!DOCTYPE html>")) {
+                Log.d("ERRO", "A resposta do servidor é HTML, possivelmente uma página de erro");
+                Toast.makeText(TelaLoginActivity.this, "Erro no servidor. Tente novamente mais tarde.", Toast.LENGTH_LONG).show();
+                Log.d("HTTP_BODY", result);
                 return;
             }
 
@@ -121,11 +134,13 @@ public class TelaLoginActivity extends AppCompatActivity {
                 Toast.makeText(TelaLoginActivity.this, msg, Toast.LENGTH_LONG).show();
 
                 if (jsonResponse.getString("status").equals("success")) {
+                    Log.d("TENTANDO LOGIN", "Aluno logado com sucesso");
                     new AlunoDownload().execute(email);
                 }
 
             } catch (JSONException e) {
                 Log.d("ERRO", e.toString());
+                Toast.makeText(TelaLoginActivity.this, "Erro ao processar resposta do servidor", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -145,6 +160,7 @@ public class TelaLoginActivity extends AppCompatActivity {
     }
 
 
+
     private class AlunoDownload extends AsyncTask<String, Void, Aluno> {
 
         @Override
@@ -155,16 +171,20 @@ public class TelaLoginActivity extends AppCompatActivity {
         @Override
         protected Aluno doInBackground(String... params) {
             String email = params[0];
-            Log.d("CONEXAO", "Tentando retornar dados do aluno");
+            Log.d("CONEXAO", "Tentando retornar dados do aluno "+email);
+
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/retornaAlunoPorEmail.php?email=" + email);
+                //https://hio.lat/retornaAlunoPorEmail.php?email=isassevalho@gmail.com
+                URL url = new URL("https://hio.lat/retornaAlunoPorEmail.php?email=" + email);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-                conexao.setReadTimeout(1500);
-                conexao.setConnectTimeout(500);
+                conexao.setReadTimeout(3000);
+                conexao.setConnectTimeout(3000);
                 conexao.setRequestMethod("GET");
                 conexao.setDoInput(true);
                 conexao.setDoOutput(false);
+                conexao.setRequestProperty("User-Agent", "AndroidApp");
+                conexao.setRequestProperty("Accept", "application/json");
                 conexao.connect();
                 Log.d("CONEXAO", "Conexão estabelecida");
 
@@ -193,6 +213,7 @@ public class TelaLoginActivity extends AppCompatActivity {
             if (aluno == null) {
                 Toast.makeText(TelaLoginActivity.this, "Erro ao buscar dados do aluno", Toast.LENGTH_LONG).show();
             } else {
+                Log.d("TENTANDO LOGIN", "Aluno retornado com sucesso");
                 Intent intent = new Intent(TelaLoginActivity.this, InicialAlunoMenuDeslizanteActivity.class);
                 intent.putExtra("alunoCadastrado", alunoLogado);
                 startActivity(intent);
@@ -228,11 +249,6 @@ public class TelaLoginActivity extends AppCompatActivity {
                     aluno.setEmail(alunoJSON.getString("email"));
                     aluno.setSenha(alunoJSON.getString("senha"));
 
-                    String perfilBase64 = alunoJSON.getString("fotoPerfil");
-                    Bitmap bitmapFotoPerfil = decodeBase64ToBitmap(perfilBase64);
-                    aluno.setFotoPerfil(bitmapFotoPerfil);
-
-
                 } else {
                     Log.d("ERRO", jsonObject.getString("message"));
                 }
@@ -241,11 +257,5 @@ public class TelaLoginActivity extends AppCompatActivity {
             }
             return aluno;
         }
-    }
-
-
-    public Bitmap decodeBase64ToBitmap(String base64String) {
-        byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 }

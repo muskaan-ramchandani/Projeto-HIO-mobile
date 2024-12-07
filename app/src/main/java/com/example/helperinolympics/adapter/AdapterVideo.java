@@ -13,15 +13,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Video;
 
 import java.util.List;
 
 public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.VideoViewHolder> {
     private List<Video> listaVideos;
+    private Aluno alunoCadastrado;
 
-    public AdapterVideo(List<Video>listaVideos){this.listaVideos=listaVideos; }
+    public AdapterVideo(List<Video>listaVideos, Aluno alunoCadastrado){
+        this.listaVideos=listaVideos;
+        this.alunoCadastrado = alunoCadastrado;
+    }
 
     public VideoViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
         View viewItemListaVideo= LayoutInflater.from(parent.getContext()).inflate(R.layout.modelo_video, parent, false);
@@ -64,6 +70,7 @@ public class AdapterVideo extends RecyclerView.Adapter<AdapterVideo.VideoViewHol
                 public void onClick(View v) {
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkVideo));
+                    new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "Video", String.valueOf(id));
                     context.startActivity(intent);
                 }
             });

@@ -1,10 +1,9 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-
-$servername = "sql207.infinityfree.com";
-$username = "if0_37755624";
-$password = "1k31AyGMaqyz7";
-$dbname = "if0_37755624_hio";    
+$servername = "localhost"; 
+$username = "u740411060_user";        
+$password = "OWYzZ?o2";            
+$dbname = "u740411060_hio";       
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);

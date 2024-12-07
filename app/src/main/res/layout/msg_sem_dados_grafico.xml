@@ -33,7 +33,7 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_bold"
-                    android:text="Não é possível montar o gráfico, pois você não praticou nenhum exercício esta semana!"
+                    android:text="Não é possível montar o gráfico, pois você não respondeu nenhum questionário!"
                     android:textAlignment="center"
                     android:textColor="#E40000"
                     android:textSize="16sp" />

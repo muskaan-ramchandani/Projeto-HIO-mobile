@@ -8,10 +8,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
-
+    <!--android:networkSecurityConfig="@xml/network_security_config"
+    android:usesCleartextTraffic="false"     true se for normal-->
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="false"
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_app"
@@ -147,7 +149,7 @@
 
         <!--Telas sem pasta para classificar-->
         <activity
-            android:name=".AcertosSemanaisActivity"
+            android:name=".AcertosActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
@@ -162,7 +164,7 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
-            android:name=".ErrosSemanaisActivity"
+            android:name=".ErrosActivity"
             android:exported="false"
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 

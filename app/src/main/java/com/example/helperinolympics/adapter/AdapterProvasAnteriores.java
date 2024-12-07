@@ -19,7 +19,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.R;
+import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.ProvasAnteriores;
 
 import java.io.File;
@@ -30,9 +32,11 @@ import java.util.List;
 public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasAnteriores.ProvasAnterioresViewHolder>{
     private static final int REQUEST_WRITE_PERMISSION = 100; // Código de requisição para a permissão
     List<ProvasAnteriores> listaProvasAnteriores;
+    Aluno alunoCadastrado;
 
-    public AdapterProvasAnteriores(List<ProvasAnteriores> provas){
+    public AdapterProvasAnteriores(List<ProvasAnteriores> provas, Aluno alunoCadastrado){
         this.listaProvasAnteriores=provas;
+        this.alunoCadastrado = alunoCadastrado;
     }
 
     public AdapterProvasAnteriores.ProvasAnterioresViewHolder onCreateViewHolder (@NonNull ViewGroup parent, int ViewType){
@@ -42,6 +46,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
 
     public void onBindViewHolder(@NonNull AdapterProvasAnteriores.ProvasAnterioresViewHolder holder, int position) {
         ProvasAnteriores prova = listaProvasAnteriores.get(position);
+        holder.id = prova.getId();
 
         String valorAno= String.valueOf(prova.getAnoProva());
         holder.ano.setText(valorAno);
@@ -61,6 +66,8 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         String valorProf= prova.getUserProf();
         holder.prof.setText(valorProf);
 
+        holder.olimp = prova.getSiglaOlimpiadaPertencente();
+
         holder.pdfBytes= prova.getArquivoPdfBytes();
     }
 
@@ -68,6 +75,8 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
     public class ProvasAnterioresViewHolder extends RecyclerView.ViewHolder {
         TextView ano, estado, fase, prof;
         byte[] pdfBytes;
+        int id;
+        String olimp;
 
         public ProvasAnterioresViewHolder(@NonNull View itemView, final Context context) {
             super(itemView);
@@ -81,7 +90,8 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
                 @Override
                 public void onClick(View v) {
                     if (pdfBytes != null && pdfBytes.length > 0) {
-                        salvarPdfNoDispositivo(pdfBytes, context);
+                        salvarPdfNoDispositivo(pdfBytes, context, olimp, ano.getText().toString(), fase.getText().toString());
+                        new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "ProvaAnterior", String.valueOf(id));
                     } else {
                         Toast.makeText(context, "PDF não disponível.", Toast.LENGTH_SHORT).show();
                     }
@@ -94,7 +104,7 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
         return listaProvasAnteriores.size();
     }
 
-    public void salvarPdfNoDispositivo(byte[] pdfBytes, Context context) {
+    public void salvarPdfNoDispositivo(byte[] pdfBytes, Context context, String olimp, String ano, String fase) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -102,16 +112,16 @@ public class AdapterProvasAnteriores extends RecyclerView.Adapter<AdapterProvasA
                         new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         REQUEST_WRITE_PERMISSION);
             } else {
-                salvarPdf(pdfBytes, context);
+                salvarPdf(pdfBytes, context, olimp, ano, fase);
             }
         } else {
-            salvarPdf(pdfBytes, context);
+            salvarPdf(pdfBytes, context, olimp, ano, fase);
         }
     }
 
-    private void salvarPdf(byte[] pdfBytes, Context context) {
+    private void salvarPdf(byte[] pdfBytes, Context context, String olimp, String ano, String fase) {
         try {
-            File file = new File(context.getExternalFilesDir(null), "prova_olimpiada.pdf");
+            File file = new File(context.getExternalFilesDir(null), "prova"+ano+"_olimpiada"+olimp+"_fase"+fase+".pdf");
 
             // Escrevendo bytes
             FileOutputStream fos = new FileOutputStream(file);

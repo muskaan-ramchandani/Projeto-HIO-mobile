@@ -28,6 +28,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -70,7 +71,7 @@ public class FragmentPerguntasRecentes  extends Fragment {
             List<PerguntasForum> perguntasLista = new ArrayList<>();
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaPerguntaAluno.php";
+                String urlString = "https://hio.lat/carregaPerguntaAluno.php";
 
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
@@ -163,6 +164,7 @@ public class FragmentPerguntasRecentes  extends Fragment {
             if (!perguntasLista.isEmpty()) {
                 perguntasF.clear();
                 perguntasF.addAll(new HashSet<>(perguntasLista));
+                Collections.sort(perguntasF, (p1, p2) -> p2.getDataPublicacao().compareTo(p1.getDataPublicacao()));
                 adapter.notifyDataSetChanged();
             } else {
                 Log.d("LISTA_VAZIA", "Nenhuma pergunta carregada");

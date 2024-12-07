@@ -131,7 +131,7 @@ public class RankingActivity extends Activity {
         protected List<Ranking> doInBackground(Void... voids) {
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/montarRanking.php";
+                String urlString = "https://hio.lat/montarRanking.php";
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);

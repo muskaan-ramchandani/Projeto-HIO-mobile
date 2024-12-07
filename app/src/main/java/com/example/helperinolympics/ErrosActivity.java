@@ -12,14 +12,11 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.helperinolympics.adapter.AdapterErros;
-import com.example.helperinolympics.databinding.ActivityErrosSemanaisBinding;
+import com.example.helperinolympics.databinding.ActivityErrosBinding;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Erros;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -38,9 +35,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class ErrosSemanaisActivity extends Activity {
+public class ErrosActivity extends Activity {
     private Aluno alunoCadastrado;
-    private ActivityErrosSemanaisBinding binding;
+    private ActivityErrosBinding binding;
     private ArrayList<Erros> listaErros = new ArrayList<>();
 
     private Date dataAtual, dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2,
@@ -54,17 +51,17 @@ public class ErrosSemanaisActivity extends Activity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        binding = ActivityErrosSemanaisBinding.inflate(getLayoutInflater());
+        binding = ActivityErrosBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         configurarDatas();
         alunoCadastrado = getIntent().getParcelableExtra("alunoCadastrado");
-        new ErrosSemanaisActivity.CarregaErrosSemanais(alunoCadastrado.getEmail(), dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2, dataInicialSemana3, dataFinalSemana3).execute();
+        new CarregaErros(alunoCadastrado.getEmail(), dataInicialSemana1, dataFinalSemana1, dataInicialSemana2, dataFinalSemana2, dataInicialSemana3, dataFinalSemana3).execute();
 
         binding.btnVoltarAoPerfilDosErros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ErrosSemanaisActivity.this, PerfilAlunoActivity.class);
+                Intent intent = new Intent(ErrosActivity.this, PerfilAlunoActivity.class);
                 intent.putExtra("alunoCadastrado", alunoCadastrado);
                 startActivity(intent);
                 finish();
@@ -153,11 +150,11 @@ public class ErrosSemanaisActivity extends Activity {
     }
 
 
-    private class CarregaErrosSemanais extends AsyncTask<String, Void, String> {
+    private class CarregaErros extends AsyncTask<String, Void, String> {
         String emailAluno;
         String inicioSemana1, fimSemana1, inicioSemana2, fimSemana2, inicioSemana3, fimSemana3;
 
-        public CarregaErrosSemanais(String emailAluno, Date inicioSemana1, Date fimSemana1, Date inicioSemana2, Date fimSemana2, Date inicioSemana3, Date fimSemana3){
+        public CarregaErros(String emailAluno, Date inicioSemana1, Date fimSemana1, Date inicioSemana2, Date fimSemana2, Date inicioSemana3, Date fimSemana3){
             SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd");
 
             this.emailAluno = emailAluno;
@@ -174,7 +171,7 @@ public class ErrosSemanaisActivity extends Activity {
             StringBuilder result = new StringBuilder();
 
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/carregaErrosAluno.php?emailAluno=" + emailAluno +
+                String urlString = "https://hio.lat/carregaErrosAluno.php?emailAluno=" + emailAluno +
                         "&dataInicialSemana1=" + inicioSemana1 +
                         "&dataFinalSemana1=" + fimSemana1 +
                         "&dataInicialSemana2=" + inicioSemana2 +
@@ -196,7 +193,7 @@ public class ErrosSemanaisActivity extends Activity {
                     reader.close();
                 }
             } catch (Exception e) {
-                Log.e("CarregaErrosSemanais", "Erro na requisição HTTP", e);
+                Log.e("CarregaErros", "Erro na requisição HTTP", e);
             }
 
             return result.toString();
@@ -243,7 +240,7 @@ public class ErrosSemanaisActivity extends Activity {
                 configurarRecyclerErros();
 
             } catch (JSONException e) {
-                Log.e("CarregaErrosSemanais", "Erro ao fazer o parse do JSON", e);
+                Log.e("CarregaErros", "Erro ao fazer o parse do JSON", e);
             }
         }
     }

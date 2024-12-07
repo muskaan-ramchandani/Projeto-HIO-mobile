@@ -22,9 +22,10 @@ import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
 import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
-import com.example.helperinolympics.menu.SairActivity;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Olimpiada;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarNovasOlimpiadas;
+import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -47,7 +48,6 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
     AdapterOlimpiadas adapter;
     Aluno alunoCadastrado;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +58,8 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
 
         drawerLayout = binding.drawerLayout;
         navView = binding.navView;
+
+        configurarRecyclerOlimpiadas();
 
         //Função dos botoes inferiores
         binding.btnAcessarRanking.setOnClickListener(new View.OnClickListener() {
@@ -90,64 +92,75 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             }
         });
 
-     navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-         @Override
-         public boolean onNavigationItemSelected(MenuItem item) {
-             // Fecha o drawer quando um item é selecionado
-             drawerLayout.closeDrawers();
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                // Fecha o drawer quando um item é selecionado
+                drawerLayout.closeDrawers();
 
-             int itemID= item.getItemId();
+                int itemID= item.getItemId();
 
-             if(itemID == R.id.nav_perfil_aluno){
-                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class);
-                 intent.putExtra("alunoCadastrado", alunoCadastrado);
-                 startActivity(intent);
-                 finish();
+                if(itemID == R.id.nav_perfil_aluno){
+                    Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, PerfilAlunoActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoCadastrado);
+                    startActivity(intent);
+                    finish();
 
-                 return true;
-             }else if(itemID == R.id.nav_forum){
-                 Intent intentForum = new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class);
-                 intentForum.putExtra("alunoCadastrado", alunoCadastrado);
-                 startActivity(intentForum);
-                 finish();
+                    return true;
+                }else if(itemID == R.id.nav_forum){
+                    Intent intentForum = new Intent(InicialAlunoMenuDeslizanteActivity.this, ForumActivity.class);
+                    intentForum.putExtra("alunoCadastrado", alunoCadastrado);
+                    startActivity(intentForum);
+                    finish();
 
-                 return true;
-             }else if(itemID == R.id.nav_manual){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
-                 finish();
+                    return true;
+                }else if(itemID == R.id.nav_manual){
+                    startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
+                    finish();
 
-                 return true;
-             }else if(itemID == R.id.nav_configuracoes){
-                 Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
-                 intent.putExtra("alunoCadastrado", alunoCadastrado);
-                 startActivity(intent);
-                 finish();
+                    return true;
+                }else if(itemID == R.id.nav_configuracoes){
+                    Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
+                    intent.putExtra("alunoCadastrado", alunoCadastrado);
+                    startActivity(intent);
+                    finish();
 
-                 return true;
-             }else if(itemID == R.id.nav_sair){
-                 startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, TelaLoginActivity.class));
-                 finish();
-                 return true;
-             }else{
-                 return false;
-             }
-         }
-     });
+                    return true;
+                }else if(itemID == R.id.nav_sair){
+                    startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, TelaLoginActivity.class));
+                    finish();
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        });
 
-        configurarRecyclerOlimpiadas();
+        //extras
+        binding.adicionarOlimpiada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CadastrarNovasOlimpiadas notificationDialogFragment = new CadastrarNovasOlimpiadas(alunoCadastrado, InicialAlunoMenuDeslizanteActivity.this);
+                notificationDialogFragment.show(getSupportFragmentManager(), "notificationDialog");
+            }
+        });
     }
 
-    public void configurarRecyclerOlimpiadas(){
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+    public void configurarRecyclerOlimpiadas() {
+        adapter = new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter= new AdapterOlimpiadas(olimpiadas, alunoCadastrado);
         binding.recyclerViewTelaInicialOlimpiadas.setLayoutManager(layoutManager);
         binding.recyclerViewTelaInicialOlimpiadas.setHasFixedSize(true);
         binding.recyclerViewTelaInicialOlimpiadas.setAdapter(adapter);
 
         new OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
+    }
 
-        adapter.notifyDataSetChanged(); //atualizar o recycler
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 
     private class OlimpiadasSelecionadasDownload extends AsyncTask<String, Void, List<Olimpiada>> {
@@ -164,7 +177,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
             Log.d("CONEXAO", "Tentando fazer download");
 
             try {
-                URL url = new URL("http://10.0.0.64:8086/phpHio/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
+                URL url = new URL("https://hio.lat/carregaOlimpiadasSelecionadas.php?emailAluno=" + emailAluno);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setReadTimeout(1500);
                 conexao.setConnectTimeout(500);
@@ -188,10 +201,9 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         }
 
         @Override
-        protected void onPostExecute(List<Olimpiada> olimpiadas) {
-            super.onPostExecute(olimpiadas);
-            adapter.atualizarOpcoes(olimpiadas);
-            adapter.notifyDataSetChanged();
+        protected void onPostExecute(List<Olimpiada> novasOlimpiadas) {
+            super.onPostExecute(novasOlimpiadas);
+            adapter.atualizarOpcoes(novasOlimpiadas);
         }
 
         private String converterParaJSONString(InputStream in) {
@@ -241,5 +253,9 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         }
     }
 
+    public void atualizaRecyclerPosAdicionar(ArrayList<Olimpiada> listaEscolhidas){
+        olimpiadas.addAll(listaEscolhidas);
+        configurarRecyclerOlimpiadas();
+    }
 
 }

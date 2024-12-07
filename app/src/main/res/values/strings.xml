@@ -11,6 +11,26 @@
     <string name="alternativa_marcada_negrito"><b>Alternativa marcada:</b></string>
     <string name="alternativa_correta_negrito"><b>Alternativa correta:</b></string>
 
+    <string-array name="opcoes_Olimpiadas">
+        <item>Escolha a olimpíada</item>
+        <item>MOBFOG</item>
+        <item>OBA</item>
+        <item>OBB</item>
+        <item>OBF</item>
+        <item>OBG</item>
+        <item>OBI</item>
+        <item>OBLE</item>
+        <item>OBMEP</item>
+        <item>OBQ</item>
+        <item>OBR</item>
+        <item>OBRL</item>
+        <item>OBSMA</item>
+        <item>OCM</item>
+        <item>OLP</item>
+        <item>ONC</item>
+        <item>ONHB</item>
+    </string-array>
+
 
     <!--exemplos-->
     <string name="pergunta_exemplo"> <b>Pergunta:</b> Para quê serve o uso da estrutura if/else? </string>

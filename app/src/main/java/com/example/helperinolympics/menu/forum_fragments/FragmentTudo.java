@@ -41,6 +41,10 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
     private Context contexto;
 
     //contagens para olimpiadas
+    int perguntasOCM = 0;
+    int perguntasMOBFOG = 0;
+    int perguntasOBG = 0;
+    int perguntasOBLE = 0;
     int perguntasOBA = 0;
     int perguntasOBF = 0;
     int perguntasOBI = 0;
@@ -49,6 +53,10 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
     int perguntasOBQ = 0;
     int perguntasOBB = 0;
     int perguntasONC = 0;
+    int perguntasOLP = 0;
+    int perguntasOBRl = 0;
+    int perguntasOBR = 0;
+    int perguntasOBSMA = 0;
 
     @Nullable
     @Override
@@ -122,7 +130,7 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
         protected HashMap<String, Integer> doInBackground(Void... voids) {
             HashMap<String, Integer> contagemPerguntas = new HashMap<>();
             try {
-                String urlString = "http://10.0.0.64:8086/phpHio/contaPerguntasPorOlimpiada.php";
+                String urlString = "https://hio.lat/contaPerguntasPorOlimpiada.php";
                 URL url = new URL(urlString);
                 HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
                 conexao.setRequestMethod("GET");
@@ -170,20 +178,43 @@ public class FragmentTudo extends Fragment implements AdapterOlimpiadasForum.OnO
                 perguntasOBF = contagemPerguntas.getOrDefault("OBF", 0);
                 perguntasOBI = contagemPerguntas.getOrDefault("OBI", 0);
                 perguntasOBMEP = contagemPerguntas.getOrDefault("OBMEP", 0);
+
+                perguntasOCM = contagemPerguntas.getOrDefault("OCM", 0);
+                perguntasMOBFOG = contagemPerguntas.getOrDefault("MOBFOG", 0);
+                perguntasOBG = contagemPerguntas.getOrDefault("OBG", 0);
+                perguntasOBLE = contagemPerguntas.getOrDefault("OBLE", 0);
+
                 perguntasONHB = contagemPerguntas.getOrDefault("ONHB", 0);
                 perguntasOBQ = contagemPerguntas.getOrDefault("OBQ", 0);
                 perguntasOBB = contagemPerguntas.getOrDefault("OBB", 0);
                 perguntasONC = contagemPerguntas.getOrDefault("ONC", 0);
+
+                perguntasOLP = contagemPerguntas.getOrDefault("OLP", 0);
+                perguntasOBRl = contagemPerguntas.getOrDefault("OBRL", 0);
+                perguntasOBR = contagemPerguntas.getOrDefault("OBR", 0);
+                perguntasOBSMA = contagemPerguntas.getOrDefault("OBSMA", 0);
+
 
                 olimpiadasF.clear();
                 olimpiadasF.add(new OlimpiadaForum("OBA", "Rosa", perguntasOBA));
                 olimpiadasF.add(new OlimpiadaForum("OBF", "Azul", perguntasOBF));
                 olimpiadasF.add(new OlimpiadaForum("OBI", "Laranja", perguntasOBI));
                 olimpiadasF.add(new OlimpiadaForum("OBMEP", "Ciano", perguntasOBMEP));
-                olimpiadasF.add(new OlimpiadaForum("ONC", "Ciano", perguntasONC));
+
+                olimpiadasF.add(new OlimpiadaForum("OCM", "Rosa", perguntasOCM));
+                olimpiadasF.add(new OlimpiadaForum("MOBFOG", "Azul", perguntasMOBFOG));
+                olimpiadasF.add(new OlimpiadaForum("OBG", "Laranja", perguntasOBG));
+                olimpiadasF.add(new OlimpiadaForum("OBLE", "Ciano", perguntasOBLE));
+
                 olimpiadasF.add(new OlimpiadaForum("ONHB", "Rosa", perguntasONHB));
                 olimpiadasF.add(new OlimpiadaForum("OBQ", "Azul", perguntasOBQ));
                 olimpiadasF.add(new OlimpiadaForum("OBB", "Laranja", perguntasOBB));
+                olimpiadasF.add(new OlimpiadaForum("ONC", "Ciano", perguntasONC));
+
+                olimpiadasF.add(new OlimpiadaForum("OLP", "Rosa", perguntasOLP));
+                olimpiadasF.add(new OlimpiadaForum("OBRL", "Azul", perguntasOBRl));
+                olimpiadasF.add(new OlimpiadaForum("OBR", "Laranja", perguntasOBR));
+                olimpiadasF.add(new OlimpiadaForum("OBSMA", "Ciano", perguntasOBSMA));
 
                 adapter.notifyDataSetChanged();
             }

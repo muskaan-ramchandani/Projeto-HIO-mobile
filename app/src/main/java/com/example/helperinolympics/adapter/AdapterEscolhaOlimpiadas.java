@@ -66,6 +66,8 @@ public class AdapterEscolhaOlimpiadas extends RecyclerView.Adapter<AdapterEscolh
             holder.cardFundo.setBackgroundResource(R.drawable.fundo_btn_olimp_rosa);
         }
 
+        holder.checkBox.setChecked(listaEscolhidas.contains(olimp));
+
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.helperinolympics.asyn_tasks_universais.CadastraHistoricoAsynTask;
 import com.example.helperinolympics.R;
 import com.example.helperinolympics.model.Aluno;
 import com.example.helperinolympics.model.Conteudo;
@@ -42,6 +43,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
     @Override
     public void onBindViewHolder(@NonNull TextoViewHolder holder, int position) {
         Texto texto = listaTexto.get(position);
+        holder.id= texto.getId();
         holder.txt = texto;
 
         String valorUserProf = texto.getProfessorCadastrou();
@@ -62,6 +64,7 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
         TextView titulo, userProf;
         String textoString;
         Texto txt;
+        int id;
 
         public TextoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +81,8 @@ public class AdapterTexto extends RecyclerView.Adapter<AdapterTexto.TextoViewHol
                     intent.putExtra("olimpiada", olimpiadaPertencente);
                     intent.putExtra("texto", txt);
                     context.startActivity(intent);
+
+                    new CadastraHistoricoAsynTask().execute(alunoCadastrado.getEmail(), "Texto", String.valueOf(id));
 
                     if (context instanceof Activity) {
                         ((Activity) context).finish();
