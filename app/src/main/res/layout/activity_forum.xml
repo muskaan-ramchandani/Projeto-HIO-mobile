@@ -97,7 +97,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardItensForum"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="680dp"
         android:layout_marginTop="80dp"
         app:cardElevation="10dp"
         app:cardBackgroundColor="@android:color/transparent"
@@ -108,7 +108,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="680dp"
             android:orientation="vertical"
             android:background="@drawable/fundo_card_forum">
 
@@ -147,7 +147,7 @@
             <FrameLayout
                 android:id="@+id/fragmentForum"
                 android:layout_width="match_parent"
-                android:layout_height="510dp"
+                android:layout_height="590dp"
                 android:layout_marginTop="15dp" />
 
         </LinearLayout>
