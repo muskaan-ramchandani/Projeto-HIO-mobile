@@ -23,6 +23,7 @@
         android:theme="@style/Theme.HelperInOlympics"
         tools:targetApi="31">
 
+        
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileprovider"
@@ -94,11 +95,6 @@
             android:theme="@style/Theme.HelperInOlympics.NoActionBar"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="keyboardHidden|orientation|screenSize"/>
-
-        <activity
-            android:name=".menu.ManualActivity"
-            android:exported="false"
-            android:theme="@style/Theme.HelperInOlympics.NoActionBar"/>
 
         <activity
             android:name=".menu.PerfilAlunoActivity"

@@ -1,15 +1,24 @@
 package com.example.helperinolympics.telas_iniciais;
-
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -20,21 +29,26 @@ import com.example.helperinolympics.adapter.AdapterOlimpiadas;
 import com.example.helperinolympics.databinding.ActivityMenuDeslizanteAlunoBinding;
 import com.example.helperinolympics.menu.ForumActivity;
 import com.example.helperinolympics.menu.ConfiguracoesActivity;
-import com.example.helperinolympics.menu.ManualActivity;
 import com.example.helperinolympics.menu.PerfilAlunoActivity;
 import com.example.helperinolympics.model.Aluno;
+import com.example.helperinolympics.model.Manual;
 import com.example.helperinolympics.model.Olimpiada;
 import com.example.helperinolympics.modelos_sobrepostos.CadastrarNovasOlimpiadas;
 import com.example.helperinolympics.modelos_sobrepostos.CadastrarPergunta;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,9 +129,17 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
 
                     return true;
                 }else if(itemID == R.id.nav_manual){
-                    startActivity(new Intent(InicialAlunoMenuDeslizanteActivity.this, ManualActivity.class));
-                    finish();
+                    String url = "https://hio.lat/Manual_do_usu%C3%A1rio_HIO.pdf";
 
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(InicialAlunoMenuDeslizanteActivity.this, "Nenhum aplicativo encontrado para abrir o PDF", Toast.LENGTH_SHORT).show();
+                    }
                     return true;
                 }else if(itemID == R.id.nav_configuracoes){
                     Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
@@ -257,5 +279,4 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         olimpiadas.addAll(listaEscolhidas);
         configurarRecyclerOlimpiadas();
     }
-
 }
