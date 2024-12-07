@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -140,7 +141,7 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
                     } else {
                         Toast.makeText(InicialAlunoMenuDeslizanteActivity.this, "Nenhum aplicativo encontrado para abrir o PDF", Toast.LENGTH_SHORT).show();
                     }
-                    return true;
+                    return false;
                 }else if(itemID == R.id.nav_configuracoes){
                     Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
                     intent.putExtra("alunoCadastrado", alunoCadastrado);
@@ -179,11 +180,6 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         new OlimpiadasSelecionadasDownload().execute(alunoCadastrado.getEmail());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
 
     private class OlimpiadasSelecionadasDownload extends AsyncTask<String, Void, List<Olimpiada>> {
 
@@ -279,4 +275,6 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
         olimpiadas.addAll(listaEscolhidas);
         configurarRecyclerOlimpiadas();
     }
+
+
 }
