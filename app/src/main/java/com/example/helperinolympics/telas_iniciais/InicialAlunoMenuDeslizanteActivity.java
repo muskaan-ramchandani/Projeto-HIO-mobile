@@ -1,5 +1,6 @@
 package com.example.helperinolympics.telas_iniciais;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -132,15 +134,32 @@ public class InicialAlunoMenuDeslizanteActivity extends AppCompatActivity{
                 }else if(itemID == R.id.nav_manual){
                     String url = "https://hio.lat/Manual_do_usu%C3%A1rio_HIO.pdf";
 
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(url));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
 
-                    if (intent.resolveActivity(getPackageManager()) != null) {
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(InicialAlunoMenuDeslizanteActivity.this, "Nenhum aplicativo encontrado para abrir o PDF", Toast.LENGTH_SHORT).show();
-                    }
+//                    Intent intent = new Intent(Intent.ACTION_VIEW);
+//                    intent.setData(Uri.parse(url));
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//
+//                    if (intent.resolveActivity(getPackageManager()) != null) {
+//                        startActivity(intent);
+//                    } else {
+//                        Toast.makeText(InicialAlunoMenuDeslizanteActivity.this, "Nenhum aplicativo encontrado para abrir o PDF", Toast.LENGTH_SHORT).show();
+//                    }
+
+//                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+//                    request.setTitle("Manual do Usuário HIO");
+//                    request.setDescription("Baixando o PDF...");
+//                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "Manual_do_Usuario_HIO.pdf");
+//
+//                    DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+//                    if (downloadManager != null) {
+//                        downloadManager.enqueue(request);
+//                    } else {
+//                        Toast.makeText(InicialAlunoMenuDeslizanteActivity.this, "Erro ao inicializar o gerenciador de downloads", Toast.LENGTH_SHORT).show();
+//                    }
+
                     return false;
                 }else if(itemID == R.id.nav_configuracoes){
                     Intent intent = new Intent(InicialAlunoMenuDeslizanteActivity.this, ConfiguracoesActivity.class);
