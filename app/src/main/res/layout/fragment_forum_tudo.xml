@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="505dp"
+    android:layout_height="590dp"
     android:background="#f8f6f6"
     android:orientation="vertical">
 
@@ -25,7 +25,7 @@
     <FrameLayout
         android:id="@+id/fragmentForumPerguntas"
         android:layout_width="match_parent"
-        android:layout_height="305dp"
+        android:layout_height="390dp"
         android:layout_marginTop="10dp"/>
 
 </LinearLayout>

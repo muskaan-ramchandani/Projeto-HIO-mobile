@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="265dp"
+    android:layout_height="390dp"
     android:background="#f8f6f6"
     android:orientation="vertical">
 
@@ -20,7 +20,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPerguntasOlimpiadas"
         android:layout_width="match_parent"
-        android:layout_height="220dp" />
+        android:layout_height="340dp" />
 
 
 </LinearLayout>

@@ -305,6 +305,12 @@ CREATE TABLE HistoricoCadastroProfessor(
     PRIMARY KEY(id)
 );
 
+DROP TABLE IF EXISTS Manual;
+CREATE TABLE Manual(
+	id INT AUTO_INCREMENT NOT NULL,
+	arquivoPdf LONGBLOB NOT NULL,
+    PRIMARY KEY(id)
+);
 
 #testes respostas
 Insert into RespostasForum(emailProf, resposta, dataResposta, idPergunta)

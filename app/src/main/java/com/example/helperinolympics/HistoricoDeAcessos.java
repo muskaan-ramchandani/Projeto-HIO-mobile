@@ -128,6 +128,16 @@ public class HistoricoDeAcessos extends AppCompatActivity {
                 Log.d("INFO", "Histórico de acesso recebido com sucesso.");
                 processarResultados(result);
             } else {
+                binding.linearHistoricoProvas.setVisibility(View.GONE);
+                binding.linearSEMHistoricoProvas.setVisibility(View.VISIBLE);
+                binding.linearHistoricoTextos.setVisibility(View.GONE);
+                binding.linearSEMHistoricoTexto.setVisibility(View.VISIBLE);
+                binding.linearHistoricoVideos.setVisibility(View.GONE);
+                binding.linearSEMHistoricoVideos.setVisibility(View.VISIBLE);
+                binding.linearHistoricoFlashcards.setVisibility(View.GONE);
+                binding.linearSEMHistoricoFlashcards.setVisibility(View.VISIBLE);
+                binding.linearHistoricoQuestionarios.setVisibility(View.GONE);
+                binding.linearSEMHistoricoQuestionario.setVisibility(View.VISIBLE);
                 Log.d("ERRO", "Não foi possível carregar o histórico de acesso.");
             }
         }
