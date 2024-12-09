@@ -56,6 +56,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
 
         holder.capa.setImageBitmap(livro.getCapa());
         holder.livroParaPesquisa = livro.getTitulo();
+        holder.autorLivro = livro.getAutor();
     }
 
 
@@ -64,6 +65,7 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
         ImageView capa;
         Button ondeComprar;
         String livroParaPesquisa;
+        String autorLivro;
 
         public LivrosViewHolder(@NonNull View itemView, final Context context){
             super(itemView);
@@ -78,19 +80,19 @@ public class AdapterLivros extends RecyclerView.Adapter<AdapterLivros.LivrosView
             ondeComprar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    abrirPesquisaGoogle(livroParaPesquisa);
+                    abrirPesquisaGoogle(livroParaPesquisa, autorLivro);
                 }
             });
         }
     }
 
-    private String criarUrlPesquisa(String livro) {
+    private String criarUrlPesquisa(String livro, String autorLivro) {
         String urlBase = "https://www.google.com/search?q=";
-        return urlBase + Uri.encode(livro + " livro comprar");
+        return urlBase + Uri.encode(livro + " " +autorLivro+ " livro comprar");
     }
 
-    private void abrirPesquisaGoogle(String termoDePesquisa) {
-        String urlPesquisa = criarUrlPesquisa(termoDePesquisa);
+    private void abrirPesquisaGoogle(String termoDePesquisa, String autorLivro) {
+        String urlPesquisa = criarUrlPesquisa(termoDePesquisa, autorLivro);
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlPesquisa));
         context.startActivity(intent);
     }
