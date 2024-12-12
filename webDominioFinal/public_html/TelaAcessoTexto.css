@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px; /* Adiciona algum espaçamento interno */
+    box-sizing: border-box;
+}
+
+
+.barra .logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Faz com que a logo-container ocupe o espaço restante */
+}
+
+
+
+
+.barra .logo-container img {
+    height: 80px; /* Ajusta a altura da imagem */
+    margin-right: 10px; /* Espaço entre a imagem e o texto */
+}
+
+
+
+
+.barra .logo-container .text {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+
+
+.barra .button-container {
+    display: flex;
+    align-items: flex-end; /* Alinha os botões na parte inferior da barra */
+    margin-left: auto; /* Alinha os botões à direita */
+}
+
+
+
+
+.barra .button-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 10px; /* Espaço entre os botões */
+    position: relative;
+}
+
+
+
+
+.barra .button-item img {
+    height: 50px; /* Ajusta a altura dos botões */
+}
+
+
+.barra .button-item .button-label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    margin-top: 1px; /* Espaço entre a imagem e o texto */
+    text-align: center;
+}
+
+
+.barra .button-item img:hover {
+    background-color: #a952ff; /* Cor de fundo quando o mouse passa sobre o botão */
+    border-radius: 7px; /* Adiciona cantos arredondados ao fundo */
+}
+
+
+.conceitos {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    color: black;
+    text-align: center;
+    margin-top: 100px; /* margin-top para dar espaço suficiente entre a barra e o texto */
+}
+
+
+.autor {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 10px; /* Adiciona um pequeno espaço entre os dois textos */
+}
+
+
+.texto-principal {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: black;
+    text-align: justify;
+    margin-top: 20px;
+    padding: 0 20px; /* Adiciona espaçamento nas laterais */
+}

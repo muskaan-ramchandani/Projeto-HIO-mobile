@@ -1,0 +1,175 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+.logo-container img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+
+.titulo {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+.subtitulo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin: 55px 0;
+    margin-top: 100px;
+}
+
+
+.custom-button {
+    background-color: #e9e8e8;
+    color: #898989;
+    font-size: 17px;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.custom-button:hover {
+    background-color: #5e17eb;
+    color: white;
+}
+
+
+.quadrado {
+    background-color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(128, 128, 128, 0.5); /* Sombra inicial */
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 20px auto;
+    text-align: center;
+    transition: box-shadow 0.3s ease, border 0.3s ease; /* Transição suave */
+}
+
+
+/* Efeito 3D quando o mouse passa sobre o quadrado */
+.quadrado:hover {
+    box-shadow: 0 4px 15px rgba(128, 128, 128, 0.7); /* Aumenta o efeito 3D */
+    border: 2px solid #8c52ff; /* Adiciona a borda roxa */
+}
+
+
+
+
+/* Estilo do campo de texto (placeholder) */
+.titulo-input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 28px; /* Tamanho da fonte */
+    color: black; /* Cor do texto quando o usuário digitar */
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+
+/* Estilo do placeholder */
+.titulo-input::placeholder {
+    color: #a6a6a6; /* Cor do placeholder */
+}
+
+
+
+
+.linha {
+    border: 1px solid #898989;
+    margin: 10px 0;
+}
+
+
+.botao-adicionar {
+    background-color: #ededed;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+.botao-adicionar:hover {
+    background-color: #d3d3d3;
+}
+
+
+/* Estilo do campo de texto para o conteúdo */
+.texto-input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px; /* Tamanho da fonte */
+    color: #a6a6a6; /* Cor inicial do texto (placeholder) */
+    width: 100%;
+    min-height: 100px; /* Tamanho mínimo do campo de texto */
+    padding: 10px;
+    border: none;
+    outline: none;
+    text-align: left;
+    font-style: italic; /* Texto em itálico para o placeholder */
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+
+/* Estilo do placeholder do campo de texto */
+.texto-input::placeholder {
+    color: #a6a6a6; /* Cor do placeholder */
+    font-style: italic; /* Texto do placeholder em itálico */
+}
+
+
+/* Quando o usuário começa a digitar, o texto ficará preto e sem itálico */
+.texto-input:focus {
+    color: black; /* Cor do texto quando o campo recebe foco (usuário começa a digitar) */
+    font-style: normal; /* Retira o itálico quando o usuário começa a digitar */
+}
+
+

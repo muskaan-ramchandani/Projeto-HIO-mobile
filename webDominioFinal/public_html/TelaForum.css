@@ -1,0 +1,462 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    position: fixed;
+    display: flex;
+    align-items: left;
+    padding: 10px;
+    background-color: transparent;
+    z-index: 1000;
+    left: 0;  /* Garantir que o menu esteja na posição inicial da tela */
+}
+
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 3px 0;
+    transition: background-color 0.3s;
+}
+.menu-icon.active {
+    background-color: #6531c9;
+}
+.menu-icon.active .bar {
+    background-color: #fff;
+}
+
+
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    background-color: #5e17eb;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    font-family: 'Open Sans', sans-serif;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+.menu-content a {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 20px;
+}
+.menu-content a:hover {
+    background-color: #a952ff;
+}
+.menu-icon-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+.message-box-img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 260px;
+    height: auto;
+    z-index: 2;
+}
+
+
+.content {
+    margin-left: 250px; /* Compensa a largura do menu */
+    padding: 20px;
+    width: calc(150% - 250px); /* Ajusta a largura do conteúdo para não sobrepor o menu */
+}
+
+
+.barra-roxa {
+    width: 150%;
+    height: 150px;
+    background-color: #8c52ff;
+    position: relative;
+    top: 10px;
+}
+
+
+.forum-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;                  
+    font-size: 28px;                      
+    color: #fff;                    
+    margin-left: 20px;
+}
+.search-input {
+    width: 350%;                    
+    padding: 10px;                
+    font-size: 16px;                
+    font-family: 'Open Sans', sans-serif;
+    border: 2px solid #ccc;        
+    border-radius: 5px;            
+    margin-top: 10px;                
+    background-color: #fff;      
+    color: #333;    
+}
+
+
+/* Estilo do texto do placeholder */
+.search-input::placeholder {
+    color: #a6a6a6;                
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+
+
+.top-right-image {
+    position: fixed;
+    top: 10px;        
+    right: 15px;      
+    width: 90px;      
+    height: auto;      
+    z-index: 2000;    
+}
+
+
+.perguntas-olimpiada {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;                    
+    font-size: 24px;                    
+    color: black;                        
+    margin-top: 20px;                    
+    margin-left: 20px;                  
+}
+
+
+/*quadrados */
+.squares-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 0px;
+}
+
+
+.square {
+    width: 135px;
+    height: 135px;
+    margin: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, transform 0.2s;
+    background-color: inherit;
+    padding: 0;
+    outline: none; /* Remover a borda de foco padrão */
+    border: none; /* Remover qualquer borda */
+    text-align: center;
+}
+
+
+.square:hover {
+    transform: scale(1.1); /* Aumentando o tamanho do quadrado ao passar o mouse */
+}
+
+
+.square-1 { background-color: #cb6ce6; }
+.square-2 { background-color: #5271ff; }
+.square-3 { background-color: #ff914d; }
+.square-4 { background-color: #18b9cd; }
+.square-5 { background-color: #cb6ce6; }
+.square-6 { background-color: #5271ff; }
+.square-7 { background-color: #ff914d; }
+.square-8 { background-color: #18b9cd; }
+
+
+.square-text {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding-bottom: 5px; /* Espaço abaixo da sigla */
+}
+
+
+.square-subtext {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+}
+.perguntas-recentes {
+    font-family: 'Open Sans', sans-serif;  
+    font-weight: bold;                  
+    font-size: 24px;                    
+    color: black;                        
+    margin-top: 20px;                    
+    margin-left: 20px;                  
+    margin-bottom: 10px;
+}
+
+
+.retangulo {
+    width: 97%;                          
+    height: auto;                        
+    border: 2px solid #a6a6a6;          
+    border-radius: 10px;                
+    background-color: #fff;              
+    margin-top: 20px;                  
+    margin-left: 20px;                  
+    margin-right: 20px;                
+    transition: all 0.3s ease;          
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    position: relative;                  /* Necessário para o posicionamento absoluto dos elementos dentro do retângulo */
+    display: flex;                      
+    flex-direction: column;            
+    align-items: flex-start;          
+    padding: 15px;                       /* Espaçamento interno do retângulo */
+}
+
+
+/* Efeito 3D ao passar o mouse */
+.retangulo:hover {
+    transform: translateY(-5px) scale(1.02);      /* Efeito 3D no hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);  
+    border-color: #6531c9;                        
+}
+
+
+.top-left-image {
+    width: 50px;                
+    height: auto;                /* Mantém a proporção da imagem */
+}
+
+
+.retangulo-texto-container {
+    display: flex;               /* Flexbox para alinhar os textos */
+    flex-direction: column;      
+    align-items: flex-start;     /* Alinha os textos à esquerda */
+    margin-left: 70px;            /* Distância entre a imagem e o texto */
+    width: 100%;                
+}
+
+
+.retangulo-texto {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;                    
+    font-size: 20px;                    
+    color: black;                        
+    margin-bottom: 5px;                   /* Espaço entre o título e o nome do usuário */
+}
+
+
+.usuario-texto {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;                      
+    color: #000000;                      
+}
+
+
+.retangulo-data {
+    position: absolute;                  
+    top: 10px;                            
+    right: 15px;                          
+    font-family: 'Open Sans', sans-serif;  
+    font-size: 15px;                    
+    color: #a6a6a6;                      
+}
+
+
+.retangulo-pergunta {
+    font-family: 'Open Sans', sans-serif;  
+    font-size: 18px;                      
+    color: #000000;                        
+    width: 100%;                          
+    text-align: left;                      
+    margin-top: 10px;                    
+}
+
+
+.retangulo-resposta {
+    font-family: 'Open Sans', sans-serif;  
+    font-size: 15px;                      
+    color: #a6a6a6;                        
+    cursor: pointer;                      
+    margin-top: 15px;                    
+}
+
+
+/* botão "Responder pergunta" */
+.retangulo-botao-container {
+    position: absolute;                   /* Posiciona o botão de forma absoluta */
+    bottom: 10px;                          /* Distância de 10px da parte inferior */
+    right: 15px;                          
+}
+
+
+.retangulo-botao {
+    background-color: #8c52ff;            
+    color: white;                        
+    font-family: 'Open Sans', sans-serif;  
+    font-size: 14px;                      
+    padding: 10px 20px;                    /* Preenchimento interno (vertical e horizontal) */
+    border: none;                        
+    border-radius: 5px;                  
+    cursor: pointer;                      /* Cursor de clique */
+    transition: background-color 0.3s;     /* Transição suave para mudança de cor */
+}
+
+
+.retangulo-botao:hover {
+    background-color: #7326c5;          
+}
+
+
+
+
+
+
+/* Estilos para o Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Ajusta o modal para que seu centro fique no meio da tela */
+    z-index: 1000; /* Coloca o modal acima de outros elementos */
+    width: 110%;
+    max-width: 700px;
+    padding: 20px;
+    overflow: auto;
+    border-radius: 8px;
+    animation: fadeIn 0.3s ease-out; /* Animação para o modal aparecer suavemente */
+}
+
+
+
+
+/* Modal com fundo branco */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Título do modal */
+.modal-content h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #835ad2;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+
+
+
+.pergunta-title-modal {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+    text-align: left;
+    margin: 0; /* Remover margens */
+    padding-bottom: 10px; /* Espaçamento inferior */
+}
+
+
+/* Estilos para a pergunta */
+.pergunta-text-modal {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    margin-top: 10px;
+}
+
+
+.resposta-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000;
+    text-align: left;
+    margin: 0;
+    padding-top: 20px; /* Espaçamento superior */
+    padding-bottom: 10px;
+}
+
+
+/* Estilo para o campo de entrada abaixo da resposta */
+#campoEntrada {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #ededed;
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Borda sutil */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    height: 90px; /* Aumentaa altura do campo de entrada */
+    resize: vertical; /* Permite que o usuário redimensione o campo verticalmente */
+}
+
+
+#responderBtnModal {
+    width: 45%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave para a mudança de cor */
+}
+
+
+/* Efeito hover para o botão "Responder" */
+#responderBtnModal:hover {
+    background-color: #7a47d1; /* Cor mais escura ao passar o mouse */
+}
+
+
+#cancelarBtnModal {
+    width: 45%;
+    padding: 12px;
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave para a mudança de cor */
+}
+
+
+/* Efeito hover para o botão "Cancelar" */
+#cancelarBtnModal:hover {
+    background-color: #7a47d1; /* Cor mais escura ao passar o mouse */
+}
+
+

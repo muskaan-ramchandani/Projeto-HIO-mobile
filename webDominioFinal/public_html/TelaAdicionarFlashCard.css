@@ -1,0 +1,130 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+
+.barra {
+    background-color: #8c52ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 67px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+
+.logo-container img {
+    height: 60px;
+    margin-right: 10px;
+}
+
+
+.titulo {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+}
+
+
+.subtitulo {
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin: 55px 0;
+}
+
+
+.custom-button {
+    background-color: #e9e8e8;
+    color: #898989;
+    font-size: 15px;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.custom-button:hover {
+    background-color: #5e17eb;
+    color: white;
+}
+
+
+.quadrado {
+    background-color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 1100px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+.titulo-input, .texto-input {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px; /* Tamanho da fonte */
+    color: #a6a6a6; /* Cor do texto */
+    width: 100%;
+    min-height: 40px; /* Altura mínima */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Remove borda */
+    outline: none; /* Remove contorno */
+    margin-bottom: 10px; /* Espaço abaixo */
+}
+
+
+.titulo-input:focus, .texto-input:focus {
+    color: #a6a6a6; /* Mantém a cor ao focar */
+}
+
+
+.linha {
+    border: 1px solid #898989;
+    margin: 10px 0;
+}
+
+
+.botao-adicionar {
+    background-color: #ededed;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+
+.botao-adicionar:hover {
+    background-color: #d3d3d3;
+}
+
+

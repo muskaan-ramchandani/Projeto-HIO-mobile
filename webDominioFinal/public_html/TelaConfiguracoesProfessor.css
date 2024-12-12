@@ -1,0 +1,1002 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    z-index: 1000;
+}
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #5e17eb;
+    margin: 3px 0;
+    transition: background-color 0.3s;
+}
+.menu-icon.active {
+    background-color: #6531c9;
+}
+.menu-icon.active .bar {
+    background-color: #fff;
+}
+.helper-text {
+    display: none;
+    margin-left: 10px;
+    font-size: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    color: #fff;
+    background-color: #6531c9;
+    padding: 5px;
+    border-radius: 5px;
+}
+.menu-icon.active + .helper-text {
+    display: inline;
+}
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    background-color: #5e17eb;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    font-family: 'Open Sans', sans-serif;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+.menu-content a {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 20px;
+}
+.menu-content a:hover {
+    background-color: #a952ff;
+}
+.menu-icon-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+.message-box-img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 260px;
+    height: auto;
+    z-index: 2;
+}
+
+
+.content {
+    margin-left: 250px; /* Compensa a largura do menu */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ajusta a largura do conteúdo para não sobrepor o menu */
+}
+
+
+
+
+.profile-container {
+    text-align: left;
+}
+
+
+
+
+.profile-name {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+.profile-username, .profile-email {
+    font-size: 23px;
+    color: #333;
+    margin: 5px 0;
+}
+
+
+.profile-email {
+    color: #000;
+}
+
+
+.perfil-img {
+    position: absolute;
+    top: 20px;
+    right: 144px;
+    width: 150px;
+    height: auto;
+    z-index: 2;
+}
+
+
+.perfil-img img {
+    width: 100%;
+    height: auto; /* Mantém a proporção da altura */
+    display: block; /* Remove espaços abaixo da imagem */
+}
+
+
+.profile-divider {
+    border: 0;
+    border-top: 3px solid #a6a6a6;
+    margin-top: 100px;
+    margin-bottom: 10px;
+}
+
+
+.dados-button {
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 15px; /* Espaçamento interno */
+    cursor: pointer;
+    margin-bottom: 15px; /* Espaço abaixo do botão */
+}
+
+
+/*botoes*/
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Duas colunas */
+    gap: 90px; /* Aumentando o espaço entre os botões */
+    margin-top: 20px; /* Espaço acima da tabela */
+}
+
+
+.action-button {
+    background-color: #ededed;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    border: 1px solid #898989;
+    border-radius: 5px;
+    width: 400px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efeito de transição */
+    font-weight: bold;
+    text-align: left;
+    display: flex; /* alinha imagem e texto */
+    flex-direction: column; /* Organiza a imagem acima do texto */
+    align-items: center; /* Centraliza o conteúdo */
+}
+
+
+.action-button:hover {
+    background-color: #d3d3d3;
+}
+
+
+.button-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+
+/*modal para altear dados*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center; /* Centraliza verticalmente */
+}
+
+
+.modal-content {
+    background-color: white;
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra do modal */
+    display: flex;
+    flex-direction: column; /* Coluna para os itens */
+    align-items: center; /* Centraliza itens na horizontal */
+}
+
+
+.modal-image {
+    width: 100px;
+    height: auto; /* Manter a proporção */
+    margin: 15px 0;
+}
+
+
+
+
+.modal-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: #835ad2;
+    margin-bottom: 15px;
+}
+
+
+.close-modal {
+    background-color: #835ad2;
+    color: white;
+    border: none; /* Sem borda */
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+
+.image-container {
+    position: relative; /* Permite posicionar elementos filhos */
+    display: inline-block; /* Mantém a imagem no tamanho da imagem de fundo */
+}
+
+
+.modal-image {
+    width: 150px;
+    height: auto;
+}
+
+
+.overlay-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: auto;
+}
+
+
+.modal-label {
+    font-weight: bold;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.modal-input {
+    background-color: #ededed;
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    padding: 10px;
+    width: 100%;
+    border: none; /* Sem borda */
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+
+
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+/* Estilo dos botões */
+.modal-button {
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    padding: 15px 30px; /* Aumenta o espaçamento interno */
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer;
+    margin-right: 10px; /* Espaço entre os botões */
+}
+
+
+.button-group {
+    display: flex; /* alinhar botões lado a lado */
+    margin-top: 20px;
+}
+
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px; /* Bordas arredondadas */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra do modal */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza itens na horizontal */
+    width: 600px;
+    height: auto;
+    max-width: 90%;
+}
+
+
+.modal-title {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #835ad2;
+    margin-bottom: 15px;
+}
+
+
+.modal-button {
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px; /* Espaçamento interno */
+    cursor: pointer;
+    margin: 10px; /* Espaço entre os botões */
+}
+
+
+/* Modal para confirmação da alteração de dados */
+#modalConfirmacaoAlteracao {
+    display: none;
+    position: fixed; /* Fixo na tela */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+
+.modal-content-confirmacao {
+    background-color: white;
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px; /* Bordas arredondadas */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra do modal */
+    width: 400px; /* Largura do modal */
+}
+
+
+.modal-title-confirmacao {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #835ad2;
+    margin-bottom: 15px;
+}
+
+
+.modal-label-confirmacao {
+    font-weight: bold;
+    color: black;
+    margin-top: 15px;
+    text-align: left;
+}
+
+
+.modal-input-confirmacao {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ededed;
+}
+
+
+.button-group-confirmacao {
+    display: flex; /* Flexbox para alinhar os botões */
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+
+.modal-button-confirmar {
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px; /* Espaçamento interno */
+    cursor: pointer;
+    flex: 1; /* Flexível para ocupar espaço */
+    margin: 0 5px; /* Espaço lateral entre os botões */
+}
+
+
+
+
+/* modal para alterar senha*/
+.modal-senha {
+    display: none;
+    position: fixed; /* Fixo na tela */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+
+.modal-content-senha {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column; /* Coluna para os itens */
+    align-items: center;
+    width: 400px; /* Largura do modal */
+    height: auto;
+}
+
+
+.modal-title-senha {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #835ad2;
+    margin-bottom: 15px;
+}
+
+
+.modal-input-senha {
+        background-color: #ededed;
+        color: black;
+        font-family: 'Open Sans', sans-serif;
+        padding: 10px;
+        width: 100%; /* Largura total */
+        border: none; /* Sem borda */
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-size: 20px;
+   
+}
+
+
+.button-group-senha {
+    margin-top: 15px;
+}
+
+
+.modal-button-senha {
+    width: 100%;
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    margin-bottom: 10px;
+}
+
+
+.modal-button-senha:last-child {
+    margin-bottom: 0; /* Remove a margem do último botão */
+}
+
+
+.modal-button-senha:hover {
+    background-color: #6531c9; /* Cor do botão ao passar o mouse */
+}
+
+
+ /* Estilos para o novo modal de alteração de senha */
+ .modal-senha-nova {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro */
+}
+.modal-content-nova {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    max-width: 90%;
+}
+.modal-title-nova {
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    color: #835ad2;
+}
+.modal-label {
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: black;
+}
+.modal-input {
+     background-color: #ededed;
+        color: black;
+        font-family: 'Open Sans', sans-serif;
+        padding: 10px;
+        width: 98%; /* Largura total */
+        border: none; /* Sem borda */
+        border-radius: 5px;
+        margin-top: 5px; /* Espaço acima do campo de entrada */
+        margin-bottom: 15px; /* Aumenta o espaço abaixo do campo de entrada */
+        font-size: 18px;
+}
+
+
+/* Modal para deletar conta */
+.modalDeletarConta {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.modal-content-deletar {
+    background-color: white;
+    margin: 10% auto; /* Margem superior */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px; /* Largura do modal */
+    max-width: 90%; /* Para telas pequenas */
+}
+
+
+.modal-titleDeletar {
+    font-weight: bold;
+    color: #835ad2;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+
+.modal-inputDeletar {
+    background-color: #ededed;
+    color: black;
+    padding: 10px;
+    width: 98%; /* Largura total */
+    border: none; /* Sem borda */
+    border-radius: 5px;
+    margin-top: 5px; /* Espaço acima do campo de entrada */
+    margin-bottom: 15px; /* Espaço abaixo do campo de entrada */
+    font-size: 18px;
+}
+
+
+.modal-buttonDeletar {
+    width: 100%; /* Ocupa toda a largura do modal */
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
+.modal-buttonDeletar:last-child {
+    margin-bottom: 0; /* Remove a margem do último botão */
+}
+
+
+.modal-buttonDeletar:hover {
+    background-color: #6531c9;
+}
+/* Estilo geral para os botões de confirmação */
+.modal-buttonConfirmacao {
+    width: 100%;
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+
+.modal-buttonConfirmacao:last-child {
+    margin-bottom: 0; /* Remove a margem do último botão */
+}
+
+
+.modal-buttonConfirmacao:hover {
+    background-color: #6531c9; /* Cor ao passar o mouse no botão "Sim" */
+}
+
+
+/* Estilo para o botão "Não" */
+.modal-buttonNao {
+    width: 100%;
+    background-color: #8c52ff;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px; /* Espaçamento interno */
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s; /* Efeito de transição suave */
+   
+   
+}
+
+
+.modal-buttonNao:hover {
+    background-color: #6531c9;
+}
+
+
+/*historico de cadastro*/
+.modal-historico {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.modal-content-historico {
+    background-color: #fefefe;
+    margin: 5% auto; /* Margens automáticas para centralizar */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-height: 80%;
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+}
+
+
+
+
+.close-button-historico {
+    color: #aaa;
+    float: right; /* Coloca o botão de fechar no canto superior direito */
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.close-button-historico:hover,
+.close-button-historico:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #835ad2;
+    margin: 0 0 15px; /* Espaço inferior */
+    text-align: center;
+}
+
+
+/* estilos para tudo que envolve texto no modal*/
+.modal-texto {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin: 0;
+    text-align: left;
+}
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Oculta os retângulos fora da área visível */
+    margin-top: 20px; /* Espaço acima do carrossel */
+    position: relative; /* Para posicionar os botões */
+}
+
+
+.carousel-content {
+    display: flex;
+    transition: transform 0.5s ease; /* Transição suave */
+}
+
+
+.info-box-container {
+    display: flex; /* Flex para alinhar os retângulos em linha */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+}
+
+
+.info-box {
+    background-color: #f8f6f6;
+    border-radius: 10px;
+    width: 250px;
+    height: 150px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+}
+.button-voltar, .button-prosseguir {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute; /* Para fixar os botões */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10; /* Coloca os botões acima do carrossel */
+}
+
+
+.button-voltar {
+    left: 10px;
+}
+
+
+.button-prosseguir {
+    right: 10px;
+}
+.carousel-buttons {
+    display: flex;
+    justify-content: space-between; /* Espaça os botões para os lados */
+    margin-top: 20px;
+}
+.info-conteudo-texto {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.circle-container {
+    display: flex;
+    align-items: center;
+    margin-top: auto; /* Empurra os círculos para a parte inferior do retângulo */
+}
+
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; /* Faz o círculo roxo */
+    margin-right: 10px; /* Espaço entre o círculo e o nome da olimpíada */
+}
+
+
+.blue {
+    background-color: #5271ff;
+}
+
+
+.orange {
+    background-color: #ff914d;
+}
+
+
+.green {
+    background-color: #18b9cd;
+}
+
+
+.green2 {
+    background-color: #039855;
+}
+
+
+.olympiad-name {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+
+/* estilos para tudo que envolve video no modal*/
+.modal-video {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 20px;
+}
+
+
+.carousel {
+    margin: 20px 0;
+}
+
+
+.carousel-content {
+    display: flex;
+    overflow: hidden;
+}
+
+
+.info-box-container {
+    display: flex;
+}
+
+
+.info-box {
+    background-color: #f8f6f6;
+    border-radius: 10px; /* Bordas arredondadas */
+    width: 250px;
+    height: 150px;
+    margin: 10px; /* Espaço entre os retângulos */
+    display: flex;
+    flex-direction: column; /* Alinha o conteúdo verticalmente */
+    justify-content: flex-start; /* Alinha o conteúdo no topo */
+    padding: 10px; /* Espaço interno */
+}
+
+
+.circle-container {
+    display: flex; /* Alinha o círculo e o nome horizontalmente */
+    align-items: center; /* Alinha verticalmente no centro */
+}
+
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+
+.blue { background-color: blue; }
+.orange { background-color: orange; }
+.green { background-color: #18b9cd; }
+.green2 { background-color: darkgreen; }
+
+
+.carousel-buttons {
+    margin-top: 10px;
+}
+
+
+.button-voltar, .button-prosseguir {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+
+.info-image {
+    max-width: 70%; /* A imagem não deve exceder a largura do retângulo */
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+
+.modal-flashcard {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 20px;
+    text-align: left;
+}
+
+
+.carousel-flashcard {
+    overflow: hidden; /* Oculta o conteúdo que ultrapassa */
+    position: relative; /* Para posicionar elementos dentro */
+    padding: 20px;
+}
+
+
+.carousel-content-flashcard {
+    display: flex;
+    transition: transform 0.3s ease; /* Transição suave */
+}
+
+
+.info-box {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 10px;
+    margin: 0 10px; /* Margem lateral */
+    flex: 0 0 auto;
+    width: 200px;
+    text-align: center;
+}
+
+
+.info-conteudo-texto {
+    margin-bottom: 10px; /* Espaço abaixo do texto */
+}
+
+
+.circle-container {
+    display: flex; /* Alinha o círculo e o texto */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Círculo perfeito */
+    margin-right: 5px;
+}
+
+
+.carousel-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+
+  a {
+            text-decoration: none;
+            outline: none;
+        }
