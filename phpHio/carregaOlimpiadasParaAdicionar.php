@@ -3,9 +3,9 @@ header('Content-Type: application/json');
 header('Character-Encoding: utf-8');
 
 $servername = "localhost"; 
-$username = "u740411060_user";        
-$password = "OWYzZ?o2";            
-$dbname = "u740411060_hio";
+$username = "u792730258_noemi";        
+$password = "Masenfimacontece123";            
+$dbname = "u792730258_hio";
 
 $emailAluno = $_GET['email'];
 

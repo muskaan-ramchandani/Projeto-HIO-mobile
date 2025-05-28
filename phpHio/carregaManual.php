@@ -6,9 +6,9 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
 $servername = "localhost"; 
-$username = "u740411060_user";        
-$password = "OWYzZ?o2";            
-$dbname = "u740411060_hio";         
+$username = "u792730258_noemi";        
+$password = "Masenfimacontece123";            
+$dbname = "u792730258_hio";        
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
